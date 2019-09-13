@@ -1,7 +1,10 @@
 import javafx.application.Application;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -11,6 +14,8 @@ import javafx.stage.Stage;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import javafx.scene.control.*;
+
+import java.awt.*;
 import java.io.FileInputStream;
 import javafx.geometry.*;
 import javafx.event.EventHandler;
@@ -27,6 +32,8 @@ public class Main extends Application {
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
 
+        Image pic = new Image("file:backgroundGame.jpg");
+        ImageView mv = new ImageView(pic);
 
         VBox sliderBox = new VBox();
         sliderBox.setAlignment(Pos.CENTER);
@@ -55,15 +62,15 @@ public class Main extends Application {
 
         //Add game mode images
         ImageView iv_1 = new ImageView();
-        iv_1.setImage(new Image(new FileInputStream("src/PvP.png")));
+        iv_1.setImage(new Image(new FileInputStream("PvP.png")));
         ImageView iv_2 = new ImageView();
-        iv_2.setImage(new Image(new FileInputStream("src/PvC.png")));
+        iv_2.setImage(new Image(new FileInputStream("PvC.png")));
 
         //Add game mode labels
-        Label modeOneLabel = new Label("PvP");
+        Button modeOneLabel = new Button("Player vs. Player");
         modeOneLabel.setStyle("-fx-font: 20 arial;");
-        Label modeTwoLabel = new Label("PvC");
-        modeTwosLabel.setStyle("-fx-font: 20 arial;");
+        Button modeTwoLabel = new Button("Player vs. Computer");
+        modeTwoLabel.setStyle("-fx-font: 20 arial;");
 
         //Defining layouts 
         VBox mainContainer = new VBox();
@@ -74,7 +81,7 @@ public class Main extends Application {
         HBox modeBox = new HBox();
 
 
-        modeOneContainer.getStyleClass().add("modeButton");
+        modeOneContainer.getStyleClass().add("modeButton" );
         modeOneContainer.setPadding(new Insets(10,10,10,10));
         modeTwoContainer.getStyleClass().add("modeButton");
         modeTwoContainer.setPadding(new Insets(10,10,10,10));
@@ -118,8 +125,22 @@ public class Main extends Application {
             }
         });
 
+        VBox  vBox  = new VBox();
+        Scene playerScene = new Scene(vBox);
 
-        modeOneContainer.getChildren().addAll(iv_1,modeOneLabel);
+        VBox  box2  = new VBox();
+        Scene AIScene = new Scene(box2);
+
+
+        modeOneLabel.setOnAction(e ->{
+            primaryStage.setScene(playerScene);
+        });
+
+        modeTwoLabel.setOnAction(e ->{
+            primaryStage.setScene(AIScene);
+        });
+
+        modeOneContainer.getChildren().addAll(iv_1,modeOneLabel );
         modeOneContainer.setAlignment(Pos.CENTER);
         modeTwoContainer.getChildren().addAll(iv_2,modeTwoLabel);
         modeTwoContainer.setAlignment(Pos.CENTER);
@@ -127,11 +148,12 @@ public class Main extends Application {
         modeBox.getChildren().addAll(createSpacer(),modeOneContainer,createSpacer(), modeTwoContainer,createSpacer());
         modeBox.setPadding(new Insets(0,0,0,0));
 
+        StackPane pane = new StackPane();
+        mainContainer.getChildren().addAll(sliderBox, modeBox );
+        pane.getChildren().addAll(mv,mainContainer);
 
+        Scene scene = new Scene(pane,3000,2000);
 
-        mainContainer.getChildren().addAll(sliderBox, modeBox);
-
-        Scene scene = new Scene(mainContainer);
         scene.getStylesheets().add("application/Main.css");
         primaryStage.setScene(scene);
 
@@ -250,35 +272,57 @@ public class Main extends Application {
         ruleMainCont.setHgap(50);
 
 //"..." need to be filled out!
-        Text ruleOneContent = new Text("...");
+        Text ruleOneContent = new Text("To be the first player to push six of the opponent's marbles out of play, into the board's outer rim.");
         TextFlow ruleOneCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list7 = ruleOneCont.getChildren();
         list7.addAll(ruleOneContent);
 
-        Text ruleTwoContent = new Text("...");
+        Text ruleTwoContent = new Text("Black makes the first move");
         TextFlow ruleTwoCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list8 = ruleTwoCont.getChildren();
         list8.addAll(ruleTwoContent);
 
-        Text ruleThreeContent = new Text("...");
+        Text ruleThreeContent = new Text("You can push one, two or three marbles at a time");
         TextFlow ruleThreeCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list9 = ruleThreeCont.getChildren();
         list9.addAll(ruleThreeContent);
 
+        Text ruleFourContent = new Text("Your marbles can move one space, in a straight line or laterally.");
+        TextFlow ruleFourCont = new TextFlow();
+        //Retrieving the observable list of the TextFlow Pane
+        ObservableList list10 = ruleFourCont.getChildren();
+        list10.addAll(ruleFourContent);
+
+        Text ruleFiveContent = new Text(" Two marbles can push one and three marbles can push one or two of your opponent's marbles. However, an equal number of marbles cannot push each other (ie: 1 cannot push 1, 2 cannot push 2, etc).");
+        TextFlow ruleFiveCont = new TextFlow();
+        //Retrieving the observable list of the TextFlow Pane
+        ObservableList list11 = ruleFiveCont.getChildren();
+        list11.addAll(ruleFiveContent);
+
         ruleOneCont.setPadding(new Insets(10, 10, 10, 10));
         ruleTwoCont.setPadding(new Insets(10, 10, 10, 10));
         ruleThreeCont.setPadding(new Insets(10, 10, 10, 10));
+        ruleFourCont.setPadding(new Insets(10, 10, 10, 10));
+        ruleFiveCont.setPadding(new Insets(10, 10, 10, 10));
+
 
         ruleOneCont.setStyle("-fx-background-color: #dae7f3;");
         ruleTwoCont.setStyle("-fx-background-color: #dae7f3;");
         ruleThreeCont.setStyle("-fx-background-color: #dae7f3;");
+        ruleFourCont.setStyle("-fx-background-color: #dae7f3;");
+        ruleFiveCont.setStyle("-fx-background-color: #dae7f3;");
+
 
         ruleMainCont.add(ruleOneCont, 1, 0);
         ruleMainCont.add(ruleTwoCont, 1, 1);
         ruleMainCont.add(ruleThreeCont, 1, 2);
+        ruleMainCont.add(ruleFourCont, 1, 3);
+        ruleMainCont.add(ruleFiveCont, 1, 3);
+
+
 
         rulesMainCont.getChildren().addAll(rulesTitleCont, rulSubTitleCont, ruleMainCont,backCont2);
         Scene ruleScene = new Scene(rulesMainCont);
@@ -311,9 +355,6 @@ public class Main extends Application {
 
 
 
-
-
-
         credits.setOnAction(e ->{
             primaryStage.setScene(creditScene);
             back.setOnAction(f-> {
@@ -334,6 +375,7 @@ public class Main extends Application {
                 primaryStage.setScene(scene);
             });
         });
+
 
     }
     private Node createSpacer() {
