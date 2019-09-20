@@ -3,7 +3,7 @@ import javafx.scene.shape.Polygon;
 
 public class Board extends AnchorPane{
 	//create rows manually
-   int HexRowStart = 5;
+   int HexRowStart = 6;
    Board(){
 	   add();
    }
