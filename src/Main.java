@@ -1,9 +1,7 @@
-package src;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -30,8 +28,8 @@ public class Main extends Application {
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
 
-        Image pic = new Image("file:backgroundGame.jpg");
-        ImageView mv = new ImageView(pic);
+        //Image pic = new Image("file:backgroundGame.jpg");
+        //ImageView mv = new ImageView(pic);
 
         VBox sliderBox = new VBox();
         sliderBox.setAlignment(Pos.CENTER);
@@ -149,8 +147,9 @@ public class Main extends Application {
 
         StackPane pane = new StackPane();
         mainContainer.getChildren().addAll(sliderBox, modeBox );
-        pane.getChildren().addAll(mv,mainContainer);
-
+        pane.getChildren().addAll(mainContainer);
+        String style = "-fx-background-color: lightblue;;";
+        pane.setStyle(style);
         Scene scene = new Scene(pane,3000,2000);
 
         scene.getStylesheets().add("application/Main.css");
