@@ -2,32 +2,25 @@ import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
-
 import java.io.FileInputStream;
-
 import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
 //comment
 public class Main extends Application {
-    double radius = 30; // the inner radius from hexagon center to outer corner
-    double n = Math.sqrt(radius * radius * 0.75); // the inner radius from hexagon center to middle of the axis
-    double Hexagon_Height = 2 * radius;
-    double Hexagon_Width = 2 * n;
-
+   
     DropShadow shadow = new DropShadow();
 
     @Override
@@ -128,37 +121,10 @@ public class Main extends Application {
                 iv_2.setEffect(null);
             }
         });
-        AnchorPane board = new AnchorPane();
+        Board board = new Board();
+        AnchorPane TheBoard =  board.add();
 
-        //create rows manually
-        int HexRowStart = 5;
-
-        for (int j = 0; j < 9; j++) {
-        	for (int i = 0; i < HexRowStart; i++) {
-
-        		double xCoord = i * Hexagon_Width + (j % 2) * n  +450;
-        		double yCoord = j * Hexagon_Height * 0.75  + 140;
-
-        		if (j == 0 || j == 8) {
-        			xCoord = xCoord + Hexagon_Width *2;
-        		}
-        		if (j == 1 || j ==2 || j ==6 || j ==7) {
-        			xCoord = xCoord + Hexagon_Width;
-        		}
-
-        		Polygon Hex = new Hexagon(xCoord, yCoord);
-        		board.getChildren().add(Hex);
-        	}
-        	if ( j < 4) {
-        		HexRowStart++;
-        	}
-        	else {
-        		HexRowStart--;
-        	}
-        }
-
-
-        Scene playerScene = new Scene(board);
+        Scene playerScene = new Scene(TheBoard);
 
         VBox  box2  = new VBox();
         Scene AIScene = new Scene(box2);
@@ -420,27 +386,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
-    private class Hexagon extends Polygon {
-    	Hexagon(double x, double y) {
-            /*
-            creates the polygon, defined by an array of (x,y) coordinates
-    		which represents the six points of a hexagon
-    		*/
-            getPoints().addAll(
-                    x, y,
-                    x, y + radius,
-                    x + n, y + radius * 1.5,
-                    x + Hexagon_Width, y + radius,
-                    x + Hexagon_Width, y,
-                    x + n, y - radius * 0.5
-            );
-
-            // set up the visuals and a click listener for the tile
-            setFill(Color.ALICEBLUE);
-            setStrokeWidth(3);
-            setStroke(Color.BLACK);
-            setOnMouseClicked(e -> System.out.println("Clicked: " + this));
-        }
-    }
+ 
 
 }
