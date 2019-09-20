@@ -129,17 +129,35 @@ public class Main extends Application {
             }
         });
         AnchorPane board = new AnchorPane();
-        int rowCount = 11; 
-        int HexPerRow = 10; 
- 
-        for (int x = 0; x < HexPerRow; x++) {
-            for (int y = 0; y < rowCount; y++) {
-                double xCoord = x * Hexagon_Width + (y % 2) * n  +450;
-                double yCoord = y * Hexagon_Height * 0.75  + 140;
-                Polygon Hex = new Hexagon(xCoord, yCoord);
-                board.getChildren().add(Hex);               
-            }
-        }   
+        
+        //create rows manually
+        int HexRowStart = 5;
+        
+        for (int j = 0; j < 9; j++) {
+        	for (int i = 0; i < HexRowStart; i++) {
+        		
+        		double xCoord = i * Hexagon_Width + (j % 2) * n  +450;
+        		double yCoord = j * Hexagon_Height * 0.75  + 140;
+        		
+        		if (j == 0 || j == 8) {
+        			xCoord = xCoord + Hexagon_Width *2;
+        		}
+        		if (j == 1 || j ==2 || j ==6 || j ==7) {
+        			xCoord = xCoord + Hexagon_Width;
+        		}
+        		
+        		Polygon Hex = new Hexagon(xCoord, yCoord);
+        		board.getChildren().add(Hex);    
+        	}
+        	if ( j < 4) {
+        		HexRowStart++;
+        	}
+        	else {
+        		HexRowStart--;
+        	}
+        }
+        
+        
         Scene playerScene = new Scene(board);
 
         VBox  box2  = new VBox();
@@ -214,7 +232,7 @@ public class Main extends Application {
         Text SouzanTitle = new Text("Souzan Abboud");
         Text WafaaTitle = new Text("Wafaa Aljbawi");
         Text HendrikTitle = new Text("Hendrik Baacke");
-        Text JannekeTitle = new Text("Janneke Baden van");
+        Text JannekeTitle = new Text("Janneke van Baden");
         Text NickTitle = new Text("Nick Bast");
         Text FredTitle = new Text("Fred Bedetse");
 
