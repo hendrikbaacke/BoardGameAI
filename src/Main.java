@@ -21,7 +21,7 @@ import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
-
+//comment
 public class Main extends Application {
     double radius = 30; // the inner radius from hexagon center to outer corner
     double n = Math.sqrt(radius * radius * 0.75); // the inner radius from hexagon center to middle of the axis
@@ -76,7 +76,7 @@ public class Main extends Application {
         Button modeTwoLabel = new Button("Player vs. Computer");
         modeTwoLabel.setStyle("-fx-font: 20 arial;");
 
-        //Defining layouts 
+        //Defining layouts
         VBox mainContainer = new VBox();
         VBox modeOneContainer = new VBox();
         VBox modeTwoContainer = new VBox();
@@ -129,25 +129,25 @@ public class Main extends Application {
             }
         });
         AnchorPane board = new AnchorPane();
-        
+
         //create rows manually
         int HexRowStart = 5;
-        
+
         for (int j = 0; j < 9; j++) {
         	for (int i = 0; i < HexRowStart; i++) {
-        		
+
         		double xCoord = i * Hexagon_Width + (j % 2) * n  +450;
         		double yCoord = j * Hexagon_Height * 0.75  + 140;
-        		
+
         		if (j == 0 || j == 8) {
         			xCoord = xCoord + Hexagon_Width *2;
         		}
         		if (j == 1 || j ==2 || j ==6 || j ==7) {
         			xCoord = xCoord + Hexagon_Width;
         		}
-        		
+
         		Polygon Hex = new Hexagon(xCoord, yCoord);
-        		board.getChildren().add(Hex);    
+        		board.getChildren().add(Hex);
         	}
         	if ( j < 4) {
         		HexRowStart++;
@@ -156,8 +156,8 @@ public class Main extends Application {
         		HexRowStart--;
         	}
         }
-        
-        
+
+
         Scene playerScene = new Scene(board);
 
         VBox  box2  = new VBox();
@@ -225,7 +225,7 @@ public class Main extends Application {
         GridPane credMainCont = new GridPane();
         credMainCont.setStyle("-fx-font-size: 18px;");
         credMainCont.setPadding(new Insets(50, 50, 50, 50));
-        //Setting the vertical and horizontal gaps between the columns 
+        //Setting the vertical and horizontal gaps between the columns
         credMainCont.setVgap(50);
         credMainCont.setHgap(50);
 
@@ -299,7 +299,7 @@ public class Main extends Application {
         GridPane ruleMainCont = new GridPane();
         ruleMainCont.setStyle("-fx-font-size: 18px;");
         ruleMainCont.setPadding(new Insets(50, 50, 50, 50));
-        //Setting the vertical and horizontal gaps between the columns 
+        //Setting the vertical and horizontal gaps between the columns
         ruleMainCont.setVgap(50);
         ruleMainCont.setHgap(50);
 
@@ -422,8 +422,8 @@ public class Main extends Application {
     }
     private class Hexagon extends Polygon {
     	Hexagon(double x, double y) {
-            /* 
-            creates the polygon, defined by an array of (x,y) coordinates 
+            /*
+            creates the polygon, defined by an array of (x,y) coordinates
     		which represents the six points of a hexagon
     		*/
             getPoints().addAll(
