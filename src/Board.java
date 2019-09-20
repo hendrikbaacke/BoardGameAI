@@ -8,7 +8,8 @@ public class Board extends AnchorPane{
 	   add();
    }
    
-	public AnchorPane add() {
+
+public AnchorPane add() {
     AnchorPane board = new AnchorPane();
     for (int j = 0; j < 9; j++) {
     	for (int i = 0; i < HexRowStart; i++) {
