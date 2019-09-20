@@ -1,5 +1,4 @@
 package src;
-//comment
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -20,7 +19,7 @@ import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
-//comment
+
 public class Main extends Application {
    
     DropShadow shadow = new DropShadow();
