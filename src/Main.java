@@ -347,28 +347,6 @@ public class Main extends Application {
             });
         });
 
-
-        //creating the board
-        Board board = new Board();
-        Pane TheBoard =  board.add();
-
-        Button back4 = new Button("BACK");
-        HBox backCont4 = new HBox();
-        backCont4.getChildren().add(back4);
-        backCont4.setAlignment(Pos.CENTER_RIGHT);
-        backCont4.setPadding(new Insets(50, 50, 50, 50));
-
-        GridPane BoardCont = new GridPane();
-        BoardCont.setStyle("-fx-font-size: 18px;");
-        BoardCont.setPadding(new Insets(50, 50, 50, 50));
-        //Setting the vertical and horizontal gaps between the columns
-        BoardCont.setVgap(50);
-        BoardCont.setHgap(50);
-        BoardCont.getChildren().addAll(TheBoard,backCont4);
-        Scene playerScene = new Scene(BoardCont);
-
-
-
         VBox  box2  = new VBox();
         Scene AIScene = new Scene(box2);
 
@@ -377,11 +355,8 @@ public class Main extends Application {
         //changing to the board scene
         modeOneContainer.setPickOnBounds(true); // allows click on transparent areas
         modeOneContainer.setOnMouseClicked((MouseEvent e) -> {
-            primaryStage.setScene(playerScene);
-            primaryStage.centerOnScreen();
-            back4.setOnAction(f-> {
-                primaryStage.setScene(scene);
-            });
+            GameGui Game = new GameGui();
+            Game.start(primaryStage);
         });
 
         modeTwoContainer.setPickOnBounds(true); // allows click on transparent areas
