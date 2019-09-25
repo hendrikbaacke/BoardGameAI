@@ -1,7 +1,8 @@
-import javafx.scene.layout.AnchorPane;
+package src;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
-public class Board extends AnchorPane{
+public class Board extends Pane{
 	//create rows manually
    int HexRowStart = 6;
    Board(){
@@ -9,13 +10,13 @@ public class Board extends AnchorPane{
    }
    
 
-public AnchorPane add() {
-    AnchorPane board = new AnchorPane();
+public Pane add() {
+    Pane board = new Pane();
     for (int j = 0; j < 9; j++) {
     	for (int i = 0; i < HexRowStart; i++) {
 
-    		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  +450;
-    		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + 140;
+    		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  +500;  //450
+    		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + 250;  //140
 
     		if (j == 0 || j == 8) {
     			xCoord = xCoord + Hexagon.Hexagon_Width *2;

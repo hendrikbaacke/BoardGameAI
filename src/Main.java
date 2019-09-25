@@ -1,3 +1,4 @@
+package src;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -17,6 +18,7 @@ import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
+import javafx.stage.Window;
 
 public class Main extends Application {
    
@@ -121,7 +123,11 @@ public class Main extends Application {
             }
         });
         Board board = new Board();
-        AnchorPane TheBoard =  board.add();
+        Pane TheBoard =  board.add();
+
+        board.prefWidthProperty().bindBidirectional(Pane.widthProperty());
+        board.prefHeightProperty().bindBidirectional(Pane.heightProperty());
+
 
         Scene playerScene = new Scene(TheBoard);
 
