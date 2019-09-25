@@ -54,7 +54,7 @@ public class Main extends Application {
 
         sliderBox.getChildren().addAll(title, menuBox);
 
-
+//dfdd
 
         //Add game mode images
         ImageView iv_1 = new ImageView();
