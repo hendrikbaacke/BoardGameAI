@@ -1,3 +1,4 @@
+package src;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -18,6 +19,7 @@ import javafx.geometry.*;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
+import javafx.stage.Window;
 
 public class Main extends Application {
 
@@ -108,6 +110,7 @@ public class Main extends Application {
                 iv_2.setEffect(null);
             }
         });
+
 
 
         modeOneContainer.getChildren().addAll(iv_1,modeOneLabel );

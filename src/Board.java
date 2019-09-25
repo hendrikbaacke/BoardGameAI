@@ -1,6 +1,5 @@
+package src;
 import java.util.Hashtable;
-import java.util.logging.XMLFormatter;
-
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
@@ -41,6 +40,7 @@ public Pane add() {
 
     		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  + CenterX-Hexagon.Hexagon_Width*4.5;
     		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + CenterY-Hexagon.Hexagon_Height*4;
+
 
     		if (j == 0 || j == 8) {
     			xCoord = xCoord + Hexagon.Hexagon_Width *2;
