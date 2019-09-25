@@ -1,4 +1,5 @@
 import java.util.Hashtable;
+import java.util.logging.XMLFormatter;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
@@ -6,12 +7,14 @@ import javafx.scene.shape.Polygon;
 public class Board extends Pane{
 	//create rows manually
    private int HexRowStart = 5;
+   public double CenterX;
+   public double CenterY;
    public Hashtable<String, Polygon> hashBoard = new Hashtable();
 
-   Board(){
-	   //add();
+   public Board(double X, double Y) {
+	   CenterX = X;
+	   CenterY = Y;
    }
-
 
 public Pane add() {
     Pane board = new Pane();
@@ -36,8 +39,8 @@ public Pane add() {
     		}
     		String neededForHash = Integer.toString(numberCode);
 
-    		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  +450;
-    		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + 140;
+    		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  + CenterX-Hexagon.Hexagon_Width*4.5;
+    		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + CenterY-Hexagon.Hexagon_Height*4;
 
     		if (j == 0 || j == 8) {
     			xCoord = xCoord + Hexagon.Hexagon_Width *2;
