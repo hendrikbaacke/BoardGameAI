@@ -1,24 +1,24 @@
 import java.util.Hashtable;
 
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
-public class Board extends AnchorPane{
+public class Board extends Pane{
 	//create rows manually
    private int HexRowStart = 5;
    public Hashtable<String, Polygon> hashBoard = new Hashtable();
-   
+
    Board(){
 	   //add();
    }
-   
 
-public AnchorPane add() {
-    AnchorPane board = new AnchorPane();
+
+public Pane add() {
+    Pane board = new Pane();
     for (int j = 0; j < 9; j++) {
     	char hexa = getCharFromAlphabet(9 - j - 1);
     	String letterCode = Character.toString(hexa);
-    	
+
     	for (int i = 0; i < HexRowStart; i++) {
 
     		int numberCode = i + 1;
@@ -35,7 +35,7 @@ public AnchorPane add() {
     			numberCode = numberCode + 1;
     		}
     		String neededForHash = Integer.toString(numberCode);
-    		
+
     		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  +450;
     		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + 140;
 
@@ -48,11 +48,11 @@ public AnchorPane add() {
 
     		String key = letterCode + neededForHash;
     		System.out.println(key);
-    		
+
     		Polygon Hex = new Hexagon(xCoord, yCoord);
     		hashBoard.put(key, Hex);
-    		
-    		
+
+
     		board.getChildren().add(Hex);
     	}
     	if ( j < 4) {

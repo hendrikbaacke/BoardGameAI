@@ -3,6 +3,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,7 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
 
 public class Main extends Application {
-   
+
     DropShadow shadow = new DropShadow();
 
     @Override
@@ -54,7 +55,7 @@ public class Main extends Application {
 
         sliderBox.getChildren().addAll(title, menuBox);
 
-//dfdd
+
 
         //Add game mode images
         ImageView iv_1 = new ImageView();
@@ -63,10 +64,10 @@ public class Main extends Application {
         iv_2.setImage(new Image(new FileInputStream("PvC.png")));
 
         //Add game mode labels
-        Button modeOneLabel = new Button("Player vs. Player");
-        modeOneLabel.setStyle("-fx-font: 20 arial;");
-        Button modeTwoLabel = new Button("Player vs. Computer");
-        modeTwoLabel.setStyle("-fx-font: 20 arial;");
+        Label modeOneLabel = new Label("Player vs. Player");
+        //modeOneLabel.setStyle("-fx-font: 20 arial;");
+        Label modeTwoLabel = new Label("Player vs. Computer");
+        //modeTwoLabel.setStyle("-fx-font: 20 arial;");
 
         //Defining layouts
         VBox mainContainer = new VBox();
@@ -81,19 +82,6 @@ public class Main extends Application {
         modeOneContainer.setPadding(new Insets(10,10,10,10));
         modeTwoContainer.getStyleClass().add("modeButton");
         modeTwoContainer.setPadding(new Insets(10,10,10,10));
-
-        modeOneContainer.setPickOnBounds(true); // allows click on transparent areas
-        modeOneContainer.setOnMouseClicked((MouseEvent e) -> {
-            System.out.println("Clicked 1!"); // change functionality
-        });
-
-        modeTwoContainer.setPickOnBounds(true); // allows click on transparent areas
-        modeTwoContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                System.out.println("Clicked 2!"); // change functionality
-            }
-        });
 
         //some fancy shadow effects
         modeOneContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
@@ -120,22 +108,7 @@ public class Main extends Application {
                 iv_2.setEffect(null);
             }
         });
-        Board board = new Board();
-        AnchorPane TheBoard =  board.add();
 
-        Scene playerScene = new Scene(TheBoard);
-
-        VBox  box2  = new VBox();
-        Scene AIScene = new Scene(box2);
-
-
-        modeOneLabel.setOnAction(e ->{
-            primaryStage.setScene(playerScene);
-        });
-
-        modeTwoLabel.setOnAction(e ->{
-            primaryStage.setScene(AIScene);
-        });
 
         modeOneContainer.getChildren().addAll(iv_1,modeOneLabel );
         modeOneContainer.setAlignment(Pos.CENTER);
@@ -269,7 +242,7 @@ public class Main extends Application {
         ruleMainCont.setVgap(50);
         ruleMainCont.setHgap(50);
 
-//"..." need to be filled out!
+
         Text ruleOneContent = new Text("To be the first player to push six of the opponent's marbles out of play, into the board's outer rim.");
         TextFlow ruleOneCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
@@ -360,6 +333,13 @@ public class Main extends Application {
             });
         });
 
+        rules.setOnAction(e ->{
+            primaryStage.setScene(ruleScene);
+            back2.setOnAction(f-> {
+                primaryStage.setScene(scene);
+            });
+        });
+
         settings.setOnAction(e ->{
             primaryStage.setScene(setScene);
             back3.setOnAction(f-> {
@@ -367,11 +347,49 @@ public class Main extends Application {
             });
         });
 
-        rules.setOnAction(e ->{
-            primaryStage.setScene(ruleScene);
-            back2.setOnAction(f-> {
+
+        //creating the board
+        Board board = new Board();
+        Pane TheBoard =  board.add();
+
+        Button back4 = new Button("BACK");
+        HBox backCont4 = new HBox();
+        backCont4.getChildren().add(back4);
+        backCont4.setAlignment(Pos.CENTER_RIGHT);
+        backCont4.setPadding(new Insets(50, 50, 50, 50));
+
+        GridPane BoardCont = new GridPane();
+        BoardCont.setStyle("-fx-font-size: 18px;");
+        BoardCont.setPadding(new Insets(50, 50, 50, 50));
+        //Setting the vertical and horizontal gaps between the columns
+        BoardCont.setVgap(50);
+        BoardCont.setHgap(50);
+        BoardCont.getChildren().addAll(TheBoard,backCont4);
+        Scene playerScene = new Scene(BoardCont);
+
+
+
+        VBox  box2  = new VBox();
+        Scene AIScene = new Scene(box2);
+
+
+
+        //changing to the board scene
+        modeOneContainer.setPickOnBounds(true); // allows click on transparent areas
+        modeOneContainer.setOnMouseClicked((MouseEvent e) -> {
+            primaryStage.setScene(playerScene);
+            primaryStage.centerOnScreen();
+            back4.setOnAction(f-> {
                 primaryStage.setScene(scene);
             });
+        });
+
+        modeTwoContainer.setPickOnBounds(true); // allows click on transparent areas
+        modeTwoContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                primaryStage.setScene(AIScene);
+            }
         });
 
 
@@ -386,6 +404,6 @@ public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
- 
+
 
 }
