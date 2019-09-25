@@ -1,11 +1,11 @@
-package src;
+
 import java.util.Hashtable;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
 public class Board extends Pane{
 	//create rows manually
-   private int HexRowStart = 5;
+   private int HexRowStart = 6;
    public double CenterX;
    public double CenterY;
    public Hashtable<String, Polygon> hashBoard = new Hashtable();
@@ -17,12 +17,13 @@ public class Board extends Pane{
 
 public Pane add() {
     Pane board = new Pane();
-    for (int j = 0; j < 9; j++) {
-    	char hexa = getCharFromAlphabet(9 - j - 1);
+    double HexRow = HexRowStart;
+    for (int j = 0; j < HexRowStart*2-1; j++) {
+    	char hexa = getCharFromAlphabet(HexRowStart*2-1 - j - 1);
     	String letterCode = Character.toString(hexa);
 
-    	for (int i = 0; i < HexRowStart; i++) {
-
+    	for (int i = 0; i < HexRow; i++) {
+/*
     		int numberCode = i + 1;
     		if (j == 0) {
     			numberCode = numberCode + 4;
@@ -37,32 +38,38 @@ public Pane add() {
     			numberCode = numberCode + 1;
     		}
     		String neededForHash = Integer.toString(numberCode);
-
+*/
     		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  + CenterX-Hexagon.Hexagon_Width*4.5;
-    		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + CenterY-Hexagon.Hexagon_Height*4;
+    		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + CenterY-Hexagon.Hexagon_Height*2-3*Hexagon.radius;
 
 
-    		if (j == 0 || j == 8) {
+    		if (j == 0 || j == HexRowStart*2-2) {
     			xCoord = xCoord + Hexagon.Hexagon_Width *2;
     		}
-    		if (j == 1 || j ==2 || j ==6 || j ==7) {
+    		if (j == 1 || j ==2 || j ==HexRowStart*2-4 || j ==HexRowStart*2-3) {
     			xCoord = xCoord + Hexagon.Hexagon_Width;
     		}
+    		if(HexRowStart>5){
+    			if(j==(HexRowStart*2-2)/2){
+					xCoord = xCoord - Hexagon.Hexagon_Width;
+				}
+			}
 
-    		String key = letterCode + neededForHash;
-    		System.out.println(key);
+
+    		//String key = letterCode + neededForHash;
+    		//System.out.println(key);
 
     		Polygon Hex = new Hexagon(xCoord, yCoord);
-    		hashBoard.put(key, Hex);
+    		//hashBoard.put(key, Hex);
 
 
     		board.getChildren().add(Hex);
     	}
-    	if ( j < 4) {
-    		HexRowStart++;
+    	if ( j < HexRowStart-1) {
+    		HexRow++;
     	}
     	else {
-    		HexRowStart--;
+    		HexRow--;
     	}
     }
     return board;
