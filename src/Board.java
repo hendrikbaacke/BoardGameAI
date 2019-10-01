@@ -8,7 +8,7 @@ public class Board extends Pane{
    private int HexRowStart = 5;
    public double CenterX;
    public double CenterY;
-   public Hashtable<String, Polygon> hashBoard = new Hashtable();
+   public static Hashtable<String, Hexagon> hashBoard = new Hashtable();
 
    public Board(double X, double Y) {
 	   CenterX = X;
@@ -23,23 +23,16 @@ public Pane add() {
     	String letterCode = Character.toString(hexa);
 
     	for (int i = 0; i < HexRow; i++) {
-/*
+
     		int numberCode = i + 1;
-    		if (j == 0) {
-    			numberCode = numberCode + 4;
+    		if (j >= 0 && j <=3) {
+    			numberCode = numberCode + 4-j;
     		}
-    		if(j==1) {
-    			numberCode = numberCode + 3;
-    		}
-    		if(j ==2) {
-    			numberCode = numberCode + 2;
-    		}
-    		if(j==3) {
-    			numberCode = numberCode + 1;
-    		}
+		
     		String neededForHash = Integer.toString(numberCode);
-*/
+
     		double xCoord = i * Hexagon.Hexagon_Width + (j % 2) * Hexagon.n  + CenterX-Hexagon.Hexagon_Width*(HexRowStart-0.5);
+
     		double yCoord = j * Hexagon.Hexagon_Height * 0.75  + CenterY-Hexagon.Hexagon_Height*2-3*Hexagon.radius;
 
 
@@ -59,11 +52,11 @@ public Pane add() {
 			}
 
 
-    		//String key = letterCode + neededForHash;
+    		String key = letterCode + neededForHash;
     		//System.out.println(key);
 
-    		Polygon Hex = new Hexagon(xCoord, yCoord);
-    		//hashBoard.put(key, Hex);
+    		Hexagon Hex = new Hexagon(xCoord, yCoord);
+    		hashBoard.put(key, Hex);
 
 
     		board.getChildren().add(Hex);
