@@ -7,8 +7,8 @@ public class Hexagon extends Polygon {
        public static double n = Math.sqrt(radius * radius * 0.75); // the inner radius from hexagon center to middle of the axis
 	   public static double Hexagon_Height = 2 * radius;
 	   public static double Hexagon_Width = 2 * n;
-	   public static double centerX;
-	   public static double centerY;
+	   public double centerX;
+	   public double centerY;
 
     	Hexagon(double x, double y) {
             /*

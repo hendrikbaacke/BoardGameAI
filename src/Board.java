@@ -1,5 +1,7 @@
 
 import java.util.Hashtable;
+import java.util.LinkedList;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
@@ -53,9 +55,8 @@ public Pane add() {
 
     		Hexagon Hex = new Hexagon(xCoord, yCoord);
     		hashBoard.put(key, Hex);
-
-
-    		board.getChildren().add(Hex);
+    		
+    		board.getChildren().addAll(Hex);
     	}
     	if ( j < HexRowStart-1) {
     		HexRow++;
@@ -66,6 +67,7 @@ public Pane add() {
     }
     return board;
 	}
+
 
 	public static char getCharFromAlphabet(int i) {
 		return (char)('A' + i);

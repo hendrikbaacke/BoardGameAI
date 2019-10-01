@@ -1,30 +1,63 @@
 import java.util.LinkedList;
 
+import javafx.scene.layout.AnchorPane;
+
 public class MarbleStorage {
+
+	public static AnchorPane pieceGroup = new AnchorPane();
 	LinkedList<Marble> storage = new LinkedList<Marble>();
-	
-	public void startSituation() {
-		int player = 1;
-		int marbleRowStart = 5;
-		String code = null;
-		
-		for (int i = 0; i < 2; i++) {
-			for (int k = 1; k < marbleRowStart; k++) {
-				String letter = Character.toString((char)('A'+i));
-				String number = Integer.toString(k);
-				code = letter + number;
+	 
+	public AnchorPane Balls() {
+		for (int i = 0; i < 10; i++) {
+
+			if (Board.hashBoard.get("A" + i) != null) {
+				Marble p = new Marble(Board.hashBoard.get("A" + i).centerX,
+						Board.hashBoard.get("A" + i).centerY, 20, 1);
+				storage.add(p);
 			}
-			Marble now = new Marble(code, player, 10);
-			storage.add(now);
-			marbleRowStart++;
-		}
-			
-		player = 2;
-		for (int j = 8; j > 6; j--) {
-			
-			
+			if (Board.hashBoard.get("B" + i) != null) {
+				Marble p = new Marble(Board.hashBoard.get("B" + i).centerX,
+						Board.hashBoard.get("B" + i).centerY, 20, 1);
+				storage.add(p);
+
+			}
+			if (Board.hashBoard.get("C" + i) != null) {
+				if (i > 2 && i < 6) {
+					Marble p = new Marble(
+							Board.hashBoard.get("C" + i).centerX,
+							Board.hashBoard.get("C" + i).centerY, 20, 1);
+					storage.add(p);
+
+				}
+			}
+			if (Board.hashBoard.get("I" + i) != null) {
+				Marble p = new Marble(Board.hashBoard.get("I" + i).centerX,
+						Board.hashBoard.get("I" + i).centerY, 20, 2);
+				storage.add(p);
+
+			}
+			if (Board.hashBoard.get("H" + i) != null) {
+				Marble p = new Marble(Board.hashBoard.get("H" + i).centerX,
+						Board.hashBoard.get("H" + i).centerY, 20, 2);
+				storage.add(p);
+
+			}
+			if (Board.hashBoard.get("G" + i) != null) {
+				if (i > 4 && i < 8) {
+					Marble p = new Marble(
+							Board.hashBoard.get("G" + i).centerX,
+							Board.hashBoard.get("G" + i).centerY, 20, 2);
+					storage.add(p);
+
+				}
+			}
+			System.out.println("Number of items in the list: " + storage.size());
+		     System.out.println(storage);
 		}
 		
+		
+		return pieceGroup;
 	}
-	
+
+
 }
