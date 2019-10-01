@@ -7,8 +7,9 @@ import javafx.scene.shape.Ellipse;
 public class Marble extends Ellipse{
 	private String locationKey;
 	private int playerNumber;
+	private final int radius = 20;
 	
-	Marble(double centerX, double centerY, int radius, int player){
+	Marble(double centerX, double centerY, int player){
 		Ellipse e = new Ellipse(centerX, centerY, radius, radius);
 		this.playerNumber = player;
 		if(player == 1) {
