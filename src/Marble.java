@@ -45,8 +45,8 @@ public class Marble extends Ellipse{
 		Hexagon hex = (Hexagon) Board.hashBoard.get(locationKey);
 		double tempX = hex.centerX ;
 		double tempY = hex.centerY;
-		
-		
+		this.setCenterX(tempX);
+		this.setCenterY(tempY);
 	}
 	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
 		        new EventHandler<MouseEvent>() {
