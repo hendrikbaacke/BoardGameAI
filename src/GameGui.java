@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Cell;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
@@ -43,6 +44,9 @@ public class GameGui extends Application{
             HBox hbox2 = new HBox();
             Button Player2 = new Button("Player 2");
 
+            /*TODO
+            If Player 1's turn: select P1 and viceversa
+            */
 
             GridPane.setRowIndex(hbox0, 0);
             GridPane.setRowIndex(hbox1, 1);
@@ -53,12 +57,12 @@ public class GameGui extends Application{
 
             for (int i = 0; i < 6; i++) {
 
-                hbox1.getChildren().add(new Button("" + (i + 1)));
+                hbox1.getChildren().add(new CheckBox("" + (i + 1)));
             }
             hbox2.getChildren().addAll(Player2);
 
             for (int i = 0; i < 6; i++) {
-                hbox2.getChildren().add((new Button("" + (i + 1))));
+                hbox2.getChildren().add((new CheckBox("" + (i + 1))));
             }
 
             SubScene.getChildren().addAll(hbox0, hbox1, hbox2);
@@ -74,7 +78,7 @@ public class GameGui extends Application{
             stage.show();
 
         } catch (Exception e){
-            System.out.println("Error in GUI Creation"+ e.getMessage());
+            System.out.println("Exception in GUI Creation"+ e.getMessage());
         }
 
 
