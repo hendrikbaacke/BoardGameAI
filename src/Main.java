@@ -30,6 +30,7 @@ public class Main extends Application {
 
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
+        primaryStage.setFullScreen(true);
 
         //Image pic = new Image("file:backgroundGame.jpg");
         //ImageView mv = new ImageView(pic);
@@ -214,7 +215,7 @@ public class Main extends Application {
         credMainCont.add(hendrikTitleBG, 0, 4);
         credMainCont.add(fredTitleBG, 0, 5);
 
-        creditsMainCont.getChildren().addAll(credTitleCont, credSubTitleCont, credMainCont, backCont);
+        creditsMainCont.getChildren().addAll(credTitleCont,backCont, credSubTitleCont, credMainCont);
         Scene creditScene = new Scene(creditsMainCont);
 
         Button back2 = new Button("BACK");
@@ -246,25 +247,25 @@ public class Main extends Application {
         ruleMainCont.setHgap(50);
 
 
-        Text ruleOneContent = new Text("To be the first player to push six of the opponent's marbles out of play, into the board's outer rim.");
+        Text ruleOneContent = new Text("To win, you must push six of the opponent's marbles out of play, into the board's outer rim.");
         TextFlow ruleOneCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list7 = ruleOneCont.getChildren();
         list7.addAll(ruleOneContent);
 
-        Text ruleTwoContent = new Text("Black makes the first move");
+        Text ruleTwoContent = new Text("Player with Black marbles makes the first move");
         TextFlow ruleTwoCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list8 = ruleTwoCont.getChildren();
         list8.addAll(ruleTwoContent);
 
-        Text ruleThreeContent = new Text("You can push one, two or three marbles at a time");
+        Text ruleThreeContent = new Text("You can move one, two or three marbles at a time");
         TextFlow ruleThreeCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list9 = ruleThreeCont.getChildren();
         list9.addAll(ruleThreeContent);
 
-        Text ruleFourContent = new Text("Your marbles can move one space, in a straight line or laterally.");
+        Text ruleFourContent = new Text("Your marbles can move one space, in any direction (backward, forward, laterally and diagonally).");
         TextFlow ruleFourCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list10 = ruleFourCont.getChildren();
@@ -331,22 +332,28 @@ public class Main extends Application {
 
         credits.setOnAction(e ->{
             primaryStage.setScene(creditScene);
+            primaryStage.setFullScreen(true);
             back.setOnAction(f-> {
                 primaryStage.setScene(scene);
+                primaryStage.setFullScreen(true);
             });
         });
 
         rules.setOnAction(e ->{
             primaryStage.setScene(ruleScene);
+            primaryStage.setFullScreen(true);
             back2.setOnAction(f-> {
                 primaryStage.setScene(scene);
+                primaryStage.setFullScreen(true);
             });
         });
 
         settings.setOnAction(e ->{
             primaryStage.setScene(setScene);
+            primaryStage.setFullScreen(true);
             back3.setOnAction(f-> {
                 primaryStage.setScene(scene);
+                primaryStage.setFullScreen(true);
             });
         });
 
