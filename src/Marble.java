@@ -1,5 +1,8 @@
 
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
@@ -7,10 +10,15 @@ import javafx.scene.shape.Ellipse;
 public class Marble extends Ellipse{
 	private String locationKey;
 	private int playerNumber;
+	double orgSceneX, orgSceneY;
+	double orgTranslateX, orgTranslateY;
 	
 	Marble(double centerX, double centerY, int radius, int player){
 		Ellipse e = new Ellipse(centerX, centerY, radius, radius);
 		this.playerNumber = player;
+		e.setCursor(Cursor.MOVE);
+		e.setOnMousePressed(EllipseOnMousePressedEventHandler);
+	    e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
 		if(player == 1) {
 			e.setFill(Color.DARKMAGENTA);
 		}
@@ -18,6 +26,7 @@ public class Marble extends Ellipse{
 			e.setFill(Color.PINK);
 		}
 		MarbleStorage.pieceGroup.getChildren().add(e);
+		
 	}
 	
 	public void setLocationKey(String key){
@@ -35,5 +44,31 @@ public class Marble extends Ellipse{
 		
 		
 	}
+	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
+		        new EventHandler<MouseEvent>() {
+		 
+		        @Override
+		        public void handle(MouseEvent t) {
+		            orgSceneX = t.getSceneX();
+		            orgSceneY = t.getSceneY();
+		            orgTranslateX = ((Ellipse)(t.getSource())).getTranslateX();
+		            orgTranslateY = ((Ellipse)(t.getSource())).getTranslateY();
+		        }
+		    };
+		     
+		    EventHandler<MouseEvent> EllipseOnMouseDraggedEventHandler = 
+		        new EventHandler<MouseEvent>() {
+		 
+		        @Override
+		        public void handle(MouseEvent t) {
+		            double offsetX = t.getSceneX() - orgSceneX;
+		            double offsetY = t.getSceneY() - orgSceneY;
+		            double newTranslateX = orgTranslateX + offsetX;
+		            double newTranslateY = orgTranslateY + offsetY;
+		             
+		            ((Ellipse)(t.getSource())).setTranslateX(newTranslateX);
+		            ((Ellipse)(t.getSource())).setTranslateY(newTranslateY);
+		        }
+		    };
 	
 }
