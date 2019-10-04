@@ -1,4 +1,4 @@
-
+package src;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;

@@ -1,11 +1,12 @@
-
+package src;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
-public class Board extends Pane{
+public class Board extends BorderPane {
 	//create rows manually
    private int HexRowStart = 5;
    public double CenterX;
@@ -17,8 +18,8 @@ public class Board extends Pane{
 	   CenterY = Y;
    }
 
-public Pane add() {
-    Pane board = new Pane();
+public BorderPane add() {
+    BorderPane board = new BorderPane();
     double HexRow = HexRowStart;
     for (int j = 0; j < HexRowStart*2-1; j++) {
     	char hexa = getCharFromAlphabet(HexRowStart*2-1 - j - 1);

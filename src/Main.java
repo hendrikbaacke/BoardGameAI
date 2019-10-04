@@ -1,4 +1,4 @@
-
+package src;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -126,6 +126,8 @@ public class Main extends Application {
         pane.getChildren().addAll(mainContainer);
         String style = "-fx-background-color: lightblue;;";
         pane.setStyle(style);
+
+
         Scene scene = new Scene(pane,3000,2000);
 
         scene.getStylesheets().add("application/Main.css");
