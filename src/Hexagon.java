@@ -37,9 +37,8 @@ public class Hexagon extends Polygon {
             
             this.code = code;
             
-            this.setOnMouseClicked(e -> System.out.println("Clicked"));
+            this.setOnMouseClicked(e -> Board.move.select(code));
             
-         
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
         }

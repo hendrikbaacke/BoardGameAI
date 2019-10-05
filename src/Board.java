@@ -14,6 +14,7 @@ public class Board extends BorderPane {
    public double CenterY;
    public static Hashtable<String, Hexagon> hashBoard = new Hashtable();
    public static ArrayList<Hexagon> everyHex = new ArrayList<Hexagon>();
+   public static Move move = new Move();
 
    public Board(double X, double Y) {
 	   CenterX = X;

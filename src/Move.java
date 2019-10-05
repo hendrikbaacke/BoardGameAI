@@ -17,6 +17,13 @@ public class Move {
 	
 	public int playersTurn = 1;
 	
+	public Move() {
+		first = null;
+		second = null;
+		third = null;
+		moveTo = null;
+	}
+	
 	public void select(String code) {
 		//select the marbles for the movement
 		if (first == null && !Board.hashBoard.get(code).empty) {
@@ -53,11 +60,12 @@ public class Move {
 					third = code;
 					nrSelected++;
 					selectedMarbles.add(code);
+					selected = true;
 				}
 			}
 		}
 		else{
-			if (first != null) {
+			if (first != null && selected) {
 				moveTo = code;
 			}	
 		}

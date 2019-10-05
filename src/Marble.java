@@ -13,13 +13,15 @@ public class Marble extends Ellipse{
 	double orgSceneX, orgSceneY;
 	double orgTranslateX, orgTranslateY;
 	
-	Marble(double centerX, double centerY, int radius, int player){
+	Marble(double centerX, double centerY, int radius, int player, String key){
 		Ellipse e = new Ellipse(centerX, centerY, radius, radius);
 		this.playerNumber = player;
+		this.locationKey = key;
+		
 		//e.setCursor(Cursor.MOVE);
 		//e.setOnMousePressed(EllipseOnMousePressedEventHandler);
 	    //e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
-	    //e.setOnMouseClicked(EllipseOnMouseClicked);
+	    e.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
 			e.setFill(Color.ANTIQUEWHITE);
 		}
@@ -48,6 +50,7 @@ public class Marble extends Ellipse{
 		this.setCenterX(tempX);
 		this.setCenterY(tempY);
 	}
+	/*
 	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
 		        new EventHandler<MouseEvent>() {
 		 
@@ -74,13 +77,15 @@ public class Marble extends Ellipse{
 		            ((Ellipse)(t.getSource())).setTranslateY(newTranslateY);
 		        }
 		    };
-
+*/
 			EventHandler<MouseEvent> EllipseOnMouseClicked =
 					new EventHandler<MouseEvent>() {
 
 						@Override
 						public void handle(MouseEvent t) {
 							System.out.println(locationKey);
+							Board.move.select(locationKey);
+							
 						}
 					};
 }

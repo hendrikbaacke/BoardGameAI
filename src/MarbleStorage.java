@@ -33,15 +33,15 @@ public class MarbleStorage {
 
 			if (Board.hashBoard.get("A" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("A" + i).centerX,
-						Board.hashBoard.get("A" + i).centerY, 20, 1);
-				p.setLocationKey("A" + i);
+						Board.hashBoard.get("A" + i).centerY, 20, 1, "A" + i);
+				//p.setLocationKey("A" + i);
 				Board.hashBoard.get("A" + i).setFull(p);
 				storage.add(p);
 			}
 			if (Board.hashBoard.get("B" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("B" + i).centerX,
-						Board.hashBoard.get("B" + i).centerY, 20, 1);
-				p.setLocationKey("B" + i);
+						Board.hashBoard.get("B" + i).centerY, 20, 1, "B"+i);
+				//p.setLocationKey("B" + i);
 				Board.hashBoard.get("B" + i).setFull(p);
 				storage.add(p);
 
@@ -50,7 +50,7 @@ public class MarbleStorage {
 				if (i > 2 && i < 6) {
 					Marble p = new Marble(
 							Board.hashBoard.get("C" + i).centerX,
-							Board.hashBoard.get("C" + i).centerY, 20, 1);
+							Board.hashBoard.get("C" + i).centerY, 20, 1, "C" + i);
 					p.setLocationKey("C" + i);
 					Board.hashBoard.get("C" + i).setFull(p);
 					storage.add(p);
@@ -59,16 +59,16 @@ public class MarbleStorage {
 			}
 			if (Board.hashBoard.get("I" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("I" + i).centerX,
-						Board.hashBoard.get("I" + i).centerY, 20, 2);
-				p.setLocationKey("I" + i);
+						Board.hashBoard.get("I" + i).centerY, 20, 2, "I" + i);
+				//p.setLocationKey("I" + i);
 				Board.hashBoard.get("I" + i).setFull(p);
 				storage.add(p);
 
 			}
 			if (Board.hashBoard.get("H" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("H" + i).centerX,
-						Board.hashBoard.get("H" + i).centerY, 20, 2);
-				p.setLocationKey("H" + i);
+						Board.hashBoard.get("H" + i).centerY, 20, 2, "H" + i);
+				//p.setLocationKey("H" + i);
 				Board.hashBoard.get("H" + i).setFull(p);
 				storage.add(p);
 
@@ -77,8 +77,8 @@ public class MarbleStorage {
 				if (i > 4 && i < 8) {
 					Marble p = new Marble(
 							Board.hashBoard.get("G" + i).centerX,
-							Board.hashBoard.get("G" + i).centerY, 20, 2);
-					p.setLocationKey("G" + i);
+							Board.hashBoard.get("G" + i).centerY, 20, 2, "G" + i);
+					//p.setLocationKey("G" + i);
 					Board.hashBoard.get("G" + i).setFull(p);
 					storage.add(p);
 
