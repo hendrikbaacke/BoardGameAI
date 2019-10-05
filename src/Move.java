@@ -60,7 +60,6 @@ public class Move {
 			if(validMoveOne()) {
 				performMovementOne();
 				changePlayer();
-				
 			}
 		}
 		else if(nrSelected ==2) {
