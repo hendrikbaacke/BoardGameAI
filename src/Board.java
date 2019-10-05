@@ -58,7 +58,6 @@ public BorderPane add() {
 
 
     		String key = letterCode + neededForHash;
-    		System.out.println(key);
 
     		Hexagon Hex = new Hexagon(xCoord, yCoord, key);
     		hashBoard.put(key, Hex);
