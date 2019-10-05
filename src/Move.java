@@ -1,9 +1,13 @@
 package src;
 
+import java.util.ArrayList;
+
 public class Move {
 	public String first;
 	public String second;
 	public String third;
+	
+	public ArrayList<String> selectedMarbles = new ArrayList<String>();
 	
 	public int nrSelected = 0;
 	
@@ -13,16 +17,38 @@ public class Move {
 	
 	public int playersTurn;
 	
-	public void select() {
+	public void select(String code) {
 		//select the marbles for the movement
-		
-		
-		
-		if(moveTo != null) {
-			selected = true;
+		if (first == null) {
+			first = code;
+			nrSelected++;
+			selectedMarbles.add(code);
+		}
+		else if(second == null) {
+			if (first.equals(code)) {
+				selected = true;
+			}
+			else{
+				second = code;
+				nrSelected++;
+				selectedMarbles.add(code);
+			}
+		}
+		else if(third == null && !selected) {
+			if(first.equals(code) || second.equals(code)) {
+				selected = true;
+			}
+			else {
+				third = code;
+				nrSelected++;
+				selectedMarbles.add(code);
+			}
+		}
+		else{
+			moveTo = code;
 		}
 		
-		if(selected) {
+		if(moveTo != null) {
 			move();
 		}
 	}

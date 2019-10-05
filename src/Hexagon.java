@@ -38,6 +38,8 @@ public class Hexagon extends Polygon {
             this.code = code;
             
             this.setOnMouseClicked(e -> System.out.println("Clicked"));
+            //need to add Move.select to this :(
+            
          
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
