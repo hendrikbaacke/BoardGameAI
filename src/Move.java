@@ -31,6 +31,9 @@ public class Move {
 				if (first.equals(code)) {
 					selected = true;
 				}
+				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
+					first = code;
+				}
 				else{
 					second = code;
 					nrSelected++;
@@ -42,6 +45,9 @@ public class Move {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if(first.equals(code) || second.equals(code)) {
 					selected = true;
+				}
+				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second))) {
+					first = code;
 				}
 				else {
 					third = code;
@@ -66,18 +72,21 @@ public class Move {
 			if(validMoveOne()) {
 				performMovementOne();
 				changePlayer();
+				resetMove();
 			}
 		}
 		else if(nrSelected ==2) {
 			if(validMoveTwo()) {
 				performMovementTwo();
 				changePlayer();
+				resetMove();
 			}
 		}
 		else if(nrSelected ==3) {
 			if(validMoveThree()) {
 				performMovementThree();
 				changePlayer();
+				resetMove();
 			}
 		}
 	}
@@ -114,6 +123,7 @@ public class Move {
 		this.moveTo = null;
 		this.selected = false;
 		this.nrSelected = 0;
+		this.selectedMarbles.clear();
 	}
 	
 	//test if it is possible to move these
