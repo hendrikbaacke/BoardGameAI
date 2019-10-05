@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 
 public class Board extends BorderPane {
-	//create rows manually
+	//create rows
    private int HexRowStart = 5;
    public double CenterX;
    public double CenterY;

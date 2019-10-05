@@ -4,12 +4,16 @@ import java.util.LinkedList;
 
 import javafx.scene.layout.AnchorPane;
 
+//i added something to this so you can see for every hexagon whether it contain a marble or not - and the marble is linked to it as well!!
+//so if this gets updated correctly, the marbles are accessible through the hashboard as well
+
 public class MarbleStorage {
 
 	public static AnchorPane pieceGroup = new AnchorPane();
 	LinkedList<Marble> storage = new LinkedList<Marble>();
 	 
 	public AnchorPane Balls() {
+		/*
 		//filling every Hexagon with dummy marbles
 		for (char ch='A'; ch <= 'I'; ch++) {
 			String letterCode = Character.toString(ch);
@@ -22,18 +26,21 @@ public class MarbleStorage {
 				}
 			}
 		}
+		*/
 		for (int i = 0; i < 10; i++) {
 
 			if (Board.hashBoard.get("A" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("A" + i).centerX,
 						Board.hashBoard.get("A" + i).centerY, 20, 1);
 				p.setLocationKey("A" + i);
+				Board.hashBoard.get("A" + i).setFull(p);
 				storage.add(p);
 			}
 			if (Board.hashBoard.get("B" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("B" + i).centerX,
 						Board.hashBoard.get("B" + i).centerY, 20, 1);
 				p.setLocationKey("B" + i);
+				Board.hashBoard.get("B" + i).setFull(p);
 				storage.add(p);
 
 			}
@@ -43,6 +50,7 @@ public class MarbleStorage {
 							Board.hashBoard.get("C" + i).centerX,
 							Board.hashBoard.get("C" + i).centerY, 20, 1);
 					p.setLocationKey("C" + i);
+					Board.hashBoard.get("C" + i).setFull(p);
 					storage.add(p);
 
 				}
@@ -51,6 +59,7 @@ public class MarbleStorage {
 				Marble p = new Marble(Board.hashBoard.get("I" + i).centerX,
 						Board.hashBoard.get("I" + i).centerY, 20, 2);
 				p.setLocationKey("I" + i);
+				Board.hashBoard.get("I" + i).setFull(p);
 				storage.add(p);
 
 			}
@@ -58,6 +67,7 @@ public class MarbleStorage {
 				Marble p = new Marble(Board.hashBoard.get("H" + i).centerX,
 						Board.hashBoard.get("H" + i).centerY, 20, 2);
 				p.setLocationKey("H" + i);
+				Board.hashBoard.get("H" + i).setFull(p);
 				storage.add(p);
 
 			}
@@ -67,15 +77,15 @@ public class MarbleStorage {
 							Board.hashBoard.get("G" + i).centerX,
 							Board.hashBoard.get("G" + i).centerY, 20, 2);
 					p.setLocationKey("G" + i);
+					Board.hashBoard.get("G" + i).setFull(p);
 					storage.add(p);
 
 				}
 			}
-			//System.out.println("Number of items in the list: " + storage.size());
-		     //System.out.println(storage);
+				//System.out.println("Number of items in the list: " + storage.size());
+		     	//System.out.println(storage);
 		}
 
-		
 		return pieceGroup;
 	}
 
