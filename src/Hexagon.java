@@ -16,7 +16,7 @@ public class Hexagon extends Polygon {
 	   public String code;
 	   public Marble marble;
 
-    	Hexagon(double x, double y) {
+    	Hexagon(double x, double y, String code) {
             /*
             creates the polygon, defined by an array of (x,y) coordinates
     		which represents the six points of a hexagon
@@ -31,23 +31,18 @@ public class Hexagon extends Polygon {
             );
 
             // set up the visuals and a click listener for the tile
-            setFill(Color.ALICEBLUE);
+            setFill(Color.ANTIQUEWHITE);
             setStrokeWidth(3);
             setStroke(Color.BLACK);
             
-            createNeighbourList();
+            this.code = code;
             
-            System.out.println("isSettingClicked");
-            setOnMouseClicked(e -> System.out.println("Clicked"));
-            
-            
+            this.setOnMouseClicked(e -> System.out.println("Clicked"));
+         
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
         }
     	
-    	public void setCode(String code) {
-    		this.code = code;
-    	}
     	
     	public void setFull(Marble m){
     		this.empty = false;
@@ -67,14 +62,57 @@ public class Hexagon extends Polygon {
     	}
     	
     	public boolean adjacent(Hexagon other) {
-    		boolean adjacent = false;
-    		
-    		
-    		return adjacent;
+    		if (neighbours.contains(other)) {
+    			return true;
+    		}
+    		return false;
     	}
     	
+    	//neighbours of a Hexagon: the letter after it in the alfabet + the same number or the same number + 1
+    	//the same letter + a number one bigger or smaller
+    	//the letter before it in the alfabet, number one smaller or the same
+    	//also!! if it's A, only the same letter or the one above it, for I only the I and the one below - > don't try to find codes that don't exist
     	public void createNeighbourList() {
-    		//for ()
-    		//this.neighbours.add(e)
+    		char lettercode = this.code.charAt(0);
+    		char number = this.code.charAt(1);
+    		int numbercode = Character.getNumericValue(number);
+    		
+    		char tempLetter = 'A';
+    		int tempNumber = 0;
+    		String code = null;
+    		
+    		for (int i = 0; i < 3; i++) {
+    			for (int j = 0; j < 3; j++) {
+    				
+    				
+    				tempLetter = (char) ((char) lettercode - 1 + i);
+    				
+    				if (i == 0 && j < 1) {
+    					tempNumber = numbercode -1+j;
+    					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
+    						if(Board.hashBoard.containsKey(code)) {
+    							neighbours.add(Board.hashBoard.get(code));
+    						}
+    				}
+    				
+    						
+    				if (i == 1 && j != 1) {
+    					tempNumber = numbercode -1+j;
+    					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
+    						if(Board.hashBoard.containsKey(code)) {
+    						neighbours.add(Board.hashBoard.get(code));
+    						}
+    				}
+    				
+    				
+    				if (i == 2 && j > 0) {
+    					tempNumber = numbercode -1+j;
+    					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
+    						if(Board.hashBoard.containsKey(code)) {
+    						neighbours.add(Board.hashBoard.get(code));
+    						}
+    				}
+    			}
+    		}
     	}
     }

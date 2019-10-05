@@ -13,6 +13,7 @@ public class MarbleStorage {
 	LinkedList<Marble> storage = new LinkedList<Marble>();
 	 
 	public AnchorPane Balls() {
+		
 		/*
 		//filling every Hexagon with dummy marbles
 		for (char ch='A'; ch <= 'I'; ch++) {
@@ -27,6 +28,7 @@ public class MarbleStorage {
 			}
 		}
 		*/
+		
 		for (int i = 0; i < 10; i++) {
 
 			if (Board.hashBoard.get("A" + i) != null) {

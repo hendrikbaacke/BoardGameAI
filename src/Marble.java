@@ -19,15 +19,15 @@ public class Marble extends Ellipse{
 		//e.setCursor(Cursor.MOVE);
 		//e.setOnMousePressed(EllipseOnMousePressedEventHandler);
 	    //e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
-	    e.setOnMouseClicked(EllipseOnMouseClicked);
+	    //e.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
-			e.setFill(Color.WHITE);
+			e.setFill(Color.ANTIQUEWHITE);
 		}
 		if(player == 1) {
-			e.setFill(Color.DARKMAGENTA);
+			e.setFill(Color.BLACK);
 		}
 		if(player == 2) {
-			e.setFill(Color.PINK);
+			e.setFill(Color.WHITE);
 		}
 		MarbleStorage.pieceGroup.getChildren().add(e);
 		

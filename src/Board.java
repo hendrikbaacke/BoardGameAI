@@ -1,4 +1,5 @@
 package src;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.LinkedList;
 
@@ -12,6 +13,7 @@ public class Board extends BorderPane {
    public double CenterX;
    public double CenterY;
    public static Hashtable<String, Hexagon> hashBoard = new Hashtable();
+   public static ArrayList<Hexagon> everyHex = new ArrayList<Hexagon>();
 
    public Board(double X, double Y) {
 	   CenterX = X;
@@ -56,10 +58,11 @@ public BorderPane add() {
 
 
     		String key = letterCode + neededForHash;
-    		//System.out.println(key);
+    		System.out.println(key);
 
-    		Hexagon Hex = new Hexagon(xCoord, yCoord);
+    		Hexagon Hex = new Hexagon(xCoord, yCoord, key);
     		hashBoard.put(key, Hex);
+    		everyHex.add(Hex);
     		
     		board.getChildren().addAll(Hex);
     	}
@@ -70,6 +73,10 @@ public BorderPane add() {
     		HexRow--;
     	}
     }
+    for (int i = 0; i < everyHex.size(); i++) {
+    	everyHex.get(i).createNeighbourList();
+    }
+    
     return board;
 	}
 
