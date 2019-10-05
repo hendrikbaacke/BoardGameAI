@@ -9,7 +9,7 @@ import javafx.scene.shape.Ellipse;
 
 public class Marble extends Ellipse{
 	private String locationKey;
-	private int playerNumber;
+	public int playerNumber;
 	double orgSceneX, orgSceneY;
 	double orgTranslateX, orgTranslateY;
 	

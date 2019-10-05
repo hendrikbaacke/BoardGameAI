@@ -15,16 +15,16 @@ public class Move {
 	
 	private boolean selected = false;
 	
-	public int playersTurn;
+	public int playersTurn = 1;
 	
 	public void select(String code) {
 		//select the marbles for the movement
-		if (first == null) {
+		if (first == null && Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 			first = code;
 			nrSelected++;
 			selectedMarbles.add(code);
 		}
-		else if(second == null) {
+		else if(second == null  && Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 			if (first.equals(code)) {
 				selected = true;
 			}
@@ -34,7 +34,7 @@ public class Move {
 				selectedMarbles.add(code);
 			}
 		}
-		else if(third == null && !selected) {
+		else if(third == null && !selected && Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 			if(first.equals(code) || second.equals(code)) {
 				selected = true;
 			}
@@ -45,7 +45,9 @@ public class Move {
 			}
 		}
 		else{
-			moveTo = code;
+			if (first != null) {
+				moveTo = code;
+			}	
 		}
 		
 		if(moveTo != null) {
@@ -57,17 +59,30 @@ public class Move {
 		if (nrSelected == 1) {
 			if(validMoveOne()) {
 				performMovementOne();
+				changePlayer();
+				
 			}
 		}
 		else if(nrSelected ==2) {
 			if(validMoveTwo()) {
 				performMovementTwo();
+				changePlayer();
 			}
 		}
 		else if(nrSelected ==3) {
 			if(validMoveThree()) {
 				performMovementThree();
+				changePlayer();
 			}
+		}
+	}
+	
+	public void changePlayer() {
+		if (playersTurn ==1) {
+			playersTurn = 2;
+		}
+		else {
+			playersTurn = 1;
 		}
 	}
 	
