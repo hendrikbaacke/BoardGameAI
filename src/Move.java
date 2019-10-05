@@ -19,29 +19,35 @@ public class Move {
 	
 	public void select(String code) {
 		//select the marbles for the movement
-		if (first == null && Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
-			first = code;
-			nrSelected++;
-			selectedMarbles.add(code);
-		}
-		else if(second == null  && Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
-			if (first.equals(code)) {
-				selected = true;
-			}
-			else{
-				second = code;
+		if (first == null && !Board.hashBoard.get(code).empty) {
+			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
+				first = code;
 				nrSelected++;
 				selectedMarbles.add(code);
 			}
 		}
-		else if(third == null && !selected && Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
-			if(first.equals(code) || second.equals(code)) {
-				selected = true;
+		else if(second == null  && !Board.hashBoard.get(code).empty) {
+			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
+				if (first.equals(code)) {
+					selected = true;
+				}
+				else{
+					second = code;
+					nrSelected++;
+					selectedMarbles.add(code);
+				}
 			}
-			else {
-				third = code;
-				nrSelected++;
-				selectedMarbles.add(code);
+		}
+		else if(third == null && !selected && !Board.hashBoard.get(code).empty) {
+			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
+				if(first.equals(code) || second.equals(code)) {
+					selected = true;
+				}
+				else {
+					third = code;
+					nrSelected++;
+					selectedMarbles.add(code);
+				}
 			}
 		}
 		else{
