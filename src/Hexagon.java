@@ -68,10 +68,6 @@ public class Hexagon extends Polygon {
     		return false;
     	}
     	
-    	//neighbours of a Hexagon: the letter after it in the alfabet + the same number or the same number + 1
-    	//the same letter + a number one bigger or smaller
-    	//the letter before it in the alfabet, number one smaller or the same
-    	//also!! if it's A, only the same letter or the one above it, for I only the I and the one below - > don't try to find codes that don't exist
     	public void createNeighbourList() {
     		char lettercode = this.code.charAt(0);
     		char number = this.code.charAt(1);
