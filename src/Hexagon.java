@@ -37,13 +37,14 @@ public class Hexagon extends Polygon {
             
             this.code = code;
             
+            //so it gives the code to move, will automatically do everything that's needed
             this.setOnMouseClicked(e -> Board.move.select(code));
             
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
         }
     	
-    	
+    	//link a marble to the hexagon it is in:
     	public void setFull(Marble m){
     		this.empty = false;
     		this.marble = m;
@@ -61,6 +62,7 @@ public class Hexagon extends Polygon {
     		return "full";
     	}
     	
+    	//returns "true" if another hexagon is adjacent
     	public boolean adjacent(Hexagon other) {
     		if (neighbours.contains(other)) {
     			return true;
@@ -68,6 +70,7 @@ public class Hexagon extends Polygon {
     		return false;
     	}
     	
+    	//creates a list of all neighbours, so it's easy to check whether another hexagon is adjacent
     	public void createNeighbourList() {
     		char lettercode = this.code.charAt(0);
     		char number = this.code.charAt(1);

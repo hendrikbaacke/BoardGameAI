@@ -50,7 +50,7 @@ public class Marble extends Ellipse{
 		this.setCenterX(tempX);
 		this.setCenterY(tempY);
 	}
-	/*
+	
 	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
 		        new EventHandler<MouseEvent>() {
 		 
@@ -77,7 +77,7 @@ public class Marble extends Ellipse{
 		            ((Ellipse)(t.getSource())).setTranslateY(newTranslateY);
 		        }
 		    };
-*/
+
 			EventHandler<MouseEvent> EllipseOnMouseClicked =
 					new EventHandler<MouseEvent>() {
 
