@@ -29,7 +29,7 @@ public class Marble extends Ellipse{
 			e.setFill(Color.BLACK);
 		}
 		if(player == 2) {
-			e.setFill(Color.WHITE);
+			e.setFill(Color.GRAY);
 		}
 		MarbleStorage.pieceGroup.getChildren().add(e);
 		
