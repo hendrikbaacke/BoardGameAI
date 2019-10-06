@@ -40,44 +40,7 @@ public class Marble extends Ellipse{
 	public String getLocationKey() {
 		return locationKey;
 	}
-	
-	public void updateLocation(String code) {
-	/*	Hexagon hex = (Hexagon) Board.hashBoard.get(code);
-		double tempX = hex.centerX ;
-		double tempY = hex.centerY;*/
 
-		this.setCenterX(Board.hashBoard.get(code).centerX);
-		System.out.println(Board.hashBoard.get(code).centerX);
-		this.setCenterY(Board.hashBoard.get(code).centerX);
-	System.out.println("Test");
-	}
-	
-	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
-		        new EventHandler<MouseEvent>() {
-		 
-		        @Override
-		        public void handle(MouseEvent t) {
-		            orgSceneX = t.getSceneX();
-		            orgSceneY = t.getSceneY();
-		            orgTranslateX = ((Ellipse)(t.getSource())).getTranslateX();
-		            orgTranslateY = ((Ellipse)(t.getSource())).getTranslateY();
-		        }
-		    };
-		     
-		    EventHandler<MouseEvent> EllipseOnMouseDraggedEventHandler = 
-		        new EventHandler<MouseEvent>() {
-		 
-		        @Override
-		        public void handle(MouseEvent t) {
-		            double offsetX = t.getSceneX() - orgSceneX;
-		            double offsetY = t.getSceneY() - orgSceneY;
-		            double newTranslateX = orgTranslateX + offsetX;
-		            double newTranslateY = orgTranslateY + offsetY;
-		             
-		            ((Ellipse)(t.getSource())).setTranslateX(newTranslateX);
-		            ((Ellipse)(t.getSource())).setTranslateY(newTranslateY);
-		        }
-		    };
 
 			EventHandler<MouseEvent> EllipseOnMouseClicked =
 					new EventHandler<MouseEvent>() {
@@ -87,7 +50,7 @@ public class Marble extends Ellipse{
 							System.out.println(locationKey);
 							System.out.println(Board.hashBoard.get(locationKey).marble.getPlayer());
 							Board.move.select(locationKey);
-							
+
 						}
 					};
 }

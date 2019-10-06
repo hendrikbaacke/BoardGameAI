@@ -11,7 +11,7 @@ public class MarbleStorage {
 	LinkedList<Marble> storage = new LinkedList<Marble>();
 
 	public AnchorPane Balls() {
-		//filling every Hexagon with dummy marbles
+
 		for (char ch='A'; ch <= 'I'; ch++) {
 			String letterCode = Character.toString(ch);
 			for (int j = 0; j < 10; j++) {
