@@ -1,6 +1,8 @@
 package src;
 import java.util.ArrayList;
 
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
@@ -39,7 +41,7 @@ public class Hexagon extends Polygon {
             
             //so it gives the code to move, will automatically do everything that's needed
             this.setOnMouseClicked(e -> Board.move.select(code));
-            
+           
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
         }
@@ -69,6 +71,7 @@ public class Hexagon extends Polygon {
     		}
     		return false;
     	}
+    	
     	
     	//creates a list of all neighbours, so it's easy to check whether another hexagon is adjacent
     	public void createNeighbourList() {

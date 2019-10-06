@@ -1,7 +1,6 @@
 package src;
 
 import java.util.LinkedList;
-
 import javafx.scene.layout.AnchorPane;
 
 //i added something to this so you can see for every hexagon whether it contain a marble or not - and the marble is linked to it as well!!
@@ -11,24 +10,9 @@ public class MarbleStorage {
 
 	public static AnchorPane pieceGroup = new AnchorPane();
 	LinkedList<Marble> storage = new LinkedList<Marble>();
-	 
+
 	public AnchorPane Balls() {
-		
-		/*
-		//filling every Hexagon with dummy marbles
-		for (char ch='A'; ch <= 'I'; ch++) {
-			String letterCode = Character.toString(ch);
-			for (int j = 0; j < 10; j++) {
-				if (Board.hashBoard.get(letterCode + j) != null) {
-					Marble p = new Marble(Board.hashBoard.get(letterCode + j).centerX,
-							Board.hashBoard.get(letterCode + j).centerY, 20, 0);
-					p.setLocationKey(letterCode + j);
-					storage.add(p);
-				}
-			}
-		}
-		*/
-		
+	
 		for (int i = 0; i < 10; i++) {
 
 			if (Board.hashBoard.get("A" + i) != null) {
@@ -37,6 +21,7 @@ public class MarbleStorage {
 				//p.setLocationKey("A" + i);
 				Board.hashBoard.get("A" + i).setFull(p);
 				storage.add(p);
+
 			}
 			if (Board.hashBoard.get("B" + i) != null) {
 				Marble p = new Marble(Board.hashBoard.get("B" + i).centerX,
@@ -81,11 +66,13 @@ public class MarbleStorage {
 					//p.setLocationKey("G" + i);
 					Board.hashBoard.get("G" + i).setFull(p);
 					storage.add(p);
+					
 
 				}
 			}
 				//System.out.println("Number of items in the list: " + storage.size());
 		     	//System.out.println(storage);
+	
 		}
 
 		return pieceGroup;
