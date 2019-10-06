@@ -15,13 +15,13 @@ public class Marble extends Ellipse{
 		Ellipse e = new Ellipse(centerX, centerY, radius, radius);
 		this.playerNumber = player;
 		this.locationKey = key;
-		
+
 		e.setCursor(Cursor.MOVE);
 //		e.setOnMousePressed(EllipseOnMousePressedEventHandler);
 //	    e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
 	    e.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
-			e.setFill(Color.ANTIQUEWHITE);
+			e.setFill(Color.BLUE);
 		}
 		if(player == 1) {
 			e.setFill(Color.BLACK);
@@ -32,7 +32,7 @@ public class Marble extends Ellipse{
 		MarbleStorage.pieceGroup.getChildren().add(e);
 		
 	}
-	
+
 	public void setLocationKey(String key){
 		this.locationKey = key;
 	}
@@ -42,47 +42,23 @@ public class Marble extends Ellipse{
 	}
 	
 	public void updateLocation() {
-		Hexagon hex = (Hexagon) Board.hashBoard.get(locationKey);
+		Hexagon hex =  Board.hashBoard.get(locationKey);
 		double tempX = hex.centerX ;
 		double tempY = hex.centerY;
 		this.setCenterX(tempX);
 		this.setCenterY(tempY);
+		this.relocate(tempX,tempY);
+
+
 	}
-	
-	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
-		        new EventHandler<MouseEvent>() {
-		 
-		        @Override
-		        public void handle(MouseEvent t) {
-		            orgSceneX = t.getSceneX();
-		            orgSceneY = t.getSceneY();
-		            orgTranslateX = ((Ellipse)(t.getSource())).getTranslateX();
-		            orgTranslateY = ((Ellipse)(t.getSource())).getTranslateY();
-		        }
-		    };
-		     
-		    EventHandler<MouseEvent> EllipseOnMouseDraggedEventHandler = 
-		        new EventHandler<MouseEvent>() {
-		 
-		        @Override
-		        public void handle(MouseEvent t) {
-		            double offsetX = t.getSceneX() - orgSceneX;
-		            double offsetY = t.getSceneY() - orgSceneY;
-		            double newTranslateX = orgTranslateX + offsetX;
-		            double newTranslateY = orgTranslateY + offsetY;
-		             
-		            ((Ellipse)(t.getSource())).setTranslateX(newTranslateX);
-		            ((Ellipse)(t.getSource())).setTranslateY(newTranslateY);
-		        }
-		    };
 
 			EventHandler<MouseEvent> EllipseOnMouseClicked =
 					new EventHandler<MouseEvent>() {
 
 						@Override
 						public void handle(MouseEvent t) {
-							System.out.println(locationKey);
-							Board.move.select(locationKey);
+							System.out.println(getLocationKey());
+							Board.move.select(getLocationKey());
 							
 						}
 					};

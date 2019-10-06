@@ -31,6 +31,7 @@ public class Move {
 	//select marbles
 	public void select(String code) {
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
+
 		if (first == null && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				first = code;
@@ -43,7 +44,7 @@ public class Move {
 		else if(second == null  && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if (first.equals(code)) {
-					selected = true;
+					selected = true;    //NB missing in if clause
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 					selectedMarbles.clear();
@@ -62,7 +63,7 @@ public class Move {
 		else if(third == null && !selected && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if(first.equals(code) || second.equals(code)) {
-					selected = true;
+					selected = true;   //NB missing in if clause
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second))) {
 					selectedMarbles.clear();
@@ -81,11 +82,11 @@ public class Move {
 		//so if all of these are not possible, try if it is possible to move it to the place you want to move it to
 		//if it's not, then it will automatically reset
 		else{
-			if (selected && !Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
+			if (selected && Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 				moveTo = code;
 			}	
 		}
-		
+
 		if(moveTo != null) {
 			move();
 		}
@@ -133,10 +134,15 @@ public class Move {
 		Board.hashBoard.get(moveTo).setFull(moving);
 		moving.setLocationKey(moveTo);
 		moving.updateLocation();
+
+
 	}
 	
 	public void performMovementTwo() {
-		
+
+
+
+
 	}
 	
 	public void performMovementThree() {

@@ -71,6 +71,8 @@ public class GameGui extends Application{
             stage.setScene(scene);
             stage.show();
 
+
+
         } catch (Exception e){
             System.out.println("Exception in GUI Creation"+ e.getMessage());
         }
