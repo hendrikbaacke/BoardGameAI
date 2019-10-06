@@ -1,9 +1,7 @@
 package src;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
 
@@ -18,9 +16,9 @@ public class Marble extends Ellipse{
 		this.playerNumber = player;
 		this.locationKey = key;
 		
-		//e.setCursor(Cursor.MOVE);
-		//e.setOnMousePressed(EllipseOnMousePressedEventHandler);
-	    //e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
+		e.setCursor(Cursor.MOVE);
+//		e.setOnMousePressed(EllipseOnMousePressedEventHandler);
+//	    e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
 	    e.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
 			e.setFill(Color.ANTIQUEWHITE);

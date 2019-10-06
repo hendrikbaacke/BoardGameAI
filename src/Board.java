@@ -1,11 +1,8 @@
 package src;
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.LinkedList;
-
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Polygon;
+
 
 public class Board extends BorderPane {
 	//create rows
@@ -13,7 +10,7 @@ public class Board extends BorderPane {
    public double CenterX;
    public double CenterY;
    public static Hashtable<String, Hexagon> hashBoard = new Hashtable();
-   public static ArrayList<Hexagon> everyHex = new ArrayList<Hexagon>();
+   public  ArrayList<Hexagon> everyHex = new ArrayList<Hexagon>();
    public static Move move = new Move();
 
    public Board(double X, double Y) {
@@ -61,8 +58,11 @@ public BorderPane add() {
     		String key = letterCode + neededForHash;
 
     		Hexagon Hex = new Hexagon(xCoord, yCoord, key);
+    		 Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
+
     		hashBoard.put(key, Hex);
     		everyHex.add(Hex);
+         
     		
     		board.getChildren().addAll(Hex);
     	}

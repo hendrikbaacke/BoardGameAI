@@ -1,33 +1,26 @@
 package src;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Cell;
 import javafx.scene.control.CheckBox;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
-import java.awt.*;
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.canvas.*;
-import javafx.scene.web.*;
-import javafx.scene.Group;
-import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 
 public class GameGui extends Application{
     @Override
     public void start(Stage stage) {
         try {
-        System.out.println(stage.getWidth()+"        "+stage.getHeight());
+      //  System.out.println(stage.getWidth()+"        "+stage.getHeight());
         Board board = new Board(stage.getWidth()/2,stage.getHeight()/2);
-        StackPane Screen = new StackPane();
+        Pane Screen = new Pane();
         BorderPane MainScene =  board.add();
         GridPane SubScene = new GridPane();
-        SubScene.setAlignment(Pos.BOTTOM_LEFT);
+        //SubScene.setAlignment(Pos.BOTTOM_LEFT);
 
 
             HBox hbox0 = new HBox();
@@ -66,13 +59,14 @@ public class GameGui extends Application{
             }
 
             SubScene.getChildren().addAll(hbox0, hbox1, hbox2);
-            Screen.getChildren().addAll(MainScene, SubScene);
+            Screen.getChildren().addAll(MainScene,SubScene);
 
 
             MarbleStorage m = new MarbleStorage();
             AnchorPane pp = m.Balls();
-            MainScene.getChildren().add(pp);
+            MainScene.getChildren().addAll(pp);
             Scene scene = new Scene(Screen);
+    
             stage.setTitle("Player vs Player");
             stage.setScene(scene);
             stage.show();
