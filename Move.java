@@ -1,3 +1,4 @@
+package src;
 
 import java.util.ArrayList;
 
@@ -29,9 +30,11 @@ public class Move {
 	
 	//select marbles
 	public void select(String code) {
+		System.out.println("select");
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
-		if (first == null && !(Board.hashBoard.get(code).marble.getPlayer() == 0)) {
+		if (first == null && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
+				System.out.println("selected 1");
 				first = code;
 				nrSelected++;
 				selectedMarbles.add(code);
@@ -39,10 +42,11 @@ public class Move {
 		}
 		//if the first and second are the same, end selection (you're done) it also checks whether they are adjacent
 		//if not adjacent: the second selected marble becomes the first - else just add it to the selection
-		else if(second == null  && !(Board.hashBoard.get(code).marble.getPlayer() == 0)) {
+		else if(second == null  && !Board.hashBoard.get(code).empty && !selected) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if (first.equals(code)) {
-					selected = true;    //NB missing in if clause
+					selected = true;
+					System.out.println("total = 1");
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 					selectedMarbles.clear();
@@ -53,15 +57,16 @@ public class Move {
 					second = code;
 					nrSelected++;
 					selectedMarbles.add(code);
+					System.out.println("selected two");
 				}
 			}
 		}
 		//quite similar to the second selection - checks whether it is adjacent to the second one, if not, then it becomes the first in the selection
 		//if  this is done, selected becomes true automatically
-		else if(third == null && !selected && !(Board.hashBoard.get(code).marble.getPlayer() == 0)) {
+		else if(third == null && !selected && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if(first.equals(code) || second.equals(code)) {
-					selected = true;   //NB missing in if clause
+					selected = true;
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second))) {
 					selectedMarbles.clear();
@@ -74,18 +79,19 @@ public class Move {
 					nrSelected++;
 					selectedMarbles.add(code);
 					selected = true;
+					System.out.println("selected three");
 				}
 			}
 		}
 		//so if all of these are not possible, try if it is possible to move it to the place you want to move it to
 		//if it's not, then it will automatically reset
 		else{
-
 			if (selected && Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 				moveTo = code;
+				System.out.println("moveto");
 			}	
 		}
-
+		
 		if(moveTo != null) {
 			move();
 		}
@@ -93,10 +99,10 @@ public class Move {
 	
 	public void move() {
 		//check if valid -> if not, reset, else: perform movement, change player, resetmove
+		System.out.println("move");
 		if (nrSelected == 1) {
 			if(validMoveOne()) {
-                Board.hashBoard.get(first).marble.setCenterX(Board.hashBoard.get(moveTo).marble.getCenterX());
-                Board.hashBoard.get(first).marble.setCenterY(Board.hashBoard.get(moveTo).marble.getCenterY());
+				performMovementOne();
 				changePlayer();
 				resetMove();
 			}
@@ -126,10 +132,18 @@ public class Move {
 			playersTurn = 1;
 		}
 	}
-
+	
+	//moves one single marble
+	public void performMovementOne() {
+		Marble moving = Board.hashBoard.get(first).marble;
+		Board.hashBoard.get(first).setEmpty();
+		Board.hashBoard.get(moveTo).setFull(moving);
+		moving.setLocationKey(moveTo);
+		moving.updateLocation();
+	}
+	
 	public void performMovementTwo() {
-
-
+		
 	}
 	
 	public void performMovementThree() {
@@ -149,7 +163,7 @@ public class Move {
 	
 	//test if it is possible to move one, else it resets the move
 	public boolean validMoveOne() {
-		if (Board.hashBoard.get(first).adjacent(Board.hashBoard.get(moveTo)) && (Board.hashBoard.get(moveTo).marble.getPlayer() == 0)){
+		if (Board.hashBoard.get(first).adjacent(Board.hashBoard.get(moveTo)) && Board.hashBoard.get(moveTo).empty){
 			return true;
 		}
 		else {
