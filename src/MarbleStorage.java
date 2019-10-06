@@ -1,6 +1,5 @@
 package src;
 
-
 import java.util.LinkedList;
 import javafx.scene.layout.AnchorPane;
 
@@ -13,19 +12,20 @@ public class MarbleStorage {
 	LinkedList<Marble> storage = new LinkedList<Marble>();
 
 	public AnchorPane Balls() {
+		
 
 		for (char ch='A'; ch <= 'I'; ch++) {
 			String letterCode = Character.toString(ch);
 			for (int j = 0; j < 10; j++) {
 				if (Board.hashBoard.get(letterCode + j) != null) {
 					Marble p = new Marble(Board.hashBoard.get(letterCode + j).centerX,
-							Board.hashBoard.get(letterCode + j).centerY, 20, 0,letterCode + j);
-					Board.hashBoard.get(letterCode + j).setFull(p);
+							Board.hashBoard.get(letterCode + j).centerY, 20, 0, letterCode + j);
+
 					storage.add(p);
 				}
 			}
 		}
-
+	
 		for (int i = 0; i < 10; i++) {
 
 			if (Board.hashBoard.get("A" + i) != null) {

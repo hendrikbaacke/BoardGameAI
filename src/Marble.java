@@ -1,4 +1,5 @@
 package src;
+import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -16,12 +17,13 @@ public class Marble extends Ellipse{
 		super(centerX, centerY, radius, radius);
 		this.playerNumber = player;
 		this.locationKey = key;
-
+		
+		this.setCursor(Cursor.MOVE);
 //		e.setOnMousePressed(EllipseOnMousePressedEventHandler);
 //	    e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
 	    this.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
-			this.setFill(Color.BLUE);
+			this.setFill(Color.ANTIQUEWHITE);
 		}
 		if(player == 1) {
 			this.setFill(Color.BLACK);
@@ -32,9 +34,7 @@ public class Marble extends Ellipse{
 		MarbleStorage.pieceGroup.getChildren().add(this);
 		
 	}
-	public int getPlayer(){
-		return playerNumber;
-	}
+	
 	public void setLocationKey(String key){
 		this.locationKey = key;
 	}
@@ -42,7 +42,41 @@ public class Marble extends Ellipse{
 	public String getLocationKey() {
 		return locationKey;
 	}
-
+	
+	public void updateLocation() {
+		Hexagon hex = (Hexagon) Board.hashBoard.get(locationKey);
+		double tempX = hex.centerX ;
+		double tempY = hex.centerY;
+		this.setCenterX(tempX);
+		this.setCenterY(tempY);
+	}
+	
+	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
+		        new EventHandler<MouseEvent>() {
+		 
+		        @Override
+		        public void handle(MouseEvent t) {
+		            orgSceneX = t.getSceneX();
+		            orgSceneY = t.getSceneY();
+		            orgTranslateX = ((Ellipse)(t.getSource())).getTranslateX();
+		            orgTranslateY = ((Ellipse)(t.getSource())).getTranslateY();
+		        }
+		    };
+		     
+		    EventHandler<MouseEvent> EllipseOnMouseDraggedEventHandler = 
+		        new EventHandler<MouseEvent>() {
+		 
+		        @Override
+		        public void handle(MouseEvent t) {
+		            double offsetX = t.getSceneX() - orgSceneX;
+		            double offsetY = t.getSceneY() - orgSceneY;
+		            double newTranslateX = orgTranslateX + offsetX;
+		            double newTranslateY = orgTranslateY + offsetY;
+		             
+		            ((Ellipse)(t.getSource())).setTranslateX(newTranslateX);
+		            ((Ellipse)(t.getSource())).setTranslateY(newTranslateY);
+		        }
+		    };
 
 			EventHandler<MouseEvent> EllipseOnMouseClicked =
 					new EventHandler<MouseEvent>() {
@@ -50,9 +84,7 @@ public class Marble extends Ellipse{
 						@Override
 						public void handle(MouseEvent t) {
 							System.out.println(locationKey);
-							System.out.println(Board.hashBoard.get(locationKey).marble.getPlayer());
 							Board.move.select(locationKey);
-
 						}
 					};
 }

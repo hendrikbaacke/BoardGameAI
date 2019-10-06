@@ -1,8 +1,8 @@
 package src;
-
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
@@ -33,15 +33,15 @@ public class Hexagon extends Polygon {
                     x + n, y - radius * 0.5
             );
 
+            
+            this.setCursor(Cursor.MOVE);
+            this.setOnMouseClicked(HexagonOnMouseClicked);
             // set up the visuals and a click listener for the tile
             setFill(Color.ANTIQUEWHITE);
             setStrokeWidth(3);
             setStroke(Color.BLACK);
             
             this.code = code;
-            
-            //so it gives the code to move, will automatically do everything that's needed
-            this.setOnMouseClicked(e -> Board.move.select(code));
            
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
@@ -118,4 +118,15 @@ public class Hexagon extends Polygon {
     			}
     		}
     	}
+    	
+    	EventHandler<MouseEvent> HexagonOnMouseClicked =
+				new EventHandler<MouseEvent>() {
+
+					@Override
+					public void handle(MouseEvent t) {
+						System.out.println(code);
+						Board.move.select(code);
+						
+					}
+				};
     }
