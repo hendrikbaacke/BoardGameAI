@@ -1,4 +1,3 @@
-package src;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
@@ -89,7 +88,7 @@ public class Hexagon extends Polygon {
     				
     				tempLetter = (char) ((char) lettercode - 1 + i);
     				
-    				if (i == 0 && j < 1) {
+    				if (i == 0 && j <= 1) {
     					tempNumber = numbercode -1+j;
     					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
     						if(Board.hashBoard.containsKey(code)) {

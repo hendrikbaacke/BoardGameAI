@@ -1,4 +1,3 @@
-package src;
 
 import java.util.ArrayList;
 
@@ -31,7 +30,7 @@ public class Move {
 	//select marbles
 	public void select(String code) {
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
-		if (first == null && !Board.hashBoard.get(code).empty) {
+		if (first == null && !(Board.hashBoard.get(code).marble.getPlayer() == 0)) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				first = code;
 				nrSelected++;
@@ -40,7 +39,7 @@ public class Move {
 		}
 		//if the first and second are the same, end selection (you're done) it also checks whether they are adjacent
 		//if not adjacent: the second selected marble becomes the first - else just add it to the selection
-		else if(second == null  && !Board.hashBoard.get(code).empty) {
+		else if(second == null  && !(Board.hashBoard.get(code).marble.getPlayer() == 0)) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if (first.equals(code)) {
 					selected = true;
@@ -59,7 +58,7 @@ public class Move {
 		}
 		//quite similar to the second selection - checks whether it is adjacent to the second one, if not, then it becomes the first in the selection
 		//if  this is done, selected becomes true automatically
-		else if(third == null && !selected && !Board.hashBoard.get(code).empty) {
+		else if(third == null && !selected && !(Board.hashBoard.get(code).marble.getPlayer() == 0)) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if(first.equals(code) || second.equals(code)) {
 					selected = true;
@@ -81,7 +80,8 @@ public class Move {
 		//so if all of these are not possible, try if it is possible to move it to the place you want to move it to
 		//if it's not, then it will automatically reset
 		else{
-			if (selected && !Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
+			//if (selected && Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
+			if(selected){
 				moveTo = code;
 			}	
 		}
@@ -95,7 +95,8 @@ public class Move {
 		//check if valid -> if not, reset, else: perform movement, change player, resetmove
 		if (nrSelected == 1) {
 			if(validMoveOne()) {
-				performMovementOne();
+                Board.hashBoard.get(first).marble.setCenterX(Board.hashBoard.get(moveTo).marble.getCenterX());
+                Board.hashBoard.get(first).marble.setCenterY(Board.hashBoard.get(moveTo).marble.getCenterY());
 				changePlayer();
 				resetMove();
 			}
@@ -125,15 +126,7 @@ public class Move {
 			playersTurn = 1;
 		}
 	}
-	
-	//moves one single marble
-	public void performMovementOne() {
-		Marble moving = Board.hashBoard.get(first).marble;
-		Board.hashBoard.get(first).setEmpty();;
-		Board.hashBoard.get(moveTo).setFull(moving);
-		moving.setLocationKey(moveTo);
-		moving.updateLocation();
-	}
+
 	
 	public void performMovementTwo() {
 		
@@ -156,7 +149,7 @@ public class Move {
 	
 	//test if it is possible to move one, else it resets the move
 	public boolean validMoveOne() {
-		if (Board.hashBoard.get(first).adjacent(Board.hashBoard.get(moveTo)) && Board.hashBoard.get(moveTo).empty){
+		if (Board.hashBoard.get(first).adjacent(Board.hashBoard.get(moveTo)) && (Board.hashBoard.get(moveTo).marble.getPlayer() == 0)){
 			return true;
 		}
 		else {

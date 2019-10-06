@@ -1,4 +1,3 @@
-package src;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import javafx.scene.layout.BorderPane;
@@ -58,7 +57,7 @@ public BorderPane add() {
     		String key = letterCode + neededForHash;
 
     		Hexagon Hex = new Hexagon(xCoord, yCoord, key);
-    		 Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
+    		//Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
 
     		hashBoard.put(key, Hex);
     		everyHex.add(Hex);

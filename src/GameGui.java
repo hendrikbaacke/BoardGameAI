@@ -1,4 +1,3 @@
-package src;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -59,12 +58,13 @@ public class GameGui extends Application{
             }
 
             SubScene.getChildren().addAll(hbox0, hbox1, hbox2);
-            Screen.getChildren().addAll(MainScene,SubScene);
 
 
             MarbleStorage m = new MarbleStorage();
             AnchorPane pp = m.Balls();
             MainScene.getChildren().addAll(pp);
+
+            Screen.getChildren().addAll(MainScene,SubScene);
             Scene scene = new Scene(Screen);
     
             stage.setTitle("Player vs Player");

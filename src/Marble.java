@@ -1,4 +1,3 @@
-package src;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
@@ -12,27 +11,28 @@ public class Marble extends Ellipse{
 	double orgTranslateX, orgTranslateY;
 	
 	Marble(double centerX, double centerY, int radius, int player, String key){
-		Ellipse e = new Ellipse(centerX, centerY, radius, radius);
+		super(centerX, centerY, radius, radius);
 		this.playerNumber = player;
 		this.locationKey = key;
-		
-		e.setCursor(Cursor.MOVE);
+
 //		e.setOnMousePressed(EllipseOnMousePressedEventHandler);
 //	    e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
-	    e.setOnMouseClicked(EllipseOnMouseClicked);
+	    this.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
-			e.setFill(Color.ANTIQUEWHITE);
+			this.setFill(Color.BLUE);
 		}
 		if(player == 1) {
-			e.setFill(Color.BLACK);
+			this.setFill(Color.BLACK);
 		}
 		if(player == 2) {
-			e.setFill(Color.GRAY);
+			this.setFill(Color.GRAY);
 		}
-		MarbleStorage.pieceGroup.getChildren().add(e);
+		MarbleStorage.pieceGroup.getChildren().add(this);
 		
 	}
-	
+	public int getPlayer(){
+		return playerNumber;
+	}
 	public void setLocationKey(String key){
 		this.locationKey = key;
 	}
@@ -41,12 +41,15 @@ public class Marble extends Ellipse{
 		return locationKey;
 	}
 	
-	public void updateLocation() {
-		Hexagon hex = (Hexagon) Board.hashBoard.get(locationKey);
+	public void updateLocation(String code) {
+	/*	Hexagon hex = (Hexagon) Board.hashBoard.get(code);
 		double tempX = hex.centerX ;
-		double tempY = hex.centerY;
-		this.setCenterX(tempX);
-		this.setCenterY(tempY);
+		double tempY = hex.centerY;*/
+
+		this.setCenterX(Board.hashBoard.get(code).centerX);
+		System.out.println(Board.hashBoard.get(code).centerX);
+		this.setCenterY(Board.hashBoard.get(code).centerX);
+	System.out.println("Test");
 	}
 	
 	  EventHandler<MouseEvent> EllipseOnMousePressedEventHandler = 
@@ -82,6 +85,7 @@ public class Marble extends Ellipse{
 						@Override
 						public void handle(MouseEvent t) {
 							System.out.println(locationKey);
+							System.out.println(Board.hashBoard.get(locationKey).marble.getPlayer());
 							Board.move.select(locationKey);
 							
 						}
