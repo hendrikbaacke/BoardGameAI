@@ -2,6 +2,8 @@ package src;
 
 import java.util.ArrayList;
 
+import javafx.scene.paint.Color;
+
 public class Move {
 	//first, second, and third marble code that need to be moved (the hexagon in the hashboard contains the marbles of the same code- which can be removed and added quickly)
 	public String first;
@@ -35,6 +37,7 @@ public class Move {
 		if (first == null && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				System.out.println("selected 1");
+				Board.hashBoard.get(code).marble.setFill(Color.AQUAMARINE);
 				first = code;
 				nrSelected++;
 				selectedMarbles.add(code);
@@ -50,11 +53,19 @@ public class Move {
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 					selectedMarbles.clear();
+					if(Board.hashBoard.get(first).marble.playerNumber == 1) {
+						Board.hashBoard.get(first).marble.setFill(Color.BLACK);
+					}
+					if(Board.hashBoard.get(first).marble.playerNumber == 2) {
+						Board.hashBoard.get(first).marble.setFill(Color.GRAY);
+					}
 					first = code;
+					Board.hashBoard.get(code).marble.setFill(Color.AQUAMARINE);
 					selectedMarbles.add(code);
 				}
 				else{
 					second = code;
+					Board.hashBoard.get(code).marble.setFill(Color.AQUAMARINE);
 					nrSelected++;
 					selectedMarbles.add(code);
 					System.out.println("selected two");
@@ -66,19 +77,31 @@ public class Move {
 		else if(third == null && !selected && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if(first.equals(code) || second.equals(code)) {
+					System.out.println("total = 2");
 					selected = true;
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second))) {
 					selectedMarbles.clear();
+					if(Board.hashBoard.get(first).marble.playerNumber == 1) {
+						Board.hashBoard.get(first).marble.setFill(Color.BLACK);
+						Board.hashBoard.get(second).marble.setFill(Color.BLACK);
+					}
+					if(Board.hashBoard.get(first).marble.playerNumber == 2) {
+						Board.hashBoard.get(first).marble.setFill(Color.GRAY);
+						Board.hashBoard.get(second).marble.setFill(Color.GRAY);
+					}
 					first = code;
+					second = null;
 					nrSelected = 1;
 					selectedMarbles.add(code);
+					
 				}
 				else {
 					third = code;
 					nrSelected++;
 					selectedMarbles.add(code);
 					selected = true;
+					Board.hashBoard.get(third).marble.setFill(Color.AQUAMARINE);
 					System.out.println("selected three");
 				}
 			}
@@ -93,6 +116,25 @@ public class Move {
 		}
 		
 		if(moveTo != null) {
+			if(Board.hashBoard.get(first).marble.playerNumber == 1) {
+				Board.hashBoard.get(first).marble.setFill(Color.BLACK);
+				if(second != null) {
+					Board.hashBoard.get(second).marble.setFill(Color.BLACK);
+				}
+				if(third != null) {
+					Board.hashBoard.get(third).marble.setFill(Color.BLACK);
+				}
+			}
+			if(Board.hashBoard.get(first).marble.playerNumber == 2) {
+				Board.hashBoard.get(first).marble.setFill(Color.GRAY);
+				if(second != null) {
+					Board.hashBoard.get(second).marble.setFill(Color.GRAY);
+				}
+				if(third!=null) {
+					Board.hashBoard.get(third).marble.setFill(Color.GRAY);
+				}
+				
+			}
 			move();
 		}
 	}
