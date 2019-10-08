@@ -16,6 +16,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
 import java.io.FileInputStream;
 import javafx.geometry.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
@@ -27,7 +28,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+  
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
 
@@ -362,6 +363,7 @@ public class Main extends Application {
         modeOneContainer.setOnMouseClicked((MouseEvent e) -> {
             GameGui Game = new GameGui();
             Game.start(primaryStage);
+            
         });
 
         modeTwoContainer.setPickOnBounds(true); // allows click on transparent areas
@@ -371,7 +373,7 @@ public class Main extends Application {
                 primaryStage.setScene(AIScene);
             }
         });
-
+    
 
     }
     private Node createSpacer() {

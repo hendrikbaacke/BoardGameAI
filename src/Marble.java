@@ -19,8 +19,6 @@ public class Marble extends Ellipse{
 		this.locationKey = key;
 		
 		this.setCursor(Cursor.MOVE);
-//		e.setOnMousePressed(EllipseOnMousePressedEventHandler);
-//	    e.setOnMouseDragged(EllipseOnMouseDraggedEventHandler);
 	    this.setOnMouseClicked(EllipseOnMouseClicked);
 	    if(player == 0) {
 			this.setFill(Color.ANTIQUEWHITE);
