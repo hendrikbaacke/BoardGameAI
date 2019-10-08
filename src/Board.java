@@ -1,6 +1,4 @@
 package src;
-
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 import javafx.scene.layout.BorderPane;
@@ -14,6 +12,8 @@ public class Board extends BorderPane {
    public static Hashtable<String, Hexagon> hashBoard = new Hashtable();
    public  ArrayList<Hexagon> everyHex = new ArrayList<Hexagon>();
    public static Move move = new Move();
+   public static BoardRows rows;
+   public static int[] score = new int[2];
 
    public Board(double X, double Y) {
 	   CenterX = X;
@@ -60,7 +60,7 @@ public BorderPane add() {
     		String key = letterCode + neededForHash;
 
     		Hexagon Hex = new Hexagon(xCoord, yCoord, key);
-    		//Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
+    		 Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
 
     		hashBoard.put(key, Hex);
     		everyHex.add(Hex);
@@ -78,6 +78,7 @@ public BorderPane add() {
     for (int i = 0; i < everyHex.size(); i++) {
     	everyHex.get(i).createNeighbourList();
     }
+    rows = new BoardRows();
     
     return board;
 	}

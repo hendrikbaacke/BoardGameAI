@@ -37,7 +37,7 @@ public class Move {
 		if (first == null && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				System.out.println("selected 1");
-				Board.hashBoard.get(code).marble.setFill(Color.AQUAMARINE);
+				Board.hashBoard.get(code).marble.setFill(Color.PURPLE);
 				first = code;
 				nrSelected++;
 				selectedMarbles.add(code);
@@ -53,14 +53,9 @@ public class Move {
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 					selectedMarbles.clear();
-					if(Board.hashBoard.get(first).marble.playerNumber == 1) {
-						Board.hashBoard.get(first).marble.setFill(Color.BLACK);
-					}
-					if(Board.hashBoard.get(first).marble.playerNumber == 2) {
-						Board.hashBoard.get(first).marble.setFill(Color.GRAY);
-					}
+					coloursBackToNormal();
 					first = code;
-					Board.hashBoard.get(code).marble.setFill(Color.AQUAMARINE);
+					Board.hashBoard.get(code).marble.setFill(Color.PURPLE);
 					selectedMarbles.add(code);
 				}
 				else{
@@ -80,17 +75,11 @@ public class Move {
 					System.out.println("total = 2");
 					selected = true;
 				}
-				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second))) {
+				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second)) || !Board.rows.sameRowThree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(code))) {
 					selectedMarbles.clear();
-					if(Board.hashBoard.get(first).marble.playerNumber == 1) {
-						Board.hashBoard.get(first).marble.setFill(Color.BLACK);
-						Board.hashBoard.get(second).marble.setFill(Color.BLACK);
-					}
-					if(Board.hashBoard.get(first).marble.playerNumber == 2) {
-						Board.hashBoard.get(first).marble.setFill(Color.GRAY);
-						Board.hashBoard.get(second).marble.setFill(Color.GRAY);
-					}
+					coloursBackToNormal();
 					first = code;
+					Board.hashBoard.get(first).marble.setFill(Color.PURPLE);
 					second = null;
 					nrSelected = 1;
 					selectedMarbles.add(code);
@@ -110,32 +99,65 @@ public class Move {
 		//if it's not, then it will automatically reset
 		else{
 			if (selected && Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
-				moveTo = code;
-				System.out.println("moveto");
+				if (!Board.hashBoard.get(code).empty) {
+					if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
+						selectedMarbles.clear();
+							coloursBackToNormal();
+							selected = false;
+							first = code;
+							Board.hashBoard.get(first).marble.setFill(Color.PURPLE);
+							second = null;
+							third = null;
+							nrSelected = 1;
+							selectedMarbles.add(code);
+						}
+					else {
+						moveTo = code;
+						System.out.println("moveto");
+					}
+					}
+				else {
+					moveTo = code;
+					System.out.println("moveto");
+				}
 			}	
+			else if (!Board.hashBoard.get(code).empty && Board.hashBoard.get(code).marble.playerNumber ==playersTurn) {
+				selectedMarbles.clear();
+				coloursBackToNormal();
+				selected = false;
+				first = code;
+				Board.hashBoard.get(first).marble.setFill(Color.PURPLE);
+				second = null;
+				third = null;
+				nrSelected = 1;
+				selectedMarbles.add(code);
+			}
 		}
 		
 		if(moveTo != null) {
-			if(Board.hashBoard.get(first).marble.playerNumber == 1) {
-				Board.hashBoard.get(first).marble.setFill(Color.BLACK);
-				if(second != null) {
-					Board.hashBoard.get(second).marble.setFill(Color.BLACK);
-				}
-				if(third != null) {
-					Board.hashBoard.get(third).marble.setFill(Color.BLACK);
-				}
-			}
-			if(Board.hashBoard.get(first).marble.playerNumber == 2) {
-				Board.hashBoard.get(first).marble.setFill(Color.GRAY);
-				if(second != null) {
-					Board.hashBoard.get(second).marble.setFill(Color.GRAY);
-				}
-				if(third!=null) {
-					Board.hashBoard.get(third).marble.setFill(Color.GRAY);
-				}
-				
-			}
+			coloursBackToNormal();
 			move();
+		}
+	}
+	
+	public void coloursBackToNormal() {
+		if(Board.hashBoard.get(first).marble.playerNumber == 1) {
+			Board.hashBoard.get(first).marble.setFill(Color.BLACK);
+			if(second != null) {
+				Board.hashBoard.get(second).marble.setFill(Color.BLACK);
+			}
+			if(third != null) {
+				Board.hashBoard.get(third).marble.setFill(Color.BLACK);
+			}
+		}
+		if(Board.hashBoard.get(first).marble.playerNumber == 2) {
+			Board.hashBoard.get(first).marble.setFill(Color.GRAY);
+			if(second != null) {
+				Board.hashBoard.get(second).marble.setFill(Color.GRAY);
+			}
+			if(third!=null) {
+				Board.hashBoard.get(third).marble.setFill(Color.GRAY);
+			}
 		}
 	}
 	
@@ -144,6 +166,7 @@ public class Move {
 		System.out.println("move");
 		if (nrSelected == 1) {
 			if(validMoveOne()) {
+				System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
 				performMovementOne();
 				changePlayer();
 				resetMove();
@@ -152,6 +175,7 @@ public class Move {
 		else if(nrSelected ==2) {
 			if(validMoveTwo()) {
 				performMovementTwo();
+				gameFinished();
 				changePlayer();
 				resetMove();
 			}
@@ -159,6 +183,7 @@ public class Move {
 		else if(nrSelected ==3) {
 			if(validMoveThree()) {
 				performMovementThree();
+				gameFinished();
 				changePlayer();
 				resetMove();
 			}
@@ -185,11 +210,50 @@ public class Move {
 	}
 	
 	public void performMovementTwo() {
+		//if it is moves sideways, then it can never push another marble
+		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+			//move sideways
+		}
+		
+		
+		
 		
 	}
 	
 	public void performMovementThree() {
+		//if it is moves sideways, then it can never push another marble
+		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+			//move sideways
+		}
 		
+		
+		
+	}
+	
+	public void moveTwoSideways() {
+		
+	}
+	
+	public void moveThreeSideways() {
+		
+	}
+	
+	public void doPushOne() {
+		
+		
+		boolean offboard = false;
+		if (offboard){
+			Board.score[playersTurn-1]++;
+		}
+	}
+	
+	public void doPushTwo() {
+		
+		
+		boolean offboard = false;
+		if(offboard) {
+			Board.score[playersTurn-1]++;
+		}
 	}
 	
 	//resets the move
@@ -215,15 +279,39 @@ public class Move {
 	}
 	
 	public boolean validMoveTwo() {
+		//if it needs to move sideways and if there are two free space where they are needed, the move is valid
+		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+			if (Board.rows.twoFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+				return true;
+			}
+		}
+		//add moving in same direction to this later
+		else {
+			resetMove();
+		}
 		
 		//TODO: enter rules
-		return true;
+		return false;
 	}
 	
 	public boolean validMoveThree() {
-		
+		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+			if (Board.rows.threeFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(third), Board.hashBoard.get(moveTo))) {
+				return true;
+			}
+		}
+		//for now, add the moving in same direction to this later
+		else {
+			resetMove();
+		}
+		return false;
 		//TODO: enter rules
-		return true;
+	}
+	
+	public void gameFinished() {
+		if (Board.score[0] == 6 || Board.score[1] ==6) {
+			//go to ending screen
+		}
 	}
 	
 }
