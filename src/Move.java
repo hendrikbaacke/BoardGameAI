@@ -238,6 +238,14 @@ public class Move {
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 			moveSideways();
 		}
+		else if(Board.hashBoard.get(moveTo).empty) {
+			System.out.println("movement for 3");
+			Marble moving=Board.hashBoard.get(third).marble;
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(moveTo).setFull(moving);
+			moving.setLocationKey(moveTo);
+			moving.updateLocation();
+		}
 		
 		
 		
@@ -444,12 +452,17 @@ public class Move {
 				return true;
 			}
 		}
-		//for now, add the moving in same direction to this later
+		else if (Board.hashBoard.get(moveTo).empty) {
+			System.out.println("move to is empty");
+			return true;
+		}
 		else {
+			System.out.println("did not move");
 			resetMove();
 		}
-		return false;
+		
 		//TODO: enter rules
+		return false;
 	}
 	
 	public void gameFinished() {
