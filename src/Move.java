@@ -217,7 +217,7 @@ public class Move {
 	public void performMovementTwo() {
 		//if it is moves sideways, then it can never push another marble
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
-			//move sideways
+			moveTwoSideways();
 		}
 		
 		
@@ -228,7 +228,7 @@ public class Move {
 	public void performMovementThree() {
 		//if it is moves sideways, then it can never push another marble
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
-			//move sideways
+			moveThreeSideways();
 		}
 		
 		
@@ -236,11 +236,265 @@ public class Move {
 	}
 	
 	public void moveTwoSideways() {
+		int direction = Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo));
+		System.out.println("direction is " + direction);
+		char letterFirst = first.charAt(0);
+		char letterSecond = second.charAt(0);
 		
+		String letterFirstSt = first.substring(0,1);
+		String letterSecondSt = second.substring(0,1);
+		
+		String numberFirst = first.substring(1);
+		String numberSecond = second.substring(1);
+		int numberOne = Integer.parseInt(numberFirst);
+		int numberTwo = Integer.parseInt(numberSecond);
+		
+		//when the value is one bigger
+		int numberOnePlus = numberOne + 1;
+		int numberTwoPlus = numberTwo + 1;
+		char letterOnePlus = (char) (letterFirst +1);
+		char letterTwoPlus = (char) (letterSecond +1);
+		String letterOnePlusSt = Character.toString(letterOnePlus);
+		String letterTwoPlusSt = Character.toString(letterTwoPlus);
+		
+		
+		//when the value is one smaller
+		int numberOneMinus = numberOne - 1;
+		int numberTwoMinus = numberTwo - 1;
+		char letterOneMinus = (char) (letterFirst -1);
+		char letterTwoMinus = (char) (letterSecond -1);
+		String letterOneMinusSt = Character.toString(letterOneMinus);
+		String letterTwoMinusSt = Character.toString(letterTwoMinus);
+		
+		Marble firstMar = Board.hashBoard.get(first).marble;
+		Marble secondMar = Board.hashBoard.get(second).marble;
+		
+		if (direction ==1) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterFirstSt+numberOneMinus).setFull(firstMar);
+			firstMar.setLocationKey(letterFirstSt+numberOneMinus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterSecondSt+numberTwoMinus).setFull(secondMar);
+			secondMar.setLocationKey(letterSecondSt+numberTwoMinus);
+			secondMar.updateLocation();	
+		}
+		
+		else if (direction ==2) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberOne).setFull(firstMar);
+			firstMar.setLocationKey(letterOnePlusSt+numberOne);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberTwo).setFull(secondMar);
+			secondMar.setLocationKey(letterOnePlusSt+numberTwo);
+			secondMar.updateLocation();	
+		}
+		
+		else if(direction ==3) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberOnePlus).setFull(firstMar);
+			firstMar.setLocationKey(letterOnePlusSt+numberOnePlus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberTwoPlus).setFull(secondMar);
+			secondMar.setLocationKey(letterOnePlusSt+numberTwoPlus);
+			secondMar.updateLocation();
+		}
+		else if (direction ==4) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterFirstSt+numberOnePlus).setFull(firstMar);
+			firstMar.setLocationKey(letterFirstSt+numberOnePlus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterSecondSt+numberTwoPlus).setFull(secondMar);
+			secondMar.setLocationKey(letterSecondSt+numberTwoPlus);
+			secondMar.updateLocation();
+		}
+		else if (direction ==5) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOneMinusSt+numberOne).setFull(firstMar);
+			firstMar.setLocationKey(letterOneMinusSt+numberOne);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterTwoMinusSt+numberTwo).setFull(secondMar);
+			secondMar.setLocationKey(letterTwoMinusSt+numberTwo);
+			secondMar.updateLocation();
+		}
+		else if (direction ==6) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOneMinusSt+numberOneMinus).setFull(firstMar);
+			firstMar.setLocationKey(letterOneMinusSt+numberOneMinus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterTwoMinusSt+numberTwoMinus).setFull(secondMar);
+			secondMar.setLocationKey(letterTwoMinusSt+numberTwoMinus);
+			secondMar.updateLocation();
+		}
 	}
 	
 	public void moveThreeSideways() {
+		int direction = Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo));
+		System.out.println("direction is " + direction);
+		char letterFirst = first.charAt(0);
+		char letterSecond = second.charAt(0);
+		char letterThird = third.charAt(0);
 		
+		String letterFirstSt = first.substring(0,1);
+		String letterSecondSt = second.substring(0,1);
+		String letterThirdSt = third.substring(0,1);
+		
+		String numberFirst = first.substring(1);
+		String numberSecond = second.substring(1);
+		String numberThird = third.substring(1);
+		
+		int numberOne = Integer.parseInt(numberFirst);
+		int numberTwo = Integer.parseInt(numberSecond);
+		int numberThree = Integer.parseInt(numberThird);
+		
+		//when the value is one bigger
+		int numberOnePlus = numberOne + 1;
+		int numberTwoPlus = numberTwo + 1;
+		int numberThreePlus = numberThree + 1;
+		char letterOnePlus = (char) (letterFirst +1);
+		char letterTwoPlus = (char) (letterSecond +1);
+		char letterThreePlus = (char) (letterThird + 1);
+		String letterOnePlusSt = Character.toString(letterOnePlus);
+		String letterTwoPlusSt = Character.toString(letterTwoPlus);
+		String letterThreePlusSt = Character.toString(letterThreePlus);
+		
+		
+		//when the value is one smaller
+		int numberOneMinus = numberOne - 1;
+		int numberTwoMinus = numberTwo - 1;
+		int numberThreeMinus = numberThree -1;
+		char letterOneMinus = (char) (letterFirst -1);
+		char letterTwoMinus = (char) (letterSecond -1);
+		char letterThreeMinus = (char) (letterThird -1);
+		String letterOneMinusSt = Character.toString(letterOneMinus);
+		String letterTwoMinusSt = Character.toString(letterTwoMinus);
+		String letterThreeMinusSt = Character.toString(letterThreeMinus);
+		
+		//set the marbles
+		
+		Marble firstMar = Board.hashBoard.get(first).marble;
+		Marble secondMar = Board.hashBoard.get(second).marble;
+		Marble thirdMar = Board.hashBoard.get(third).marble;
+		
+		
+		if (direction ==1) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterFirstSt+numberOneMinus).setFull(firstMar);
+			firstMar.setLocationKey(letterFirstSt+numberOneMinus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterSecondSt+numberTwoMinus).setFull(secondMar);
+			secondMar.setLocationKey(letterSecondSt+numberTwoMinus);
+			secondMar.updateLocation();
+			
+
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(letterThirdSt+numberThreeMinus).setFull(thirdMar);
+			thirdMar.setLocationKey(letterThirdSt+numberThreeMinus);
+			thirdMar.updateLocation();
+			
+		}
+		
+		else if (direction ==2) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberOne).setFull(firstMar);
+			firstMar.setLocationKey(letterOnePlusSt+numberOne);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberTwo).setFull(secondMar);
+			secondMar.setLocationKey(letterOnePlusSt+numberTwo);
+			secondMar.updateLocation();
+			
+
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(letterThreePlusSt+numberThree).setFull(thirdMar);
+			thirdMar.setLocationKey(letterThreePlusSt+numberThree);
+			thirdMar.updateLocation();
+		}
+		
+		else if(direction ==3) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberOnePlus).setFull(firstMar);
+			firstMar.setLocationKey(letterOnePlusSt+numberOnePlus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterOnePlusSt+numberTwoPlus).setFull(secondMar);
+			secondMar.setLocationKey(letterOnePlusSt+numberTwoPlus);
+			secondMar.updateLocation();
+			
+
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(letterThreePlusSt+numberThreePlus).setFull(thirdMar);
+			thirdMar.setLocationKey(letterThreePlusSt+numberThreePlus);
+			thirdMar.updateLocation();
+			
+		}
+		else if (direction ==4) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterFirstSt+numberOnePlus).setFull(firstMar);
+			firstMar.setLocationKey(letterFirstSt+numberOnePlus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterSecondSt+numberTwoPlus).setFull(secondMar);
+			secondMar.setLocationKey(letterSecondSt+numberTwoPlus);
+			secondMar.updateLocation();
+			
+
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(letterThirdSt+numberThreePlus).setFull(thirdMar);
+			thirdMar.setLocationKey(letterThirdSt+numberThreePlus);
+			thirdMar.updateLocation();
+			
+		}
+		else if (direction ==5) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOneMinusSt+numberOne).setFull(firstMar);
+			firstMar.setLocationKey(letterOneMinusSt+numberOne);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterTwoMinusSt+numberTwo).setFull(secondMar);
+			secondMar.setLocationKey(letterTwoMinusSt+numberTwo);
+			secondMar.updateLocation();
+			
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(letterThreeMinusSt+numberThree).setFull(thirdMar);
+			thirdMar.setLocationKey(letterThreeMinusSt+numberThree);
+			thirdMar.updateLocation();
+			
+		}
+		else if (direction ==6) {
+			Board.hashBoard.get(first).setEmpty();
+			Board.hashBoard.get(letterOneMinusSt+numberOneMinus).setFull(firstMar);
+			firstMar.setLocationKey(letterOneMinusSt+numberOneMinus);
+			firstMar.updateLocation();
+			
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(letterTwoMinusSt+numberTwoMinus).setFull(secondMar);
+			secondMar.setLocationKey(letterTwoMinusSt+numberTwoMinus);
+			secondMar.updateLocation();
+			
+
+			Board.hashBoard.get(third).setEmpty();
+			Board.hashBoard.get(letterThreeMinusSt+numberThreeMinus).setFull(thirdMar);
+			thirdMar.setLocationKey(letterThreeMinusSt+numberThreeMinus);
+			thirdMar.updateLocation();
+		}
 	}
 	
 	public void doPushOne() {

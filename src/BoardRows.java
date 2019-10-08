@@ -25,7 +25,6 @@ public class BoardRows {
 			horizontal.add(row);
 		}
 		
-		
 		//starting from top left (going to bottom right)
 		for (int j = 0; j < 10; j++) {
 			ArrayList<Hexagon> row = new ArrayList<Hexagon>();
