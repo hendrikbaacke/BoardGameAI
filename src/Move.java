@@ -50,6 +50,7 @@ public class Move {
 				if (first.equals(code)) {
 					selected = true;
 					System.out.println("total = 1");
+					Board.hashBoard.get(code).marble.setFill(Color.ORANGE);
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 					selectedMarbles.clear();
@@ -72,6 +73,8 @@ public class Move {
 		else if(third == null && !selected && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if(first.equals(code) || second.equals(code)) {
+					Board.hashBoard.get(first).marble.setFill(Color.ORANGE);
+					Board.hashBoard.get(second).marble.setFill(Color.YELLOW);
 					System.out.println("total = 2");
 					selected = true;
 				}
@@ -90,7 +93,9 @@ public class Move {
 					nrSelected++;
 					selectedMarbles.add(code);
 					selected = true;
-					Board.hashBoard.get(third).marble.setFill(Color.AQUAMARINE);
+					Board.hashBoard.get(first).marble.setFill(Color.ORANGE);
+					Board.hashBoard.get(second).marble.setFill(Color.YELLOW);
+					Board.hashBoard.get(third).marble.setFill(Color.YELLOW);
 					System.out.println("selected three");
 				}
 			}
