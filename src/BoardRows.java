@@ -154,10 +154,10 @@ public class BoardRows {
 				int numberTwo = Integer.parseInt(numberMoveTo);
 				
 				if (numberOne>numberTwo) {
-					direction = 3;
+					direction = 6;
 				}
 				else {
-					direction = 6;
+					direction = 3;
 				}
 				
 				sameRow = true;
@@ -178,51 +178,167 @@ public class BoardRows {
 	//if it's sideways with two!!
 	public boolean twoFree(Hexagon first, Hexagon second, Hexagon moveTo) {
 		int direction = direction(first, moveTo);
+		System.out.println("direction is " + direction);
 		char letterFirst = first.code.charAt(0);
 		char letterSecond = second.code.charAt(0);
 		
 		String letterFirstSt = first.code.substring(0,1);
-		String letterSecondSt = first.code.substring(0,1);
+		String letterSecondSt = second.code.substring(0,1);
 		
 		String numberFirst = first.code.substring(1);
 		String numberSecond = second.code.substring(1);
-		
 		int numberOne = Integer.parseInt(numberFirst);
 		int numberTwo = Integer.parseInt(numberSecond);
 		
+		//when the value is one bigger
+		int numberOnePlus = numberOne + 1;
+		int numberTwoPlus = numberTwo + 1;
+		char letterOnePlus = (char) (letterFirst +1);
+		char letterTwoPlus = (char) (letterSecond +1);
+		String letterOnePlusSt = Character.toString(letterOnePlus);
+		String letterTwoPlusSt = Character.toString(letterTwoPlus);
+		
+		
+		//when the value is one smaller
+		int numberOneMinus = numberOne - 1;
+		int numberTwoMinus = numberTwo - 1;
+		char letterOneMinus = (char) (letterFirst -1);
+		char letterTwoMinus = (char) (letterSecond -1);
+		String letterOneMinusSt = Character.toString(letterOneMinus);
+		String letterTwoMinusSt = Character.toString(letterTwoMinus);
+		
 		
 		if (direction ==1) {
-			int neededFreeOne = numberOne -1;
-			int neededFreeTwo = numberTwo -1;
-			//if(Board.hashBoard.get(letterFirstSt+neededFreeOne) && Board.hashBoard.get(letterSecondSt+neededFreeTwo) {
-				
-			//}
+			if(Board.hashBoard.get(letterFirstSt+numberOneMinus).empty && Board.hashBoard.get(letterSecondSt+numberTwoMinus).empty) {
+				System.out.println("ONE TRUE");
+				return true;
+			}	
+		}
+		
+		else if (direction ==2) {
+			if(Board.hashBoard.get(letterOnePlusSt + numberOne).empty && Board.hashBoard.get(letterTwoPlusSt+ numberTwo).empty) {
+				System.out.println("TWO TRUE");
+				return true;
+			}	
+		}
+		
+		else if(direction ==3) {
+			if(Board.hashBoard.get(letterOnePlusSt + numberOnePlus).empty && Board.hashBoard.get(letterTwoPlusSt+numberTwoPlus).empty) {
+				System.out.println("THREE TRUE");
+				return true;
+			}	
 			
 		}
-		if (direction ==2) {
-			
+		else if (direction ==4) {
+			if(Board.hashBoard.get(letterFirstSt+numberOnePlus).empty && Board.hashBoard.get(letterSecondSt+numberTwoPlus).empty) {
+				System.out.println("FOUR TRUE");
+				return true;
+			}
 		}
-		if(direction ==3) {
-			
+		else if (direction ==5) {
+			if(Board.hashBoard.get(letterOneMinusSt + numberOne).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwo).empty) {
+				System.out.println("FIVE TRUE");
+				return true;
+			}
 		}
-		if (direction ==4) {
-			
-		}
-		if (direction ==5) {
-			
-		}
-		if (direction ==6) {
+		else if (direction ==6) {
+			if(Board.hashBoard.get(letterOneMinusSt + numberOneMinus).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwoMinus).empty) {
+				System.out.println("SIX TRUE");
+				return true;
+			}
 			
 		}
 		
+		System.out.println("FALSE SIDE");
 		return false;
 	}
 	
 	//if it's sideways with three
 	public boolean threeFree(Hexagon first, Hexagon second, Hexagon third, Hexagon moveTo) {
+		int direction = direction(first, moveTo);
+		System.out.println("direction is " + direction);
+		char letterFirst = first.code.charAt(0);
+		char letterSecond = second.code.charAt(0);
+		char letterThird = third.code.charAt(0);
+		
+		String letterFirstSt = first.code.substring(0,1);
+		String letterSecondSt = second.code.substring(0,1);
+		String letterThirdSt = third.code.substring(0,1);
+		
+		String numberFirst = first.code.substring(1);
+		String numberSecond = second.code.substring(1);
+		String numberThird = third.code.substring(1);
+		int numberOne = Integer.parseInt(numberFirst);
+		int numberTwo = Integer.parseInt(numberSecond);
+		int numberThree = Integer.parseInt(numberThird);
+		
+		//when the value is one bigger
+		int numberOnePlus = numberOne + 1;
+		int numberTwoPlus = numberTwo + 1;
+		int numberThreePlus = numberThree + 1;
+		char letterOnePlus = (char) (letterFirst +1);
+		char letterTwoPlus = (char) (letterSecond +1);
+		char letterThreePlus = (char) (letterThird + 1);
+		String letterOnePlusSt = Character.toString(letterOnePlus);
+		String letterTwoPlusSt = Character.toString(letterTwoPlus);
+		String letterThreePlusSt = Character.toString(letterThreePlus);
 		
 		
-		return true;
+		//when the value is one smaller
+		int numberOneMinus = numberOne - 1;
+		int numberTwoMinus = numberTwo - 1;
+		int numberThreeMinus = numberThree -1;
+		char letterOneMinus = (char) (letterFirst -1);
+		char letterTwoMinus = (char) (letterSecond -1);
+		char letterThreeMinus = (char) (letterThird -1);
+		String letterOneMinusSt = Character.toString(letterOneMinus);
+		String letterTwoMinusSt = Character.toString(letterTwoMinus);
+		String letterThreeMinusSt = Character.toString(letterThreeMinus);
+		
+		
+		if (direction ==1) {
+			if(Board.hashBoard.get(letterFirstSt+numberOneMinus).empty && Board.hashBoard.get(letterSecondSt+numberTwoMinus).empty && Board.hashBoard.get(letterThirdSt + numberThreeMinus).empty) {
+				System.out.println("ONE TRUE");
+				return true;
+			}	
+		}
+		
+		else if (direction ==2) {
+			if(Board.hashBoard.get(letterOnePlusSt + numberOne).empty && Board.hashBoard.get(letterTwoPlusSt+ numberTwo).empty && Board.hashBoard.get(letterThreePlusSt + numberThree).empty) {
+				System.out.println("TWO TRUE");
+				return true;
+			}	
+		}
+		
+		else if(direction ==3) {
+			if(Board.hashBoard.get(letterOnePlusSt + numberOnePlus).empty && Board.hashBoard.get(letterTwoPlusSt+numberTwoPlus).empty && Board.hashBoard.get(letterThreePlusSt + numberThreePlus).empty) {
+				System.out.println("THREE TRUE");
+				return true;
+			}	
+			
+		}
+		else if (direction ==4) {
+			if(Board.hashBoard.get(letterFirstSt+numberOnePlus).empty && Board.hashBoard.get(letterSecondSt+numberTwoPlus).empty && Board.hashBoard.get(letterThirdSt + numberThreePlus).empty) {
+				System.out.println("FOUR TRUE");
+				return true;
+			}
+		}
+		else if (direction ==5) {
+			if(Board.hashBoard.get(letterOneMinusSt + numberOne).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwo).empty && Board.hashBoard.get(letterThreeMinusSt + numberThree).empty) {
+				System.out.println("FIVE TRUE");
+				return true;
+			}
+		}
+		else if (direction ==6) {
+			if(Board.hashBoard.get(letterOneMinusSt + numberOneMinus).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwoMinus).empty && Board.hashBoard.get(letterThreeMinusSt + numberThreeMinus).empty) {
+				System.out.println("SIX TRUE");
+				return true;
+			}
+			
+		}
+		
+		System.out.println("FALSE SIDE");
+		return false;
 	}
 	
 	//if you need to push one marble - so with the two marbles
