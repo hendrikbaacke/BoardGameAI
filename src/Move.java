@@ -219,6 +219,14 @@ public class Move {
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 			moveSideways();
 		}
+		else if(Board.hashBoard.get(moveTo).empty) {
+			System.out.println("moving");
+			Marble moving = Board.hashBoard.get(second).marble;
+			Board.hashBoard.get(second).setEmpty();
+			Board.hashBoard.get(moveTo).setFull(moving);
+			moving.setLocationKey(moveTo);
+			moving.updateLocation();
+		}
 		
 		
 		
@@ -412,12 +420,17 @@ public class Move {
 	public boolean validMoveTwo() {
 		//if it needs to move sideways and if there are two free space where they are needed, the move is valid
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+			System.out.println("sideways is true");
 			if (Board.rows.twoFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 				return true;
 			}
 		}
-		//add moving in same direction to this later
+		else if (Board.hashBoard.get(moveTo).empty) {
+			System.out.println("move to is empty");
+			return true;
+		}
 		else {
+			System.out.println("did not move");
 			resetMove();
 		}
 		

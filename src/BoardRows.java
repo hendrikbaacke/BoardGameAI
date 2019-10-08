@@ -168,9 +168,19 @@ public class BoardRows {
 	}
 	
 	public boolean sideways(Hexagon first, Hexagon second, Hexagon moveTo) {
-		if (this.direction(first, second) != this.direction(first, moveTo)) {
+		if (this.direction(first, second) == 1 & this.direction(first, moveTo) ==4 || this.direction(first, second) == 4 & this.direction(first, moveTo) ==1) {
+			return false;
+		}
+		else if (this.direction(first, second) == 2 & this.direction(first, moveTo) ==5 || this.direction(first, second) == 5 & this.direction(first, moveTo) ==2) {
+			return false;
+		}
+		else if(this.direction(first, second) == 3 & this.direction(first, moveTo) ==6 || this.direction(first, second) == 6 & this.direction(first, moveTo) ==3) {
+			return false;
+		}
+		else if (this.direction(first, second) != this.direction(first, moveTo)){
 			return true;
 		}
+		else
 		return false;
 	}
 	
