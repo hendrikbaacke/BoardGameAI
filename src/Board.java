@@ -1,4 +1,5 @@
 package src;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import javafx.scene.layout.BorderPane;
@@ -14,6 +15,7 @@ public class Board extends BorderPane {
    public static Move move = new Move();
    public static BoardRows rows;
    public static int[] score = new int[2];
+   public static MarbleStorage boardMarbles;
 
    public Board(double X, double Y) {
 	   CenterX = X;

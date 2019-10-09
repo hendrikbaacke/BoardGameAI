@@ -1,4 +1,5 @@
 package src;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -12,6 +13,13 @@ import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 public class GameGui extends Application {
+	
+	public Board board;
+	static BorderPane MainScene;
+	static Pane Screen;
+	static AnchorPane pp;
+	
+	
 	public void start( Stage stage) {
 		try {
 		
@@ -22,12 +30,14 @@ public class GameGui extends Application {
 			GridPane.setRowIndex(hbox3, 3);
 
 			SubScene.getChildren().add(hbox3);
+			
 
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
-			Board board = new Board(stage.getWidth() / 2,
+			board = new Board(stage.getWidth() / 2,
 					stage.getHeight() / 2);
-			MarbleStorage m = new MarbleStorage();
-			 Scene scene = newScene(m, board,SubScene);
+			//MarbleStorage m = new MarbleStorage();
+			Board.boardMarbles = new MarbleStorage();
+			 Scene scene = newScene(Board.boardMarbles, board,SubScene);
 			stage.setTitle("Player vs Player");
 			stage.setScene(scene);
 			stage.show();
@@ -35,11 +45,7 @@ public class GameGui extends Application {
 			reset.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent actionEvent) {
-	            	Move movement = new Move();
-	                stage.setScene(newScene(m, board,SubScene));
-	            	movement.resetMove();
-	            	movement.move();
-	            	movement.playersTurn = 1;
+	                stage.setScene(newScene(board.boardMarbles, board,SubScene));
 	            	Platform.runLater( () -> new GameGui().start( stage) );
 	            	System.out.println("restart");
 
@@ -53,9 +59,9 @@ public class GameGui extends Application {
 	}
 
 	protected static Scene newScene(MarbleStorage m, Board board,GridPane SubScene) {
-		Pane Screen = new Pane();
-		BorderPane MainScene = board.add();
-		AnchorPane pp = m.Balls();
+		Screen = new Pane();
+		MainScene = board.add();
+		pp = m.Balls();
 		MainScene.getChildren().addAll(pp);
 		
 		// SubScene.setAlignment(Pos.BOTTOM_LEFT);

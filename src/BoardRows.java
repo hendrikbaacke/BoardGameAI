@@ -1,5 +1,6 @@
 package src;
 
+
 import java.util.ArrayList;
 
 public class BoardRows {
@@ -9,7 +10,6 @@ public class BoardRows {
 	ArrayList<ArrayList<Hexagon>> horizontal = new ArrayList<ArrayList<Hexagon>>();
 	ArrayList<ArrayList<Hexagon>> topLeft = new ArrayList<ArrayList<Hexagon>>();
 	ArrayList<ArrayList<Hexagon>> topRight = new ArrayList<ArrayList<Hexagon>>();
-	Move move;
 	
 	public BoardRows() {
 		//create the rows
@@ -351,12 +351,42 @@ public class BoardRows {
 		return false;
 	}
 	
-
-
-	
-	//if you need to push either one or two - wih the three marbles
-	public boolean pushOneOrTwo(Hexagon first, Hexagon second, Hexagon third, Hexagon moveTo) {
+	public String adjacentDirection(Hexagon moveTo, int direction ) {
+		char letterMoveTo = moveTo.code.charAt(0);
+		String letterMoveToSt = moveTo.code.substring(0,1);
+		String numberMoveToSt = moveTo.code.substring(1);
+		int numberMoveTo = Integer.parseInt(numberMoveToSt);
 		
-		return true;
+		//when the value is one bigger
+		int numberMoveToPlus = numberMoveTo + 1;
+		char letterMoveToPlus = (char) (letterMoveTo +1);
+		String letterMoveToPlusSt = Character.toString(letterMoveToPlus);
+		
+		
+		//when the value is one smaller
+		int numberMoveToMinus = numberMoveTo - 1;
+		char letterMoveToMinus = (char) (letterMoveTo -1);
+		String letterMoveToMinusSt = Character.toString(letterMoveToMinus);
+		
+		System.out.println("YES");
+		if (direction ==1) {
+			return letterMoveToSt+numberMoveToMinus;
+		}
+		if (direction ==2) {
+			return letterMoveToPlusSt + numberMoveTo;
+		}
+		if (direction ==3) {
+			return letterMoveToPlusSt + numberMoveToPlus;
+		}
+		if (direction ==4) {
+			return letterMoveToSt+numberMoveToPlus;
+		}
+		if (direction ==5) {
+			return letterMoveToMinusSt + numberMoveTo;
+		}
+		if (direction ==6) {
+			return letterMoveToMinusSt + numberMoveToMinus;
+		}
+		return null;
 	}
 }

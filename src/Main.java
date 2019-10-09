@@ -1,4 +1,6 @@
 package src;
+
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -21,10 +23,16 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.effect.DropShadow;
 import javafx.stage.Window;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
 
 public class Main extends Application {
 
     DropShadow shadow = new DropShadow();
+    public GameGui Game;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -39,9 +47,22 @@ public class Main extends Application {
         sliderBox.setAlignment(Pos.CENTER);
         sliderBox.setPrefHeight(500);
         sliderBox.setSpacing(50);
-        Text title = new Text("Abalone Game-IT");
-        title.setStyle("-fx-font: 50 arial;");
-        title.getStyleClass().add("title");
+
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setRadius(5.0);
+        dropShadow.setOffsetX(3.0);
+        dropShadow.setOffsetY(3.0);
+        dropShadow.setColor(Color.color(0.4, 0.5, 0.5));
+
+        Text title = new Text();
+        title.setEffect(dropShadow);
+        title.setCache(true);
+        title.setX(10.0);
+        title.setY(70.0);
+        title.setFill(Color.web("0x3b596d"));
+        title.setText("Abalone Game-IT");
+        title.setFont(Font.font(null, FontWeight.BOLD, 70));
+
 
         Button settings = new Button("SETTINGS");
         settings.getStyleClass().add("menu_items");
@@ -361,7 +382,7 @@ public class Main extends Application {
         //changing to the board scene
         modeOneContainer.setPickOnBounds(true); // allows click on transparent areas
         modeOneContainer.setOnMouseClicked((MouseEvent e) -> {
-            GameGui Game = new GameGui();
+            Game = new GameGui();
             Game.start(primaryStage);
             
         });
