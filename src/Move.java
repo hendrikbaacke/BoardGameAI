@@ -434,7 +434,12 @@ public class Move {
 			}
 			else {
 				Board.score[playersTurn-1]++;
+				GameGui.MainScene.getChildren().remove(removing);
 				Board.boardMarbles.storage.remove(removing);
+				GameGui.Screen.getChildren().remove(removing);
+				GameGui.pp.getChildren().remove(removing);
+				removing.setFill(Color.PINK);
+				System.out.println(playersTurn + " gets a point");
 				System.out.println("out of board");
 			}
 			moving.setLocationKey(moveTo);
