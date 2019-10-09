@@ -432,6 +432,10 @@ public class Move {
 			if (Board.rows.twoFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 				return true;
 			}
+			else {
+				System.out.println("did not move");
+				resetMove();
+			}
 		}
 		else if (Board.hashBoard.get(moveTo).empty) {
 			System.out.println("move to is empty");
@@ -450,6 +454,10 @@ public class Move {
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 			if (Board.rows.threeFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(third), Board.hashBoard.get(moveTo))) {
 				return true;
+			}
+			else {
+				System.out.println("did not move");
+				resetMove();
 			}
 		}
 		else if (Board.hashBoard.get(moveTo).empty) {
