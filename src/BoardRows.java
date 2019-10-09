@@ -9,6 +9,7 @@ public class BoardRows {
 	ArrayList<ArrayList<Hexagon>> horizontal = new ArrayList<ArrayList<Hexagon>>();
 	ArrayList<ArrayList<Hexagon>> topLeft = new ArrayList<ArrayList<Hexagon>>();
 	ArrayList<ArrayList<Hexagon>> topRight = new ArrayList<ArrayList<Hexagon>>();
+	Move move;
 	
 	public BoardRows() {
 		//create the rows
@@ -350,12 +351,8 @@ public class BoardRows {
 		return false;
 	}
 	
-	//if you need to push one marble - so with the two marbles
-	public boolean pushOne(Hexagon first, Hexagon second, Hexagon moveTo) {
-		
-		return true;
-	}
-	
+
+
 	
 	//if you need to push either one or two - wih the three marbles
 	public boolean pushOneOrTwo(Hexagon first, Hexagon second, Hexagon third, Hexagon moveTo) {

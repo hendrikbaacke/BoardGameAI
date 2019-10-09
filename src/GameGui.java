@@ -22,7 +22,6 @@ public class GameGui extends Application {
 			GridPane.setRowIndex(hbox3, 3);
 
 			SubScene.getChildren().add(hbox3);
-			
 
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
 			Board board = new Board(stage.getWidth() / 2,
@@ -36,7 +35,11 @@ public class GameGui extends Application {
 			reset.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent actionEvent) {
+	            	Move movement = new Move();
 	                stage.setScene(newScene(m, board,SubScene));
+	            	movement.resetMove();
+	            	movement.move();
+	            	movement.playersTurn = 1;
 	            	Platform.runLater( () -> new GameGui().start( stage) );
 	            	System.out.println("restart");
 
