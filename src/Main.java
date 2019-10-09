@@ -43,11 +43,7 @@ public class Main extends Application {
         sliderBox.setAlignment(Pos.CENTER);
         sliderBox.setPrefHeight(500);
         sliderBox.setSpacing(50);
-       /* Text title = new Text("Abalone Game-IT");
-        //title.setStyle("-fx-font-size: 50px;");
-        title.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 50));
-        title.getStyleClass().add("title");
-*/
+
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(5.0);
         dropShadow.setOffsetX(3.0);
