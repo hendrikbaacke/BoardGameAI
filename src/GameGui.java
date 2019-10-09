@@ -37,7 +37,7 @@ public class GameGui extends Application {
 					stage.getHeight() / 2);
 			//MarbleStorage m = new MarbleStorage();
 			Board.boardMarbles = new MarbleStorage();
-			 Scene scene = newScene(Board.boardMarbles, board,SubScene);
+			Scene scene = newScene(Board.boardMarbles, board,SubScene);
 			stage.setTitle("Player vs Player");
 			stage.setScene(scene);
 			stage.show();
@@ -45,13 +45,20 @@ public class GameGui extends Application {
 			reset.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent actionEvent) {
-	                stage.setScene(newScene(board.boardMarbles, board,SubScene));
-	            	Platform.runLater( () -> new GameGui().start( stage) );
-	            	System.out.println("restart");
+	            	stage.close();
 
+	                Platform.runLater( () -> {
+						try {
+							new Main().start( new Stage() );
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} );
+	    		    stage.setScene(newScene(board.boardMarbles, board,SubScene));
 
 	            }
 	        });
+
 		} catch (Exception e) {
 			System.out.println("Exception in GUI Creation" + e.getMessage());
 		}
