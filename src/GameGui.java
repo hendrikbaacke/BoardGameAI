@@ -40,13 +40,13 @@ public class GameGui extends Application {
 			GridPane SubScene = new GridPane();
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
-			hbox3.getChildren().add(reset);
+			//hbox3.getChildren().add(reset);
 			GridPane.setRowIndex(hbox3, 5);
 			GridPane.setRowIndex(winner, 4);
 			GridPane.setRowIndex(playerBox, 1);
 			GridPane.setRowIndex(score,2 );
 			GridPane.setRowIndex(score2,3 );
-
+			player_text.setText("1");
 			SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2);
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
 			board = new Board(stage.getWidth() / 2,
