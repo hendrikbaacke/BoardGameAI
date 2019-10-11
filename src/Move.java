@@ -1,8 +1,9 @@
 package src;
 
-import java.util.ArrayList;
-
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class Move {
 	//first, second, and third marble code that need to be moved (the hexagon in the hashboard contains the marbles of the same code- which can be removed and added quickly)
@@ -622,8 +623,14 @@ public class Move {
 	}
 	
 	public void gameFinished() {
-		if (Board.score[0] == 6 || Board.score[1] ==6) {
-			//go to ending screen
+		if (Board.score[0] == 6){
+			GameGui.createPopup("Game over, Player 1 won!");
+
+			System.out.println("DONE");
+		}
+		if (Board.score[1] ==6) {
+			GameGui.createPopup("Game over, Player 2 won!");
+
 			System.out.println("DONE");
 		}
 	}
