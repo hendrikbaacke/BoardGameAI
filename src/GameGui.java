@@ -41,11 +41,11 @@ public class GameGui extends Application {
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
 			hbox3.getChildren().add(reset);
-			GridPane.setRowIndex(hbox3, 3);
-			GridPane.setRowIndex(winner, 7);
-			GridPane.setRowIndex(playerBox, 4);
-			GridPane.setRowIndex(score,5 );
-			GridPane.setRowIndex(score2,6 );
+			GridPane.setRowIndex(hbox3, 5);
+			GridPane.setRowIndex(winner, 4);
+			GridPane.setRowIndex(playerBox, 1);
+			GridPane.setRowIndex(score,2 );
+			GridPane.setRowIndex(score2,3 );
 
 			SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2);
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
@@ -114,44 +114,6 @@ public class GameGui extends Application {
 		MainScene = board.add();
 		pp = m.Balls();
 		MainScene.getChildren().addAll(pp);
-		
-		// SubScene.setAlignment(Pos.BOTTOM_LEFT);
-
-		HBox hbox0 = new HBox();
-		Text labelLostMarbles = new Text("Lost Marble Count: ");
-		hbox0.getChildren().addAll(labelLostMarbles);
-		hbox0.setPadding(new Insets(50, 50, 30, 0));
-
-		HBox hbox1 = new HBox();
-		Button Player1 = new Button("Player 1");
-
-		HBox hbox3 = new HBox();
-		
-		
-		HBox hbox2 = new HBox();
-		Button Player2 = new Button("Player 2");
-
-		/*
-		 * TODO If Player 1's turn: select P1 and viceversa
-		 */
-
-		GridPane.setRowIndex(hbox0, 0);
-		GridPane.setRowIndex(hbox1, 1);
-		GridPane.setRowIndex(hbox2, 2);
-
-		hbox1.getChildren().addAll(Player1);
-
-		for (int i = 0; i < 6; i++) {
-
-			hbox1.getChildren().add(new CheckBox("" + (i + 1)));
-		}
-		hbox2.getChildren().addAll(Player2);
-
-		for (int i = 0; i < 6; i++) {
-			hbox2.getChildren().add((new CheckBox("" + (i + 1))));
-		}
-	  
-		SubScene.getChildren().addAll(hbox0, hbox1, hbox2);
 		Screen.getChildren().addAll(MainScene,SubScene);
 		Scene scene = new Scene(Screen);
 

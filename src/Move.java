@@ -657,14 +657,14 @@ public class Move {
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Game Over");
 		alert.setHeaderText("Winner is:");
-		if ( getScore1() == 2){
+		if ( getScore1() == 6){
 			String s ="Game over, Player 1 won!" ;
 			alert.setContentText(s);
 			alert.show();
 			GameGui.winner_text.setText("Game over, Player 1 won!");
 			System.out.println("DONE");
 		}
-		if ( getScore2() ==2) {
+		if ( getScore2() == 6) {
 			
 			String s ="Game over, Player 2 won!" ;
 			alert.setContentText(s);
