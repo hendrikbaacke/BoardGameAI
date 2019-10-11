@@ -1,8 +1,8 @@
 package src;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 public class Move {
@@ -10,7 +10,8 @@ public class Move {
 	public String first;
 	public String second;
 	public String third;
-	
+	int point= 0;
+	int point2= 0;
 	//following arraylist can be used to find the ones that need to be moved:
 	public ArrayList<String> selectedMarbles = new ArrayList<String>();
 	public int nrSelected = 0; //keep track of how many marbles are selected
@@ -23,7 +24,7 @@ public class Move {
 	
 	//keep track of the player that needs to move a marble
 	public int playersTurn = 1;
-	
+
 	public Move() {
 		first = null;
 		second = null;
@@ -144,6 +145,8 @@ public class Move {
 			coloursBackToNormal();
 			move();
 		}
+		GameGui.player_text.setText(String.valueOf(playersTurn));
+
 	}
 	
 	public void coloursBackToNormal() {
@@ -440,7 +443,13 @@ public class Move {
 				GameGui.Screen.getChildren().remove(removing);
 				GameGui.pp.getChildren().remove(removing);
 				removing.setFill(Color.PINK);
-				System.out.println(playersTurn + " gets a point");
+				if(playersTurn==1) {
+					point++;
+					System.out.println(playersTurn + " gets a point");
+				}else {
+					point2++;
+				}
+				
 				System.out.println("out of board");
 			}
 			moving.setLocationKey(moveTo);
@@ -468,18 +477,24 @@ public class Move {
 				Board.boardMarbles.storage.remove(removing);
 				GameGui.Screen.getChildren().remove(removing);
 				GameGui.pp.getChildren().remove(removing);
+				if(playersTurn==1) {
+					point++;
+					System.out.println(playersTurn + " gets a point");
+				}else {
+					point2++;
+				}
 				removing.setFill(Color.PINK);
-				System.out.println(playersTurn + " gets a point");
 				System.out.println("out of board");
 			}
+
 			moving.setLocationKey(moveTo);
 			moving.updateLocation();
+			
 		}
-		
-		
-		
+
 	}
-	
+
+
 	//push two marbles
 	public void doPushTwo() {
 		Marble moving=Board.hashBoard.get(third).marble;
@@ -508,6 +523,12 @@ public class Move {
 			GameGui.MainScene.getChildren().remove(removing);
 			GameGui.Screen.getChildren().remove(removing);
 			GameGui.pp.getChildren().remove(removing);
+			if(playersTurn==1) {
+				point++;
+				System.out.println(playersTurn + " gets a point");
+			}else {
+				point2++;
+			}
 			System.out.println("out of board");
 			removing.setFill(Color.PINK);
 		}
@@ -621,16 +642,34 @@ public class Move {
 		resetMove();
 		return false;
 	}
-	
+	public int getScore1() {
+		return point;
+	}
+	public int getScore2() {
+		return point2;
+	}
+	public int player() {
+		return playersTurn;
+	}
 	public void gameFinished() {
-		if (Board.score[0] == 6){
-			GameGui.createPopup("Game over, Player 1 won!");
-
+		GameGui.score_text1.setText(String.valueOf(point));
+		GameGui.score_text2.setText(String.valueOf(point2));
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle("Game Over");
+		alert.setHeaderText("Winner is:");
+		if ( getScore1() == 2){
+			String s ="Game over, Player 1 won!" ;
+			alert.setContentText(s);
+			alert.show();
+			GameGui.winner_text.setText("Game over, Player 1 won!");
 			System.out.println("DONE");
 		}
-		if (Board.score[1] ==6) {
-			GameGui.createPopup("Game over, Player 2 won!");
-
+		if ( getScore2() ==2) {
+			
+			String s ="Game over, Player 2 won!" ;
+			alert.setContentText(s);
+			alert.show();
+			GameGui.winner_text.setText("Game over, Player 2 won!");
 			System.out.println("DONE");
 		}
 	}

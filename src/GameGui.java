@@ -8,13 +8,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
-import javafx.stage.WindowEvent;
 
 public class GameGui extends Application {
 	
@@ -22,20 +20,34 @@ public class GameGui extends Application {
 	static BorderPane MainScene;
 	static Pane Screen;
 	static AnchorPane pp;
-	
-	
+	static TextField winner_text = new TextField("0");
+    static TextField player_text = new TextField("0");
+    static TextField score_text1 = new TextField("0");
+    static TextField score_text2 = new TextField("0");
+   
+    Move move;
+
 	public void start( Stage stage) {
 		try {
-		
+		    Label winner_label = new Label("Player win:\t");
+		    HBox winner = new HBox(winner_label, winner_text);
+			Label player_label = new Label("Player turn:\t");
+		    HBox playerBox = new HBox(player_label, player_text);
+			Label score_label1 = new Label("Player 1 score is :\t");
+		    HBox score = new HBox(score_label1, score_text1);
+		    Label score_label2 = new Label("Player 2 score is :\t");
+			HBox score2 = new HBox(score_label2, score_text2);
 			GridPane SubScene = new GridPane();
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
 			hbox3.getChildren().add(reset);
 			GridPane.setRowIndex(hbox3, 3);
+			GridPane.setRowIndex(winner, 7);
+			GridPane.setRowIndex(playerBox, 4);
+			GridPane.setRowIndex(score,5 );
+			GridPane.setRowIndex(score2,6 );
 
-			SubScene.getChildren().add(hbox3);
-			
-
+			SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2);
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
 			board = new Board(stage.getWidth() / 2,
 					stage.getHeight() / 2);
@@ -45,7 +57,6 @@ public class GameGui extends Application {
 			stage.setTitle("Player vs Player");
 			stage.setScene(scene);
 			stage.show();
-			
 			reset.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent actionEvent) {
@@ -68,36 +79,35 @@ public class GameGui extends Application {
 		}
 
 	}
-
-	public static Popup createPopup(final String message) {
-		final Popup popup = new Popup();
-		popup.setAutoFix(true);
-		popup.setAutoHide(true);
-		popup.setHideOnEscape(true);
-		Label label = new Label(message);
-		label.setOnMouseReleased(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent e) {
-				popup.hide();
-			}
-		});
-		label.getStylesheets().add("/css/styles.css");
-		label.getStyleClass().add("popup");
-		popup.getContent().add(label);
-		return popup;
-	}
-
-	public static void showPopupMessage(final String message, final Stage stage) {
-		final Popup popup = createPopup(message);
-		popup.setOnShown(new EventHandler<WindowEvent>() {
-			@Override
-			public void handle(WindowEvent e) {
-				popup.setX(stage.getX() + stage.getWidth()/2 - popup.getWidth()/2);
-				popup.setY(stage.getY() + stage.getHeight()/2 - popup.getHeight()/2);
-			}
-		});
-		popup.show(stage);
-	}
+//	public static Popup createPopup(final String message) {
+//	    popup = new Popup();
+//		popup.setAutoFix(true);
+//		popup.setAutoHide(true);
+//		popup.setHideOnEscape(true);
+//		Label label = new Label(message);
+//		label.setOnMouseReleased(new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent e) {
+//				popup.hide();
+//			}
+//		});
+//		label.getStylesheets().add("/css/styles.css");
+//		label.getStyleClass().add("popup");
+//		popup.getContent().add(label);
+//		return popup;
+//	}
+//
+//	public static void showPopupMessage(  Stage stage) {
+//	 //  Popup popup = createPopup(message);
+//		popup.setOnShown(new EventHandler<WindowEvent>() {
+//			@Override
+//			public void handle(WindowEvent e) {
+//				popup.setX(stage.getX() + stage.getWidth()/2 - popup.getWidth()/2);
+//				popup.setY(stage.getY() + stage.getHeight()/2 - popup.getHeight()/2);
+//			}
+//		});
+//		popup.show(stage);
+//	}
 
 	protected static Scene newScene(MarbleStorage m, Board board,GridPane SubScene) {
 		Screen = new Pane();
