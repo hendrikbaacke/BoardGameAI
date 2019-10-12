@@ -57,6 +57,7 @@ public class GameGui extends Application {
 			stage.setTitle("Player vs Player");
 			stage.setScene(scene);
 			stage.show();
+			
 			reset.setOnAction(new EventHandler<ActionEvent>() {
 	            @Override
 	            public void handle(ActionEvent actionEvent) {
@@ -79,36 +80,6 @@ public class GameGui extends Application {
 		}
 
 	}
-//	public static Popup createPopup(final String message) {
-//	    popup = new Popup();
-//		popup.setAutoFix(true);
-//		popup.setAutoHide(true);
-//		popup.setHideOnEscape(true);
-//		Label label = new Label(message);
-//		label.setOnMouseReleased(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent e) {
-//				popup.hide();
-//			}
-//		});
-//		label.getStylesheets().add("/css/styles.css");
-//		label.getStyleClass().add("popup");
-//		popup.getContent().add(label);
-//		return popup;
-//	}
-//
-//	public static void showPopupMessage(  Stage stage) {
-//	 //  Popup popup = createPopup(message);
-//		popup.setOnShown(new EventHandler<WindowEvent>() {
-//			@Override
-//			public void handle(WindowEvent e) {
-//				popup.setX(stage.getX() + stage.getWidth()/2 - popup.getWidth()/2);
-//				popup.setY(stage.getY() + stage.getHeight()/2 - popup.getHeight()/2);
-//			}
-//		});
-//		popup.show(stage);
-//	}
-
 	protected static Scene newScene(MarbleStorage m, Board board,GridPane SubScene) {
 		Screen = new Pane();
 		MainScene = board.add();

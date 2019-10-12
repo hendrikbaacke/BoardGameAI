@@ -663,6 +663,7 @@ public class Move {
 			alert.show();
 			GameGui.winner_text.setText("Game over, Player 1 won!");
 			System.out.println("DONE");
+		
 		}
 		if ( getScore2() == 6) {
 			
@@ -672,6 +673,12 @@ public class Move {
 			GameGui.winner_text.setText("Game over, Player 2 won!");
 			System.out.println("DONE");
 		}
+		alert.setOnCloseRequest( event ->
+	    {
+	        System.out.println("CLOSING");
+	        System.exit(0);
+	    });
 	}
+	
 	
 }
