@@ -336,20 +336,54 @@ public class Main extends Application {
 
         //Settings:
         VBox setMainCont = new VBox();
-        HBox settingsTitleCont = new HBox();
-        settingsTitleCont.setAlignment(Pos.CENTER);
-        Text settingsTitle = new Text("SETTINGS");
-        settingsTitle.setStyle("-fx-font-size: 30px;");
-        settingsTitleCont.getChildren().add(settingsTitle);
-        settingsTitleCont.setPrefHeight(100);
-        HBox setSubTitleCont = new HBox();
-        setSubTitleCont.setAlignment(Pos.CENTER);
-        Text setSubTitle = new Text(" Settings");
-        setSubTitleCont.getChildren().add(setSubTitle);
-        setSubTitleCont.setPrefHeight(50);
-        setSubTitle.setStyle("-fx-font-size: 20px;");
+        setMainCont .setPadding(new Insets(10));
+        setMainCont .setSpacing(8);
+        setMainCont .setAlignment(Pos.TOP_LEFT);
+        Text setting1 = new Text("1. To be able to play the game first select the mode on which you prefer to play.");
+        setting1.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting2 = new Text("2.You can play the game with a human player or with a computer.");
+        setting2.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting3 = new Text("3. If you have choosen already what mode you want to play.");
+        setting3.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting4 = new Text("4. Then you have first to understand the rules of the game.");
+        setting4.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        
+        Text setting5 = new Text("5. If you click on one of the marbels then it will be highlited in Purple this means that you are in the selection step");
+        setting5.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting6 = new Text("6. If you click on the second marble it will be highlited in blue, You are not done yet.");
+        setting6.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        
+        Text setting7 = new Text("7. click again in the second marble to confirm that you are done with selection.");
+        setting7.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        
+        Text setting8 = new Text("8. If you are done with selection then the marbels will be highletd with yellow and orange colors.");
+        setting8.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        
+        Text setting9 = new Text("9. Then you can perform your movement in any direction you prefer.");
+        setting9.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting10 = new Text("10. Once you are done you need you have to wait because it is your oppoent's turn .");
+        setting10.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting11 = new Text("11. To push the opponent marbles then click on the marble itself that you want to push. ");
+        setting11.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting12 = new Text("12. Once you push one marble out of the board then your score will increase .");
+        setting12.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        Text setting13 = new Text("13. That is all enjoy your game ");
+        setting13.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        setMainCont.getChildren().add(setting1);
+        setMainCont.getChildren().add(setting2);
+        setMainCont.getChildren().add(setting3);
+        setMainCont.getChildren().add(setting4);
+        setMainCont.getChildren().add(setting5);
+        setMainCont.getChildren().add(setting6);
+        setMainCont.getChildren().add(setting7);
+        setMainCont.getChildren().add(setting8);
+        setMainCont.getChildren().add(setting9);
+        setMainCont.getChildren().add(setting10);
+        setMainCont.getChildren().add(setting11);
+        setMainCont.getChildren().add(setting12);
+        setMainCont.getChildren().add(setting13);
 
-        setMainCont.getChildren().addAll(settingsTitleCont, setSubTitleCont, backCont3);
+     
         Scene setScene = new Scene(setMainCont);
 
 
