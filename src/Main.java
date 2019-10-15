@@ -292,6 +292,7 @@ public class Main extends Application {
         GridPane SetCont = new SettingsPane().create();
 
         setMainCont.getChildren().addAll(settingsTitleCont, setSubTitleCont,SetCont, backCont3);
+
         Scene setScene = new Scene(setMainCont);
 
 
