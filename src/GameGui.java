@@ -1,4 +1,3 @@
-package src;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -20,11 +19,11 @@ public class GameGui extends Application {
 	static BorderPane MainScene;
 	static Pane Screen;
 	static AnchorPane pp;
-	static TextField winner_text = new TextField("0");
-    static TextField player_text = new TextField("0");
-    static TextField score_text1 = new TextField("0");
-    static TextField score_text2 = new TextField("0");
-   
+	static Text winner_text = new Text("0");
+    static Text player_text = new Text("0");
+    static Text score_text1 = new Text("0");
+    static Text score_text2 = new Text("0");
+
     Move move;
 
 	public void start( Stage stage) {
@@ -34,9 +33,9 @@ public class GameGui extends Application {
 			Label player_label = new Label("Player turn:\t");
 		    HBox playerBox = new HBox(player_label, player_text);
 			Label score_label1 = new Label("Player 1 score is :\t");
-		    HBox score = new HBox(score_label1, score_text1);
+		    HBox score = new HBox(score_label1, score_text1, new Text("/6"));
 		    Label score_label2 = new Label("Player 2 score is :\t");
-			HBox score2 = new HBox(score_label2, score_text2);
+			HBox score2 = new HBox(score_label2, score_text2, new Text("/6"));
 			GridPane SubScene = new GridPane();
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
@@ -47,7 +46,7 @@ public class GameGui extends Application {
 			GridPane.setRowIndex(score,2 );
 			GridPane.setRowIndex(score2,3 );
 			player_text.setText("1");
-			SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2);
+			SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2); //add reset for the reset button
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
 			board = new Board(stage.getWidth() / 2,
 					stage.getHeight() / 2);

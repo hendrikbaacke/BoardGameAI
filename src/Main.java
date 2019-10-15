@@ -61,7 +61,7 @@ public class Main extends Application {
         title.setX(10.0);
         title.setY(70.0);
         title.setFill(Color.web("0x3b596d"));
-        title.setText("Abalone Game-IT");
+        title.setText("Abalone: Play it!");
         title.setFont(Font.font(null, FontWeight.BOLD, 70));
 
 
