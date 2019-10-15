@@ -1,4 +1,3 @@
-package src;
 
 
 import javafx.application.Application;
@@ -263,65 +262,7 @@ public class Main extends Application {
         rulSubTitleCont.getChildren().add(ruleSubTitle);
         rulSubTitleCont.setPrefHeight(50);
         ruleSubTitle.setStyle("-fx-font-size: 20px;");
-        GridPane ruleMainCont = new GridPane();
-        ruleMainCont.setStyle("-fx-font-size: 18px;");
-        ruleMainCont.setPadding(new Insets(50, 50, 50, 50));
-        //Setting the vertical and horizontal gaps between the columns
-        ruleMainCont.setVgap(50);
-        ruleMainCont.setHgap(50);
-
-
-        Text ruleOneContent = new Text("To be the first player to push six of the opponent's marbles out of play, into the board's outer rim.");
-        TextFlow ruleOneCont = new TextFlow();
-        //Retrieving the observable list of the TextFlow Pane
-        ObservableList list7 = ruleOneCont.getChildren();
-        list7.addAll(ruleOneContent);
-
-        Text ruleTwoContent = new Text("Black makes the first move");
-        TextFlow ruleTwoCont = new TextFlow();
-        //Retrieving the observable list of the TextFlow Pane
-        ObservableList list8 = ruleTwoCont.getChildren();
-        list8.addAll(ruleTwoContent);
-
-        Text ruleThreeContent = new Text("You can push one, two or three marbles at a time");
-        TextFlow ruleThreeCont = new TextFlow();
-        //Retrieving the observable list of the TextFlow Pane
-        ObservableList list9 = ruleThreeCont.getChildren();
-        list9.addAll(ruleThreeContent);
-
-        Text ruleFourContent = new Text("Your marbles can move one space, in a straight line or laterally.");
-        TextFlow ruleFourCont = new TextFlow();
-        //Retrieving the observable list of the TextFlow Pane
-        ObservableList list10 = ruleFourCont.getChildren();
-        list10.addAll(ruleFourContent);
-
-        Text ruleFiveContent = new Text(" Two marbles can push one and three marbles can push one or two of your opponent's marbles. However, an equal number of marbles cannot push each other (ie: 1 cannot push 1, 2 cannot push 2, etc).");
-        TextFlow ruleFiveCont = new TextFlow();
-        //Retrieving the observable list of the TextFlow Pane
-        ObservableList list11 = ruleFiveCont.getChildren();
-        list11.addAll(ruleFiveContent);
-
-        ruleOneCont.setPadding(new Insets(10, 10, 10, 10));
-        ruleTwoCont.setPadding(new Insets(10, 10, 10, 10));
-        ruleThreeCont.setPadding(new Insets(10, 10, 10, 10));
-        ruleFourCont.setPadding(new Insets(10, 10, 10, 10));
-        ruleFiveCont.setPadding(new Insets(10, 10, 10, 10));
-
-
-        ruleOneCont.setStyle("-fx-background-color: #dae7f3;");
-        ruleTwoCont.setStyle("-fx-background-color: #dae7f3;");
-        ruleThreeCont.setStyle("-fx-background-color: #dae7f3;");
-        ruleFourCont.setStyle("-fx-background-color: #dae7f3;");
-        ruleFiveCont.setStyle("-fx-background-color: #dae7f3;");
-
-
-        ruleMainCont.add(ruleOneCont, 1, 0);
-        ruleMainCont.add(ruleTwoCont, 1, 1);
-        ruleMainCont.add(ruleThreeCont, 1, 2);
-        ruleMainCont.add(ruleFourCont, 1, 3);
-        ruleMainCont.add(ruleFiveCont, 1, 3);
-
-
+        GridPane ruleMainCont = new RulesPane().create();
 
         rulesMainCont.getChildren().addAll(rulesTitleCont, rulSubTitleCont, ruleMainCont,backCont2);
         Scene ruleScene = new Scene(rulesMainCont);
@@ -344,12 +285,13 @@ public class Main extends Application {
         settingsTitleCont.setPrefHeight(100);
         HBox setSubTitleCont = new HBox();
         setSubTitleCont.setAlignment(Pos.CENTER);
-        Text setSubTitle = new Text(" Settings");
+        Text setSubTitle = new Text("Explaining how to play the game");
         setSubTitleCont.getChildren().add(setSubTitle);
         setSubTitleCont.setPrefHeight(50);
         setSubTitle.setStyle("-fx-font-size: 20px;");
+        GridPane SetCont = new SettingsPane().create();
 
-        setMainCont.getChildren().addAll(settingsTitleCont, setSubTitleCont, backCont3);
+        setMainCont.getChildren().addAll(settingsTitleCont, setSubTitleCont,SetCont, backCont3);
         Scene setScene = new Scene(setMainCont);
 
 
