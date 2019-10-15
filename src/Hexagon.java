@@ -9,7 +9,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class Hexagon extends Polygon {
-	   public static double radius = 30; // the inner radius from hexagon center to outer corner
+	   public static double radius = 50; // the inner radius from hexagon center to outer corner
        public static double n = Math.sqrt(radius * radius * 0.75); // the inner radius from hexagon center to middle of the axis
 	   public static double Hexagon_Height = 2 * radius;
 	   public static double Hexagon_Width = 2 * n;
