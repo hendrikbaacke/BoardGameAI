@@ -25,6 +25,11 @@ public class Board extends BorderPane {
 public BorderPane add() {
     BorderPane board = new BorderPane();
     double HexRow = HexRowStart;
+
+	Hexagon.radius = CenterY/10; // the inner radius from hexagon center to outer corner
+	Hexagon.n = Math.sqrt(Hexagon.radius * Hexagon.radius * 0.75); // the inner radius from hexagon center to middle of the axis
+	Hexagon.Hexagon_Height = 2 * Hexagon.radius;
+	Hexagon.Hexagon_Width = 2 * Hexagon.n;
     for (int j = 0; j < HexRowStart*2-1; j++) {
     	char hexa = getCharFromAlphabet(HexRowStart*2-1 - j - 1);
     	String letterCode = Character.toString(hexa);
@@ -62,7 +67,7 @@ public BorderPane add() {
     		String key = letterCode + neededForHash;
 
     		Hexagon Hex = new Hexagon(xCoord, yCoord, key);
-    		 Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
+    		 //Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
 
     		hashBoard.put(key, Hex);
     		everyHex.add(Hex);

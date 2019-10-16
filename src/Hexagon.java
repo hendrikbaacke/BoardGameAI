@@ -9,10 +9,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class Hexagon extends Polygon {
-	   public static double radius = 50; // the inner radius from hexagon center to outer corner
-       public static double n = Math.sqrt(radius * radius * 0.75); // the inner radius from hexagon center to middle of the axis
-	   public static double Hexagon_Height = 2 * radius;
-	   public static double Hexagon_Width = 2 * n;
+	   public static double radius ; // the inner radius from hexagon center to outer corner
+       public static double n; // the inner radius from hexagon center to middle of the axis
+	   public static double Hexagon_Height ;
+	   public static double Hexagon_Width ;
 	   public double centerX;
 	   public double centerY;
 	   public boolean empty = true;
@@ -20,7 +20,8 @@ public class Hexagon extends Polygon {
 	   public String code;
 	   public Marble marble;
 
-    	Hexagon(double x, double y, String code) {
+
+	   Hexagon(double x, double y, String code) {
             /*
             creates the polygon, defined by an array of (x,y) coordinates
     		which represents the six points of a hexagon
@@ -43,7 +44,8 @@ public class Hexagon extends Polygon {
             setStroke(Color.BLACK);
             
             this.code = code;
-           
+
+            //centerpoint for marbles
             centerX = x + 0.5 * Hexagon_Width;
             centerY = y + 0.5 * radius;
         }
@@ -125,7 +127,7 @@ public class Hexagon extends Polygon {
 
 					@Override
 					public void handle(MouseEvent t) {
-						System.out.println(code);
+						//System.out.println(code);
 						Board.move.select(code);
 						
 					}

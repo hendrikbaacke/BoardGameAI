@@ -81,7 +81,7 @@ public class Marble extends Ellipse{
 
 						@Override
 						public void handle(MouseEvent t) {
-							System.out.println(locationKey);
+							//System.out.println(locationKey);
 							Board.move.select(locationKey);
 						}
 					};
