@@ -1,3 +1,5 @@
+package src;
+
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -11,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class GameGui extends Application {
@@ -29,13 +32,30 @@ public class GameGui extends Application {
 	public void start( Stage stage) {
 		try {
 		    Label winner_label = new Label("Player win:\t");
-		    HBox winner = new HBox(winner_label, winner_text);
+		     double MAX_FONT_SIZE = 30.0; // define max font size you need
+		     winner_label.setFont(new Font(MAX_FONT_SIZE));		
+		     winner_text.setFont(new Font(MAX_FONT_SIZE));		
+		     player_text.setFont(new Font(MAX_FONT_SIZE));		
+		     score_text1.setFont(new Font(MAX_FONT_SIZE));	
+		     score_text2.setFont(new Font(MAX_FONT_SIZE));		
+
+
+		     HBox winner = new HBox(winner_label, winner_text);
 			Label player_label = new Label("Player turn:\t");
+			player_label.setFont(new Font(MAX_FONT_SIZE));		
+
 		    HBox playerBox = new HBox(player_label, player_text);
 			Label score_label1 = new Label("Player 1 score is :\t");
-		    HBox score = new HBox(score_label1, score_text1, new Text("/6"));
+			score_label1.setFont(new Font(MAX_FONT_SIZE));		
+			Text tex = new Text("/6");
+			tex.setFont(new Font(MAX_FONT_SIZE));		
+
+		    HBox score = new HBox(score_label1, score_text1, tex);
 		    Label score_label2 = new Label("Player 2 score is :\t");
-			HBox score2 = new HBox(score_label2, score_text2, new Text("/6"));
+		    score_label2.setFont(new Font(MAX_FONT_SIZE));		
+		    Text tex2 = new Text("/6");
+			tex2.setFont(new Font(MAX_FONT_SIZE));	
+			HBox score2 = new HBox(score_label2, score_text2, tex2);
 			GridPane SubScene = new GridPane();
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
