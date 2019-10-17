@@ -34,11 +34,11 @@ public class Move {
 	
 	//select marbles
 	public void select(String code) {
-		System.out.println("select");
+		//System.out.println("select");
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
 		if (first == null && !Board.hashBoard.get(code).empty) {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
-				System.out.println("selected 1");
+				//System.out.println("selected 1");
 				Board.hashBoard.get(code).marble.setFill(Color.PURPLE);
 				first = code;
 				nrSelected++;
@@ -51,7 +51,7 @@ public class Move {
 			if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
 				if (first.equals(code)) {
 					selected = true;
-					System.out.println("total = 1");
+					//System.out.println("total = 1");
 					Board.hashBoard.get(code).marble.setFill(Color.ORANGE);
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
@@ -66,7 +66,7 @@ public class Move {
 					Board.hashBoard.get(code).marble.setFill(Color.AQUAMARINE);
 					nrSelected++;
 					selectedMarbles.add(code);
-					System.out.println("selected two");
+					//System.out.println("selected two");
 				}
 			}
 		}
@@ -77,7 +77,7 @@ public class Move {
 				if(first.equals(code) || second.equals(code)) {
 					Board.hashBoard.get(first).marble.setFill(Color.ORANGE);
 					Board.hashBoard.get(second).marble.setFill(Color.YELLOW);
-					System.out.println("total = 2");
+					//System.out.println("total = 2");
 					selected = true;
 				}
 				else if(!Board.hashBoard.get(code).adjacent(Board.hashBoard.get(second)) || !Board.rows.sameRowThree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(code))) {
@@ -98,7 +98,7 @@ public class Move {
 					Board.hashBoard.get(first).marble.setFill(Color.ORANGE);
 					Board.hashBoard.get(second).marble.setFill(Color.YELLOW);
 					Board.hashBoard.get(third).marble.setFill(Color.YELLOW);
-					System.out.println("selected three");
+					//System.out.println("selected three");
 				}
 			}
 		}
@@ -120,12 +120,12 @@ public class Move {
 						}
 					else {
 						moveTo = code;
-						System.out.println("moveto");
+						//System.out.println("moveto");
 					}
 					}
 				else {
 					moveTo = code;
-					System.out.println("moveto");
+					//System.out.println("moveto");
 				}
 			}	
 			else if (!Board.hashBoard.get(code).empty && Board.hashBoard.get(code).marble.playerNumber ==playersTurn) {
@@ -172,10 +172,10 @@ public class Move {
 	
 	public void move() {
 		//check if valid -> if not, reset, else: perform movement, change player, resetmove
-		System.out.println("move");
+		//System.out.println("move");
 		if (nrSelected == 1) {
 			if(validMoveOne()) {
-				System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
+				//System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
 				performMovementOne();
 				changePlayer();
 				resetMove();
@@ -224,7 +224,7 @@ public class Move {
 			moveSideways();
 		}
 		else if(Board.hashBoard.get(moveTo).empty) {
-			System.out.println("moving");
+			//System.out.println("moving");
 			Marble moving = Board.hashBoard.get(second).marble;
 			Board.hashBoard.get(second).setEmpty();
 			Board.hashBoard.get(moveTo).setFull(moving);
@@ -253,7 +253,7 @@ public class Move {
 			moveSideways();
 		}
 		else if(Board.hashBoard.get(moveTo).empty) {
-			System.out.println("movement for 3");
+			//System.out.println("movement for 3");
 			Marble moving=Board.hashBoard.get(third).marble;
 			Board.hashBoard.get(third).setEmpty();
 			Board.hashBoard.get(moveTo).setFull(moving);
@@ -286,7 +286,7 @@ public class Move {
 	
 	public void moveSideways() {
 		int direction = Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo));
-		System.out.println("direction is " + direction);
+		//System.out.println("direction is " + direction);
 		char letterFirst = first.charAt(0);
 		char letterSecond = second.charAt(0);
 		
@@ -434,7 +434,7 @@ public class Move {
 				Board.hashBoard.get(keyAdj).setFull(removing);
 				removing.setLocationKey(keyAdj);
 				removing.updateLocation();
-				System.out.println("pushed");
+				//System.out.println("pushed");
 			}
 			else {
 				Board.score[playersTurn-1]++;
@@ -445,12 +445,12 @@ public class Move {
 				removing.setFill(Color.PINK);
 				if(playersTurn==1) {
 					point++;
-					System.out.println(playersTurn + " gets a point");
+					//System.out.println(playersTurn + " gets a point");
 				}else {
 					point2++;
 				}
 				
-				System.out.println("out of board");
+				//System.out.println("out of board");
 			}
 			moving.setLocationKey(moveTo);
 			moving.updateLocation();
@@ -469,7 +469,7 @@ public class Move {
 				Board.hashBoard.get(keyAdj).setFull(removing);
 				removing.setLocationKey(keyAdj);
 				removing.updateLocation();
-				System.out.println("pushed");
+				//System.out.println("pushed");
 			}
 			else {
 				Board.score[playersTurn-1]++;
@@ -479,12 +479,12 @@ public class Move {
 				GameGui.pp.getChildren().remove(removing);
 				if(playersTurn==1) {
 					point++;
-					System.out.println(playersTurn + " gets a point");
+					//System.out.println(playersTurn + " gets a point");
 				}else {
 					point2++;
 				}
 				removing.setFill(Color.PINK);
-				System.out.println("out of board");
+				//System.out.println("out of board");
 			}
 
 			moving.setLocationKey(moveTo);
@@ -506,7 +506,7 @@ public class Move {
 		
 		String keyAdj = Board.rows.adjacentDirection(Board.hashBoard.get(moveTo), Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
 		String keyAdjTwo = Board.rows.adjacentDirection(Board.hashBoard.get(keyAdj), Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
-		System.out.println("keyAdjTwo is " + keyAdjTwo);
+		//System.out.println("keyAdjTwo is " + keyAdjTwo);
 		
 		
 		//as it's already determined it is possible to move it, doesn't need to be checked
@@ -514,22 +514,22 @@ public class Move {
 			Board.hashBoard.get(keyAdjTwo).setFull(removing);
 			removing.setLocationKey(keyAdjTwo);
 			removing.updateLocation();	
-			System.out.println("pushed 2");
+			//System.out.println("pushed 2");
 		}
 		else {
 			Board.score[playersTurn-1]++;
-			System.out.println(playersTurn + " gets a point");
+			//System.out.println(playersTurn + " gets a point");
 			Board.boardMarbles.storage.remove(removing);
 			GameGui.MainScene.getChildren().remove(removing);
 			GameGui.Screen.getChildren().remove(removing);
 			GameGui.pp.getChildren().remove(removing);
 			if(playersTurn==1) {
 				point++;
-				System.out.println(playersTurn + " gets a point");
+				//System.out.println(playersTurn + " gets a point");
 			}else {
 				point2++;
 			}
-			System.out.println("out of board");
+			//System.out.println("out of board");
 			removing.setFill(Color.PINK);
 		}
 		
@@ -562,20 +562,20 @@ public class Move {
 	//should be done
 	public boolean validMoveTwo() {
 		String newHex = Board.rows.adjacentDirection(Board.hashBoard.get(moveTo), Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
-		System.out.println("the new hex is " + newHex);
+		//System.out.println("the new hex is " + newHex);
 		//if it needs to move sideways and if there are two free space where they are needed, the move is valid
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
-			System.out.println("sideways is true");
+			//System.out.println("sideways is true");
 			if (Board.rows.twoFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 				return true;
 			}
 			else {
-				System.out.println("did not move");
+				//System.out.println("did not move");
 				resetMove();
 			}
 		}
 		else if (Board.hashBoard.get(moveTo).empty) {
-			System.out.println("move to is empty");
+			//System.out.println("move to is empty");
 			return true;
 		}
 		else if (Board.hashBoard.get(moveTo).marble.playerNumber != playersTurn) {
@@ -592,7 +592,7 @@ public class Move {
 			}
 		}
 		
-		System.out.println("did not move");
+		//System.out.println("did not move");
 		resetMove();
 		return false;
 	}
@@ -606,12 +606,12 @@ public class Move {
 				return true;
 			}
 			else {
-				System.out.println("did not move");
+				//System.out.println("did not move");
 				resetMove();
 			}
 		}
 		else if (Board.hashBoard.get(moveTo).empty) {
-			System.out.println("move to is empty");
+			//System.out.println("move to is empty");
 			return true;
 		}
 		//can push one
@@ -638,7 +638,7 @@ public class Move {
 			}
 			
 		}
-		System.out.println("did not move");
+		//System.out.println("did not move");
 		resetMove();
 		return false;
 	}
@@ -662,7 +662,7 @@ public class Move {
 			alert.setContentText(s);
 			alert.show();
 			GameGui.winner_text.setText("Game over, Player 1 won!");
-			System.out.println("DONE");
+			//System.out.println("DONE");
 		
 		}
 		if ( getScore2() == 6) {
@@ -671,11 +671,11 @@ public class Move {
 			alert.setContentText(s);
 			alert.show();
 			GameGui.winner_text.setText("Game over, Player 2 won!");
-			System.out.println("DONE");
+			//System.out.println("DONE");
 		}
 		alert.setOnCloseRequest( event ->
 	    {
-	        System.out.println("CLOSING");
+	        //System.out.println("CLOSING");
 	        System.exit(0);
 	    });
 	}

@@ -14,8 +14,8 @@ public class Marble extends Ellipse{
 	double orgSceneX, orgSceneY;
 	double orgTranslateX, orgTranslateY;
 	
-	Marble(double centerX, double centerY, int radius, int player, String key){
-		super(centerX, centerY, radius, radius);
+	Marble(double centerX, double centerY, int player, String key){
+		super(centerX, centerY, Hexagon.radius*0.70, Hexagon.radius*0.70);
 		this.playerNumber = player;
 		this.locationKey = key;
 
@@ -53,7 +53,7 @@ public class Marble extends Ellipse{
 
 						@Override
 						public void handle(MouseEvent t) {
-							System.out.println(locationKey);
+							//System.out.println(locationKey);
 							Board.move.select(locationKey);
 						}
 					};
