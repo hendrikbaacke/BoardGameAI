@@ -14,7 +14,7 @@ public class Marble extends Ellipse{
 	double orgSceneX, orgSceneY;
 	double orgTranslateX, orgTranslateY;
 	
-	Marble(double centerX, double centerY, int player, String key){
+	Marble(double centerX, double centerY, int player, String key, boolean newM){
 		super(centerX, centerY, Hexagon.radius*0.70, Hexagon.radius*0.70);
 		this.playerNumber = player;
 		this.locationKey = key;
@@ -32,7 +32,9 @@ public class Marble extends Ellipse{
 		if(player == 3) {
 			this.setFill(Color.DARKGREEN);
 		}
-		MarbleStorage.pieceGroup.getChildren().add(this);
+		if (newM) {
+			MarbleStorage.pieceGroup.getChildren().add(this);
+		}
 		
 	}
 	
@@ -60,4 +62,9 @@ public class Marble extends Ellipse{
 							Board.move.select(locationKey);
 						}
 					};
+					
+	public Marble clone() {
+		Marble marble = new Marble(this.getCenterX(), this.getCenterY(), playerNumber, locationKey, false);
+		return marble;
+	}
 }

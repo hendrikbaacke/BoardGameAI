@@ -192,6 +192,7 @@ public class Move {
 				performMovementOne();
 				changePlayer();
 				resetMove();
+				Board.tb.add();
 			}
 		}
 		else if(nrSelected ==2) {
@@ -200,6 +201,7 @@ public class Move {
 				gameFinished();
 				changePlayer();
 				resetMove();
+				Board.tb.add();
 			}
 		}
 		else if(nrSelected ==3) {
@@ -208,6 +210,7 @@ public class Move {
 				gameFinished();
 				changePlayer();
 				resetMove();
+				Board.tb.add();
 			}
 		}
 	}

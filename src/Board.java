@@ -17,6 +17,7 @@ public class Board extends BorderPane {
    public static int[] score = new int[3];
    public static MarbleStorage boardMarbles;
    public static int numberPlayers = 2;
+   public static Traceback tb = new Traceback();
 
    public Board(double X, double Y) {
 	   CenterX = X;
@@ -95,6 +96,6 @@ public BorderPane add() {
 	public static char getCharFromAlphabet(int i) {
 		return (char)('A' + i);
 	}
-
+	
 }
 

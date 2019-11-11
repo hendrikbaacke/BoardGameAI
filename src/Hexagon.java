@@ -132,4 +132,5 @@ public class Hexagon extends Polygon {
 						
 					}
 				};
+		
     }
