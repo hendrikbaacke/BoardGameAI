@@ -29,6 +29,9 @@ public class Marble extends Ellipse{
 		if(player == 2) {
 			this.setFill(Color.GRAY);
 		}
+		if(player == 3) {
+			this.setFill(Color.DARKGREEN);
+		}
 		MarbleStorage.pieceGroup.getChildren().add(this);
 		
 	}

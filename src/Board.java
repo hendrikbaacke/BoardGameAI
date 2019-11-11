@@ -14,8 +14,9 @@ public class Board extends BorderPane {
    public  ArrayList<Hexagon> everyHex = new ArrayList<Hexagon>();
    public static Move move = new Move();
    public static BoardRows rows;
-   public static int[] score = new int[2];
+   public static int[] score = new int[3];
    public static MarbleStorage boardMarbles;
+   public static int numberPlayers = 2;
 
    public Board(double X, double Y) {
 	   CenterX = X;

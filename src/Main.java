@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -49,6 +50,27 @@ public class Main extends Application {
         sliderBox.setAlignment(Pos.CENTER);
         sliderBox.setPrefHeight(500);
         sliderBox.setSpacing(50);
+        
+        HBox chooseP = new HBox();
+        chooseP.setAlignment(Pos.CENTER);
+        chooseP.setSpacing(20);
+        
+        Button twoP = new Button("Two players");
+        Button threeP = new Button("Three players");
+        twoP.setStyle("-fx-background-color: darkgray");
+        threeP.setStyle("-fx-background-color: white");
+        
+        twoP.setOnAction(e ->{
+        	threeP.setStyle("-fx-background-color: white");
+            Board.numberPlayers = 2;
+            twoP.setStyle("-fx-background-color: darkgray");
+        });
+        threeP.setOnAction(e ->{
+        	twoP.setStyle("-fx-background-color: white");
+            Board.numberPlayers =3;
+            threeP.setStyle("-fx-background-color: darkgray");
+        }); 
+        chooseP.getChildren().addAll(twoP, threeP);
 
         DropShadow dropShadow = new DropShadow();
         dropShadow.setRadius(5.0);
@@ -79,7 +101,7 @@ public class Main extends Application {
         menuBox.setSpacing(20);
         menuBox.getChildren().addAll(settings, rules, credits);
 
-        sliderBox.getChildren().addAll(title, menuBox);
+        sliderBox.getChildren().addAll(title, menuBox, chooseP);
 
 
 

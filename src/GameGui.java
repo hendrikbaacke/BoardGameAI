@@ -26,6 +26,7 @@ public class GameGui extends Application {
     static Text player_text = new Text("0");
     static Text score_text1 = new Text("0");
     static Text score_text2 = new Text("0");
+    static Text score_text3 = new Text("0");
 
     Move move;
 
@@ -38,7 +39,7 @@ public class GameGui extends Application {
 		     player_text.setFont(new Font(MAX_FONT_SIZE));		
 		     score_text1.setFont(new Font(MAX_FONT_SIZE));	
 		     score_text2.setFont(new Font(MAX_FONT_SIZE));		
-
+		     score_text3.setFont(new Font(MAX_FONT_SIZE));	
 
 		     HBox winner = new HBox(winner_label, winner_text);
 			Label player_label = new Label("Player turn:\t");
@@ -49,24 +50,44 @@ public class GameGui extends Application {
 			score_label1.setFont(new Font(MAX_FONT_SIZE));		
 			Text tex = new Text("/6");
 			tex.setFont(new Font(MAX_FONT_SIZE));		
-
 		    HBox score = new HBox(score_label1, score_text1, tex);
+		    
 		    Label score_label2 = new Label("Player 2 score is :\t");
 		    score_label2.setFont(new Font(MAX_FONT_SIZE));		
 		    Text tex2 = new Text("/6");
 			tex2.setFont(new Font(MAX_FONT_SIZE));	
 			HBox score2 = new HBox(score_label2, score_text2, tex2);
+			
+			Label score_label3 = new Label("Player 3 score is :\t");
+		    score_label3.setFont(new Font(MAX_FONT_SIZE));		
+		    Text tex3 = new Text("/6");
+			tex3.setFont(new Font(MAX_FONT_SIZE));	
+			HBox score3 = new HBox(score_label3, score_text3, tex3);
+			
 			GridPane SubScene = new GridPane();
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
 			//hbox3.getChildren().add(reset);
-			GridPane.setRowIndex(hbox3, 5);
-			GridPane.setRowIndex(winner, 4);
-			GridPane.setRowIndex(playerBox, 1);
-			GridPane.setRowIndex(score,2 );
-			GridPane.setRowIndex(score2,3 );
+			if (Board.numberPlayers ==2) {
+				GridPane.setRowIndex(hbox3, 5);
+				GridPane.setRowIndex(winner, 4);
+				GridPane.setRowIndex(playerBox, 1);
+				GridPane.setRowIndex(score,2 );
+				GridPane.setRowIndex(score2,3 );
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2); //add reset for the reset button
+			}
+			
+			if (Board.numberPlayers ==3) {
+				GridPane.setRowIndex(hbox3, 6);
+				GridPane.setRowIndex(winner, 5);
+				GridPane.setRowIndex(playerBox, 1);
+				GridPane.setRowIndex(score,2 );
+				GridPane.setRowIndex(score2,3 );
+				GridPane.setRowIndex(score3, 4);
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, score3); //add reset for the reset button
+			}
 			player_text.setText("1");
-			SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2); //add reset for the reset button
+			
 			// System.out.println(stage.getWidth()+" "+stage.getHeight());
 			board = new Board(stage.getWidth() / 2,
 					stage.getHeight() / 2);

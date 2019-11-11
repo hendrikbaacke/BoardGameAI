@@ -12,6 +12,8 @@ public class Move {
 	public String third;
 	int point= 0;
 	int point2= 0;
+	int point3 = 0;
+	
 	//following arraylist can be used to find the ones that need to be moved:
 	public ArrayList<String> selectedMarbles = new ArrayList<String>();
 	public int nrSelected = 0; //keep track of how many marbles are selected
@@ -108,7 +110,7 @@ public class Move {
 			if (selected && Board.hashBoard.get(code).adjacent(Board.hashBoard.get(first))) {
 				if (!Board.hashBoard.get(code).empty) {
 					if (Board.hashBoard.get(code).marble.playerNumber == playersTurn) {
-						selectedMarbles.clear();
+							selectedMarbles.clear();
 							coloursBackToNormal();
 							selected = false;
 							first = code;
@@ -168,6 +170,17 @@ public class Move {
 				Board.hashBoard.get(third).marble.setFill(Color.GRAY);
 			}
 		}
+		if (Board.numberPlayers ==3) {
+			if(Board.hashBoard.get(first).marble.playerNumber == 3) {
+				Board.hashBoard.get(first).marble.setFill(Color.DARKGREEN);
+				if(second != null) {
+					Board.hashBoard.get(second).marble.setFill(Color.DARKGREEN);
+				}
+				if(third!=null) {
+					Board.hashBoard.get(third).marble.setFill(Color.DARKGREEN);
+				}
+			}
+		}
 	}
 	
 	public void move() {
@@ -205,7 +218,15 @@ public class Move {
 			playersTurn = 2;
 		}
 		else {
-			playersTurn = 1;
+			if (Board.numberPlayers == 2 || Board.numberPlayers == 3 && playersTurn ==3) {
+				playersTurn = 1;
+			}
+			else if (Board.numberPlayers == 3 && playersTurn ==2){
+				if (playersTurn == 2) {
+					playersTurn = 3;
+				}
+				
+			}
 		}
 	}
 	
@@ -446,8 +467,11 @@ public class Move {
 				if(playersTurn==1) {
 					point++;
 					//System.out.println(playersTurn + " gets a point");
-				}else {
+				}else if (playersTurn ==2) {
 					point2++;
+				}
+				else {
+					point3++;
 				}
 				
 				//System.out.println("out of board");
@@ -480,8 +504,11 @@ public class Move {
 				if(playersTurn==1) {
 					point++;
 					//System.out.println(playersTurn + " gets a point");
-				}else {
+				}else if (playersTurn ==2){
 					point2++;
+				}
+				else {
+					point3++;
 				}
 				removing.setFill(Color.PINK);
 				//System.out.println("out of board");
@@ -526,8 +553,11 @@ public class Move {
 			if(playersTurn==1) {
 				point++;
 				//System.out.println(playersTurn + " gets a point");
-			}else {
+			}else if (playersTurn ==2){
 				point2++;
+			}
+			else {
+				point3++;
 			}
 			//System.out.println("out of board");
 			removing.setFill(Color.PINK);
@@ -648,12 +678,20 @@ public class Move {
 	public int getScore2() {
 		return point2;
 	}
+	
+	public int getScore3() {
+		return point3;
+	}
+	
 	public int player() {
 		return playersTurn;
 	}
 	public void gameFinished() {
 		GameGui.score_text1.setText(String.valueOf(point));
 		GameGui.score_text2.setText(String.valueOf(point2));
+		if (Board.numberPlayers == 3) {
+			GameGui.score_text3.setText(String.valueOf(point3));
+		}
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.setTitle("Game Over");
 		alert.setHeaderText("Winner is:");
@@ -673,6 +711,15 @@ public class Move {
 			GameGui.winner_text.setText("Game over, Player 2 won!");
 			//System.out.println("DONE");
 		}
+		if (Board.numberPlayers ==3) {
+			if (getScore3() == 6) {
+				String s ="Game over, Player 3 won!" ;
+				alert.setContentText(s);
+				alert.show();
+				GameGui.winner_text.setText("Game over, Player 3 won!");
+			}
+		}
+		
 		alert.setOnCloseRequest( event ->
 	    {
 	        //System.out.println("CLOSING");
