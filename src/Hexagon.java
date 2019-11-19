@@ -16,11 +16,20 @@ public class Hexagon extends Polygon {
 	   public double centerX;
 	   public double centerY;
 	   public boolean empty = true;
-	   public ArrayList<Hexagon> neighbours = new ArrayList<Hexagon>();
+	   public ArrayList<String> neighbours = new ArrayList<String>();
 	   public String code;
 	   public Marble marble;
 
 
+	   Hexagon(){
+		   this.setCursor(Cursor.MOVE);
+           this.setOnMouseClicked(HexagonOnMouseClicked);
+           // set up the visuals and a click listener for the tile
+           setFill(Color.ANTIQUEWHITE);
+           setStrokeWidth(3);
+           setStroke(Color.BLACK);
+	   }
+	   
 	   Hexagon(double x, double y, String code) {
             /*
             creates the polygon, defined by an array of (x,y) coordinates
@@ -70,7 +79,7 @@ public class Hexagon extends Polygon {
     	
     	//returns "true" if another hexagon is adjacent
     	public boolean adjacent(Hexagon other) {
-    		if (neighbours.contains(other)) {
+    		if (neighbours.contains(other.code)) {
     			return true;
     		}
     		return false;
@@ -97,7 +106,7 @@ public class Hexagon extends Polygon {
     					tempNumber = numbercode -1+j;
     					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
     						if(Board.hashBoard.containsKey(code)) {
-    							neighbours.add(Board.hashBoard.get(code));
+    							neighbours.add(code);
     						}
     				}
     				
@@ -106,7 +115,7 @@ public class Hexagon extends Polygon {
     					tempNumber = numbercode -1+j;
     					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
     						if(Board.hashBoard.containsKey(code)) {
-    						neighbours.add(Board.hashBoard.get(code));
+    						neighbours.add(code);
     						}
     				}
     				
@@ -115,7 +124,7 @@ public class Hexagon extends Polygon {
     					tempNumber = numbercode -1+j;
     					code = Character.toString(tempLetter) + Integer.toString(tempNumber);
     						if(Board.hashBoard.containsKey(code)) {
-    						neighbours.add(Board.hashBoard.get(code));
+    						neighbours.add(code);
     						}
     				}
     			}
@@ -129,8 +138,24 @@ public class Hexagon extends Polygon {
 					public void handle(MouseEvent t) {
 						//System.out.println(code);
 						Board.move.select(code);
-						
 					}
 				};
+				
+				
+				
+		//don't know if anything goes wrong while cloning - check other classes as well
+		public Hexagon deepClone() {
+			Hexagon clone = new Hexagon();
+			for (int i = 0; i < this.getPoints().size(); i++) {
+				clone.getPoints().addAll(this.getPoints().get(i));
+			}
+			clone.centerX = this.centerX;
+			clone.centerY = this.centerY;
+			clone.empty = this.empty;
+			clone.code = this.code;
+			clone.marble = this.marble.clone();
+			clone.createNeighbourList();
+			return clone;
+		}
 		
     }

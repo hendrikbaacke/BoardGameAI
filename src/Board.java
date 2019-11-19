@@ -97,5 +97,17 @@ public BorderPane add() {
 		return (char)('A' + i);
 	}
 	
+	public Hashtable<String, Hexagon> copyHashBoard(){
+		Hashtable<String, Hexagon> newBoard = new Hashtable();
+		for (char i= 'A'; i < 'J'; i++) {
+			for (int j = 1; i < 10; i++) {
+				String code = Character.toString(i) + j;
+				if (this.hashBoard.containsKey(code)){
+					newBoard.put(code, hashBoard.get(code).deepClone());
+				}
+			}
+		}
+		return newBoard;
+	}
 }
 
