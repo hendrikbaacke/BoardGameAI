@@ -1,6 +1,7 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
@@ -46,8 +47,8 @@ public class Marble extends Ellipse{
 		return locationKey;
 	}
 	
-	public void updateLocation() {
-		Hexagon hex = (Hexagon) Board.hashBoard.get(locationKey);
+	public void updateLocation(Hashtable<String, Hexagon> board) {
+		Hexagon hex = (Hexagon) board.get(locationKey);
 		double tempX = hex.centerX ;
 		double tempY = hex.centerY;
 		this.setCenterX(tempX);
@@ -59,7 +60,7 @@ public class Marble extends Ellipse{
 						@Override
 						public void handle(MouseEvent t) {
 							//System.out.println(locationKey);
-							Board.move.select(locationKey);
+							Board.move.select(locationKey, Board.hashBoard);
 						}
 					};
 					

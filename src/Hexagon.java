@@ -137,7 +137,7 @@ public class Hexagon extends Polygon {
 					@Override
 					public void handle(MouseEvent t) {
 						//System.out.println(code);
-						Board.move.select(code);
+						Board.move.select(code, Board.hashBoard);
 					}
 				};
 				
