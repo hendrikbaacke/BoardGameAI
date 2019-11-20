@@ -1,14 +1,15 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class BoardRows {
 	//creates rows for the board -> one in every direction
 	//NEEDS to be created after the board otherwise it won't work
 	
-	ArrayList<ArrayList<Hexagon>> horizontal = new ArrayList<ArrayList<Hexagon>>();
-	ArrayList<ArrayList<Hexagon>> topLeft = new ArrayList<ArrayList<Hexagon>>();
-	ArrayList<ArrayList<Hexagon>> topRight = new ArrayList<ArrayList<Hexagon>>();
+	ArrayList<ArrayList<String>> horizontal = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> topLeft = new ArrayList<ArrayList<String>>();
+	ArrayList<ArrayList<String>> topRight = new ArrayList<ArrayList<String>>();
 	
 	public BoardRows() {
 		//create the rows
@@ -16,10 +17,10 @@ public class BoardRows {
 		//horizontal rows
 		for (char ch='A'; ch <= 'I'; ch++) {
 			String letterCode = Character.toString(ch);
-			ArrayList<Hexagon> row = new ArrayList<Hexagon>();
+			ArrayList<String> row = new ArrayList<String>();
 			for (int j = 0; j < 10; j++) {
 				if (Board.hashBoard.containsKey((letterCode+j))) {
-					row.add(Board.hashBoard.get(letterCode+j));
+					row.add(letterCode+j);
 				}
 			}
 			horizontal.add(row);
@@ -27,11 +28,11 @@ public class BoardRows {
 		
 		//starting from top left (going to bottom right)
 		for (int j = 0; j < 10; j++) {
-			ArrayList<Hexagon> row = new ArrayList<Hexagon>();
+			ArrayList<String> row = new ArrayList<String>();
 			for (char ch='A'; ch <= 'I'; ch++) {
 				String letterCode = Character.toString(ch);
 				if (Board.hashBoard.containsKey((letterCode+j))) {
-					row.add(Board.hashBoard.get(letterCode+j));
+					row.add(letterCode+j);
 				}
 			}
 			topLeft.add(row);
@@ -41,19 +42,17 @@ public class BoardRows {
 		
 		char start = 'I';
 		for (int i = 13; i >= 5; i--) {
-			ArrayList<Hexagon> row = new ArrayList<Hexagon>();
+			ArrayList<String> row = new ArrayList<String>();
 			for (int j = 0; j < 9; j++) {
 				String lettercode = Character.toString(start);
 				int temp = i-j;
 				if (Board.hashBoard.containsKey((lettercode+temp))) {
-					row.add(Board.hashBoard.get(lettercode+temp));
-					System.out.println(lettercode+temp);
+					row.add(lettercode+temp);
 				}
 				start = (char) (start -1);
 			}
 			start = 'I';
 			topRight.add(row);
-			System.out.println("end");
 		}
 		
 		
@@ -67,7 +66,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (horizontal.get(i).contains(one) && horizontal.get(i).contains(two) && horizontal.get(i).contains(three)) {
+			if (horizontal.get(i).contains(one.code) && horizontal.get(i).contains(two.code) && horizontal.get(i).contains(three.code)) {
 				sameRow = true;
 				
 			}
@@ -77,7 +76,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topLeft.get(i).contains(one) && topLeft.get(i).contains(two) && topLeft.get(i).contains(three)) {
+			if (topLeft.get(i).contains(one.code) && topLeft.get(i).contains(two.code) && topLeft.get(i).contains(three.code)) {
 				sameRow = true;
 				
 			}
@@ -87,7 +86,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topRight.get(i).contains(one) && topRight.get(i).contains(two) && topRight.get(i).contains(three)) {
+			if (topRight.get(i).contains(one.code) && topRight.get(i).contains(two.code) && topRight.get(i).contains(three.code)) {
 				sameRow = true;
 			}
 			System.out.println(sameRow);
@@ -104,7 +103,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (horizontal.get(i).contains(first) && horizontal.get(i).contains(moveTo)) {
+			if (horizontal.get(i).contains(first.code) && horizontal.get(i).contains(moveTo.code)) {
 				String numberFirst = first.code.substring(1);
 				String numberMoveTo = moveTo.code.substring(1);
 				
@@ -126,7 +125,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topLeft.get(i).contains(first) && topLeft.get(i).contains(moveTo)) {
+			if (topLeft.get(i).contains(first.code) && topLeft.get(i).contains(moveTo.code)) {
 				
 					char letterFirst = first.code.charAt(0);
 					char letterMoveTo = moveTo.code.charAt(0);
@@ -145,7 +144,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topRight.get(i).contains(first) && topRight.get(i).contains(moveTo)) {
+			if (topRight.get(i).contains(first.code) && topRight.get(i).contains(moveTo.code)) {
 				String numberFirst = first.code.substring(1);
 				String numberMoveTo = moveTo.code.substring(1);
 				
@@ -185,9 +184,9 @@ public class BoardRows {
 	}
 	
 	//if it's sideways with two!!
-	public boolean twoFree(Hexagon first, Hexagon second, Hexagon moveTo) {
+	public boolean twoFree(Hexagon first, Hexagon second, Hexagon moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
-		System.out.println("direction is " + direction);
+		//System.out.println("direction is " + direction);
 		char letterFirst = first.code.charAt(0);
 		char letterSecond = second.code.charAt(0);
 		
@@ -218,40 +217,40 @@ public class BoardRows {
 		
 		
 		if (direction ==1) {
-			if(Board.hashBoard.get(letterFirstSt+numberOneMinus).empty && Board.hashBoard.get(letterSecondSt+numberTwoMinus).empty) {
+			if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty) {
 				System.out.println("ONE TRUE");
 				return true;
 			}	
 		}
 		
 		else if (direction ==2) {
-			if(Board.hashBoard.get(letterOnePlusSt + numberOne).empty && Board.hashBoard.get(letterTwoPlusSt+ numberTwo).empty) {
+			if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty) {
 				System.out.println("TWO TRUE");
 				return true;
 			}	
 		}
 		
 		else if(direction ==3) {
-			if(Board.hashBoard.get(letterOnePlusSt + numberOnePlus).empty && Board.hashBoard.get(letterTwoPlusSt+numberTwoPlus).empty) {
+			if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty) {
 				System.out.println("THREE TRUE");
 				return true;
 			}	
 			
 		}
 		else if (direction ==4) {
-			if(Board.hashBoard.get(letterFirstSt+numberOnePlus).empty && Board.hashBoard.get(letterSecondSt+numberTwoPlus).empty) {
+			if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty) {
 				System.out.println("FOUR TRUE");
 				return true;
 			}
 		}
 		else if (direction ==5) {
-			if(Board.hashBoard.get(letterOneMinusSt + numberOne).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwo).empty) {
+			if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty) {
 				System.out.println("FIVE TRUE");
 				return true;
 			}
 		}
 		else if (direction ==6) {
-			if(Board.hashBoard.get(letterOneMinusSt + numberOneMinus).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwoMinus).empty) {
+			if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty) {
 				System.out.println("SIX TRUE");
 				return true;
 			}
@@ -263,9 +262,9 @@ public class BoardRows {
 	}
 	
 	//if it's sideways with three
-	public boolean threeFree(Hexagon first, Hexagon second, Hexagon third, Hexagon moveTo) {
+	public boolean threeFree(Hexagon first, Hexagon second, Hexagon third, Hexagon moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
-		System.out.println("direction is " + direction);
+		//System.out.println("direction is " + direction);
 		char letterFirst = first.code.charAt(0);
 		char letterSecond = second.code.charAt(0);
 		char letterThird = third.code.charAt(0);
@@ -306,40 +305,40 @@ public class BoardRows {
 		
 		
 		if (direction ==1) {
-			if(Board.hashBoard.get(letterFirstSt+numberOneMinus).empty && Board.hashBoard.get(letterSecondSt+numberTwoMinus).empty && Board.hashBoard.get(letterThirdSt + numberThreeMinus).empty) {
+			if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty && board.get(letterThirdSt + numberThreeMinus).empty) {
 				System.out.println("ONE TRUE");
 				return true;
 			}	
 		}
 		
 		else if (direction ==2) {
-			if(Board.hashBoard.get(letterOnePlusSt + numberOne).empty && Board.hashBoard.get(letterTwoPlusSt+ numberTwo).empty && Board.hashBoard.get(letterThreePlusSt + numberThree).empty) {
+			if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty && board.get(letterThreePlusSt + numberThree).empty) {
 				System.out.println("TWO TRUE");
 				return true;
 			}	
 		}
 		
 		else if(direction ==3) {
-			if(Board.hashBoard.get(letterOnePlusSt + numberOnePlus).empty && Board.hashBoard.get(letterTwoPlusSt+numberTwoPlus).empty && Board.hashBoard.get(letterThreePlusSt + numberThreePlus).empty) {
+			if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty && board.get(letterThreePlusSt + numberThreePlus).empty) {
 				System.out.println("THREE TRUE");
 				return true;
 			}	
 			
 		}
 		else if (direction ==4) {
-			if(Board.hashBoard.get(letterFirstSt+numberOnePlus).empty && Board.hashBoard.get(letterSecondSt+numberTwoPlus).empty && Board.hashBoard.get(letterThirdSt + numberThreePlus).empty) {
+			if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty && board.get(letterThirdSt + numberThreePlus).empty) {
 				System.out.println("FOUR TRUE");
 				return true;
 			}
 		}
 		else if (direction ==5) {
-			if(Board.hashBoard.get(letterOneMinusSt + numberOne).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwo).empty && Board.hashBoard.get(letterThreeMinusSt + numberThree).empty) {
+			if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty && board.get(letterThreeMinusSt + numberThree).empty) {
 				System.out.println("FIVE TRUE");
 				return true;
 			}
 		}
 		else if (direction ==6) {
-			if(Board.hashBoard.get(letterOneMinusSt + numberOneMinus).empty && Board.hashBoard.get(letterTwoMinusSt + numberTwoMinus).empty && Board.hashBoard.get(letterThreeMinusSt + numberThreeMinus).empty) {
+			if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty && board.get(letterThreeMinusSt + numberThreeMinus).empty) {
 				System.out.println("SIX TRUE");
 				return true;
 			}
@@ -367,7 +366,6 @@ public class BoardRows {
 		char letterMoveToMinus = (char) (letterMoveTo -1);
 		String letterMoveToMinusSt = Character.toString(letterMoveToMinus);
 		
-		System.out.println("YES");
 		if (direction ==1) {
 			return letterMoveToSt+numberMoveToMinus;
 		}

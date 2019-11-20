@@ -9,12 +9,16 @@ public class GameState {
 	//all the information needed to store the move you made (from the first one)(we need to store first, second and third and moveTo in case the move needs to be done again):
 	//use this to store every valid gamestate
 	
+	//store which move needs to be done to get to this state - such as which player's turn it is and which move they perform
+	//if there is no second selected, it means that it is null
 	public String first;
 	public String second;
 	public String third;
 	public String moveTo;
 	public int turn;
 	
+	
+	//later needed for the evaluation function
 	public int point1;
 	public int point2;
 	//optional:

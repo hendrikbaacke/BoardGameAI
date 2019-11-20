@@ -5,7 +5,8 @@ public class DeleteLayers {
 	
 	//delete everything attached to a certain piece of the tree, to keep the used space limited
 	public void deleteEverythingAbove(Node<GameState> newRoot, Tree<GameState> tree) {
-		
+		//delete the parents and every parent's branch
+		//maybe also usable: just a normal set new root statement???
 	}
 	
 	//delete a branch of a certain node

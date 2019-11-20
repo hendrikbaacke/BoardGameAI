@@ -599,7 +599,7 @@ public class Move {
 		//if it needs to move sideways and if there are two free space where they are needed, the move is valid
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
 			//System.out.println("sideways is true");
-			if (Board.rows.twoFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
+			if (Board.rows.twoFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo), Board.hashBoard)) {
 				return true;
 			}
 			else {
@@ -635,7 +635,7 @@ public class Move {
 		String newHex = Board.rows.adjacentDirection(Board.hashBoard.get(moveTo), Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
 		
 		if(Board.rows.sideways(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(moveTo))) {
-			if (Board.rows.threeFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(third), Board.hashBoard.get(moveTo))) {
+			if (Board.rows.threeFree(Board.hashBoard.get(first), Board.hashBoard.get(second), Board.hashBoard.get(third), Board.hashBoard.get(moveTo), Board.hashBoard)) {
 				return true;
 			}
 			else {
