@@ -18,6 +18,7 @@ public class Board extends BorderPane {
    public static MarbleStorage boardMarbles;
    public static int numberPlayers = 2;
    public static Traceback tb = new Traceback();
+   public static ArrayList<String> hash = new ArrayList();
 
    public Board(double X, double Y) {
 	   CenterX = X;
@@ -72,6 +73,7 @@ public BorderPane add() {
     		 //Hex.setOnMouseClicked(e -> System.out.println("Clicked: " + Hex));
 
     		hashBoard.put(key, Hex);
+    		hash.add(key);
     		everyHex.add(Hex);
          
     		

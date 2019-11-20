@@ -7,7 +7,7 @@ public class GameTree {
 		gameTree = new Tree<GameState>(root);
 	}
 	
-	public void buildFullTree() {
+	public void buildFullTree(int layers) {
 		//builds the entire tree we need (can be a LOT of nodes)
 	}
 	

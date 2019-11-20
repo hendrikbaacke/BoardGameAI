@@ -144,7 +144,7 @@ public class Move {
 			}
 		}
 		
-		if(moveTo != null) {
+		if(moveTo != null && Board.hash.contains(moveTo)) {
 			coloursBackToNormal(board);
 			move(board);
 		}
