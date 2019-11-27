@@ -43,7 +43,7 @@ public class Strategies {
         //PlayerDisAv : Average of the Manhattan distance
         double PlayerDisAv = 0;
         for(int i=0; i<Player.size(); i++){
-            PlayerDisAv = PlayerDisAv + (abs((int) Player.get(i).substring(0,0) - (int) Center.substring(0,0)) + abs((int) Player.get(i).substring(1,1) - (int) Center.substring(1,1)));
+            PlayerDisAv = PlayerDisAv + (abs((int) Player.get(i).charAt(0) - (int) Center.charAt(0)) + abs((int) Player.get(i).charAt(1) - (int) Center.charAt(1)));
         }
         PlayerDisAv = PlayerDisAv / Player.size();
 
@@ -59,7 +59,7 @@ public class Strategies {
         for(int i=0; i<Player.size(); i++){
             for(int j=1; j<Player.size(); j++){
                 if(i!=j){
-                    if( abs((int) Player.get(i).substring(0,0) - (int) Player.get(j).substring(0,0)) <2 && abs((int) Player.get(i).substring(1,1) - (int) Player.get(j).substring(1,1)) <2){
+                    if( abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) <2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) <2){
                         cohesion++;
                     }
                 }
@@ -76,21 +76,40 @@ public class Strategies {
         int groupBreaks = 0;
         for(int i=0; i<Player.size(); i++){
             for(int j=0; j<Opponent.size(); j++){
-                if( abs((int) Player.get(i).substring(0,0) - (int) Opponent.get(j).substring(0,0)) <2 && abs((int) Player.get(i).substring(1,1) - (int) Opponent.get(j).substring(1,1)) <2){
-                    for(int k=0; k<Opponent.size(); k++){
-                        if(k!=j && abs((int) Player.get(i).substring(0,0) - (int) Opponent.get(k).substring(0,0)) <2 && abs((int) Player.get(i).substring(1,1) - (int) Opponent.get(k).substring(1,1)) <2){
+                if(abs((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) <2 && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1)) <2){
+                    a : for(int k=0; k<Opponent.size(); k++){
+                        if(k!=j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1))){
                             groupBreaks++;
+                            break a;
                         }
                     }
                 }
             }
         }
-        return groupBreaks;
+        return groupBreaks/2;
     }
 
 
-    public void strengthenGroup(GameState boardState){
-
+    public double strengthenGroup(GameState boardState){
+        int groupStrengh = 0;
+        for(int i=0; i<Player.size(); i++){
+            for(int j=1; j<Player.size(); j++){
+                if(abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) <2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) <2){
+                    a : for(int k=0; k<Opponent.size(); k++){
+                        if(k!=j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))){
+                            for(int m=1; m<Opponent.size(); m++){
+                                if(m!=k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))){
+                                    for(int n=1; n<Player.size(); n++){
+                                }else{
+                                    groupStrengh++;
+                                    break a;
+                                }
+                        }
+                    }
+                }
+            }
+        }
+        return groupStrengh;
 
     }
 
