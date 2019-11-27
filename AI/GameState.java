@@ -28,6 +28,8 @@ public class GameState {
 	public int point3;
 	
 	public Hashtable<String, Hexagon> boardState;
+
+	GameState oldGamestate;
 	
 	//rootNode
 	public GameState(Hashtable<String, Hexagon> state, int turn) {
@@ -46,6 +48,8 @@ public class GameState {
 		int save = Board.move.playersTurn;
 		Board.move.playersTurn = turn;
 		Board.move.adding = true;
+
+		oldGamestate =old;
 		
 		this.first = first;
 		this.second = second;
