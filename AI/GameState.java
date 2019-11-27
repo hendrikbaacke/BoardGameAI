@@ -134,7 +134,9 @@ public class GameState {
 		Board.move.playersTurn = save;
 		Board.move.adding = false;
 		
+		
 		System.out.println(valid);
 	}
+	 
 	
 }
