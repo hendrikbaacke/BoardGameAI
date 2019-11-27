@@ -59,14 +59,14 @@ public class BoardRows {
 		
 	}
 	
-	public boolean sameRowThree(Hexagon one, Hexagon two, Hexagon three) {
+	public boolean sameRowThree(String one, String two, String three) {
 		boolean sameRow = false;
 		
 		for (int i = 0; i < horizontal.size(); i++) {
 			if (sameRow) {
 				break;
 			}
-			if (horizontal.get(i).contains(one.code) && horizontal.get(i).contains(two.code) && horizontal.get(i).contains(three.code)) {
+			if (horizontal.get(i).contains(one) && horizontal.get(i).contains(two) && horizontal.get(i).contains(three)) {
 				sameRow = true;
 				
 			}
@@ -76,7 +76,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topLeft.get(i).contains(one.code) && topLeft.get(i).contains(two.code) && topLeft.get(i).contains(three.code)) {
+			if (topLeft.get(i).contains(one) && topLeft.get(i).contains(two) && topLeft.get(i).contains(three)) {
 				sameRow = true;
 				
 			}
@@ -86,7 +86,7 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topRight.get(i).contains(one.code) && topRight.get(i).contains(two.code) && topRight.get(i).contains(three.code)) {
+			if (topRight.get(i).contains(one) && topRight.get(i).contains(two) && topRight.get(i).contains(three)) {
 				sameRow = true;
 			}
 			System.out.println(sameRow);
@@ -95,7 +95,7 @@ public class BoardRows {
 		return sameRow;
 	}
 	
-	public int direction(Hexagon first, Hexagon moveTo) {
+	public int direction(String first, String moveTo) {
 		boolean sameRow = false;
 		int direction = 0;
 		
@@ -103,9 +103,9 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (horizontal.get(i).contains(first.code) && horizontal.get(i).contains(moveTo.code)) {
-				String numberFirst = first.code.substring(1);
-				String numberMoveTo = moveTo.code.substring(1);
+			if (horizontal.get(i).contains(first) && horizontal.get(i).contains(moveTo)) {
+				String numberFirst = first.substring(1);
+				String numberMoveTo = moveTo.substring(1);
 				
 				int numberOne = Integer.parseInt(numberFirst);
 				int numberTwo = Integer.parseInt(numberMoveTo);
@@ -125,10 +125,10 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topLeft.get(i).contains(first.code) && topLeft.get(i).contains(moveTo.code)) {
+			if (topLeft.get(i).contains(first) && topLeft.get(i).contains(moveTo)) {
 				
-					char letterFirst = first.code.charAt(0);
-					char letterMoveTo = moveTo.code.charAt(0);
+					char letterFirst = first.charAt(0);
+					char letterMoveTo = moveTo.charAt(0);
 					
 					if (letterFirst>letterMoveTo) {
 						direction = 5;
@@ -144,9 +144,9 @@ public class BoardRows {
 			if (sameRow) {
 				break;
 			}
-			if (topRight.get(i).contains(first.code) && topRight.get(i).contains(moveTo.code)) {
-				String numberFirst = first.code.substring(1);
-				String numberMoveTo = moveTo.code.substring(1);
+			if (topRight.get(i).contains(first) && topRight.get(i).contains(moveTo)) {
+				String numberFirst = first.substring(1);
+				String numberMoveTo = moveTo.substring(1);
 				
 				int numberOne = Integer.parseInt(numberFirst);
 				int numberTwo = Integer.parseInt(numberMoveTo);
@@ -166,7 +166,7 @@ public class BoardRows {
 		return direction;
 	}
 	
-	public boolean sideways(Hexagon first, Hexagon second, Hexagon moveTo) {
+	public boolean sideways(String first, String second, String moveTo) {
 		if (this.direction(first, second) == 1 & this.direction(first, moveTo) ==4 || this.direction(first, second) == 4 & this.direction(first, moveTo) ==1) {
 			return false;
 		}
@@ -184,17 +184,17 @@ public class BoardRows {
 	}
 	
 	//if it's sideways with two!!
-	public boolean twoFree(Hexagon first, Hexagon second, Hexagon moveTo, Hashtable<String, Hexagon> board) {
+	public boolean twoFree(String first, String second, String moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
 		//System.out.println("direction is " + direction);
-		char letterFirst = first.code.charAt(0);
-		char letterSecond = second.code.charAt(0);
+		char letterFirst = first.charAt(0);
+		char letterSecond = second.charAt(0);
 		
-		String letterFirstSt = first.code.substring(0,1);
-		String letterSecondSt = second.code.substring(0,1);
+		String letterFirstSt = first.substring(0,1);
+		String letterSecondSt = second.substring(0,1);
 		
-		String numberFirst = first.code.substring(1);
-		String numberSecond = second.code.substring(1);
+		String numberFirst = first.substring(1);
+		String numberSecond = second.substring(1);
 		int numberOne = Integer.parseInt(numberFirst);
 		int numberTwo = Integer.parseInt(numberSecond);
 		
@@ -262,20 +262,20 @@ public class BoardRows {
 	}
 	
 	//if it's sideways with three
-	public boolean threeFree(Hexagon first, Hexagon second, Hexagon third, Hexagon moveTo, Hashtable<String, Hexagon> board) {
+	public boolean threeFree(String first, String second, String third, String moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
 		//System.out.println("direction is " + direction);
-		char letterFirst = first.code.charAt(0);
-		char letterSecond = second.code.charAt(0);
-		char letterThird = third.code.charAt(0);
+		char letterFirst = first.charAt(0);
+		char letterSecond = second.charAt(0);
+		char letterThird = third.charAt(0);
 		
-		String letterFirstSt = first.code.substring(0,1);
-		String letterSecondSt = second.code.substring(0,1);
-		String letterThirdSt = third.code.substring(0,1);
+		String letterFirstSt = first.substring(0,1);
+		String letterSecondSt = second.substring(0,1);
+		String letterThirdSt = third.substring(0,1);
 		
-		String numberFirst = first.code.substring(1);
-		String numberSecond = second.code.substring(1);
-		String numberThird = third.code.substring(1);
+		String numberFirst = first.substring(1);
+		String numberSecond = second.substring(1);
+		String numberThird = third.substring(1);
 		int numberOne = Integer.parseInt(numberFirst);
 		int numberTwo = Integer.parseInt(numberSecond);
 		int numberThree = Integer.parseInt(numberThird);
@@ -349,10 +349,11 @@ public class BoardRows {
 		return false;
 	}
 	
-	public String adjacentDirection(Hexagon moveTo, int direction ) {
-		char letterMoveTo = moveTo.code.charAt(0);
-		String letterMoveToSt = moveTo.code.substring(0,1);
-		String numberMoveToSt = moveTo.code.substring(1);
+	//fix this
+	public String adjacentDirection(String moveTo, int direction ) {
+		char letterMoveTo = moveTo.charAt(0);
+		String letterMoveToSt = moveTo.substring(0,1);
+		String numberMoveToSt = moveTo.substring(1);
 		int numberMoveTo = Integer.parseInt(numberMoveToSt);
 		
 		//when the value is one bigger
@@ -385,5 +386,27 @@ public class BoardRows {
 			return letterMoveToMinusSt + numberMoveToMinus;
 		}
 		return null;
+	}
+	
+	public int oppositeDirection(int direction) {
+		if (direction ==1) {
+			direction = 4;
+		}
+		else if (direction ==2) {
+			direction = 5;
+		}
+		else if (direction ==3) {
+			direction = 6;
+		}
+		else if (direction ==4) {
+			direction = 1;
+		}
+		else if (direction ==5) {
+			direction = 2;
+		}
+		else if (direction ==6) {
+			direction = 3;
+		}
+		return direction;
 	}
 }

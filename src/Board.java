@@ -101,15 +101,32 @@ public BorderPane add() {
 	
 	public static Hashtable<String, Hexagon> copyHashBoard(Hashtable<String, Hexagon> hex){
 		Hashtable<String, Hexagon> newBoard = new Hashtable();
+		//System.out.println("board class. copying board");
 		for (char i= 'A'; i < 'J'; i++) {
-			for (int j = 1; i < 10; i++) {
+			for (int j = 1; j < 10; j++) {
 				String code = Character.toString(i) + j;
+				//System.out.println(code);
 				if (hex.containsKey(code)){
-					newBoard.put(code, hashBoard.get(code).deepClone());
+					newBoard.put(code, hex.get(code).deepClone());
+					//System.out.println(code);
 				}
 			}
 		}
 		return newBoard;
+	}
+	
+	public static boolean compareHashtables(Hashtable<String, Hexagon> one, Hashtable<String, Hexagon> two) {		
+		for(int i = 0; i < hash.size(); i++) {
+			if(!one.get(hash.get(i)).empty && !two.get(hash.get(i)).empty) {
+				if (one.get(hash.get(i)).marble.playerNumber != two.get(hash.get(i)).marble.playerNumber) {
+					return false;
+				}
+			}
+			else if((one.get(hash.get(i)).empty && !two.get(hash.get(i)).empty) || (!one.get(hash.get(i)).empty && two.get(hash.get(i)).empty)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
 

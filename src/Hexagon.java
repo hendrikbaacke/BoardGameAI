@@ -153,8 +153,13 @@ public class Hexagon extends Polygon {
 			clone.centerY = this.centerY;
 			clone.empty = this.empty;
 			clone.code = this.code;
-			clone.marble = this.marble.clone();
-			clone.createNeighbourList();
+			if (!clone.empty) {
+				clone.marble = this.marble.clone();
+			}
+			ArrayList<String> neighbourcopy = new ArrayList();
+			for (int i = 0; i < neighbours.size(); i++) {
+				neighbourcopy.add(neighbours.get(i));
+			}
 			return clone;
 		}
 		

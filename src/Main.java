@@ -343,9 +343,6 @@ public class Main extends Application {
         });
 
         VBox  box2  = new VBox();
-        Scene AIScene = new Scene(box2);
-
-
 
         //changing to the board scene
         modeOneContainer.setPickOnBounds(true); // allows click on transparent areas
@@ -359,7 +356,17 @@ public class Main extends Application {
         modeTwoContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                primaryStage.setScene(AIScene);
+            	Move.player1AI = false;
+            	if (Board.numberPlayers ==2) {
+            		Move.player2AI = true;
+            	}
+            	else {
+            		Move.player2AI = true;
+            		Move.player3AI = true;
+            	}
+            	
+            	Game = new GameGui();
+                Game.start(primaryStage);
             }
         });
     

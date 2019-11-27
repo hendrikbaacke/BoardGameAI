@@ -6,27 +6,43 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import AI.GameState;
+import AI.GameTree;
+import AI.Node;
+import AI.PerformAIAction;
+
 public class Move {
 	//first, second, and third marble code that need to be moved (the hexagon in the hashboard contains the marbles of the same code- which can be removed and added quickly)
-	public String first;
-	public String second;
-	public String third;
+	public static String first;
+	public static String second;
+	public static String third;
 	int point= 0;
 	int point2= 0;
 	int point3 = 0;
+	public static boolean pushed = false;
+	public static boolean adding = false;
+	public static boolean rejected = false;
 	
 	//following arraylist can be used to find the ones that need to be moved:
-	public ArrayList<String> selectedMarbles = new ArrayList<String>();
-	public int nrSelected = 0; //keep track of how many marbles are selected
+	public static ArrayList<String> selectedMarbles = new ArrayList<String>();
+	public static int nrSelected = 0; //keep track of how many marbles are selected
 
 	//code of the hexagon the marble needs to be moved to
-	public String moveTo;
+	public static String moveTo;
 	
 	//when the selection process is done, this will be true:
-	private boolean selected = false;
+	private static boolean selected = false;
 	
 	//keep track of the player that needs to move a marble
-	public int playersTurn = 1;
+	public static int playersTurn = 1;
+	
+	//if THIS MOVE is ai or not
+	public static boolean ai = false;
+	
+	//which players are ai players
+	public static boolean player1AI = false;
+	public static boolean player2AI = false;
+	public static boolean player3AI = false;
 
 	public Move() {
 		first = null;
@@ -83,7 +99,7 @@ public class Move {
 					//System.out.println("total = 2");
 					selected = true;
 				}
-				else if(!board.get(code).adjacent(board.get(second)) || !Board.rows.sameRowThree(board.get(first), board.get(second), board.get(code))) {
+				else if(!board.get(code).adjacent(board.get(second)) || !Board.rows.sameRowThree(first, second, code)) {
 					selectedMarbles.clear();
 					coloursBackToNormal(board);
 					first = code;
@@ -155,32 +171,34 @@ public class Move {
 	}
 	
 	public void coloursBackToNormal(Hashtable<String, Hexagon> board) {
-		if(board.get(first).marble.playerNumber == 1) {
-			board.get(first).marble.setFill(Color.BLACK);
-			if(second != null) {
-				board.get(second).marble.setFill(Color.BLACK);
-			}
-			if(third != null) {
-				board.get(third).marble.setFill(Color.BLACK);
-			}
-		}
-		if(board.get(first).marble.playerNumber == 2) {
-			board.get(first).marble.setFill(Color.GRAY);
-			if(second != null) {
-				board.get(second).marble.setFill(Color.GRAY);
-			}
-			if(third!=null) {
-				board.get(third).marble.setFill(Color.GRAY);
-			}
-		}
-		if (Board.numberPlayers ==3) {
-			if(board.get(first).marble.playerNumber == 3) {
-				board.get(first).marble.setFill(Color.DARKGREEN);
-				if(second != null) {
-					board.get(second).marble.setFill(Color.DARKGREEN);
+		if (!adding) {
+			if(board.get(first).marble.playerNumber == 1) {
+				board.get(first).marble.setFill(Color.BLACK);
+				if(second != null && !board.get(second).empty) {
+					board.get(second).marble.setFill(Color.BLACK);
 				}
-				if(third!=null) {
-					board.get(third).marble.setFill(Color.DARKGREEN);
+				if(third != null) {
+					board.get(third).marble.setFill(Color.BLACK);
+				}
+			}
+			if(board.get(first).marble.playerNumber == 2) {
+				board.get(first).marble.setFill(Color.GRAY);
+				if(second != null && !board.get(second).empty) {
+					board.get(second).marble.setFill(Color.GRAY);
+				}
+				if(third!=null && !board.get(third).empty) {
+					board.get(third).marble.setFill(Color.GRAY);
+				}
+			}
+			if (Board.numberPlayers ==3) {
+				if(board.get(first).marble.playerNumber == 3) {
+					board.get(first).marble.setFill(Color.DARKGREEN);
+					if(second != null && !board.get(second).empty) {
+						board.get(second).marble.setFill(Color.DARKGREEN);
+					}
+					if(third!=null && !board.get(third).empty) {
+						board.get(third).marble.setFill(Color.DARKGREEN);
+					}
 				}
 			}
 		}
@@ -189,36 +207,40 @@ public class Move {
 	public void move(Hashtable<String, Hexagon> board) {
 		//check if valid -> if not, reset, else: perform movement, change player, resetmove
 		//System.out.println("move");
+		
 		if (nrSelected == 1) {
-			if(validMoveOne(board)) {
+			if(validMoveOne(board, first, moveTo)) {
 				//System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
 				performMovementOne(board);
-				if (board.equals(Board.hashBoard)) {
+				
+				if (board.equals(Board.hashBoard) && !adding) {
 					changePlayer();
 					Board.tb.add();
 				}
-				resetMove();
 				
+				resetMove();
 			}
 		}
 		else if(nrSelected ==2) {
-			if(validMoveTwo(board)) {
+			if(validMoveTwo(board, first, second, moveTo)) {
 				performMovementTwo(board);
-				if (board.equals(Board.hashBoard)) {
+				if (board.equals(Board.hashBoard) && !adding) {
 					gameFinished();
 					changePlayer();
 					Board.tb.add();
+					pushed = false;
 				}
 				resetMove();
 			}
 		}
 		else if(nrSelected ==3) {
-			if(validMoveThree(board)) {
+			if(validMoveThree(board, first, second, third, moveTo)) {
 				performMovementThree(board);
-				if (board.equals(Board.hashBoard)) {
+				if (board.equals(Board.hashBoard) && !adding) {
 					gameFinished();
 					changePlayer();
 					Board.tb.add();
+					pushed = false;
 				}
 				resetMove();
 			}
@@ -241,11 +263,53 @@ public class Move {
 				
 			}
 		}
+		checkAI();
+	}
+	
+	//automatically perform the move for the ai -> create tree, search and perform the move!!
+	//TODO: implement this
+	public void checkAI() {
+		if (playersTurn ==1 && player1AI) {
+			System.out.println("ai player 1");
+			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
+			PerformAIAction.tree = new GameTree(new Node<GameState>(state));
+			PerformAIAction.tree.buildFullTree(3);
+			AI.PerformAIAction.perform();
+		}
+		else if (playersTurn ==2 && player2AI) {
+			System.out.println("ai player 2");
+			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
+			PerformAIAction.tree = new GameTree(new Node<GameState>(state));
+			PerformAIAction.tree.buildFullTree(3);
+			AI.PerformAIAction.perform();
+		}
+		else if (playersTurn ==3 && player3AI) {
+			System.out.println("ai player 3");
+			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
+			PerformAIAction.tree = new GameTree(new Node<GameState>(state));
+			PerformAIAction.tree.buildFullTree(3);
+			AI.PerformAIAction.perform();
+		}
+	}
+	
+	public int changeBack(int playerNr) {
+		if (playersTurn ==3) {
+			return 2;
+		}
+		else if (playersTurn ==2) {
+			return 1;
+		}
+		else if (playersTurn ==1 && Board.numberPlayers ==3) {
+			return 3;
+		}
+		else {
+			return 2;
+		}
 	}
 	
 	//moves one single marble
 	public void performMovementOne(Hashtable<String, Hexagon> board) {
-		Marble moving = Board.hashBoard.get(first).marble;
+		Marble moving = board.get(first).marble;
 		board.get(first).setEmpty();
 		board.get(moveTo).setFull(moving);
 		moving.setLocationKey(moveTo);
@@ -254,19 +318,19 @@ public class Move {
 	
 	public void performMovementTwo(Hashtable<String, Hexagon> board) {
 		//if it is moves sideways, then it can never push another marble
-		if(Board.rows.sideways(board.get(first), board.get(second), board.get(moveTo))) {
+		if(Board.rows.sideways(first, second, moveTo)) {
 			moveSideways(board);
 		}
 		else if(board.get(moveTo).empty) {
 			//System.out.println("moving");
-			Marble moving = Board.hashBoard.get(second).marble;
+			Marble moving = board.get(second).marble;
 			board.get(second).setEmpty();
 			board.get(moveTo).setFull(moving);
 			moving.setLocationKey(moveTo);
 			moving.updateLocation(board);
 		}
 		else if (board.get(moveTo).marble.playerNumber != playersTurn){
-			String newHex = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
+			String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 			if(board.containsKey(newHex)) {
 				if (board.get(newHex).empty){
 					doPushOne(board); 
@@ -281,9 +345,9 @@ public class Move {
 	}
 	
 	public void performMovementThree(Hashtable<String, Hexagon> board) {
-		String newHex = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
+		String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 		//if it is moves sideways, then it can never push another marble
-		if(Board.rows.sideways(board.get(first), board.get(second), board.get(moveTo))) {
+		if(Board.rows.sideways(first, second, moveTo)) {
 			moveSideways(board);
 		}
 		else if(board.get(moveTo).empty) {
@@ -301,7 +365,7 @@ public class Move {
 					doPushOne(board);
 				}
 				else if(board.get(newHex).marble.playerNumber != playersTurn) {
-				String newnewHex = Board.rows.adjacentDirection(board.get(newHex), Board.rows.direction(board.get(first), board.get(moveTo)));
+				String newnewHex = Board.rows.adjacentDirection(newHex, Board.rows.direction(first, moveTo));
 					if (board.containsKey(newnewHex)){
 							if(board.get(newnewHex).empty) {
 								doPushTwo(board);
@@ -319,7 +383,7 @@ public class Move {
 	}
 	
 	public void moveSideways(Hashtable<String, Hexagon> board) {
-		int direction = Board.rows.direction(board.get(first), board.get(moveTo));
+		int direction = Board.rows.direction(first, moveTo);
 		//System.out.println("direction is " + direction);
 		char letterFirst = first.charAt(0);
 		char letterSecond = second.charAt(0);
@@ -454,6 +518,7 @@ public class Move {
 	
 	//push one marble
 	public void doPushOne(Hashtable<String, Hexagon> board) {
+		pushed = true;
 		if (third== null) {
 			Marble moving= board.get(second).marble;
 			Marble removing = board.get(moveTo).marble;
@@ -462,7 +527,7 @@ public class Move {
 			board.get(moveTo).setEmpty();
 			board.get(moveTo).setFull(moving);
 		
-			String keyAdj = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
+			String keyAdj = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 		
 			if(board.containsKey(keyAdj)) {
 				board.get(keyAdj).setFull(removing);
@@ -471,7 +536,7 @@ public class Move {
 				//System.out.println("pushed");
 			}
 			else {
-				if (board.equals(Board.hashBoard)) {
+				if (board.equals(Board.hashBoard) && !adding) {
 					Board.score[playersTurn-1]++;
 					GameGui.MainScene.getChildren().remove(removing);
 					Board.boardMarbles.storage.remove(removing);
@@ -487,9 +552,6 @@ public class Move {
 					point3++;
 					}
 				}
-				else {
-					//add what should happen when we're working on the ai!! so update the gamestate
-				}
 			}
 			moving.setLocationKey(moveTo);
 			moving.updateLocation(board);
@@ -502,7 +564,7 @@ public class Move {
 			board.get(moveTo).setEmpty();
 			board.get(moveTo).setFull(moving);
 		
-			String keyAdj = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
+			String keyAdj = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 		
 			if(board.containsKey(keyAdj)) {
 				board.get(keyAdj).setFull(removing);
@@ -511,7 +573,7 @@ public class Move {
 				//System.out.println("pushed");
 			}
 			else {
-				if (board.equals(Board.hashBoard)) {
+				if (board.equals(Board.hashBoard) && !adding) {
 					Board.score[playersTurn-1]++;
 					GameGui.MainScene.getChildren().remove(removing);
 					Board.boardMarbles.storage.remove(removing);
@@ -533,7 +595,6 @@ public class Move {
 
 			moving.setLocationKey(moveTo);
 			moving.updateLocation(board);
-			
 		}
 
 	}
@@ -541,6 +602,7 @@ public class Move {
 
 	//push two marbles
 	public void doPushTwo(Hashtable<String, Hexagon> board) {
+		pushed = true;
 		Marble moving=board.get(third).marble;
 		Marble removing = board.get(moveTo).marble;
 		
@@ -548,8 +610,8 @@ public class Move {
 		board.get(moveTo).setEmpty();
 		board.get(moveTo).setFull(moving);
 		
-		String keyAdj = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
-		String keyAdjTwo = Board.rows.adjacentDirection(board.get(keyAdj), Board.rows.direction(board.get(first), board.get(moveTo)));
+		String keyAdj = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
+		String keyAdjTwo = Board.rows.adjacentDirection(keyAdj, Board.rows.direction(first, moveTo));
 		//System.out.println("keyAdjTwo is " + keyAdjTwo);
 		
 		
@@ -561,7 +623,7 @@ public class Move {
 			//System.out.println("pushed 2");
 		}
 		else {
-			if (board.equals(Board.hashBoard)) {
+			if (board.equals(Board.hashBoard) && !adding) {
 				Board.score[playersTurn-1]++;
 				//System.out.println(playersTurn + " gets a point");
 				Board.boardMarbles.storage.remove(removing);
@@ -587,39 +649,46 @@ public class Move {
 	}
 	
 	//resets the move
-	public void resetMove() {
-		this.first = null;
-		this.second = null;
-		this.third = null;
-		this.moveTo = null;
-		this.selected = false;
-		this.nrSelected = 0;
-		this.selectedMarbles.clear();
+	public static void resetMove() {
+		first = null;
+		second = null;
+		third = null;
+		moveTo = null;
+		selected = false;
+		nrSelected = 0;
+		selectedMarbles.clear();
 	}
 	
 	//test if it is possible to move one, else it resets the move
-	public boolean validMoveOne(Hashtable<String, Hexagon> board) {
-		if (board.get(first).adjacent(board.get(moveTo)) && board.get(moveTo).empty){
-			return true;
+	public static boolean validMoveOne(Hashtable<String, Hexagon> board, String first, String moveTo) {
+		if(board.contains(first) && board.contains(moveTo)) {
+			if (board.get(first).adjacent(board.get(moveTo)) && board.get(moveTo).empty){
+				return true;
+			}
+			else {
+				resetMove();
+				rejected = true;
+				return false;
+			}
 		}
 		else {
-			resetMove();
 			return false;
 		}
 	}
 	
 	//should be done
-	public boolean validMoveTwo(Hashtable<String, Hexagon> board) {
-		String newHex = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
+	public static boolean validMoveTwo(Hashtable<String, Hexagon> board, String first, String second, String moveTo) {
+		String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 		//System.out.println("the new hex is " + newHex);
 		//if it needs to move sideways and if there are two free space where they are needed, the move is valid
-		if(Board.rows.sideways(board.get(first), board.get(second), board.get(moveTo))) {
+		if(Board.rows.sideways(first, second, moveTo)) {
 			//System.out.println("sideways is true");
-			if (Board.rows.twoFree(board.get(first), board.get(second), board.get(moveTo), board)) {
+			if (Board.rows.twoFree(first, second, moveTo, board)) {
 				return true;
 			}
 			else {
 				//System.out.println("did not move");
+				rejected = true;
 				resetMove();
 			}
 		}
@@ -643,19 +712,21 @@ public class Move {
 		
 		//System.out.println("did not move");
 		resetMove();
+		rejected = true;
 		return false;
 	}
 	
 	//done
-	public boolean validMoveThree(Hashtable<String, Hexagon> board) {
-		String newHex = Board.rows.adjacentDirection(board.get(moveTo), Board.rows.direction(board.get(first), board.get(moveTo)));
+	public static boolean validMoveThree(Hashtable<String, Hexagon> board, String first, String second, String third, String moveTo) {
+		String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 		
-		if(Board.rows.sideways(board.get(first), board.get(second), board.get(moveTo))) {
-			if (Board.rows.threeFree(board.get(first), board.get(second), board.get(third), board.get(moveTo), board)) {
+		if(Board.rows.sideways(first, second, moveTo)) {
+			if (Board.rows.threeFree(first, second, third, moveTo, board)) {
 				return true;
 			}
 			else {
 				//System.out.println("did not move");
+				rejected = true;
 				resetMove();
 			}
 		}
@@ -671,7 +742,7 @@ public class Move {
 					return true; 
 				}
 				else if(board.get(newHex).marble.playerNumber != playersTurn) {
-				String newnewHex = Board.rows.adjacentDirection(board.get(newHex), Board.rows.direction(board.get(first), board.get(moveTo)));
+				String newnewHex = Board.rows.adjacentDirection(newHex, Board.rows.direction(first, moveTo));
 					if (board.containsKey(newnewHex)){
 							if(board.get(newnewHex).empty) {
 								return true; 
@@ -688,6 +759,7 @@ public class Move {
 			
 		}
 		//System.out.println("did not move");
+		rejected = true;
 		resetMove();
 		return false;
 	}
