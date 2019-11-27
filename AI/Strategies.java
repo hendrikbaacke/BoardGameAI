@@ -11,6 +11,8 @@ import static java.lang.Math.abs;
 
 public class Strategies {
 
+
+
     /* class contains methods that define each strategy, like moving to the center etc.
 
      */
@@ -73,7 +75,7 @@ public class Strategies {
 
         /*In order to determine value for a player each marble (of this player) is checked for an opponent marble at one adjacent side of the marble and an
          opponent marble at the opposing adjacent side. Again the difference between the values for both players is calculated.*/
-        int groupBreaks = 0;
+        double groupBreaks = 0;
         for(int i=0; i<Player.size(); i++){
             for(int j=0; j<Opponent.size(); j++){
                 if(abs((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) <2 && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1)) <2){
@@ -91,7 +93,7 @@ public class Strategies {
 
 
     public double strengthenGroup(GameState boardState){
-        int groupStrengh = 0;
+        double groupStrengh = 0;
         for(int i=0; i<Player.size(); i++){
             for(int j=1; j<Player.size(); j++){
                 if(abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) <2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) <2){
@@ -118,7 +120,7 @@ public class Strategies {
 
     }
 
-    public void amountOwnMarbles(GameState boardState){
+    public double amountOwnMarbles(GameState boardState){
 
 
     }
