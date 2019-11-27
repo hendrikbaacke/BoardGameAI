@@ -15,6 +15,7 @@ public class Hexagon extends Polygon {
 	   public static double Hexagon_Width ;
 	   public double centerX;
 	   public double centerY;
+
 	   public boolean empty = true;
 	   public ArrayList<String> neighbours = new ArrayList<String>();
 	   public String code;
