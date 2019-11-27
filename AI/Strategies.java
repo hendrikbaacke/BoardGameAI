@@ -23,8 +23,6 @@ public class Strategies {
     private ArrayList<String> Opponent = new ArrayList();
 
 
-
-
     double CenterX = Board.hashBoard.get("E5").centerX;
     double CenterY = Board.hashBoard.get("E5").centerY;
 
@@ -51,7 +49,7 @@ public class Strategies {
         for (int i = 0; i < Player.size(); i++) {
 
 
-           PlayerDisAv += Math.sqrt(Math.pow(boardState.boardState.get(Player.get(i)).centerX -CenterX,2) + Math.pow(boardState.boardState.get(Player.get(i)).centerY -CenterY,2)) ;
+            PlayerDisAv += Math.sqrt(Math.pow(boardState.boardState.get(Player.get(i)).centerX - CenterX, 2) + Math.pow(boardState.boardState.get(Player.get(i)).centerY - CenterY, 2));
 
 
             /* Distance to Center, use Euclidean Distance:
@@ -60,14 +58,12 @@ public class Strategies {
 
             */
         }
-        PlayerDisAv = PlayerDisAv / Player.size();
+        PlayerDisAv = ( PlayerDisAv / Player.size() );
 
         return PlayerDisAv;
     }
 
 
-    //Manhattan Implementation:
-    //     PlayerDisAv = PlayerDisAv + (abs((int) Player.get(i).charAt(0) - (int) Center.charAt(0)) + abs((int) Player.get(i).charAt(1) - (int) Center.charAt(1)));
 
 
     public double cohesion(GameState boardState) {
@@ -113,46 +109,114 @@ public class Strategies {
         double groupStrengh = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
+                //if we have a neighbor
                 if (abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2) {
                     a:
                     for (int k = 0; k < Opponent.size(); k++) {
-                        if (k != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
-                            for (int m = 1; m < Opponent.size(); m++) {
-                                if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
-                                    for (int n = 1; n < Player.size(); n++) {
-                                    } else{
-                                        groupStrengh++;
-                                        break a;
+
+                        for (int k = 0; k < Opponent.size(); k++) {
+                            if (k != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
+                                for (int m = 1; m < Opponent.size(); m++) {
+                                    if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
+                                        for (int n = 1; n < Player.size(); n++) {
+                                        }else{
+                                            groupStrengh++;
+                                            break a;
+                                            //found a marble to maybe push needs checking
+                                            boolean possible = true;
+                                            for (int m = 1; m < Opponent.size(); m++) {
+                                                if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
+                                                    //can we still push?
+                                                    possible = false;
+                                                    for (int n = 1; n < Player.size(); n++) {
+                                                        if (n != i && n != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
+                                                            //we have three marbles. does the Opponent as well?
+                                                            boolean possible2 = true;
+                                                            for (int p = 1; p < Opponent.size(); p++) {
+                                                                if (p != m && p != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
+                                                                    possible2 = false;
+                                                                }
+                                                            }
+                                                            if (possible2) groupStrengh++;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (possible) groupStrengh++;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-                return groupStrengh;
-
             }
+        }
+    }
 
-            public double amountOppMarbles (GameState boardState){
 
+    public int amountOppMarbles(GameState boardState, boolean AIPlayer1) {
+        int Number = 1;
+        if (!AIPlayer1) Number = 2;
+        ArrayList<String> Player = new ArrayList();
+        ArrayList<String> Opponent = new ArrayList();
 
+        int opponentCounterOld = 0;
+
+        for (int i = 0; i < boardState.oldGamestate.boardState.size(); i++) {
+            if (!boardState.oldGamestate.boardState.get(i).empty) {
+                if (boardState.oldGamestate.boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
+                    Player.add(Board.hash.get(i));
+
+                } else {
+                    Opponent.add(Board.hash.get(i));
+                    opponentCounterOld++;
+                }
             }
+        }
+        int differenceOppMarbles = opponentCounterOld - Opponent.size();
 
-            public double amountOwnMarbles (GameState boardState){
 
+        return differenceOppMarbles;
+    }
 
+    public int amountOwnMarbles(GameState boardState, boolean AIPlayer1) {
+        int Number = 1;
+        if (!AIPlayer1) Number = 2;
+        ArrayList<String> Player = new ArrayList();
+        ArrayList<String> Opponent = new ArrayList();
+
+        int ownCounterOld = 0;
+
+        for (int i = 0; i < boardState.oldGamestate.boardState.size(); i++) {
+            if (!boardState.oldGamestate.boardState.get(i).empty) {
+                if (boardState.oldGamestate.boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
+                    Player.add(Board.hash.get(i));
+                    ownCounterOld++;
+
+                } else {
+                    Opponent.add(Board.hash.get(i));
+
+                }
             }
+        }
+        int differenceOwnMarbles = ownCounterOld - Player.size();
 
 
-            //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
-            //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
+        return differenceOwnMarbles;
 
-            public void checkKillMove (GameState boardState){
+    }
+
+
+    //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
+    //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
+
+    public void checkKillMove(GameState boardState) {
 
     /* solve by giving a very high weight parameter and binary value for check killMove 0/1, if a kill move is available without consequences for the AI,
     checkKillMove should overvote most other possible moves
    */
-            }
-        }
     }
 }
+
+
