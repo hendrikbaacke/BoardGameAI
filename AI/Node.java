@@ -1,5 +1,6 @@
 package AI;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class Node<T> {
 
     public Node(T data) {
         this.data = data;
-        this.children = new LinkedList<Node<T>>();
+        this.children = new ArrayList<Node<T>>();
     }
 
     public void addChild(T childData) {
@@ -24,6 +25,14 @@ public class Node<T> {
     
     public void removeChildOnIndex(int i) {
     	this.children.remove(i);
+    }
+    
+    public void setData(T data) {
+    	this.data = data;
+    }
+    
+    public T returnData(){
+    	return data;
     }
 	
 }

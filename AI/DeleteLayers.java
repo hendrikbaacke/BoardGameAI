@@ -1,16 +1,21 @@
 package AI;
 
+//should be fine
+
 public class DeleteLayers {
 //in case the tree gets way too big - a way to delete the first couple of layers and its instances - for space complexity
 	
-	//delete everything attached to a certain piece of the tree, to keep the used space limited
-	public void deleteEverythingAbove(Node<GameState> newRoot, Tree<GameState> tree) {
-		//delete the parents and every parent's branch
-		//maybe also usable: just a normal set new root statement???
+	public static void deleteEverythingAbove(Node<GameState> newRoot, Tree<GameState> tree) {
+		//set new root and disconnect it from the parent
+		tree.setRoot(newRoot);
+		newRoot.parent = null;
 	}
 	
 	//delete a branch of a certain node
-	public void deleteBranch(Node<GameState> start, Tree<GameState> tree) {
+	public static void deleteBranch(Node<GameState> start) {
+		//delete a node and cascade - if parent removes this node, there will be no access anymore - so it's deleted
+		Node<GameState> parent = start.parent;
+		parent.children.remove(start);
 		
 	}
 }
