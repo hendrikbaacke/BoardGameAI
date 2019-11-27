@@ -6,6 +6,9 @@ public class ModeDetermination {
      the mapping into a specific mode is solved there by delimiting it by the center and cohesion strategies, the value of the weights in the evalFunction
      is determined by the mode in a static value association
     */
+
+    //add killMove
+	
 	private double[] mode1={3,2,6,1.8,0,0};
 	private double[] mode2={3.3,2,6,1.8,35,50*35};
 	private double[] mode3={2.9,2,15,3,4,50*4};

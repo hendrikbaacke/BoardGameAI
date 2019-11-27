@@ -14,6 +14,7 @@ public class EvaluationFunction {
 	private double f4;
 	private double f5;
 	private double f6;
+	//private double f7;
 	
 	private double w1;
 	private double w2;
@@ -21,6 +22,7 @@ public class EvaluationFunction {
 	private double w4;
 	private double w5;
 	private double w6;
+	//private double w7;
 	
 	public EvaluationFunction(Node<GameState> node)
 	{
@@ -33,8 +35,11 @@ public class EvaluationFunction {
 		 f2=strategies.cohesion(gameState);
 		 f3=strategies.breakGroup(gameState);
 		 f4=strategies.strengthenGroup(gameState);
-		 f5=strategies.amountOppMarbles(gameState);
-		 f6=strategies.amountOwnMarbles(gameState);
+
+		 f5=strategies.amountOppMarbles(gameState,isPlayer1AI);
+		 f6=strategies.amountOwnMarbles(gameState,isPlayer1AI);
+
+		 //f7 =strategies.checkKillMove(gameState);
 		 
 		 ModeDetermination modeDet=new ModeDetermination();
 		 double[] weightArray=modeDet.determineMode(f1, f2);
@@ -44,6 +49,7 @@ public class EvaluationFunction {
 		 w4=weightArray[3];
 		 w5=weightArray[4];
 		 w6=weightArray[5];
+		 //w7 weightArray[6];
 				 
 			
 	}
