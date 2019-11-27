@@ -128,5 +128,17 @@ public BorderPane add() {
 		}
 		return true;
 	}
+	
+	public ArrayList<String> getMarblesPlayer(Hashtable<String, Hexagon> board, int playerNumber){
+		ArrayList<String> marbles = new ArrayList();
+		for (int i = 0; i < hash.size(); i++) {
+			if (!board.get(hash.get(i)).empty) {
+				if (board.get(hash.get(i)).marble.playerNumber == playerNumber) {
+					marbles.add(hash.get(i));
+				}
+			}
+		}
+		return marbles;
+	}
 }
 
