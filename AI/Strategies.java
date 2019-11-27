@@ -113,25 +113,38 @@ public class Strategies {
         double groupStrengh = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
+                //if we have a neighbor
                 if (abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2) {
-                    a:
                     for (int k = 0; k < Opponent.size(); k++) {
                         if (k != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
+                            //found a marble to maybe push needs checking
+                            boolean possible = true;
                             for (int m = 1; m < Opponent.size(); m++) {
                                 if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
+                                    //can we still push?
+                                    possible = false;
                                     for (int n = 1; n < Player.size(); n++) {
-                                    } else{
-                                        groupStrengh++;
-                                        break a;
+                                        if (n != i && n != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
+                                            //we have three marbles. does the Opponent as well?
+                                            boolean possible2 = true;
+                                            for (int p = 1; p < Opponent.size(); p++) {
+                                                if (p != m && p != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
+                                                    possible2 = false;
+                                                }
+                                            }
+                                            if (possible2) groupStrengh++;
+                                        }
                                     }
                                 }
                             }
+                            if (possible) groupStrengh++;
                         }
                     }
                 }
-                return groupStrengh;
-
             }
+        }
+        return groupStrengh;
+    }
 
             public double amountOppMarbles (GameState boardState){
 
