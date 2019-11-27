@@ -3,6 +3,8 @@ package AI;
 
 public class Strategies {
 
+
+
     /* class contains methods that define each strategy, like moving to the center etc.
 
      */
@@ -15,6 +17,7 @@ public class Strategies {
     public void closingDistance(GameState boardState){
 
         //calculate Manhattan distance of each Players marble to center, high distance should return a high value, since closing in has greater priority
+
 
     }
 
