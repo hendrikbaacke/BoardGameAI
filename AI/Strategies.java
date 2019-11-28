@@ -19,8 +19,9 @@ public class Strategies {
 
     //not covered here is the possibility of drawing from a database of openings, this would stronlgy mitigate the importance of the closingDistance strategy
 
-    private ArrayList<String> Player = new ArrayList();
-    private ArrayList<String> Opponent = new ArrayList();
+    private ArrayList<String> Player = new ArrayList<>();
+    private ArrayList<String> Opponent = new ArrayList<>();
+    private ArrayList<String> KillMoves = new ArrayList<>();
 
 
     double CenterX = Board.hashBoard.get("E5").centerX;
@@ -110,25 +111,33 @@ public class Strategies {
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
                 //if we have a neighbor
-                if (abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2) { a:
+                if (i!=j && abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2) {
                     for (int k = 0; k < Opponent.size(); k++) {
-                        if (k != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
+                        if (abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
                             //found a marble to maybe push needs checking
                             boolean possible = true;
-                            for (int m = 1; m < Opponent.size(); m++) {
-                                if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
-                                    //can we still push?
-                                    possible = false;
-                                    for (int n = 1; n < Player.size(); n++) {
-                                        if (n != i && n != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
-                                            //we have three marbles. does the Opponent as well?
-                                            boolean possible2 = true;
-                                            for (int p = 1; p < Opponent.size(); p++) {
-                                                if (p != m && p != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
-                                                    possible2 = false;
+                            if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < 65 || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > 73 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9){
+                                KillMoves.add(Player.get(i));
+                            }else{
+                                for (int m = 1; m < Opponent.size(); m++) {
+                                    if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
+                                        //can we still push? atm 2v2
+                                        possible = false;
+                                        for (int n = 1; n < Player.size(); n++) {
+                                            if (n != i && n != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
+                                                //we have three marbles. does the Opponent as well?
+                                                boolean possible2 = true;
+                                                if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < 65 || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > 73 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9) {
+                                                    KillMoves.add(Player.get(i));
+                                                }else{
+                                                    for (int p = 1; p < Opponent.size(); p++) {
+                                                        if (p != m && p != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
+                                                            possible2 = false;
+                                                        }
+                                                    }
                                                 }
+                                                if (possible2) groupStrengh++;
                                             }
-                                            if (possible2) groupStrengh++;
                                         }
                                     }
                                 }
@@ -199,11 +208,12 @@ public class Strategies {
     //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
     //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
 
-    public void checkKillMove(GameState boardState) {
+    public double checkKillMove(GameState boardState) {
 
     /* solve by giving a very high weight parameter and binary value for check killMove 0/1, if a kill move is available without consequences for the AI,
     checkKillMove should overvote most other possible moves
    */
+        return KillMoves.size();
     }
 }
 
