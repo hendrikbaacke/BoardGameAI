@@ -31,6 +31,7 @@ public class Strategies {
     public Strategies(Hashtable<String, Hexagon> boardState, boolean AIPlayer1) {
         int Number = 1;
         if (!AIPlayer1) Number = 2;
+        //separating AI marbles from Opponent marbles
         for (int i = 0; i < boardState.size(); i++) {
             if (!boardState.get(i).empty) {
                 if (boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
@@ -69,7 +70,7 @@ public class Strategies {
 
     public double cohesion(GameState boardState) {
 
-        //determine the number of neighbouring teammates for each marble for each player, take the difference
+        //determine the number of neighbouring teammates for each marble for each player, adds them together
         int cohesion = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
@@ -87,7 +88,7 @@ public class Strategies {
     public double breakGroup(GameState boardState) {
 
         /*In order to determine value for a player each marble (of this player) is checked for an opponent marble at one adjacent side of the marble and an
-         opponent marble at the opposing adjacent side. Again the difference between the values for both players is calculated.*/
+         opponent marble at the opposing adjacent side. */
         double groupBreaks = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 0; j < Opponent.size(); j++) {
@@ -107,15 +108,18 @@ public class Strategies {
 
 
     public double strengthenGroup(GameState boardState) {
+        /* Determinates how many possibilities the AI has to push the Opponent.
+         */
         double groupStrengh = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
-                //if we have a neighbor
+                //if we have a neighbor (at least 2 marbles are needed to even consider a push)
                 if (i!=j && abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2) {
                     for (int k = 0; k < Opponent.size(); k++) {
                         if (abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
-                            //found a marble to maybe push needs checking
+                            //found a marble to potentially push, needs checking maybe Opp has more marbles
                             boolean possible = true;
+                            //if AI can kill, pushing is possible and no further checking needed
                             if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < 65 || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > 73 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9){
                                 KillMoves.add(Player.get(i));
                             }else{
@@ -125,13 +129,15 @@ public class Strategies {
                                         possible = false;
                                         for (int n = 1; n < Player.size(); n++) {
                                             if (n != i && n != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
-                                                //we have three marbles. does the Opponent as well?
+                                                //we have three marbles. does the Opponent has as well 3?
                                                 boolean possible2 = true;
+                                                //if AI can kill, pushing is possible and no further checking needed
                                                 if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < 65 || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > 73 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9) {
                                                     KillMoves.add(Player.get(i));
                                                 }else{
                                                     for (int p = 1; p < Opponent.size(); p++) {
                                                         if (p != m && p != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
+                                                            //no pushing here possible
                                                             possible2 = false;
                                                         }
                                                     }
@@ -209,10 +215,7 @@ public class Strategies {
     //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
 
     public double checkKillMove(GameState boardState) {
-
-    /* solve by giving a very high weight parameter and binary value for check killMove 0/1, if a kill move is available without consequences for the AI,
-    checkKillMove should overvote most other possible moves
-   */
+    //brings AI close to killing Opponent in the next turn
         return KillMoves.size();
     }
 }
