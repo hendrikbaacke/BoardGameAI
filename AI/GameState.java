@@ -19,8 +19,9 @@ public class GameState {
 	public String moveTo;
 	private Move move = src.Board.move;
 	public int turn;
-	public boolean valid = true;
 	
+	
+	public boolean valid;
 	//later needed for the evaluation function
 	public int point1;
 	public int point2;
@@ -28,8 +29,8 @@ public class GameState {
 	public int point3;
 	
 	public Hashtable<String, Hexagon> boardState;
-
-	GameState oldGamestate;
+	
+	GameState oldGameState;
 	
 	//rootNode
 	public GameState(Hashtable<String, Hexagon> state, int turn) {
@@ -41,71 +42,42 @@ public class GameState {
 		this.turn = turn;
 	}
 	
-	public GameState(String first, String second, String third, String moveTo, GameState old, int turn) {
-		Move.rejected = false;
+	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree
-		this.turn = turn;
+		this.turn = AddNodes.changePlayer(old.turn);
 		int save = Board.move.playersTurn;
-		Board.move.playersTurn = turn;
+		Board.move.playersTurn = this.turn;
 		Board.move.adding = true;
-
-		oldGamestate =old;
 		
 		this.first = first;
 		this.second = second;
 		this.third = third;
 		this.moveTo = moveTo;
 		
-		if (!Board.hash.contains(first)) {
-			Move.rejected = true;
-		}
-		if(second != null) {
-			if (!Board.hash.contains(second)) {
-				Move.rejected = true;
-			}
-		}
-		if (third != null) {
-			if (!Board.hash.contains(third)) {
-				Move.rejected = true;
-			}
-		}
-		if (!Board.hash.contains(moveTo)) {
-			Move.rejected = true;
-		}
-		if (!Move.rejected) {
+		
 			//make a deep copy of the current board
 			this.boardState = Board.copyHashBoard(old.boardState);
 		
-		
-			if (first != null && Board.hash.contains(first)) {
+			if (first != null) {
 				move.select(first, boardState);
 				if (second != null) {
-					if ( Board.hash.contains(second)) {
 						move.select(second, boardState);
-						if (third != null && Board.hash.contains(third)) {
+						if (third != null) {
 							move.select(third, boardState);
 						}
 						else {
 						move.select(first, boardState);
-						}
-					}
-					else {
-						Move.rejected = true;
 					}
 				}
 				else {
 					move.select(first, boardState);
 				}
-				if (Board.hash.contains(moveTo)) {
-					move.select(moveTo, boardState);
-				}
-				else {
-					Move.rejected = true;
-				}
 			}
-			else {
-				Move.rejected = true;
-			}
+			
+			move.select(moveTo, boardState);
+			move.resetMove();
+			
+			 valid = !Board.compareHashtables(boardState, old.boardState);
 		
 			//scores old
 			point1 = old.point1;
@@ -124,23 +96,12 @@ public class GameState {
 					point3++;
 				}
 			}
-		}
-		
-		//check if it's different from the parent, otherwise valid will be false
-		if(Move.rejected) {
-			valid = false;
-		}
-		//else if(Board.compareHashtables(Board.hashBoard, boardState)) {
-		//	valid = false;
-		//}
+		oldGameState = old;
 		
 		//set the turn back to the one that was actually needed
-		Board.move.playersTurn = save;
-		Board.move.adding = false;
-		
-		
-		System.out.println(valid);
+		move.pushed = false;
+		move.playersTurn = save;
+		move.adding = false;
 	}
-	 
 	
 }

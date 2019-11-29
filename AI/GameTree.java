@@ -3,7 +3,7 @@ package AI;
 import java.util.ArrayList;
 import java.util.List;
 
-//our basic game tree - can add more functionalities later!!
+//this class should be working as we need it
 
 public class GameTree {
 	Tree<GameState> gameTree;
@@ -24,16 +24,16 @@ public class GameTree {
 		expanding.add(gameTree.getRoot());
 		System.out.println("start adding");
 		
-		AddNodes.addForOne(gameTree.getRoot());
+		//create layers
+		for (int i = 1; i < layers + 1; i++) {
+			AddNodes.addForMultiple(expanding);
+			expanding = findAtDepth(i);
+			System.out.println("layer " + i + " done");
+		}
 		
-		
-		//AddNodes.addForMultiple(gameTree.getRoot().children);
-		
-		//for (int i = 1; i < layers + 1; i++) {
-		//	AddNodes.addForMultiple(expanding);
-		//	expanding = findAtDepth(i);
-		//	System.out.println("layer " + i + " done");
-		//}
+		System.out.println(findAtDepth(0).size());
+		System.out.println(findAtDepth(1).size());
+		System.out.println(findAtDepth(2).size());
 	}
 	
 	//finds all the nodes at a certain depth

@@ -18,25 +18,31 @@ public class PerformAIAction {
 		Node<GameState> needed = choose();
 		if (needed.returnData().first != null) {
 			Board.move.select(needed.returnData().first, Board.hashBoard);
+			System.out.println("select " + needed.returnData().first);
 			if (needed.returnData().second != null) {
 				Board.move.select(needed.returnData().second, Board.hashBoard);
+				System.out.println("select " + needed.returnData().second);
 				if (needed.returnData().third != null) {
 					Board.move.select(needed.returnData().third, Board.hashBoard);
+					System.out.println("select " + needed.returnData().third);
 				}
 				else {
 					Board.move.select(needed.returnData().first, Board.hashBoard);
+					System.out.println("select " + needed.returnData().first);
 				}
 			}
 			else {
 				Board.move.select(needed.returnData().first, Board.hashBoard);
+				System.out.println("select " + needed.returnData().first);
 			}
 			Board.move.select(needed.returnData().moveTo, Board.hashBoard);
+			System.out.println("select " + needed.returnData().moveTo);
 		}
 		Move.ai = false;
 	}
 	
 	public static Node<GameState> choose(){
-		List<Node<GameState>> depth = tree.findAtDepth(0);
+		List<Node<GameState>> depth = tree.findAtDepth(1);
 		return depth.get(0);
 	}
 	
@@ -45,7 +51,7 @@ public class PerformAIAction {
 		//always create a new tree
 		tree = new GameTree(current);
 		System.out.println("creating");
-		tree.buildFullTree(1);
+		tree.buildFullTree(2);
 	}
 	
 }
