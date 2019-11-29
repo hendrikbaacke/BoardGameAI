@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 
 public class MarbleStorage {
 	public static AnchorPane pieceGroup = new AnchorPane();
-	LinkedList<Marble> storage = new LinkedList<Marble>();
+	static LinkedList<Marble> storage = new LinkedList<Marble>();
 
 	public AnchorPane Balls() {
 		for (char ch='A'; ch <= 'I'; ch++) {
@@ -135,5 +135,15 @@ public class MarbleStorage {
 		}
 		return marbles;
 	}
+	
+	public static Integer ballsCount(int player) {
+	      Integer count = 0;
+	      for (Marble b : storage) {
+	         if (b.playerNumber == player) {
+	            ++count;
+	         }
+	      }
+	      return count;
+	   }
 	
 }
