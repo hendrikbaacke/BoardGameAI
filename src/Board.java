@@ -108,7 +108,6 @@ public BorderPane add() {
 				//System.out.println(code);
 				if (hex.containsKey(code)){
 					newBoard.put(code, hex.get(code).deepClone());
-					//System.out.println(code);
 				}
 			}
 		}
@@ -129,7 +128,7 @@ public BorderPane add() {
 		return true;
 	}
 	
-	public ArrayList<String> getMarblesPlayer(Hashtable<String, Hexagon> board, int playerNumber){
+	public static ArrayList<String> getMarblesPlayer(Hashtable<String, Hexagon> board, int playerNumber){
 		ArrayList<String> marbles = new ArrayList();
 		for (int i = 0; i < hash.size(); i++) {
 			if (!board.get(hash.get(i)).empty) {

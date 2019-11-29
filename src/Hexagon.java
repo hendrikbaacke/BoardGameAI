@@ -15,7 +15,6 @@ public class Hexagon extends Polygon {
 	   public static double Hexagon_Width ;
 	   public double centerX;
 	   public double centerY;
-
 	   public boolean empty = true;
 	   public ArrayList<String> neighbours = new ArrayList<String>();
 	   public String code;
@@ -79,8 +78,8 @@ public class Hexagon extends Polygon {
     	}
     	
     	//returns "true" if another hexagon is adjacent
-    	public boolean adjacent(Hexagon other) {
-    		if (neighbours.contains(other.code)) {
+    	public boolean adjacent(String other) {
+    		if (neighbours.contains(other)) {
     			return true;
     		}
     		return false;
@@ -154,13 +153,16 @@ public class Hexagon extends Polygon {
 			clone.centerY = this.centerY;
 			clone.empty = this.empty;
 			clone.code = this.code;
+			
 			if (!clone.empty) {
-				clone.marble = this.marble.clone();
+				clone.marble = this.marble.deepClone();
 			}
+			
 			ArrayList<String> neighbourcopy = new ArrayList();
 			for (int i = 0; i < neighbours.size(); i++) {
 				neighbourcopy.add(neighbours.get(i));
 			}
+			clone.neighbours = neighbourcopy;
 			return clone;
 		}
 		

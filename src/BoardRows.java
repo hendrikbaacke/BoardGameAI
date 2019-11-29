@@ -89,7 +89,7 @@ public class BoardRows {
 			if (topRight.get(i).contains(one) && topRight.get(i).contains(two) && topRight.get(i).contains(three)) {
 				sameRow = true;
 			}
-			System.out.println(sameRow);
+			//System.out.println(sameRow);
 			
 		}
 		return sameRow;
@@ -257,7 +257,7 @@ public class BoardRows {
 			
 		}
 		
-		System.out.println("FALSE SIDE");
+		System.out.println("FALSE");
 		return false;
 	}
 	
@@ -345,7 +345,7 @@ public class BoardRows {
 			
 		}
 		
-		System.out.println("FALSE SIDE");
+		System.out.println("FALSE");
 		return false;
 	}
 	

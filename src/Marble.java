@@ -64,10 +64,8 @@ public class Marble extends Ellipse{
 						}
 					};
 					
-	public Marble clone() {
+	public Marble deepClone() {
 		Marble marble = new Marble(this.getCenterX(), this.getCenterY(), playerNumber, locationKey, false);
 		return marble;
 	}
-	
-
 }
