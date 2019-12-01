@@ -9,7 +9,7 @@ import src.Move;
 
 public class AlphaBeta {
 	
-	private static final Integer MAX_DEPTH = 3;
+	private static final Integer MAX_DEPTH = 2;
 	private static final Integer INF = Integer.MAX_VALUE;
 	private static final Integer negINF = Integer.MIN_VALUE;
 
@@ -20,7 +20,7 @@ public class AlphaBeta {
 	private GameTree game= new GameTree(root);
 
 
-	private AlphaBeta(GameTree game, int PlayerTurn) {
+	public AlphaBeta(GameTree game, int PlayerTurn) {
 		      this.game = game;
 		      this.PlayerTurn = PlayerTurn;
 		   }
@@ -37,7 +37,7 @@ public class AlphaBeta {
 	public Node<GameState> getBestMove(int currentPlayer) {
 		Node<GameState> bestMove = null;
 		Integer best = -100;
-		List<Node<GameState>> moves = game.findAtDepth(currentPlayer);
+		List<Node<GameState>> moves = game.findAtDepth(1);
 		for (Node<GameState> m : moves) {
 			Integer score = alphabeta(game, other(), MAX_DEPTH - 1,
 					negINF, INF);
@@ -46,6 +46,8 @@ public class AlphaBeta {
 				bestMove = m;
 			}
 		}
+		System.out.print("alpha beta is working");
+
 		return bestMove;
 	}
 
@@ -67,6 +69,7 @@ public class AlphaBeta {
 				
 			}
 			return best;
+			
 		} else {
 			return ((currentPlayer == PlayerTurn) ? 1 : -1)
 					* this.evaluateBoard(game2, currentPlayer);

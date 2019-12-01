@@ -10,8 +10,9 @@ public class PerformAIAction {
 
 	//for now, this is done!!
 	
+
 	public static GameTree tree;
-	
+
 	//get the best node and use this action
 	public static void perform() {
 		//build the tree and perform search - make a new node a root node?
@@ -42,8 +43,10 @@ public class PerformAIAction {
 	}
 	
 	public static Node<GameState> choose(){
-		List<Node<GameState>> depth = tree.findAtDepth(1);
-		return depth.get(0);
+		//List<Node<GameState>> depth = tree.findAtDepth(1);
+		//return depth.get(0);
+		AlphaBeta  A  =new AlphaBeta(tree,2);
+		return A.getBestMove(2);
 	}
 	
 	public static void createGameTree(GameState state, int layers) {
@@ -52,6 +55,7 @@ public class PerformAIAction {
 		tree = new GameTree(current);
 		System.out.println("creating");
 		tree.buildFullTree(2);
+		
 	}
 	
 }
