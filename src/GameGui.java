@@ -32,6 +32,21 @@ public class GameGui extends Application {
 
 	public void start( Stage stage) {
 		try {
+			Button Eva = new Button("Evaluation");
+			//Eva.setStyle("-fx-background-color: darkgray");
+			Eva.setOnAction(e ->{
+				Strategies strategies = new Strategies(Board.hashBoard, true);
+
+				//double f1=strategies.closingDistance(state);
+				double f2=strategies.cohesion();
+				double f3=strategies.breakGroup();
+				double f4=strategies.strengthenGroup();
+				//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
+				//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
+
+				System.out.println(f2+"  "+f3+"  "+f4+"  ");
+			});
+
 		    Label winner_label = new Label("Player win:\t");
 		     double MAX_FONT_SIZE = 30.0; // define max font size you need
 		     winner_label.setFont(new Font(MAX_FONT_SIZE));		
@@ -74,7 +89,8 @@ public class GameGui extends Application {
 				GridPane.setRowIndex(playerBox, 1);
 				GridPane.setRowIndex(score,2 );
 				GridPane.setRowIndex(score2,3 );
-				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2); //add reset for the reset button
+				GridPane.setRowIndex(Eva,6 );
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, Eva); //add reset for the reset button
 			}
 			
 			if (Board.numberPlayers ==3) {

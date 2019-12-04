@@ -1,8 +1,10 @@
 package AI;
 
 
+/*
 import src.Board;
 import src.Hexagon;
+ */
 import java.util.ArrayList;
 import java.util.Hashtable;
 import static java.lang.Math.abs;
@@ -33,7 +35,7 @@ public class Strategies {
         if (!AIPlayer1) Number = 2;
         //separating AI marbles from Opponent marbles
         for (int i = 0; i < boardState.size(); i++) {
-            if (!boardState.get(i).empty) {
+            if (!boardState.get(Board.hash.get(i)).empty) {
                 if (boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
                     Player.add(Board.hash.get(i));
                 } else {
@@ -68,7 +70,7 @@ public class Strategies {
 
 
 
-    public double cohesion(GameState boardState) {
+    public double cohesion() {
 
         //determine the number of neighbouring teammates for each marble for each player, adds them together
         int cohesion = 0;
@@ -85,7 +87,7 @@ public class Strategies {
     }
 
 
-    public double breakGroup(GameState boardState) {
+    public double breakGroup() {
 
         /*In order to determine value for a player each marble (of this player) is checked for an opponent marble at one adjacent side of the marble and an
          opponent marble at the opposing adjacent side. */
@@ -107,9 +109,11 @@ public class Strategies {
     }
 
 
-    public double strengthenGroup(GameState boardState) {
+    public double strengthenGroup() {
         /* Determinates how many possibilities the AI has to push the Opponent.
          */
+        String Test1 = "False";
+        String Test2 = "False";
         double groupStrengh = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
@@ -120,8 +124,11 @@ public class Strategies {
                             //found a marble to potentially push, needs checking maybe Opp has more marbles
                             boolean possible = true;
                             //if AI can kill, pushing is possible and no further checking needed
-                            if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9){
+                            if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < (int) '1' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > (int) '9'){
                                 KillMoves.add(Player.get(i));
+                                System.out.println("Kill "+((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0)))+" "+((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))));
+                                System.out.println((int) 'A'+" "+(int) 'I'+" "+(int) '1'+" "+(int) '9');
+                                System.out.println(Player.get(i)+Player.get(j)+Opponent.get(k));
                             }else{
                                 for (int m = 1; m < Opponent.size(); m++) {
                                     if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
@@ -132,7 +139,7 @@ public class Strategies {
                                                 //we have three marbles. does the Opponent has as well 3?
                                                 boolean possible2 = true;
                                                 //if AI can kill, pushing is possible and no further checking needed
-                                                if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < 65 || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > 73 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9) {
+                                                if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < (int) '1' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > (int) '9'){
                                                     KillMoves.add(Player.get(i));
                                                 }else{
                                                     for (int p = 1; p < Opponent.size(); p++) {
@@ -142,18 +149,25 @@ public class Strategies {
                                                         }
                                                     }
                                                 }
-                                                if (possible2) groupStrengh++;
+                                                if (possible2) {
+                                                    groupStrengh++;
+                                                    System.out.println("Test2");
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
-                            if (possible) groupStrengh++;
+                            if (possible){
+                                groupStrengh++;
+                                System.out.println("Test1");
+                            }
                         }
                     }
                 }
             }
         }
+        //System.out.println(Test1+Test2);
         return groupStrengh;
     }
 
@@ -214,7 +228,7 @@ public class Strategies {
     //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
     //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
 
-    public double checkKillMove(GameState boardState) {
+    public double checkKillMove() {
     //brings AI close to killing Opponent in the next turn
         return KillMoves.size();
     }
