@@ -12,7 +12,6 @@ import static java.lang.Math.abs;
 public class Strategies {
 
 
-
     /* class contains methods that define each strategy, like moving to the center etc.
 
      */
@@ -120,7 +119,7 @@ public class Strategies {
                             //found a marble to potentially push, needs checking maybe Opp has more marbles
                             boolean possible = true;
                             //if AI can kill, pushing is possible and no further checking needed
-                            if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < 1 || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9){
+                            if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < (int) '1' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > 9){
                                 KillMoves.add(Player.get(i));
                             }else{
                                 for (int m = 1; m < Opponent.size(); m++) {
