@@ -36,9 +36,9 @@ public class EvaluationFunction {
 		Strategies strategies = new Strategies(state.boardState, isPlayer1AI);
 
 		f1 = strategies.closingDistance(state);
-		f2 = strategies.cohesion(state);
-		f3 = strategies.breakGroup(state);
-		f4 = strategies.strengthenGroup(state);
+		f2 = strategies.cohesion();
+		f3 = strategies.breakGroup();
+		f4 = strategies.strengthenGroup();
 
 		f5 = strategies.amountOppMarbles(state, isPlayer1AI);
 		f6 = strategies.amountOwnMarbles(state, isPlayer1AI);
