@@ -14,7 +14,6 @@ import static java.lang.Math.abs;
 public class Strategies {
 
 
-
     /* class contains methods that define each strategy, like moving to the center etc.
 
      */
