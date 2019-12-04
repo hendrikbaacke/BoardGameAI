@@ -19,6 +19,7 @@ public class GameState {
 	public String moveTo;
 	private Move move = src.Board.move;
 	public int turn;
+	public double evaluatedValue;
 	
 	
 	public boolean valid;
@@ -102,6 +103,9 @@ public class GameState {
 		move.pushed = false;
 		move.playersTurn = save;
 		move.adding = false;
+		EvaluationFunction eval= new EvaluationFunction(this);
+		evaluatedValue=eval.evaluate();
 	}
+	
 	
 }

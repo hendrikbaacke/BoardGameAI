@@ -24,20 +24,19 @@ public class EvaluationFunction {
 	private double w6;
 	//private double w7;
 	
-	public EvaluationFunction(Node<GameState> node)
+	public EvaluationFunction(GameState state)
 	{
 		boolean isPlayer1AI=src.Board.move.player1AI;
-		GameState gameState=(GameState) node.returnData();
 		
-		Strategies strategies=new Strategies(node.returnData().boardState, isPlayer1AI);
+		Strategies strategies=new Strategies(state.boardState, isPlayer1AI);
 		
-		 f1=strategies.closingDistance(gameState);
-		 f2=strategies.cohesion(gameState);
-		 f3=strategies.breakGroup(gameState);
-		 f4=strategies.strengthenGroup(gameState);
+		 f1=strategies.closingDistance(state);
+		 f2=strategies.cohesion(state);
+		 f3=strategies.breakGroup(state);
+		 f4=strategies.strengthenGroup(state);
 
-		 f5=strategies.amountOppMarbles(gameState,isPlayer1AI);
-		 f6=strategies.amountOwnMarbles(gameState,isPlayer1AI);
+		 f5=strategies.amountOppMarbles(state,isPlayer1AI);
+		 f6=strategies.amountOwnMarbles(state,isPlayer1AI);
 
 		 //f7 =strategies.checkKillMove(gameState);
 		 
