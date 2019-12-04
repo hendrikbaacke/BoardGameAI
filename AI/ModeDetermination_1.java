@@ -1,6 +1,6 @@
 package AI;
 
-public class ModeDeterminationAggressive {
+public class ModeDetermination_1 {
 
 
     /*In this class, the mode that the game is currently in, is determined. Given is the boardState. Look into paper as reference,

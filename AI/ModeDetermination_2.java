@@ -1,6 +1,6 @@
 package AI;
 
-public class ModeDeterminationDefensive {
+public class ModeDetermination_2 {
 
 //TODO: Assign weigths
 
@@ -16,7 +16,7 @@ public class ModeDeterminationDefensive {
     private double[] defaultMode= {1,1,1,1,1,1};
 
 
-    public double[] determineModeDefensive(double centerDistance, double cohesion){
+    public double[] determineMode_2(double centerDistance, double cohesion){
 
         if(centerDistance<0)
             return mode1;

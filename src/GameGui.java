@@ -35,7 +35,7 @@ public class GameGui extends Application {
 			Button Eva = new Button("Evaluation");
 			//Eva.setStyle("-fx-background-color: darkgray");
 			Eva.setOnAction(e ->{
-				Strategies strategies = new Strategies(Board.hashBoard, true);
+				AI.Strategies strategies = new AI.Strategies(Board.hashBoard, true);
 
 				//double f1=strategies.closingDistance(state);
 				double f2=strategies.cohesion();
@@ -45,7 +45,9 @@ public class GameGui extends Application {
 				//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
 
 				System.out.println(f2+"  "+f3+"  "+f4+"  ");
+				System.out.println("llll");
 			});
+
 
 		    Label winner_label = new Label("Player win:\t");
 		     double MAX_FONT_SIZE = 30.0; // define max font size you need

@@ -110,17 +110,21 @@ public class Main extends Application {
         iv_1.setImage(new Image(new FileInputStream("PvP.png")));
         ImageView iv_2 = new ImageView();
         iv_2.setImage(new Image(new FileInputStream("PvC.png")));
+        ImageView iv_3 = new ImageView();
+        iv_3.setImage(new Image(new FileInputStream("CvC.png")));
 
         //Add game mode labels
         Label modeOneLabel = new Label("Player vs. Player");
         //modeOneLabel.setStyle("-fx-font: 20 arial;");
         Label modeTwoLabel = new Label("Player vs. Computer");
         //modeTwoLabel.setStyle("-fx-font: 20 arial;");
+        Label modeThreeLabel = new Label("Computer vs. Computer");
 
         //Defining layouts
         VBox mainContainer = new VBox();
         VBox modeOneContainer = new VBox();
         VBox modeTwoContainer = new VBox();
+        VBox modeThreeContainer = new VBox();
 
 
         HBox modeBox = new HBox();
@@ -130,6 +134,8 @@ public class Main extends Application {
         modeOneContainer.setPadding(new Insets(10,10,10,10));
         modeTwoContainer.getStyleClass().add("modeButton");
         modeTwoContainer.setPadding(new Insets(10,10,10,10));
+        modeThreeContainer.getStyleClass().add("modeButton");
+        modeThreeContainer.setPadding(new Insets(10,10,10,10));
 
         //some fancy shadow effects
         modeOneContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
@@ -156,6 +162,18 @@ public class Main extends Application {
                 iv_2.setEffect(null);
             }
         });
+        modeThreeContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                iv_3.setEffect(shadow);
+            }
+        });
+        modeThreeContainer.setOnMouseExited(new EventHandler <MouseEvent>() {
+            @Override
+            public void handle(MouseEvent t) {
+                iv_3.setEffect(null);
+            }
+        });
 
 
 
@@ -163,8 +181,10 @@ public class Main extends Application {
         modeOneContainer.setAlignment(Pos.CENTER);
         modeTwoContainer.getChildren().addAll(iv_2,modeTwoLabel);
         modeTwoContainer.setAlignment(Pos.CENTER);
+        modeThreeContainer.getChildren().addAll(iv_3,modeThreeLabel);
+        modeThreeContainer.setAlignment(Pos.CENTER);
 
-        modeBox.getChildren().addAll(createSpacer(),modeOneContainer,createSpacer(), modeTwoContainer,createSpacer());
+        modeBox.getChildren().addAll(createSpacer(),modeOneContainer,createSpacer(), modeTwoContainer,createSpacer(), modeThreeContainer,createSpacer());
         modeBox.setPadding(new Insets(0,0,0,0));
 
         StackPane pane = new StackPane();
@@ -366,6 +386,22 @@ public class Main extends Application {
             	}
             	
             	Game = new GameGui();
+                Game.start(primaryStage);
+            }
+        });
+
+        modeThreeContainer.setPickOnBounds(true); // allows click on transparent areas
+        modeThreeContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                Move.player1AI = true;
+                Move.player2AI = true;
+
+                if (Board.numberPlayers ==3) {
+                    Move.player3AI = true;
+                }
+
+                Game = new GameGui();
                 Game.start(primaryStage);
             }
         });

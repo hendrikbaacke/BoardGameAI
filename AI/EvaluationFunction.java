@@ -46,7 +46,7 @@ public class EvaluationFunction {
 
 		if (isPlayer1AI == true) {
 
-			ModeDeterminationAggressive modeDet = new ModeDeterminationAggressive();
+			ModeDetermination_1 modeDet = new ModeDetermination_1();
 
 			double[] weightArray = modeDet.determineModeAggressive(f1, f2);
 			w1 = weightArray[0];
@@ -59,9 +59,9 @@ public class EvaluationFunction {
 
 		if (isPlayer2AI == true) {
 
-			ModeDeterminationDefensive modeDet = new ModeDeterminationDefensive();
+			ModeDetermination_2 modeDet = new ModeDetermination_2();
 
-			double[] weightArray = modeDet.determineModeDefensive(f1, f2);
+			double[] weightArray = modeDet.determineMode_2(f1, f2);
 
 			w1 = weightArray[0];
 			w2 = weightArray[1];
@@ -74,10 +74,10 @@ public class EvaluationFunction {
 		}
 
 		if (isPlayer3AI == true) {
-/*
-			ModeDeterminationDefensive modeDet = new ModeDeterminationDefensive();
 
-			double[] weightArray = modeDet.determineModeDefensive(f1, f2);
+			ModeDetermination_3 modeDet = new ModeDetermination_3();
+
+			double[] weightArray = modeDet.determineMode_3(f1, f2);
 
 			w1 = weightArray[0];
 			w2 = weightArray[1];
@@ -86,7 +86,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 
-*/
+
 		}
 
 
