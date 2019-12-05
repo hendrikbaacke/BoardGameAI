@@ -21,10 +21,10 @@ public class Strategies {
     //not covered here is the possibility of drawing from a database of openings, this would stronlgy mitigate the importance of the closingDistance strategy
 
     private ArrayList<String> Player = new ArrayList<>();
-    private ArrayList<String> Opponent = new ArrayList<>();
-    private ArrayList<String> Opponent2 = new ArrayList<>();
+    private ArrayList<String> Opponent = new ArrayList<>()
     private ArrayList<String> KillMoves = new ArrayList<>();
-
+    private GameState gameState;
+    private Strategies old;
 
     double CenterX = Board.hashBoard.get("E5").centerX;
     double CenterY = Board.hashBoard.get("E5").centerY;
@@ -33,6 +33,8 @@ public class Strategies {
     public Strategies(GameState gameState) {
         Hashtable<String, Hexagon> boardState = gameState.boardState;
         int turn = gameState.turn;
+        this.gameState = gameState;
+    	old = new Strategies(gameState.oldGameState);
 
         for (int i = 0; i< boardState.size(); i++) {
             if (!boardState.get(Board.hash.get(i)).empty) {
@@ -44,7 +46,7 @@ public class Strategies {
                         Opponent.add(Board.hash.get(i));
                     }
                     else if (turn ==3) {
-                        Opponent2.add(Board.hash.get(i));
+                        Opponent.add(Board.hash.get(i));
                     }
                 }
                 else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 2) {
@@ -55,7 +57,7 @@ public class Strategies {
                         Player.add(Board.hash.get(i));
                     }
                     else if (turn ==3) {
-                        Opponent2.add(Board.hash.get(i));
+                        Opponent.add(Board.hash.get(i));
                     }
                 }
                 else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 3) {
@@ -63,7 +65,7 @@ public class Strategies {
                         Opponent.add(Board.hash.get(i));
                     }
                     else if(turn ==2) {
-                        Opponent2.add(Board.hash.get(i));
+                        Opponent.add(Board.hash.get(i));
                     }
                     else if (turn ==3) {
                         Player.add(Board.hash.get(i));
@@ -195,77 +197,21 @@ public class Strategies {
     }
 
 
-    public int amountOppMarbles(GameState boardState, boolean AIPlayer1, boolean AIPLayer2) {
-        int Number = 1;
-        if (!AIPlayer1) Number = 2;
-        if (!AIPlayer1 || !AIPLayer2) Number = 3;
-
-        ArrayList<String> Player = new ArrayList();
-        ArrayList<String> Opponent = new ArrayList();
-
-        ArrayList<String> Opponent2 = new ArrayList();
-
-
-        int opponentCounterOld = 0;
-
-        for (int i = 0; i < boardState.oldGameState.boardState.size(); i++) {
-            if (!boardState.oldGameState.boardState.get(Board.hash.get(i)).empty) {
-                if (boardState.oldGameState.boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
-                    Player.add(Board.hash.get(i));
-
-                } else {
-                    Opponent.add(Board.hash.get(i));
-                    opponentCounterOld++;
-
-                    if (!AIPlayer1 || !AIPLayer2) {
-                        Opponent2.add(Board.hash.get(i));
-                        opponentCounterOld++;
-                    }
-                }
-            }
-        }
-        int differenceOppMarbles = opponentCounterOld - Opponent.size();
-
-
-        return differenceOppMarbles;
+    public int amountOppMarbles() {
+        return Opponent.size();
     }
 
-    public int amountOwnMarbles(GameState boardState, boolean AIPlayer1, boolean AIPlayer2) {
-        int Number = 1;
-        if (!AIPlayer1) Number = 2;
-        if (!AIPlayer1 || !AIPlayer2) Number = 3;
-
-        ArrayList<String> Player = new ArrayList();
-        ArrayList<String> Opponent = new ArrayList();
-
-        ArrayList<String> Opponent2 = new ArrayList();
-
-        int ownCounterOld = 0;
-
-        for (int i = 0; i < boardState.oldGameState.boardState.size(); i++) {
-            if (!boardState.oldGameState.boardState.get(Board.hash.get(i)).empty) {
-                if (boardState.oldGameState.boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
-                    Player.add(Board.hash.get(i));
-                    ownCounterOld++;
-
-                } else {
-                    Opponent.add(Board.hash.get(i));
-                    ownCounterOld++;
-
-                    if (!AIPlayer1 || !AIPlayer2) {
-                        Opponent2.add(Board.hash.get(i));
-                        ownCounterOld++;
-                    }
-                }
-            }
-        }
-        int differenceOwnMarbles = ownCounterOld - Player.size();
-
-
-        return differenceOwnMarbles;
+    public int amountOwnMarbles() {
+        return Player.size();
 
     }
-
+    public int compareMarblesWon() {
+    	return old.amountOppMarbles() - this.amountOppMarbles();
+    }
+    
+    public int compareMarblesLost() {
+    	return old.amountOwnMarbles() - this.amountOwnMarbles();
+    }
 
     //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
     //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
