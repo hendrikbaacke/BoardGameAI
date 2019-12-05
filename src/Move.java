@@ -217,7 +217,7 @@ public class Move {
 				if (board.equals(Board.hashBoard) && !adding) {
 					changePlayer();
 					Board.tb.add();
-					checkAI();
+					//checkAI();
 				}
 				
 				
@@ -231,7 +231,7 @@ public class Move {
 					gameFinished();
 					changePlayer();
 					Board.tb.add();
-					checkAI();
+					//checkAI();
 					pushed = false;
 				}
 				resetMove();
@@ -246,7 +246,7 @@ public class Move {
 					changePlayer();
 					Board.tb.add();
 					
-					checkAI();
+					//checkAI();
 					pushed = false;
 				}
 				resetMove();
@@ -272,7 +272,7 @@ public class Move {
 	}
 	
 	//automatically perform the move for the ai -> create tree, search and perform the move!!
-	public void checkAI()  {
+	public static void checkAI()  {
 		if (playersTurn ==1 && player1AI) {
 			System.out.println("ai player 1");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
@@ -296,7 +296,7 @@ public class Move {
 		}
 	}
 	
-	public int changeBack(int playerNr) {
+	public static int changeBack(int playerNr) {
 		if (playersTurn ==3) {
 			return 2;
 		}
