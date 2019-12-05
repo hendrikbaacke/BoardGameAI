@@ -171,11 +171,16 @@ public class Strategies {
     }
 
 
-    public int amountOppMarbles(GameState boardState, boolean AIPlayer1) {
+    public int amountOppMarbles(GameState boardState, boolean AIPlayer1, boolean AIPLayer2) {
         int Number = 1;
         if (!AIPlayer1) Number = 2;
+        if (!AIPlayer1 || !AIPLayer2) Number = 3;
+
         ArrayList<String> Player = new ArrayList();
         ArrayList<String> Opponent = new ArrayList();
+
+        ArrayList<String> Opponent2 = new ArrayList();
+
 
         int opponentCounterOld = 0;
 
@@ -187,6 +192,11 @@ public class Strategies {
                 } else {
                     Opponent.add(Board.hash.get(i));
                     opponentCounterOld++;
+
+                    if (!AIPlayer1 || !AIPLayer2) {
+                        Opponent2.add(Board.hash.get(i));
+                        opponentCounterOld++;
+                    }
                 }
             }
         }
@@ -196,11 +206,15 @@ public class Strategies {
         return differenceOppMarbles;
     }
 
-    public int amountOwnMarbles(GameState boardState, boolean AIPlayer1) {
+    public int amountOwnMarbles(GameState boardState, boolean AIPlayer1, boolean AIPlayer2) {
         int Number = 1;
         if (!AIPlayer1) Number = 2;
+        if (!AIPlayer1 || !AIPlayer2) Number = 3;
+
         ArrayList<String> Player = new ArrayList();
         ArrayList<String> Opponent = new ArrayList();
+
+        ArrayList<String> Opponent2 = new ArrayList();
 
         int ownCounterOld = 0;
 
@@ -212,7 +226,12 @@ public class Strategies {
 
                 } else {
                     Opponent.add(Board.hash.get(i));
+                    ownCounterOld++;
 
+                    if (!AIPlayer1 || !AIPlayer2) {
+                        Opponent2.add(Board.hash.get(i));
+                        ownCounterOld++;
+                    }
                 }
             }
         }

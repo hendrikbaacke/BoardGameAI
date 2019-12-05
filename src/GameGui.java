@@ -38,13 +38,13 @@ public class GameGui extends Application {
 				AI.Strategies strategies = new AI.Strategies(Board.hashBoard, true);
 
 				//double f1=strategies.closingDistance(state);
-				double f2=strategies.cohesion();
-				double f3=strategies.breakGroup();
-				double f4=strategies.strengthenGroup();
+				//double f2=strategies.cohesion();
+				//double f3=strategies.breakGroup();
+				//double f4=strategies.strengthenGroup();
 				//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
 				//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
 
-				System.out.println(f2+"  "+f3+"  "+f4+"  ");
+				//System.out.println(f5+"  "+f6+"  ");
 				System.out.println("llll");
 			});
 
@@ -56,7 +56,7 @@ public class GameGui extends Application {
 		     player_text.setFont(new Font(MAX_FONT_SIZE));		
 		     score_text1.setFont(new Font(MAX_FONT_SIZE));	
 		     score_text2.setFont(new Font(MAX_FONT_SIZE));		
-		     score_text3.setFont(new Font(MAX_FONT_SIZE));	
+		     score_text3.setFont(new Font(MAX_FONT_SIZE));
 
 		     HBox winner = new HBox(winner_label, winner_text);
 			Label player_label = new Label("Player turn:\t");

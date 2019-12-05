@@ -40,8 +40,8 @@ public class EvaluationFunction {
 		f3 = strategies.breakGroup();
 		f4 = strategies.strengthenGroup();
 
-		f5 = strategies.amountOppMarbles(state, isPlayer1AI);
-		f6 = strategies.amountOwnMarbles(state, isPlayer1AI);
+		f5 = strategies.amountOppMarbles(state, isPlayer1AI, isPlayer2AI);
+		f6 = strategies.amountOwnMarbles(state, isPlayer1AI, isPlayer2AI);
 
 
 		if (isPlayer1AI == true) {
