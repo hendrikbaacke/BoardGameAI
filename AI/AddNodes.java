@@ -42,49 +42,62 @@ public class AddNodes {
 						String moveTo = Board.rows.adjacentDirection(currentString, j);
 						
 						//add every move with one marble -- is okay!!
-						if (Move.validMoveOne(board, currentString, moveTo)) {
+						if (Move.validMoveOne(board, currentString, moveTo) & Board.hash.contains(moveTo)) {
 							GameState oneM = new GameState(currentString, null, null, moveTo, node.returnData());
 							if (oneM.valid) {
 								nodeNR++;
 								System.out.println(nodeNR);
 								oneMarbleMoves.add(oneM);
-								System.out.println("first is " + currentString + " moveto is " + moveTo);
+								//System.out.println("first is " + currentString + " moveto is " + moveTo);
 							}
 							//node.addChild(oneM);
 						}
 
-						//add every move with two marbles - in just one direction
-						int direction = Board.rows.oppositeDirection(j);
-						String marble2= Board.rows.adjacentDirection(currentString, direction);
-						if (Move.validMoveTwo(board, currentString, marble2, moveTo)) {
-							GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData());
-							if (twoM.valid) {
-								nodeNR++;
-								System.out.println(nodeNR);
-								twoMarblesMoves.add(twoM);
-								System.out.println("first is " + currentString + " second is  " + marble2 +  " moveto is " + moveTo);
-								//node.addChild(twoM);	
+						for (int k = 1; k < 7; k++) {
+						
+						String marble2= Board.rows.adjacentDirection(currentString, k);
+						if (Board.hash.contains(currentString) && Board.hash.contains(marble2) & Board.hash.contains(moveTo)) {
+							if (!board.get(marble2).empty) {
+								if (board.get(marble2).marble.playerNumber == changePlayer(node.returnData().turn)) {
+									if (Move.validMoveTwo(board, currentString, marble2, moveTo)) {
+										GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData());
+										if (twoM.valid) {
+											nodeNR++;
+											System.out.println(nodeNR);
+											twoMarblesMoves.add(twoM);
+											//System.out.println("first is " + currentString + " second is  " + marble2 +  " moveto is " + moveTo);
+											//node.addChild(twoM);
+										}
+									}
+								}
 							}
 						}
 						
 						//add every move with three marbles
-						String marble3 = Board.rows.adjacentDirection(marble2, direction);
-						if(Move.validMoveThree(board, currentString, marble2, marble3, moveTo)) {
-							GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData());
-							if (threeM.valid) {
-								nodeNR++;
-								System.out.println(nodeNR);
-								//node.addChild(threeM);
-								threeMarblesMoves.add(threeM);	
-								System.out.println("first is " + currentString + " second is  " + marble2 + " third is " + marble3 +  " moveto is " + moveTo);
+						String marble3 = Board.rows.adjacentDirection(marble2, k);
+						if (Board.hash.contains(currentString) && Board.hash.contains(marble2) && Board.hash.contains(marble3) & Board.hash.contains(moveTo)) {
+							if (!board.get(marble2).empty && !board.get(marble3).empty) {
+								if (board.get(marble2).marble.playerNumber == changePlayer(node.returnData().turn) && board.get(marble3).marble.playerNumber == changePlayer(node.returnData().turn)) {
+									if(Move.validMoveThree(board, currentString, marble2, marble3, moveTo)) {
+										GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData());
+										if (threeM.valid) {
+											nodeNR++;
+											System.out.println(nodeNR);
+											//node.addChild(threeM);
+											threeMarblesMoves.add(threeM);	
+										}
+									}
 								}
 							}
 						}
-					}	
-						//sideways directions!!! - add to try for this as well
 						
-				}
+						}
+
+						
+					}
+				}	
 			}
+		}
 	
 		for(int i = 0; i < threeMarblesMoves.size(); i++) {
 			node.addChild(threeMarblesMoves.get(i));
