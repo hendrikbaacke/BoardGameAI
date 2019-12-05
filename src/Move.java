@@ -673,6 +673,7 @@ public class Move {
 		selected = false;
 		nrSelected = 0;
 		selectedMarbles.clear();
+		pushed = false;
 	}
 	
 	//test if it is possible to move one, else it resets the move
