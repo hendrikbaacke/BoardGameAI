@@ -152,7 +152,7 @@ public class Main extends Application {
         });
         modeTwoContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
             @Override
-            public void handle(MouseEvent t) {
+            public void handle(MouseEvent t) { 
                 iv_2.setEffect(shadow);
             }
         });
