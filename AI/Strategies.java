@@ -22,6 +22,7 @@ public class Strategies {
 
     private ArrayList<String> Player = new ArrayList<>();
     private ArrayList<String> Opponent = new ArrayList<>();
+    private ArrayList<String> Opponent2 = new ArrayList<>();
     private ArrayList<String> KillMoves = new ArrayList<>();
 
 
@@ -29,19 +30,48 @@ public class Strategies {
     double CenterY = Board.hashBoard.get("E5").centerY;
 
 
-    public Strategies(Hashtable<String, Hexagon> boardState, boolean AIPlayer1) {
-        int Number = 1;
-        if (!AIPlayer1) Number = 2;
-        //separating AI marbles from Opponent marbles
-        for (int i = 0; i < boardState.size(); i++) {
+    public Strategies(GameState gameState) {
+        Hashtable<String, Hexagon> boardState = gameState.boardState;
+        int turn = gameState.turn;
+
+        for (int i = 0; i< boardState.size(); i++) {
             if (!boardState.get(Board.hash.get(i)).empty) {
-                if (boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
-                    Player.add(Board.hash.get(i));
-                } else {
-                    Opponent.add(Board.hash.get(i));
+                if(boardState.get(Board.hash.get(i)).marble.playerNumber == 1) {
+                    if (turn == 1) {
+                        Player.add(Board.hash.get(i));
+                    }
+                    else if(turn ==2) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if (turn ==3) {
+                        Opponent2.add(Board.hash.get(i));
+                    }
+                }
+                else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 2) {
+                    if (turn == 1) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if(turn ==2) {
+                        Player.add(Board.hash.get(i));
+                    }
+                    else if (turn ==3) {
+                        Opponent2.add(Board.hash.get(i));
+                    }
+                }
+                else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 3) {
+                    if (turn == 1) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if(turn ==2) {
+                        Opponent2.add(Board.hash.get(i));
+                    }
+                    else if (turn ==3) {
+                        Player.add(Board.hash.get(i));
+                    }
                 }
             }
         }
+
     }
 
 
