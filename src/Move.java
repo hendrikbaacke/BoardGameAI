@@ -5,6 +5,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.concurrent.TimeUnit;
 
 import AI.GameState;
 import AI.GameTree;
@@ -211,22 +212,26 @@ public class Move {
 			if(validMoveOne(board, first, moveTo)) {
 				//System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
 				performMovementOne(board);
+				resetMove();
 				
 				if (board.equals(Board.hashBoard) && !adding) {
 					changePlayer();
 					Board.tb.add();
+					checkAI();
 				}
 				
-				resetMove();
+				
 			}
 		}
 		else if(nrSelected ==2) {
 			if(validMoveTwo(board, first, second, moveTo)) {
 				performMovementTwo(board);
+				
 				if (board.equals(Board.hashBoard) && !adding) {
 					gameFinished();
 					changePlayer();
 					Board.tb.add();
+					checkAI();
 					pushed = false;
 				}
 				resetMove();
@@ -235,10 +240,13 @@ public class Move {
 		else if(nrSelected ==3) {
 			if(validMoveThree(board, first, second, third, moveTo)) {
 				performMovementThree(board);
+				
 				if (board.equals(Board.hashBoard) && !adding) {
 					gameFinished();
 					changePlayer();
 					Board.tb.add();
+					
+					checkAI();
 					pushed = false;
 				}
 				resetMove();
@@ -259,14 +267,12 @@ public class Move {
 				if (playersTurn == 2) {
 					playersTurn = 3;
 				}
-				
 			}
 		}
-		checkAI();
 	}
 	
 	//automatically perform the move for the ai -> create tree, search and perform the move!!
-	public void checkAI() {
+	public void checkAI()  {
 		if (playersTurn ==1 && player1AI) {
 			System.out.println("ai player 1");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
@@ -307,16 +313,17 @@ public class Move {
 	
 	//moves one single marble
 	public void performMovementOne(Hashtable<String, Hexagon> board) {
-		System.out.println("move one");
+		//System.out.println("move one");
 		Marble moving = board.get(first).marble;
 		board.get(first).setEmpty();
 		board.get(moveTo).setFull(moving);
 		moving.setLocationKey(moveTo);
 		moving.updateLocation(board);
+	
 	}
 	
 	public void performMovementTwo(Hashtable<String, Hexagon> board) {
-		System.out.println("move two");
+		//System.out.println("move two");
 		
 		//if it is moves sideways, then it can never push another marble
 		if(Board.rows.sideways(first, second, moveTo)) {
@@ -346,7 +353,7 @@ public class Move {
 	}
 	
 	public void performMovementThree(Hashtable<String, Hexagon> board) {
-		System.out.println("moveThree");
+		//System.out.println("moveThree");
 		
 		String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
 		//if it is moves sideways, then it can never push another marble
@@ -435,6 +442,7 @@ public class Move {
 		if (direction ==1) {
 			keyOne = letterFirstSt + numberOneMinus;
 			keyTwo = letterSecondSt + numberTwoMinus;
+			
 			
 		}
 		
@@ -698,13 +706,13 @@ public class Move {
 			if(board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
 			//if it needs to move sideways and if there are two free space where they are needed, the move is valid
 				if(Board.rows.sideways(first, second, moveTo)) {
-					System.out.println("sideways is true");
+					//System.out.println("sideways is true");
 					if (Board.rows.twoFree(first, second, moveTo, board)) {
 						return true;
 					}
 					else {
 						//System.out.println("did not move");
-						System.out.println("can't move sideways");
+						//System.out.println("can't move sideways");
 						resetMove();
 						return false;
 					}

@@ -217,47 +217,84 @@ public class BoardRows {
 		
 		
 		if (direction ==1) {
-			if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty) {
-				System.out.println("ONE TRUE");
-				return true;
-			}	
+			if (board.containsKey(letterFirstSt+numberOneMinus) && board.containsKey(letterSecondSt+numberTwoMinus)) {
+				if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty) {
+					//System.out.println("ONE TRUE");
+					return true;
+				}
+			}
+			else {
+				//System.out.println("FALSE");
+				return false;
+			}
 		}
 		
 		else if (direction ==2) {
-			if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty) {
-				System.out.println("TWO TRUE");
-				return true;
-			}	
+			if (board.containsKey(letterOnePlusSt + numberOne) && board.containsKey(letterTwoPlusSt+ numberTwo)){
+				if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty) {
+					//System.out.println("TWO TRUE");
+					return true;
+				}	
+			}
+			else {
+				//System.out.println("FALSE");
+				return false;
+			}
 		}
 		
 		else if(direction ==3) {
-			if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty) {
-				System.out.println("THREE TRUE");
-				return true;
-			}	
+			if (board.containsKey(letterOnePlusSt + numberOnePlus) && board.containsKey(letterTwoPlusSt+numberTwoPlus)) {
+				if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty) {
+					//System.out.println("THREE TRUE");
+					return true;
+				}
+			}
+			else {
+				//System.out.println("FALSE");
+				return false;
+			}
 			
 		}
 		else if (direction ==4) {
-			if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty) {
-				System.out.println("FOUR TRUE");
-				return true;
+			if (board.containsKey(letterFirstSt+numberOnePlus) && board.containsKey(letterSecondSt+numberTwoPlus)) {
+				if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty) {
+					//System.out.println("FOUR TRUE");
+					return true;
+				}
+			}
+			else {
+				//System.out.println("FALSE");
+				return false;
 			}
 		}
 		else if (direction ==5) {
-			if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty) {
-				System.out.println("FIVE TRUE");
-				return true;
+			if (board.containsKey(letterOneMinusSt + numberOne) && board.containsKey(letterTwoMinusSt + numberTwo)) {
+				if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty) {
+					//System.out.println("FIVE TRUE");
+					return true;
+				}
+			}
+			else {
+				//System.out.println("FALSE");
+				return false;
 			}
 		}
 		else if (direction ==6) {
-			if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty) {
-				System.out.println("SIX TRUE");
-				return true;
+			if (board.containsKey(letterOneMinusSt + numberOneMinus) && board.containsKey(letterTwoMinusSt + numberTwoMinus)) {
+				if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty) {
+					//System.out.println("SIX TRUE");
+					return true;
+				}
+			}
+			else {
+				//System.out.println("FALSE");
+				return false;
+				
 			}
 			
 		}
 		
-		System.out.println("FALSE");
+		//System.out.println("FALSE");
 		return false;
 	}
 	
@@ -305,47 +342,57 @@ public class BoardRows {
 		
 		
 		if (direction ==1) {
-			if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty && board.get(letterThirdSt + numberThreeMinus).empty) {
-				System.out.println("ONE TRUE");
-				return true;
-			}	
+			if(board.containsKey(letterFirstSt+numberOneMinus) && board.containsKey(letterSecondSt+numberTwoMinus) && board.containsKey(letterThirdSt + numberThreeMinus)) {
+				if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty && board.get(letterThirdSt + numberThreeMinus).empty) {
+					//System.out.println("ONE TRUE");
+					return true;
+				}	
+			}
 		}
 		
 		else if (direction ==2) {
-			if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty && board.get(letterThreePlusSt + numberThree).empty) {
-				System.out.println("TWO TRUE");
-				return true;
-			}	
+			if(board.containsKey(letterOnePlusSt + numberOne) && board.containsKey(letterTwoPlusSt+ numberTwo) && board.containsKey(letterThreePlusSt + numberThree)) {
+				if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty && board.get(letterThreePlusSt + numberThree).empty) {
+					//System.out.println("TWO TRUE");
+					return true;
+				}	
+			}
 		}
 		
 		else if(direction ==3) {
-			if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty && board.get(letterThreePlusSt + numberThreePlus).empty) {
-				System.out.println("THREE TRUE");
-				return true;
-			}	
-			
+			if(board.containsKey(letterOnePlusSt + numberOnePlus) && board.containsKey(letterTwoPlusSt+numberTwoPlus) && board.containsKey(letterThreePlusSt + numberThreePlus)) {
+				if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty && board.get(letterThreePlusSt + numberThreePlus).empty) {
+					//System.out.println("THREE TRUE");
+					return true;
+				}	
+			}
 		}
 		else if (direction ==4) {
-			if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty && board.get(letterThirdSt + numberThreePlus).empty) {
-				System.out.println("FOUR TRUE");
-				return true;
+			if(board.containsKey(letterFirstSt+numberOnePlus) && board.containsKey(letterSecondSt+numberTwoPlus) && board.containsKey(letterThirdSt + numberThreePlus)) {
+				if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty && board.get(letterThirdSt + numberThreePlus).empty) {
+					//System.out.println("FOUR TRUE");
+					return true;
+				}
 			}
 		}
 		else if (direction ==5) {
-			if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty && board.get(letterThreeMinusSt + numberThree).empty) {
-				System.out.println("FIVE TRUE");
-				return true;
+			if(board.containsKey(letterOneMinusSt + numberOne) && board.containsKey(letterTwoMinusSt + numberTwo) && board.containsKey(letterThreeMinusSt + numberThree)) {
+				if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty && board.get(letterThreeMinusSt + numberThree).empty) {
+					//System.out.println("FIVE TRUE");
+					return true;
+				}
 			}
 		}
 		else if (direction ==6) {
-			if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty && board.get(letterThreeMinusSt + numberThreeMinus).empty) {
-				System.out.println("SIX TRUE");
-				return true;
+			if(board.containsKey(letterOneMinusSt + numberOneMinus) && board.containsKey(letterTwoMinusSt + numberTwoMinus) && board.containsKey(letterThreeMinusSt + numberThreeMinus)) {
+				if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty && board.get(letterThreeMinusSt + numberThreeMinus).empty) {
+					//System.out.println("SIX TRUE");
+					return true;
+				}
 			}
-			
 		}
 		
-		System.out.println("FALSE");
+		//System.out.println("FALSE");
 		return false;
 	}
 	
