@@ -123,10 +123,10 @@ public class Strategies {
         double groupBreaks = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 0; j < Opponent.size(); j++) {
-                if (abs((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1)) < 2) {
+                if (abs((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1)) < 2 && ((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)+(int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1))!=0) {
                     a:
                     for (int k = 0; k < Opponent.size(); k++) {
-                        if (k != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1))) {
+                        if (k != j && ((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == -((int) Player.get(i).charAt(0) - (int) Opponent.get(j).charAt(0)) && ((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == -((int) Player.get(i).charAt(1) - (int) Opponent.get(j).charAt(1))) {
                             groupBreaks++;
                             break a;
                         }
@@ -141,38 +141,34 @@ public class Strategies {
     public double strengthenGroup() {
         /* Determinates how many possibilities the AI has to push the Opponent.
          */
-        String Test1 = "False";
-        String Test2 = "False";
+
         double groupStrengh = 0;
         for (int i = 0; i < Player.size(); i++) {
             for (int j = 1; j < Player.size(); j++) {
                 //if we have a neighbor (at least 2 marbles are needed to even consider a push)
-                if (i!=j && abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2) {
+                if (i!=j && abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) < 2 && abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1)) < 2 && ((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)+(int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))!=0) {
                     for (int k = 0; k < Opponent.size(); k++) {
-                        if (abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
+                        if (((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == -((int) Player.get(i).charAt(0) - (int) Player.get(j).charAt(0)) && ((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == -((int) Player.get(i).charAt(1) - (int) Player.get(j).charAt(1))) {
                             //found a marble to potentially push, needs checking maybe Opp has more marbles
                             boolean possible = true;
                             //if AI can kill, pushing is possible and no further checking needed
                             if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < (int) '1' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > (int) '9'){
                                 KillMoves.add(Player.get(i));
-                                System.out.println("Kill "+((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0)))+" "+((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))));
-                                System.out.println((int) 'A'+" "+(int) 'I'+" "+(int) '1'+" "+(int) '9');
-                                System.out.println(Player.get(i)+Player.get(j)+Opponent.get(k));
                             }else{
                                 for (int m = 1; m < Opponent.size(); m++) {
-                                    if (m != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
+                                    if (m != k && ((int) Opponent.get(k).charAt(0) - (int) Player.get(i).charAt(0)) == -((int) Opponent.get(k).charAt(0) - (int) Opponent.get(m).charAt(0)) && ((int) Opponent.get(k).charAt(1) - (int) Player.get(i).charAt(1)) == -((int) Opponent.get(k).charAt(1) - (int) Opponent.get(m).charAt(1))) {
                                         //can we still push? atm 2v2
                                         possible = false;
                                         for (int n = 1; n < Player.size(); n++) {
-                                            if (n != i && n != j && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
+                                            if (n != i && n != j && ((int) Player.get(j).charAt(0) - (int) Player.get(i).charAt(0)) == -((int) Player.get(j).charAt(0) - (int) Player.get(n).charAt(0)) && ((int) Player.get(j).charAt(1) - (int) Player.get(i).charAt(1)) == -((int) Player.get(j).charAt(1) - (int) Player.get(n).charAt(1))) {
                                                 //we have three marbles. does the Opponent has as well 3?
                                                 boolean possible2 = true;
                                                 //if AI can kill, pushing is possible and no further checking needed
-                                                if(((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) < (int) 'A' || ((int) Opponent.get(k).charAt(0)-((int) Player.get(i).charAt(0)-(int) Opponent.get(k).charAt(0))) > (int) 'I' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) < (int) '1' || ((int) Opponent.get(k).charAt(1)-((int) Player.get(i).charAt(1)-(int) Opponent.get(k).charAt(1))) > (int) '9'){
+                                                if(((int) Opponent.get(m).charAt(0)-((int) Opponent.get(k).charAt(0)-(int) Opponent.get(m).charAt(0))) < (int) 'A' || ((int) Opponent.get(m).charAt(0)-((int) Opponent.get(k).charAt(0)-(int) Opponent.get(m).charAt(0))) > (int) 'I' || ((int) Opponent.get(m).charAt(1)-((int) Opponent.get(k).charAt(1)-(int) Opponent.get(m).charAt(1))) < (int) '1' || ((int) Opponent.get(m).charAt(1)-((int) Opponent.get(k).charAt(1)-(int) Opponent.get(m).charAt(1))) > (int) '9'){
                                                     KillMoves.add(Player.get(i));
                                                 }else{
                                                     for (int p = 1; p < Opponent.size(); p++) {
-                                                        if (p != m && p != k && abs((int) Player.get(i).charAt(0) - (int) Opponent.get(k).charAt(0)) == abs((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && abs((int) Player.get(i).charAt(1) - (int) Opponent.get(k).charAt(1)) == abs((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
+                                                        if (p != m && p != k && ((int) Opponent.get(m).charAt(0) - (int) Opponent.get(k).charAt(0)) == -((int) Opponent.get(m).charAt(0) - (int) Opponent.get(p).charAt(0)) && ((int) Opponent.get(m).charAt(1) - (int) Opponent.get(k).charAt(1)) == -((int) Opponent.get(m).charAt(1) - (int) Opponent.get(p).charAt(1))) {
                                                             //no pushing here possible
                                                             possible2 = false;
                                                         }
@@ -180,7 +176,6 @@ public class Strategies {
                                                 }
                                                 if (possible2) {
                                                     groupStrengh++;
-                                                    System.out.println("Test2");
                                                 }
                                             }
                                         }
@@ -189,7 +184,6 @@ public class Strategies {
                             }
                             if (possible){
                                 groupStrengh++;
-                                System.out.println("Test1");
                             }
                         }
                     }
