@@ -31,17 +31,18 @@ public class EvaluationFunction {
 
 		boolean isPlayer2AI = src.Board.move.player2AI;
 
-		boolean isPlayer3AI = src.Board.move.player3AI;
+		boolean isPlayer3AI = src.Board.move.player3AI; 
 
-		Strategies strategies = new Strategies(state.boardState, isPlayer1AI);
+		Strategies strategies = new Strategies(state);
 
 		f1 = strategies.closingDistance(state);
 		f2 = strategies.cohesion();
 		f3 = strategies.breakGroup();
 		f4 = strategies.strengthenGroup();
 
-		f5 = strategies.amountOppMarbles(state, isPlayer1AI, isPlayer2AI);
-		f6 = strategies.amountOwnMarbles(state, isPlayer1AI, isPlayer2AI);
+		//just returns the size
+		f5 = strategies.compareMarblesWon();
+		f6 = strategies.compareMarblesLost();
 
 
 		if (isPlayer1AI == true) {
