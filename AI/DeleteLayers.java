@@ -14,8 +14,7 @@ public class DeleteLayers {
 	//delete a branch of a certain node
 	public static void deleteBranch(Node<GameState> start) {
 		//delete a node and cascade - if parent removes this node, there will be no access anymore - so it's deleted
-		Node<GameState> parent = start.parent;
-		parent.children.remove(start);
-		
+		start.children.clear();
 	}
+
 }

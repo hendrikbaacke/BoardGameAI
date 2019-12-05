@@ -30,7 +30,7 @@ public class Marble extends Ellipse{
 		if(player == 2) {
 			this.setFill(Color.GRAY);
 		}
-		if(player == 3) {
+		if(player == 3) { 
 			this.setFill(Color.DARKGREEN);
 		}
 		if (newM) {
@@ -60,7 +60,9 @@ public class Marble extends Ellipse{
 						@Override
 						public void handle(MouseEvent t) {
 							//System.out.println(locationKey);
-							Board.move.select(locationKey, Board.hashBoard);
+							if ((Move.playersTurn ==1 && !Move.player1AI) || (Move.playersTurn ==2 && !Move.player2AI) && (Move.playersTurn ==3 && !Move.player3AI)) {
+								Board.move.select(locationKey, Board.hashBoard);
+							}
 						}
 					};
 					

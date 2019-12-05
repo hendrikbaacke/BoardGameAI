@@ -9,8 +9,6 @@ import src.Move;
 public class PerformAIAction {
 
 	//for now, this is done!!
-	
-
 	public static GameTree tree;
 
 	//get the best node and use this action
@@ -26,7 +24,7 @@ public class PerformAIAction {
 				if (needed.returnData().third != null) {
 					Board.move.select(needed.returnData().third, Board.hashBoard);
 					System.out.println("select " + needed.returnData().third);
-				}
+				} 
 				else {
 					Board.move.select(needed.returnData().first, Board.hashBoard);
 					System.out.println("select " + needed.returnData().first);
@@ -40,6 +38,7 @@ public class PerformAIAction {
 			System.out.println("select " + needed.returnData().moveTo);
 		}
 		Move.ai = false;
+		DeleteLayers.deleteBranch(tree.getRoot());
 	}
 	
 	public static Node<GameState> choose(){
