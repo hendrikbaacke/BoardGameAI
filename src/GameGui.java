@@ -33,6 +33,7 @@ public class GameGui extends Application {
 	public void start( Stage stage) {
 		try {
 			Button Eva = new Button("Evaluation");
+			Button buttonAI = new Button("Perform AI move");
 			//Eva.setStyle("-fx-background-color: darkgray");
 			Eva.setOnAction(e ->{
 				AI.Strategies strategies = new AI.Strategies(Board.hashBoard, true);
@@ -47,7 +48,12 @@ public class GameGui extends Application {
 				//System.out.println(f5+"  "+f6+"  ");
 				System.out.println("llll");
 			});
-
+			
+			buttonAI.setOnAction(e -> {
+				Move.checkAI();
+				System.out.println("did ai move and delted tree (kinda)");
+			});
+			
 
 		    Label winner_label = new Label("Player win:\t");
 		     double MAX_FONT_SIZE = 30.0; // define max font size you need
@@ -92,7 +98,8 @@ public class GameGui extends Application {
 				GridPane.setRowIndex(score,2 );
 				GridPane.setRowIndex(score2,3 );
 				GridPane.setRowIndex(Eva,6 );
-				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, Eva); //add reset for the reset button
+				GridPane.setRowIndex(buttonAI, 7);
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, Eva, buttonAI); //add reset for the reset button
 			}
 			
 			if (Board.numberPlayers ==3) {
@@ -102,7 +109,7 @@ public class GameGui extends Application {
 				GridPane.setRowIndex(score,2 );
 				GridPane.setRowIndex(score2,3 );
 				GridPane.setRowIndex(score3, 4);
-				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, score3); //add reset for the reset button
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, score3, Eva, buttonAI); //add reset for the reset button
 			}
 			player_text.setText("1");
 			
@@ -131,7 +138,7 @@ public class GameGui extends Application {
 	    		    stage.setScene(newScene(board.boardMarbles, board,SubScene));
 
 	            }
-	        });
+	        }); 
 
 		} catch (Exception e) {
 			System.out.println("Exception in GUI Creation" + e.getMessage());
@@ -145,10 +152,6 @@ public class GameGui extends Application {
 		MainScene.getChildren().addAll(pp);
 		Screen.getChildren().addAll(MainScene,SubScene);
 		Scene scene = new Scene(Screen);
-
-
-
-
 		return scene;
 	}
 
