@@ -180,7 +180,7 @@ public class Strategies {
         int opponentCounterOld = 0;
 
         for (int i = 0; i < boardState.oldGameState.boardState.size(); i++) {
-            if (!boardState.oldGameState.boardState.get(i).empty) {
+            if (!boardState.oldGameState.boardState.get(Board.hash.get(i)).empty) {
                 if (boardState.oldGameState.boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
                     Player.add(Board.hash.get(i));
 
@@ -205,7 +205,7 @@ public class Strategies {
         int ownCounterOld = 0;
 
         for (int i = 0; i < boardState.oldGameState.boardState.size(); i++) {
-            if (!boardState.oldGameState.boardState.get(i).empty) {
+            if (!boardState.oldGameState.boardState.get(Board.hash.get(i)).empty) {
                 if (boardState.oldGameState.boardState.get(Board.hash.get(i)).marble.playerNumber == Number) {
                     Player.add(Board.hash.get(i));
                     ownCounterOld++;
