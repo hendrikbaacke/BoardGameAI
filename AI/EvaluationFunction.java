@@ -49,7 +49,7 @@ public class EvaluationFunction {
 
 			ModeDetermination_1 modeDet = new ModeDetermination_1();
 
-			double[] weightArray = modeDet.determineModeAggressive(f1, f2);
+			double[] weightArray = modeDet.determineMode_1(f1, f2);
 			w1 = weightArray[0];
 			w2 = weightArray[1];
 			w3 = weightArray[2];

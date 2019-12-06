@@ -20,7 +20,7 @@ public class GameState {
 	private Move move = src.Board.move;
 	public int turn;
 	public double evaluatedValue;
-	
+	public int evaluateFrom = 0;
 	
 	public boolean valid;
 	//later needed for the evaluation function
@@ -41,11 +41,13 @@ public class GameState {
 		this.point3 = move.getScore3();
 		//last one who moved
 		this.turn = turn;
+		this.evaluateFrom = move.playersTurn;  //AddNodes.changePlayer(turn);
 	}
 	
 	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree
 		this.turn = AddNodes.changePlayer(old.turn);
+		this.evaluateFrom = old.evaluateFrom;
 		int save = Board.move.playersTurn;
 		Board.move.playersTurn = this.turn;
 		Board.move.adding = true;
