@@ -10,7 +10,6 @@ public class PerformAIAction {
 
 	//for now, this is done!!
 	public static GameTree tree;
-
 	//get the best node and use this action
 	public static void perform(boolean greedy) {
 		//build the tree and perform search - make a new node a root node?
@@ -24,7 +23,8 @@ public class PerformAIAction {
 		}
 		if (needed.returnData().first != null) {
 			Board.move.select(needed.returnData().first, Board.hashBoard);
-			System.out.println("select " + needed.returnData().first);
+			
+			System.out.println("select 11111" + needed.returnData().first);
 			if (needed.returnData().second != null) {
 				Board.move.select(needed.returnData().second, Board.hashBoard);
 				System.out.println("select " + needed.returnData().second);
@@ -52,7 +52,7 @@ public class PerformAIAction {
 		//List<Node<GameState>> depth = tree.findAtDepth(1);
 		//return depth.get(0);
 		AlphaBeta  A  =new AlphaBeta(tree,2);
-		return A.getBestMove();
+		return A.getBestMove(2);
 	}
 	
 	//greedy one
