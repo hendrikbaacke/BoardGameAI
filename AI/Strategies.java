@@ -121,6 +121,7 @@ public class Strategies {
     }
 
 
+  
     public double breakGroup() {
 
         /*In order to determine value for a player each marble (of this player) is checked for an opponent marble at one adjacent side of the marble and an

@@ -10,7 +10,7 @@ import src.Move;
 public class GameState {
 	//all the information needed to store the move you made (from the first one)(we need to store first, second and third and moveTo in case the move needs to be done again):
 	//use this to store every valid gamestate
-	
+
 	//store which move needs to be done to get to this state - such as which player's turn it is and which move they perform
 	//if there is no second selected, it means that it is null
 	public String first;
@@ -42,6 +42,9 @@ public class GameState {
 		//last one who moved
 		this.turn = turn;
 	}
+	public GameState() {
+		
+	}
 	
 	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree
@@ -61,6 +64,7 @@ public class GameState {
 		
 			if (first != null) {
 				move.select(first, boardState);
+				System.out.println("i am here");
 				if (second != null) {
 						move.select(second, boardState);
 						if (third != null) {

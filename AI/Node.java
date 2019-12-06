@@ -8,10 +8,10 @@ import java.util.List;
 
 public class Node<T> {
 
-	T data;
+	private T data;
     Node<T> parent;
     List<Node<T>> children;
-
+    
     public Node(T data) {
         this.data = data;
         this.children = new ArrayList<Node<T>>();
