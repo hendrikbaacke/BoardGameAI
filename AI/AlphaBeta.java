@@ -29,7 +29,7 @@ public AlphaBeta(GameTree tree , int playerTurn){
 		double best = Double.MIN_VALUE;
 		List<Node<GameState>> moves = game.findAtDepth(1);
 		for (Node<GameState> m : moves) {
-			double score = max(0,m,alpha,beta,other());
+			double score = max(0,m,alpha,beta,otherPlayer());
 			if (score > best) {
 				best = score;
 				bestMove = m;
@@ -40,18 +40,21 @@ public AlphaBeta(GameTree tree , int playerTurn){
 		return bestMove;
 	}
 	
-    private double other() {
+    private double otherPlayer() {
 		if(playerTurn == 1)
 			return 2;
 		if(playerTurn == 2)
 			return 1;
 		return 0;
 	}
+  public void print() {
+	 
+  }
 
 	private double max(int depth, Node<GameState> state, double alpha, double beta, double playerTurn) {
         //WHEN THE DEPTH REACHES THE MAXDEPTH
 		if (0 == depth)
-            return ((playerTurn == other()) ? 1 : -1) * state.returnData().evaluatedValue;
+            return ((playerTurn == otherPlayer()) ? 1 : -1) * state.returnData().evaluatedValue;
 		
         if(depth >= MAX_DEPTH){
            //HERE ADD THE EVALUATION FUNCTION
@@ -62,14 +65,14 @@ public AlphaBeta(GameTree tree , int playerTurn){
             return heuristicvalue;
         }
         double result = Double.MIN_VALUE;
-        if(playerTurn != other()) {
+        if(playerTurn != otherPlayer()) {
         //here set alpha to the negative infinity 
         
         //then we find the list of possible moves of the state
         List<Node<GameState>> moves = state.children;
         //here for each move we do a recursive function to the min function because this is the minimizing player
         for( Node<GameState> move : moves){
-            double value = min( depth + 1,move, alpha, beta, other());
+            double value = min( depth + 1,move, alpha, beta, otherPlayer());
             //if the value we found is bigger than the alpha then we update the alpha from -infinity to the bigger value
             if(value > result){
                 result = value;
