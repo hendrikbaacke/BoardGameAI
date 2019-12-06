@@ -34,7 +34,10 @@ public class Strategies {
         Hashtable<String, Hexagon> boardState = gameState.boardState;
         int turn = gameState.turn;
         this.gameState = gameState;
-    	old = new Strategies(gameState.oldGameState);
+
+        if(gameState.oldGameState != null) {
+            old = new Strategies(gameState.oldGameState);
+        }
 
         for (int i = 0; i< boardState.size(); i++) {
             if (!boardState.get(Board.hash.get(i)).empty) {
@@ -206,11 +209,17 @@ public class Strategies {
 
     }
     public int compareMarblesWon() {
-    	return old.amountOppMarbles() - this.amountOppMarbles();
+        if (old != null) {
+            return old.amountOppMarbles() - this.amountOppMarbles();
+        }
+        return 0;
     }
     
     public int compareMarblesLost() {
-    	return old.amountOwnMarbles() - this.amountOwnMarbles();
+        if (old != null) {
+            return old.amountOwnMarbles() - this.amountOwnMarbles();
+        }
+        return 0;
     }
 
     //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
