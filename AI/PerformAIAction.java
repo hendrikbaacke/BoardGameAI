@@ -45,7 +45,7 @@ public class PerformAIAction {
 		//List<Node<GameState>> depth = tree.findAtDepth(1);
 		//return depth.get(0);
 		AlphaBeta  A  =new AlphaBeta(tree,2);
-		return A.getBestMove(2);
+		return A.getBestMove();
 	}
 	
 	public static void createGameTree(GameState state, int layers) {

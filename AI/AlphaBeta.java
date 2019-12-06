@@ -1,7 +1,7 @@
 package AI;
 
 import java.util.List;
-
+import AI.EvaluationFunction;
 import javafx.scene.paint.Color;
 import src.Board;
 import src.MarbleStorage;
@@ -10,37 +10,26 @@ import src.Move;
 public class AlphaBeta {
 	
 	private static final Integer MAX_DEPTH = 2;
-	private static final Integer INF = Integer.MAX_VALUE;
-	private static final Integer negINF = Integer.MIN_VALUE;
+	private GameTree game;
+	private int playerTurn;
+	private static double alpha = Double.MIN_VALUE;
+	private static double beta  = Double.MAX_VALUE;
+    private Move move = new Move();
 
-	private Move move = new Move();
-	private static AlphaBeta instance;
-	private int PlayerTurn;
-	private Node<GameState> root;
-	private GameTree game= new GameTree(root);
+    private int PlayerTurn;
+    	
+public AlphaBeta(GameTree tree , int playerTurn){
+            this.game = tree;
+            this.playerTurn = PlayerTurn;
+}
 
-
-	public AlphaBeta(GameTree game, int PlayerTurn) {
-		      this.game = game;
-		      this.PlayerTurn = PlayerTurn;
-		   }
-
-	public static void init(GameTree game, int AIColor) {
-		if (AlphaBeta.instance == null)
-			AlphaBeta.instance = new AlphaBeta(game, AIColor);
-	}
-
-	public static AlphaBeta getInstance() {
-		return AlphaBeta.instance;
-	}
-
-	public Node<GameState> getBestMove(int currentPlayer) {
+	public Node<GameState> getBestMove()
+	{
 		Node<GameState> bestMove = null;
-		Integer best = -100;
+		double best = Double.MIN_VALUE;
 		List<Node<GameState>> moves = game.findAtDepth(1);
 		for (Node<GameState> m : moves) {
-			Integer score = alphabeta(game, other(), MAX_DEPTH - 1,
-					negINF, INF);
+			double score = max(1,m,alpha,beta);
 			if (score > best) {
 				best = score;
 				bestMove = m;
@@ -50,50 +39,72 @@ public class AlphaBeta {
 
 		return bestMove;
 	}
-
-	private Integer alphabeta(GameTree game2, int currentPlayer, Integer depth,
-			Integer alpha, Integer beta) {
-		if (depth > 0) {
-			Integer best = beta;
-			List<Node<GameState>> moves2 = game2.findAtDepth(currentPlayer);
-			for (Node<GameState> m : moves2) {
-				Integer score = -alphabeta(game2, other(), depth - 1,
-						-best, -alpha);
-				if (alpha < score && score < beta)
-					score = -alphabeta(game2, other(), depth - 1, -beta,
-							-alpha);
-				alpha = Math.max(alpha, score);
-				if (alpha >= beta)
-					return alpha;
-				best = alpha + 1;
-				
-			}
-			return best;
-			
-		} else {
-			return ((currentPlayer == PlayerTurn) ? 1 : -1)
-					* this.evaluateBoard(game2, currentPlayer);
-		}
-	}
-
-	private Integer evaluateBoard(GameTree game2, int player) {
-		Integer good = MarbleStorage.ballsCount(player);
-		Integer bad = MarbleStorage.ballsCount(other());
-		return good - bad;
-	}
-
-	public int getColor() {
-		return PlayerTurn;
-	}
-	public int other() {
-		if(PlayerTurn ==1) {
-			return 2;
-		}
-		else if(PlayerTurn ==2) {
-			return 1;
-		}
-		else return PlayerTurn;
-		
-	}
-
+	
+    private double max(int depth, Node<GameState> state, double alpha, double beta) {
+        //WHEN THE DEPTH REACHES THE MAXDEPTH
+        if(depth >= MAX_DEPTH){
+           //HERE ADD THE EVALUATION FUNCTION
+            //here find the heursitic value od the state
+            //EvaluationFunction ef = new EvaluationFunction(state);
+            //double heuristicvalue = ef.evaluate(state);
+            double heuristicvalue = state.returnData().evaluatedValue;
+            return heuristicvalue;
+        }
+        //here set alpha to the negative infinity 
+        double result = Double.MIN_VALUE;
+        //then we find the list of possible moves of the state
+        List<Node<GameState>> moves = state.children;
+        //here for each move we do a recursive function to the min function because this is the minimizing player
+        for( Node<GameState> move : moves){
+            double value = min( depth + 1,move, alpha, beta);
+            //if the value we found is bigger than the alpha then we update the alpha from -infinity to the bigger value
+            if(value > result){
+                result = value;
+            }
+            //if value we get is bigger than beta then we return result because it is equal to alpha 
+            //so here we do not change alpha because the value was bigger than beta
+            if(value >= beta){
+                return result;
+            }
+            //if value is bigger than the alpha -infinity //so yes we update alpha and it will be equal to the value 
+            if(value > alpha){
+                alpha = value;
+            }
+        }
+        return result;
+    }
+    
+    private double min(int depth, Node<GameState> state, double alpha, double beta) {
+        //here we get the winner of the game so we are at the end of the game and the depth also 
+        //exeddes the max depth
+        if( depth >= MAX_DEPTH){
+           //here find the heursitic value od the state
+        	 double heuristicvalue = state.returnData().evaluatedValue;
+             return heuristicvalue;
+        }
+        //here result is eqaul to beta and we are trying to get the value of beta 
+        double result = Double.MAX_VALUE;
+        //then we find the list of possible moves of the state
+        List<Node<GameState>> moves = state.children;
+        //for all the maximum player we have 
+        for( Node<GameState> move : moves){
+            //because the childern of the minimum node are the maximizing player node  we do a recursive call to
+            //max function 
+            double value = max(depth + 1, move, alpha, beta);
+            //when we go to the maximum we will get the value  then we compare this value with beta 
+            //if value is less than the beta then we update the result(the beta)
+            if(value < result){
+                result = value;
+            }
+            //here we check if the value is less then we return 
+            if(value <= alpha){
+                return result;
+            }
+            if(value < beta){
+                beta = value;
+            }
+        }
+        return result;
+    }
 }
+
