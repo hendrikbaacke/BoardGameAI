@@ -42,6 +42,9 @@ public class GameState {
 		//last one who moved
 		this.turn = turn;
 	}
+	public GameState(){
+
+	}
 	
 	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree

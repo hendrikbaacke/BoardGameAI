@@ -9,7 +9,7 @@ import src.Move;
 
 public class AlphaBeta {
 	
-	private static final Integer MAX_DEPTH = 2;
+	private static final Integer MAX_DEPTH = 5;
 	private GameTree game;
 	private int playerTurn;
 	private static double alpha = Double.MIN_VALUE;
@@ -23,9 +23,10 @@ public AlphaBeta(GameTree tree , int playerTurn){
             this.playerTurn = PlayerTurn;
 }
 
-	public Node<GameState> getBestMove()
+	public Node<GameState> getBestMove( )
 	{
-		Node<GameState> bestMove = null;
+	    GameState T = new GameState();
+		Node<GameState> bestMove =new Node<GameState>(T);
 		double best = Double.MIN_VALUE;
 		List<Node<GameState>> moves = game.findAtDepth(1);
 		for (Node<GameState> m : moves) {
@@ -44,7 +45,7 @@ public AlphaBeta(GameTree tree , int playerTurn){
         //WHEN THE DEPTH REACHES THE MAXDEPTH
         if(depth >= MAX_DEPTH){
            //HERE ADD THE EVALUATION FUNCTION
-            //here find the heursitic value od the state
+            //here find the heursitic value of the state
             //EvaluationFunction ef = new EvaluationFunction(state);
             //double heuristicvalue = ef.evaluate(state);
             double heuristicvalue = state.returnData().evaluatedValue;
@@ -76,13 +77,13 @@ public AlphaBeta(GameTree tree , int playerTurn){
     
     private double min(int depth, Node<GameState> state, double alpha, double beta) {
         //here we get the winner of the game so we are at the end of the game and the depth also 
-        //exeddes the max depth
+        //exceedes the max depth
         if( depth >= MAX_DEPTH){
            //here find the heursitic value od the state
         	 double heuristicvalue = state.returnData().evaluatedValue;
              return heuristicvalue;
         }
-        //here result is eqaul to beta and we are trying to get the value of beta 
+        //here result is equal to beta and we are trying to get the value of beta
         double result = Double.MAX_VALUE;
         //then we find the list of possible moves of the state
         List<Node<GameState>> moves = state.children;

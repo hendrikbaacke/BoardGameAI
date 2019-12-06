@@ -15,9 +15,11 @@ public class PerformAIAction {
 	public static void perform() {
 		//build the tree and perform search - make a new node a root node?
 		Node<GameState> needed = choose();
+
 		if (needed.returnData().first != null) {
+
 			Board.move.select(needed.returnData().first, Board.hashBoard);
-			System.out.println("select " + needed.returnData().first);
+			System.out.println("select 11111 " + needed.returnData().first);
 			if (needed.returnData().second != null) {
 				Board.move.select(needed.returnData().second, Board.hashBoard);
 				System.out.println("select " + needed.returnData().second);
