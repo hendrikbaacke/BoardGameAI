@@ -21,7 +21,7 @@ public class Strategies {
     //not covered here is the possibility of drawing from a database of openings, this would stronlgy mitigate the importance of the closingDistance strategy
 
     private ArrayList<String> Player = new ArrayList<>();
-    private ArrayList<String> Opponent = new ArrayList<>()
+    private ArrayList<String> Opponent = new ArrayList<>();
     private ArrayList<String> KillMoves = new ArrayList<>();
     private GameState gameState;
     private Strategies old;

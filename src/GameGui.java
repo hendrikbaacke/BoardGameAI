@@ -1,6 +1,7 @@
 package src;
 
 
+import AI.GameState;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -36,7 +37,8 @@ public class GameGui extends Application {
 			Button buttonAI = new Button("Perform AI move");
 			//Eva.setStyle("-fx-background-color: darkgray");
 			Eva.setOnAction(e ->{
-				AI.Strategies strategies = new AI.Strategies(Board.hashBoard, true);
+
+				AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
 
 				//double f1=strategies.closingDistance(state);
 				//double f2=strategies.cohesion();
