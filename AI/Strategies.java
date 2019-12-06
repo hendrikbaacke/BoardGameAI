@@ -31,22 +31,50 @@ public class Strategies {
 
 
     public Strategies(GameState gameState) {
-    	this.gameState = gameState;
-    	if (gameState.oldGameState != null) {
-    		old = new Strategies(gameState.oldGameState);
-    	}
-    	Hashtable<String, Hexagon> boardState = gameState.boardState;
-        //System.out.println("evalfrom " + gameState.evaluateFrom);
-    	
+        Hashtable<String, Hexagon> boardState = gameState.boardState;
+        int turn = gameState.turn;
+        this.gameState = gameState;
+
+        if(gameState.oldGameState != null) {
+            old = new Strategies(gameState.oldGameState);
+        }
+
         for (int i = 0; i< boardState.size(); i++) {
-        	if (!boardState.get(Board.hash.get(i)).empty) {
-        		if (gameState.evaluateFrom == boardState.get(Board.hash.get(i)).marble.playerNumber) {
-        			Player.add(Board.hash.get(i));
-        		}
-        		else {
-        			Opponent.add(Board.hash.get(i));
-        		}
-        	}
+            if (!boardState.get(Board.hash.get(i)).empty) {
+                if(boardState.get(Board.hash.get(i)).marble.playerNumber == 1) {
+                    if (turn == 1) {
+                        Player.add(Board.hash.get(i));
+                    }
+                    else if(turn ==2) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if (turn ==3) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                }
+                else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 2) {
+                    if (turn == 1) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if(turn ==2) {
+                        Player.add(Board.hash.get(i));
+                    }
+                    else if (turn ==3) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                }
+                else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 3) {
+                    if (turn == 1) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if(turn ==2) {
+                        Opponent.add(Board.hash.get(i));
+                    }
+                    else if (turn ==3) {
+                        Player.add(Board.hash.get(i));
+                    }
+                }
+            }
         }
 
     }
@@ -93,7 +121,6 @@ public class Strategies {
     }
 
 
-  
     public double breakGroup() {
 
         /*In order to determine value for a player each marble (of this player) is checked for an opponent marble at one adjacent side of the marble and an

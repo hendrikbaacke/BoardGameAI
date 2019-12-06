@@ -10,7 +10,7 @@ import src.Move;
 public class GameState {
 	//all the information needed to store the move you made (from the first one)(we need to store first, second and third and moveTo in case the move needs to be done again):
 	//use this to store every valid gamestate
-
+	
 	//store which move needs to be done to get to this state - such as which player's turn it is and which move they perform
 	//if there is no second selected, it means that it is null
 	public String first;
@@ -20,7 +20,7 @@ public class GameState {
 	private Move move = src.Board.move;
 	public int turn;
 	public double evaluatedValue;
-	public int evaluateFrom = 0;
+	
 	
 	public boolean valid;
 	//later needed for the evaluation function
@@ -41,16 +41,14 @@ public class GameState {
 		this.point3 = move.getScore3();
 		//last one who moved
 		this.turn = turn;
-		this.evaluateFrom = move.playersTurn;  //AddNodes.changePlayer(turn);
 	}
-	public GameState() {
-		
+	public GameState(){
+
 	}
 	
 	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree
 		this.turn = AddNodes.changePlayer(old.turn);
-		this.evaluateFrom = old.evaluateFrom;
 		int save = Board.move.playersTurn;
 		Board.move.playersTurn = this.turn;
 		Board.move.adding = true;
@@ -66,7 +64,6 @@ public class GameState {
 		
 			if (first != null) {
 				move.select(first, boardState);
-				System.out.println("i am here");
 				if (second != null) {
 						move.select(second, boardState);
 						if (third != null) {

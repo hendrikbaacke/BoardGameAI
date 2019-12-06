@@ -11,8 +11,7 @@ public class ModeDetermination_1 {
     //add killMove
 	//TODO: Assign weigths
 
-	//private double[] mode1={-10000,2,6,1.8,0,0};
-	private double[] mode1={-10000,0,0,0,0,0};
+	private double[] mode1={3,2,6,1.8,0,0};
 	private double[] mode2={3.3,2,6,1.8,35,50*35};
 	private double[] mode3={2.9,2,15,3,4,50*4};
 	private double[] mode4={2.9,2,15,3,15,50*15};
@@ -24,8 +23,7 @@ public class ModeDetermination_1 {
 	private double[] defaultMode= {1,1,1,1,1,1};
 	
 
-    public double[] determineMode_1(double centerDistance, double cohesion){
-    	//System.out.println("closing dist " + centerDistance);
+    public double[] determineModeAggressive(double centerDistance, double cohesion){
     	
     	if(centerDistance<0)
     		return mode1;

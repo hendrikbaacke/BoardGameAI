@@ -16,8 +16,7 @@ public class ModeDetermination_3 {
 
 
     public double[] determineMode_3(double centerDistance, double cohesion){
-    	//System.out.println("closing dist " + centerDistance);
-    	
+
         if(centerDistance<0)
             return mode1;
         if(centerDistance<5)

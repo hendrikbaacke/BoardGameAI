@@ -8,7 +8,7 @@ import java.util.List;
 public class GameTree {
 	Tree<GameState> gameTree;
 	
-
+	
 	public GameTree(Node<GameState> root) {
 		gameTree = new Tree<>(root);
 	}
