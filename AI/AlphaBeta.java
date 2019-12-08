@@ -24,7 +24,7 @@ public class AlphaBeta {
 	}
 
 	public Node<GameState> getBestMove() {
-		GameState T = new GameState();
+		GameState T = null;
 		Node<GameState> bestMove = new Node<GameState>(T);
 		double best = Double.MIN_VALUE;
 		List<Node<GameState>> moves = game.findAtDepth(1);

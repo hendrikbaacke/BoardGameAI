@@ -12,7 +12,7 @@ public class PerformAIAction {
 	public static GameTree tree;
 
 	//get the best node and use this action
-	public static void perform() {
+	public static void perform(boolean greedy) {
 		//build the tree and perform search - make a new node a root node?
 		Node<GameState> needed = null;
 		if (greedy) {
