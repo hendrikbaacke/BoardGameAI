@@ -31,52 +31,23 @@ public class Strategies {
 
 
     public Strategies(GameState gameState) {
-        Hashtable<String, Hexagon> boardState = gameState.boardState;
-        int turn = gameState.turn;
-        this.gameState = gameState;
-
-        if(gameState.oldGameState != null) {
-            old = new Strategies(gameState.oldGameState);
-        }
-
+    	this.gameState = gameState;
+    	if (gameState.oldGameState != null) {
+    		old = new Strategies(gameState.oldGameState);
+    	}
+    	Hashtable<String, Hexagon> boardState = gameState.boardState;
+        //System.out.println("evalfrom " + gameState.evaluateFrom);
+    	
         for (int i = 0; i< boardState.size(); i++) {
-            if (!boardState.get(Board.hash.get(i)).empty) {
-                if(boardState.get(Board.hash.get(i)).marble.playerNumber == 1) {
-                    if (turn == 1) {
-                        Player.add(Board.hash.get(i));
-                    }
-                    else if(turn ==2) {
-                        Opponent.add(Board.hash.get(i));
-                    }
-                    else if (turn ==3) {
-                        Opponent.add(Board.hash.get(i));
-                    }
-                }
-                else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 2) {
-                    if (turn == 1) {
-                        Opponent.add(Board.hash.get(i));
-                    }
-                    else if(turn ==2) {
-                        Player.add(Board.hash.get(i));
-                    }
-                    else if (turn ==3) {
-                        Opponent.add(Board.hash.get(i));
-                    }
-                }
-                else if(boardState.get(Board.hash.get(i)).marble.playerNumber == 3) {
-                    if (turn == 1) {
-                        Opponent.add(Board.hash.get(i));
-                    }
-                    else if(turn ==2) {
-                        Opponent.add(Board.hash.get(i));
-                    }
-                    else if (turn ==3) {
-                        Player.add(Board.hash.get(i));
-                    }
-                }
-            }
+        	if (!boardState.get(Board.hash.get(i)).empty) {
+        		if (gameState.evaluateFrom == boardState.get(Board.hash.get(i)).marble.playerNumber) {
+        			Player.add(Board.hash.get(i));
+        		}
+        		else {
+        			Opponent.add(Board.hash.get(i));
+        		}
+        	}
         }
-
     }
 
 
