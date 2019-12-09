@@ -46,7 +46,7 @@ public class AddNodes {
 							GameState oneM = new GameState(currentString, null, null, moveTo, node.returnData());
 							if (oneM.valid) {
 								nodeNR++;
-								System.out.println(nodeNR);
+								//System.out.println(nodeNR);
 								oneMarbleMoves.add(oneM);
 								//System.out.println("first is " + currentString + " moveto is " + moveTo);
 							}
@@ -63,7 +63,7 @@ public class AddNodes {
 										GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData());
 										if (twoM.valid) {
 											nodeNR++;
-											System.out.println(nodeNR);
+											//System.out.println(nodeNR);
 											twoMarblesMoves.add(twoM);
 											//System.out.println("first is " + currentString + " second is  " + marble2 +  " moveto is " + moveTo);
 											//node.addChild(twoM);
@@ -82,7 +82,7 @@ public class AddNodes {
 										GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData());
 										if (threeM.valid) {
 											nodeNR++;
-											System.out.println(nodeNR);
+											//System.out.println(nodeNR);
 											//node.addChild(threeM);
 											threeMarblesMoves.add(threeM);	
 										}
