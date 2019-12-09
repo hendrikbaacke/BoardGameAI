@@ -279,12 +279,14 @@ public class Move {
 		if (playersTurn ==1 && player1AI) {
 			System.out.println("ai player 1");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
-			PerformAIAction.tree = new GameTree(new Node<GameState>(state));
+			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
 			if (greedy) {
-				PerformAIAction.tree.buildFullTree(1);
+				System.out.println("1 layer");
+				PerformAIAction.createGameTree(state, 1);
 			}
 			else {
-				PerformAIAction.tree.buildFullTree(2);
+				System.out.println("2 layers");
+				PerformAIAction.createGameTree(state, 2);
 			}
 			
 			AI.PerformAIAction.perform(greedy);
@@ -292,12 +294,14 @@ public class Move {
 		else if (playersTurn ==2 && player2AI) {
 			System.out.println("ai player 2");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
-			PerformAIAction.tree = new GameTree(new Node<GameState>(state));
+			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
 			if (greedy) {
-				PerformAIAction.tree.buildFullTree(1);
+				System.out.println("1 layer");
+				PerformAIAction.createGameTree(state, 1);
 			}
 			else {
-				PerformAIAction.tree.buildFullTree(2);
+				System.out.println("2 layers");
+				PerformAIAction.createGameTree(state, 2);
 			}
 			
 			AI.PerformAIAction.perform(greedy);
@@ -305,12 +309,14 @@ public class Move {
 		else if (playersTurn ==3 && player3AI) {
 			System.out.println("ai player 3");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
-			PerformAIAction.tree = new GameTree(new Node<GameState>(state));
+			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
 			if (greedy) {
-				PerformAIAction.tree.buildFullTree(1);
+				System.out.println("1 layer");
+				PerformAIAction.createGameTree(state, 1);
 			}
 			else {
-				PerformAIAction.tree.buildFullTree(2);
+				System.out.println("2 layers");
+				PerformAIAction.createGameTree(state, 2);
 			}
 			
 			AI.PerformAIAction.perform(greedy);
