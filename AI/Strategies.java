@@ -72,9 +72,6 @@ public class Strategies {
         return PlayerDisAv;
     }
 
-
-
-
     public double cohesion() {
 
         //determine the number of neighbouring teammates for each marble for each player, adds them together
