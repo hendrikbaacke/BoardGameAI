@@ -7,23 +7,23 @@ public class ModeDetermination_2 {
 
 //TODO: Assign weigths
 
-    private double[] mode1={-3000,2,6,1.8,0,0};
-    private double[] mode2={-3000.3,2,6,1.8,35,50*35};
-    private double[] mode3={-3000,2,15,3,4,50*4};
-    private double[] mode4={-3000,2,15,3,15,50*15};
-    private double[] mode5={2.8,2.3,25,3,15,50*15};
-    private double[] mode6={2.8,2.1,25,3,25,50*25};
-    private double[] mode7={2.7,2.3,25,3,30,50*30};
-    private double[] mode8={2.4,2.3,25,3,35,50*35};
-    private double[] mode9={2.2,2.3,25,3,40,50*40};
+    private double[] mode1={-1,0,0,0,200,-500}; //get to the middle, except we can kill
+    private double[] mode2={-0.2,50,200,0,0,-500}; //1.breaking groups 2.cohesion
+    private double[] mode3={-0.2,0,0,0,0,-500};
+    private double[] mode4={-0.2,0,0,0,0,-500};
+    private double[] mode5={-0.2,0,0,0,0,-500};
+    private double[] mode6={-0.2,0,0,0,0,-500};
+    private double[] mode7={-0.2,0,0,0,0,0};
+    private double[] mode8={-0.2,0,0,0,0,0};
+    private double[] mode9={-0.2,0,0,0,0,0};
     private double[] defaultMode= {1,1,1,1,1,1};
 
 
     public double[] determineMode_2(double centerDistance, double cohesion){
 
-        if(centerDistance> DistanceM1)
+        //if(centerDistance> DistanceM1)
             return mode1;
-        if(centerDistance<DistanceM1)
+       /* if(centerDistance<DistanceM1)
             return mode2;
         if(centerDistance<=DistanceM1 && cohesion>=0 && cohesion<4)
             return mode3;
@@ -41,6 +41,7 @@ public class ModeDetermination_2 {
             return mode9;
 
         return defaultMode;
+*/
 
     }
 }
