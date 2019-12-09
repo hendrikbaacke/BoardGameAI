@@ -7,23 +7,38 @@ public class ModeDetermination_2 {
 
 //TODO: Assign weigths
 
-    private double[] mode1={-1,0,0,0,500,-1000}; //get to the middle, except we can kill
-    private double[] mode2={-0.2,50,200,0,0,-500}; //1.breaking groups 2.cohesion
-    private double[] mode3={-0.2,0,0,0,0,-500};
-    private double[] mode4={-0.2,0,0,0,0,-500};
-    private double[] mode5={-0.2,0,0,0,0,-500};
-    private double[] mode6={-0.2,0,0,0,0,-500};
-    private double[] mode7={-0.2,0,0,0,0,0};
-    private double[] mode8={-0.2,0,0,0,0,0};
-    private double[] mode9={-0.2,0,0,0,0,0};
+    //1. closing Distance, 2. Cohesion, 3.breakGroup, 4. strengthenGroup, 5. Difference Opponent Marbles, 6. Difference Own Marbles
+
+
+    private double[] mode1={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 }; //get to the middle, except we can kill
+
+    private double[] mode2={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 }; //1.breaking groups 2.cohesion
+
+    private double[] mode3={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+
+    private double[] mode4={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
+
+    private double[] mode5={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
+
+    private double[] mode6={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+
+    private double[] mode7={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
+
+    private double[] mode8={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
+
+    private double[] mode9={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+
+
+
     private double[] defaultMode= {1,1,1,1,1,1};
 
 
     public double[] determineMode_2(double centerDistance, double cohesion){
 
         if(centerDistance> DistanceM1)
+
             return mode1;
-       /* if(centerDistance<DistanceM1)
+        if(centerDistance<DistanceM1)
             return mode2;
         if(centerDistance<=DistanceM1 && cohesion>=0 && cohesion<4)
             return mode3;
@@ -41,7 +56,7 @@ public class ModeDetermination_2 {
             return mode9;
 
         return defaultMode;
-*/
-        return mode2;
+
+
     }
 }
