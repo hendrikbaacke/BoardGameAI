@@ -60,7 +60,7 @@ public class Marble extends Ellipse{
 						@Override
 						public void handle(MouseEvent t) {
 							//System.out.println(locationKey);
-							if ((Move.playersTurn ==1 && !Move.player1AI) || (Move.playersTurn ==2 && !Move.player2AI) && (Move.playersTurn ==3 && !Move.player3AI)) {
+							if ((Move.playersTurn == 1 && !Move.player1AI) || (Move.playersTurn ==2 && !Move.player2AI) || (Move.playersTurn ==3 && !Move.player3AI)) {
 								Board.move.select(locationKey, Board.hashBoard);
 							}
 						}
