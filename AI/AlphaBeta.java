@@ -36,7 +36,7 @@ public class AlphaBeta {
 				bestMove = m;
 			}
 		}
-		System.out.print("alpha beta is working, ");
+		System.out.println("alpha beta is working.");
 
 		return bestMove;
 	}
