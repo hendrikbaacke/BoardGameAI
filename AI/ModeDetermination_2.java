@@ -7,7 +7,7 @@ public class ModeDetermination_2 {
 
 //TODO: Assign weigths
 
-    private double[] mode1={-1,0,0,0,200,-500}; //get to the middle, except we can kill
+    private double[] mode1={-1,0,0,0,500,-1000}; //get to the middle, except we can kill
     private double[] mode2={-0.2,50,200,0,0,-500}; //1.breaking groups 2.cohesion
     private double[] mode3={-0.2,0,0,0,0,-500};
     private double[] mode4={-0.2,0,0,0,0,-500};
@@ -21,7 +21,7 @@ public class ModeDetermination_2 {
 
     public double[] determineMode_2(double centerDistance, double cohesion){
 
-        //if(centerDistance> DistanceM1)
+        if(centerDistance> DistanceM1)
             return mode1;
        /* if(centerDistance<DistanceM1)
             return mode2;
@@ -42,6 +42,6 @@ public class ModeDetermination_2 {
 
         return defaultMode;
 */
-
+        return mode2;
     }
 }

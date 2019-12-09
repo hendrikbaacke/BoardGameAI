@@ -37,7 +37,7 @@ public class GameGui extends Application {
 			Button buttonAI = new Button("Perform AI move");
 			//Eva.setStyle("-fx-background-color: darkgray");
 			Eva.setOnAction(e ->{
-				if(Move.playersTurn==1){
+				if(Move.playersTurn==2){
 				AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
 
 				double f1=strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));

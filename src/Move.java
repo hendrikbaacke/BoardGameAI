@@ -45,7 +45,7 @@ public class Move {
 	public static boolean player3AI = false;
 	
 	//choose if we use greedy or not
-	private static boolean greedy = false;
+	private static boolean greedy = true;
 
 	public Move() {
 		first = null;
