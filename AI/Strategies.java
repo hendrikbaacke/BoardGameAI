@@ -72,7 +72,26 @@ public class Strategies {
         return PlayerDisAv;
     }
 
+    public double closingDistanceTest() {
 
+        double PlayerDisAv = 0;
+
+        for (int i = 0; i < Player.size(); i++) {
+
+
+            PlayerDisAv += Math.sqrt(Math.pow(Board.hashBoard.get(Player.get(i)).centerX - CenterX, 2) + Math.pow(Board.hashBoard.get(Player.get(i)).centerY - CenterY, 2));
+
+
+            /* Distance to Center, use Euclidean Distance:
+
+            (centerPointX - MarbleX )^2 + (centerPointY - MarbleY )^2 = distance^2 ;sqrt.dist^2 = distance
+
+            */
+        }
+        PlayerDisAv = ( PlayerDisAv / Player.size() );
+
+        return PlayerDisAv;
+    }
 
 
     public double cohesion() {

@@ -37,18 +37,20 @@ public class GameGui extends Application {
 			Button buttonAI = new Button("Perform AI move");
 			//Eva.setStyle("-fx-background-color: darkgray");
 			Eva.setOnAction(e ->{
-
+				if(Move.playersTurn==1){
 				AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
 
-				//double f1=strategies.closingDistance(state);
+				double f1=strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));
+				//double f1=strategies.closingDistanceTest();
 				//double f2=strategies.cohesion();
 				//double f3=strategies.breakGroup();
 				//double f4=strategies.strengthenGroup();
 				//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
 				//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
 
-				//System.out.println(f5+"  "+f6+"  ");
-				System.out.println("llll");
+				System.out.println(" -------- "+f1+" -------- ");}
+				//System.out.println(Board.hashBoard.get("E5").centerX-Board.hashBoard.get("G4").centerX);
+				System.out.println( Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("G6").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("G6").centerY, 2)));
 			});
 			
 			buttonAI.setOnAction(e -> {
