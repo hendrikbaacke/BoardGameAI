@@ -43,8 +43,9 @@ public class PerformAIAction {
 				Board.move.select(needed.returnData().first, Board.hashBoard);
 				System.out.println("select " + needed.returnData().first);
 			}
+			System.out.println("Move to:  " + needed.returnData().moveTo);
 			Board.move.select(needed.returnData().moveTo, Board.hashBoard);
-			System.out.println("select " + needed.returnData().moveTo);
+			
 		}
 		Move.ai = false;
 		DeleteLayers.deleteBranch(tree.getRoot());
