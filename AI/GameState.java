@@ -108,6 +108,7 @@ public class GameState {
 		move.adding = false;
 		EvaluationFunction eval= new EvaluationFunction(this);
 		evaluatedValue=eval.evaluate();
+		//System.out.println(evaluatedValue);
 	}
 	
 	

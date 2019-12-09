@@ -324,18 +324,35 @@ public class Move {
 	}
 	
 	public static int changeBack(int playerNr) {
-		if (playersTurn ==3) {
+		if (playerNr ==3) {
 			return 2;
 		}
-		else if (playersTurn ==2) {
+		else if (playerNr ==2) {
 			return 1;
 		}
-		else if (playersTurn ==1 && Board.numberPlayers ==3) {
+		else if (playerNr ==1 && Board.numberPlayers ==3) {
 			return 3;
 		}
 		else {
 			return 2;
 		}
+	}
+	
+	public static int changePlayer(int playerNr) {
+		if (playerNr ==1) {
+			playerNr = 2;
+		}
+		else {
+			if ((Board.numberPlayers == 2 || Board.numberPlayers == 3) && playerNr ==3) {
+				playerNr = 1;
+			}
+			else if (Board.numberPlayers == 3 && playerNr ==2){
+				if (playerNr == 2) {
+					playerNr = 3;
+				}
+			}
+		}
+		return playerNr;
 	}
 	
 	//moves one single marble
