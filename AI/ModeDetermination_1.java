@@ -10,6 +10,9 @@ public class ModeDetermination_1 {
      is determined by the mode in a static value association
     */
 
+
+    // all weigths should be positive, the function values f1..f6 have been instead altered according to heurisitc observations
+
 	private double DistanceM1 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("G6").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("G6").centerY, 2));
 
 //TODO: Assign weigths
@@ -19,21 +22,21 @@ public class ModeDetermination_1 {
 
 	private double[] mode1={  0    ,  0  ,  0    ,  0  ,  0  ,  0 }; //get to the middle, except we can kill
 
-	private double[] mode2={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 }; //1.breaking groups 2.cohesion
+	private double[] mode2={  0.2  ,  50 ,  200  ,  0  ,  0    ,  1000 }; //1.breaking groups 2.cohesion
 
-	private double[] mode3={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+	private double[] mode3={  0.2  ,  0  ,  0    ,  0  ,  0    ,  1000 };
 
-	private double[] mode4={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
+	private double[] mode4={  1    ,  0  ,  0    ,  0  ,  500  ,  1000 };
 
-	private double[] mode5={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
+	private double[] mode5={  0.2  ,  50 ,  200  ,  0  ,  0    ,  1000 };
 
-	private double[] mode6={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+	private double[] mode6={  0.2  ,  0  ,  0    ,  0  ,  0    ,  1000 };
 
-	private double[] mode7={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
+	private double[] mode7={  1    ,  0  ,  0    ,  0  ,  500  ,  1000 };
 
-	private double[] mode8={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
+	private double[] mode8={  0.2  ,  50 ,  200  ,  0  ,  0    ,  1000 };
 
-	private double[] mode9={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+	private double[] mode9={  0.2  ,  0  ,  0    ,  0  ,  0    ,  1000 };
 
 
 

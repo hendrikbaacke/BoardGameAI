@@ -2,6 +2,7 @@ package src;
 
 
 import AI.GameState;
+import AI.ModeDetermination_2;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -42,20 +43,23 @@ public class GameGui extends Application {
 
 				//double f1 = strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));
 				//double f1=strategies.closingDistanceTest();
-				double f2=strategies.cohesion();
+				//double f2=strategies.cohesion();
 				//double f3=strategies.breakGroup();
 				//double f4=strategies.strengthenGroup();
 				//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
 				//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
 
-				System.out.println(" -------- "+f2+" -------- ");}
+			//	System.out.println(" -------- "+f4 +" -------- ");
+
+				}
+
 				//System.out.println(Board.hashBoard.get("E5").centerX-Board.hashBoard.get("G4").centerX);
-				//System.out.println( Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("G6").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("G6").centerY, 2)));
+				System.out.println( Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("F5").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("F5").centerY, 2)));
 			});
 			
 			buttonAI.setOnAction(e -> {
 				Move.checkAI();
-				System.out.println("did ai move and delted tree (kinda)");
+				System.out.println("--did ai move and deleted tree--");
 			});
 			
 

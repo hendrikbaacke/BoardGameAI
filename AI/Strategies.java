@@ -67,7 +67,7 @@ public class Strategies {
 
             */
         }
-        PlayerDisAv = ( PlayerDisAv / Player.size() );
+        PlayerDisAv = ( PlayerDisAv / Player.size());
 
         return PlayerDisAv;
     }

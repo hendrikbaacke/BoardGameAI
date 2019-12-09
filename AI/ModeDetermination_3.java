@@ -9,21 +9,21 @@ public class ModeDetermination_3 {
 
     private double[] mode1={  0    ,  0  ,  0    ,  0  ,  0  ,  0 }; //get to the middle, except we can kill
 
-    private double[] mode2={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 }; //1.breaking groups 2.cohesion
+    private double[] mode2={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 }; //1.breaking groups 2.cohesion
 
-    private double[] mode3={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+    private double[] mode3={  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
 
-    private double[] mode4={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
+    private double[] mode4={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
 
-    private double[] mode5={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
+    private double[] mode5={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
 
-    private double[] mode6={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+    private double[] mode6={  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
 
-    private double[] mode7={  -1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
+    private double[] mode7={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 };
 
-    private double[] mode8={  -0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
+    private double[] mode8={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 };
 
-    private double[] mode9={  -0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
+    private double[] mode9={  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 };
 
 
 
