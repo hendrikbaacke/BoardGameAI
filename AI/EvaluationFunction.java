@@ -65,12 +65,12 @@ public class EvaluationFunction {
 //
 //				}
 //
-//				if (DistancePlayer2_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer2_mid) {
+//				if (DistancePlayer2_early > closingDistanceEvaluationValue && closingDistanceEvaluationValue > DistancePlayer2_mid) {
 //
 //					f1 = -8;
 //				}
 //
-//				if (DistancePlayer2_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer2_late + 40)) {
+//				if (DistancePlayer2_mid >= closingDistanceEvaluationValue && closingDistanceEvaluationValue > (DistancePlayer2_late + 40)) {
 //
 //					f1 = -2;
 //				}
@@ -90,12 +90,12 @@ public class EvaluationFunction {
 //					f1 = -10;
 //				}
 //
-//				if (DistancePlayer1_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer1_mid) {
+//				if (DistancePlayer1_early > closingDistanceEvaluationValue && closingDistanceEvaluationValue > DistancePlayer1_mid) {
 //
 //					f1 = -8;
 //				}
 //
-//				if (DistancePlayer1_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer1_late + 40)) {
+//				if (DistancePlayer1_mid >= closingDistanceEvaluationValue && closingDistanceEvaluationValue > (DistancePlayer1_late + 40)) {
 //
 //					f1 = -2;
 //				}
@@ -119,56 +119,56 @@ public class EvaluationFunction {
 				System.out.println("f2= "+ f2);
 			}
 
-			if (64 > cohesionEvaluationValue || cohesionEvaluationValue >= 60){
+			if (64 > cohesionEvaluationValue && cohesionEvaluationValue >= 60){
 
 				f2 = 9;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (60 > cohesionEvaluationValue || cohesionEvaluationValue >= 54){
+			if (60 > cohesionEvaluationValue && cohesionEvaluationValue >= 54){
 
 				f2 = 8;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (54 > cohesionEvaluationValue || cohesionEvaluationValue >= 48){
+			if (54 > cohesionEvaluationValue && cohesionEvaluationValue >= 48){
 
 				f2 = 7;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (48 > cohesionEvaluationValue || cohesionEvaluationValue >= 42){
+			if (48 > cohesionEvaluationValue && cohesionEvaluationValue >= 42){
 
 				f2 = 6;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (42 > cohesionEvaluationValue || cohesionEvaluationValue >= 34){
+			if (42 > cohesionEvaluationValue && cohesionEvaluationValue >= 34){
 
 				f2 = 5;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (34 > cohesionEvaluationValue || cohesionEvaluationValue >= 26){
+			if (34 > cohesionEvaluationValue && cohesionEvaluationValue >= 26){
 
 				f2 = 4;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (26 > cohesionEvaluationValue || cohesionEvaluationValue >= 18){
+			if (26 > cohesionEvaluationValue && cohesionEvaluationValue >= 18){
 
 				f2 = 3;
 				System.out.println("f2= "+ f2);
 			}
 
-			if (18 > cohesionEvaluationValue || cohesionEvaluationValue >= 10){
+			if (18 > cohesionEvaluationValue && cohesionEvaluationValue >= 10){
 
 				f2 = 2;
 				System.out.println("f2= "+ f2);
 
 			}
 
-			if (10 > cohesionEvaluationValue || cohesionEvaluationValue >= 2){
+			if (10 > cohesionEvaluationValue && cohesionEvaluationValue >= 2){
 
 				f2 = 1;
 				System.out.println("f2= "+ f2);
@@ -193,55 +193,55 @@ public class EvaluationFunction {
 				System.out.println("f3= "+ f3);
 			}
 
-			if (15 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 13){
+			if (15 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 13){
 
 				f3 = 9;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (13 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 11){
+			if (13 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 11){
 
 				f3 = 8;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (11 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 9){
+			if (11 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 9){
 
 				f3 = 8;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (9 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 7){
+			if (9 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 7){
 
 				f3 = 7;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (7 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 5){
+			if (7 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 5){
 
 				f3 = 6;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (5 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 4){
+			if (5 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 4){
 
 				f3 = 5;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (4 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 3){
+			if (4 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 3){
 
 				f3 = 4;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (3 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 2){
+			if (3 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 2){
 
 				f3 = 3;
 				System.out.println("f3= "+ f3);
 			}
 
-			if (2 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 1){
+			if (2 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 1){
 
 				f3 = 2;
 				System.out.println("f3= "+ f3);
@@ -263,55 +263,55 @@ public class EvaluationFunction {
 				System.out.println("f4= "+ f4);
 			}
 
-			if (10 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 9) {
+			if (10 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 9) {
 
 				f4 = 9;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (9 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 8) {
+			if (9 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 8) {
 
 				f4 = 8;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (8 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 7) {
+			if (8 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 7) {
 
 				f4 = 7;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (7 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 6) {
+			if (7 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 6) {
 
 				f4 = 6;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (6 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 5) {
+			if (6 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 5) {
 
 				f4 = 5;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (5 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 4) {
+			if (5 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 4) {
 
 				f4 = 4;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (4 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 3) {
+			if (4 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 3) {
 
 				f4 = 3;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (3 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 2) {
+			if (3 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 2) {
 
 				f4 = 2;
 				System.out.println("f4= "+ f4);
 			}
 
-			if (2 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 1) {
+			if (2 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 1) {
 
 				f4 = 1;
 				System.out.println("f4= "+ f4);
@@ -421,7 +421,7 @@ public class EvaluationFunction {
 
 			double finalValue = w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4 + w5 * f5 + w6 * f6;
 
-			System.out.println("----------------------------||||||||"+ "eval value: " + finalValue);
+			System.out.println("----------------------------"+ "eval value: " + finalValue);
 
 			return finalValue;
 		}
