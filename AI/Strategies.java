@@ -72,17 +72,7 @@ public class Strategies {
         return PlayerDisAv;
     }
 
-    public double closingDistanceOpp(GameState boardState) {
 
-        double PlayerDisAv = 0;
-
-        for (int i = 0; i < Opponent.size(); i++) {
-            PlayerDisAv += Math.sqrt(Math.pow(boardState.boardState.get(Opponent.get(i)).centerX - CenterX, 2) + Math.pow(boardState.boardState.get(Opponent.get(i)).centerY - CenterY, 2));
-        }
-        PlayerDisAv = ( PlayerDisAv / Opponent.size());
-
-        return PlayerDisAv;
-    }
 
     public double cohesion() {
 
@@ -203,11 +193,17 @@ public class Strategies {
         return 0;
     }
 
-    //additional Strategy: checkKillMove, checks whether pushing out one opponent marble is possible without loosing own marble in subsequent Move,
-    //I added this based on the findings of the paper, ie. the agent often had trouble to find that it is already in an position to score
+    public double closingDistanceOpp(GameState boardState) {
 
-    public double checkKillMove() {
-    //brings AI close to killing Opponent in the next turn
-        return KillMoves.size();
+        double PlayerDisAv = 0;
+
+        for (int i = 0; i < Opponent.size(); i++) {
+            PlayerDisAv += Math.sqrt(Math.pow(boardState.boardState.get(Opponent.get(i)).centerX - CenterX, 2) + Math.pow(boardState.boardState.get(Opponent.get(i)).centerY - CenterY, 2));
+        }
+        PlayerDisAv = ( PlayerDisAv / Opponent.size());
+
+        return PlayerDisAv;
     }
+
+
 }
