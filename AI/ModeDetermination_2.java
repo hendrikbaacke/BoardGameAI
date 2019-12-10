@@ -37,7 +37,7 @@ public class ModeDetermination_2 {
     private double[] defaultMode= {1,1,1,1,1,1};
 
 
-    public double[] determineMode_2(double centerDistance, double cohesion){
+    public double[] determineMode_2(double f1, double f2){
 
     //    if(centerDistance> DistanceM1)
 
