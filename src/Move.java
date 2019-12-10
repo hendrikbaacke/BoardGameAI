@@ -45,7 +45,7 @@ public class Move {
 	public static boolean player3AI = false;
 	
 	//choose if we use greedy or not
-	private static boolean greedy = true;
+	private static boolean greedy = false;
 
 	public Move() {
 		first = null;
@@ -280,46 +280,46 @@ public class Move {
 			System.out.println("ai player 1");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
 			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy) {
+			if (greedy || Board.numberPlayers ==3) {
 				System.out.println("1 layer");
 				PerformAIAction.createGameTree(state, 1);
+				AI.PerformAIAction.perform(true);
+				
 			}
 			else {
 				System.out.println("2 layers");
 				PerformAIAction.createGameTree(state, 2);
+				AI.PerformAIAction.perform(greedy);
+				
 			}
 			
-			AI.PerformAIAction.perform(greedy);
+			
 		}
 		else if (playersTurn ==2 && player2AI) {
 			System.out.println("ai player 2");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
 			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy) {
+			if (greedy || Board.numberPlayers ==3) {
 				System.out.println("1 layer");
 				PerformAIAction.createGameTree(state, 1);
+				AI.PerformAIAction.perform(true);
 			}
 			else {
 				System.out.println("2 layers");
 				PerformAIAction.createGameTree(state, 2);
+				AI.PerformAIAction.perform(greedy);
 			}
 			
-			AI.PerformAIAction.perform(greedy);
+			
 		}
 		else if (playersTurn ==3 && player3AI) {
 			System.out.println("ai player 3");
 			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
 			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy) {
 				System.out.println("1 layer");
 				PerformAIAction.createGameTree(state, 1);
-			}
-			else {
-				System.out.println("2 layers");
-				PerformAIAction.createGameTree(state, 2);
-			}
+				AI.PerformAIAction.perform(true);
 			
-			AI.PerformAIAction.perform(greedy);
 		}
 	}
 	
