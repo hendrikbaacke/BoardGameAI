@@ -32,9 +32,11 @@ public class AlphaBeta{
 			
 			for (Node<GameState> node2 : node.children) {
 				value = Math.max(value, performAB(node2, depth-1, alpha, beta, false));
+				System.out.println("value " + value);
 				alpha = Math.max(alpha, value);
 				
-				if (Math.max(alpha, value) == value) {
+				if (Math.max(alpha, value) != alpha || this.node == null) {
+					System.out.println("choose");
 					this.node = node2;
 					//System.out.println("new alpha");
 				}

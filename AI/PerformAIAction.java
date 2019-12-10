@@ -69,7 +69,6 @@ public class PerformAIAction {
 		//return depth.get(0);
 		//AlphaBeta  A  =new AlphaBeta(tree,2);
 		//return A.getBestMove();
-		int eval = tree.getRoot().returnData().evaluateFrom;
 		
 		AlphaBeta AB = new AlphaBeta();
 		AB.performAB(tree.getRoot(), 2, -Double.MAX_VALUE, Double.MAX_VALUE, true);
