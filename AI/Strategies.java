@@ -72,6 +72,18 @@ public class Strategies {
         return PlayerDisAv;
     }
 
+    public double closingDistanceOpp(GameState boardState) {
+
+        double PlayerDisAv = 0;
+
+        for (int i = 0; i < Opponent.size(); i++) {
+            PlayerDisAv += Math.sqrt(Math.pow(boardState.boardState.get(Opponent.get(i)).centerX - CenterX, 2) + Math.pow(boardState.boardState.get(Opponent.get(i)).centerY - CenterY, 2));
+        }
+        PlayerDisAv = ( PlayerDisAv / Opponent.size());
+
+        return PlayerDisAv;
+    }
+
     public double cohesion() {
 
         //determine the number of neighbouring teammates for each marble for each player, adds them together
@@ -178,6 +190,7 @@ public class Strategies {
     }
     public int compareMarblesWon() {
         if (old != null) {
+            System.out.println("+++++++++++"+ (old.amountOppMarbles() - this.amountOppMarbles()));
             return old.amountOppMarbles() - this.amountOppMarbles();
         }
         return 0;

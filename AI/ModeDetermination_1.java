@@ -20,7 +20,7 @@ public class ModeDetermination_1 {
 	//1. closing Distance, 2. Cohesion, 3.breakGroup, 4. strengthenGroup, 5. Difference Opponent Marbles, 6. Difference Own Marbles
 
 
-	private double[] mode1={  0    ,  0  ,  0    ,  0  ,  0  ,  0 }; //get to the middle, except we can kill
+	private double[] mode1={  0    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill
 
 	private double[] mode2={  0.2  ,  50 ,  200  ,  0  ,  0    ,  1000 }; //1.breaking groups 2.cohesion
 

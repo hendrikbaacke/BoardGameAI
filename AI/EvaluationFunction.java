@@ -5,19 +5,14 @@ import src.Board;
 
 public class EvaluationFunction {
 
-	private static double DistancePlayer2_early =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("H7").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("H7").centerY, 2));
-	// = 200.94 on MacBookPro 15 inch
-	private static double DistancePlayer2_mid =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("G6").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("G6").centerY, 2));
-	// = 131.55 "
-	private static double DistancePlayer2_late =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("F5").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("F5").centerY, 2));
-	// = 76 "
+	private static double DistancePlayer1 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("A1").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A1").centerY, 2));
+	private static double DistancePlayer2 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("A3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A3").centerY, 2));
+	private static double DistancePlayer3 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("B2").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("B2").centerY, 2));
+	private static double DistancePlayer4 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("B3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("B3").centerY, 2));
+	private static double DistancePlayer5 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("C3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C3").centerY, 2));
+	private static double DistancePlayer6 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
+	private static double DistancePlayer7 =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("D4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("D4").centerY, 2));
 
-	private static double DistancePlayer1_early =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("B3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("B3").centerY, 2));
-	// = 200.94 on MacBookPro 15 inch
-	private static double DistancePlayer1_mid =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
-	// = 131.55 "
-	private static double DistancePlayer1_late =  Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("D5").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("D5").centerY, 2));
-	// = 76 "
 
 	private double f1;
 	private double f2;
@@ -25,6 +20,7 @@ public class EvaluationFunction {
 	private double f4;
 	private double f5;
 	private double f6;
+	private double f7;
 
 
 	private double w1;
@@ -33,6 +29,7 @@ public class EvaluationFunction {
 	private double w4;
 	private double w5;
 	private double w6;
+	private double w7;
 
 	public EvaluationFunction(GameState state) {
 
@@ -49,65 +46,34 @@ public class EvaluationFunction {
 		//VALUE NORMALIZATION -----------------------------------------------------------------
 
 		//		Value Range ClosingDist. : 232 max - 111 min
-
-
-
+/*
 			double closingDistanceEvaluationValue = strategies.closingDistance(state);
+		System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  "+closingDistanceEvaluationValue);
 
-
-			if (isPlayer2AI == true) {
-
-				if (closingDistanceEvaluationValue >= DistancePlayer2_early) {
-
-					f1 = -10;
-
+				if (closingDistanceEvaluationValue > DistancePlayer1) {
+					f1 = 1;
+				} else if (closingDistanceEvaluationValue > DistancePlayer2) {
+					f1 = 2;
+				} else if (closingDistanceEvaluationValue > DistancePlayer3) {
+					f1 = 3;
+				} else if (closingDistanceEvaluationValue > DistancePlayer4) {
+					f1 = 4;
+				} else if (closingDistanceEvaluationValue > DistancePlayer5) {
+					f1 = 5;
+				} else if (closingDistanceEvaluationValue > DistancePlayer6) {
+					f1 = 6;
+				} else if (closingDistanceEvaluationValue > DistancePlayer7) {
+					f1 = 7;
+				}else if (closingDistanceEvaluationValue > 0) {
+					f1 = 8;
+				}else {
+					f1=9;
 				}
-
-				if (DistancePlayer2_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer2_mid) {
-
-					f1 = -8;
-				}
-
-				if (DistancePlayer2_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer2_late + 40)) {
-
-					f1 = -2;
-				}
-
-				if ((DistancePlayer2_late + 40) >= closingDistanceEvaluationValue) {
-
-					f1 = 0;
-				}
-
-
-			}
-
-			if (isPlayer1AI == true) {
-
-				if (closingDistanceEvaluationValue >= DistancePlayer1_early) {
-
-					f1 = -10;
-				}
-
-				if (DistancePlayer1_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer1_mid) {
-
-					f1 = -8;
-				}
-
-				if (DistancePlayer1_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer1_late + 40)) {
-
-					f1 = -2;
-				}
-
-				if ((DistancePlayer1_late + 40) >= closingDistanceEvaluationValue) {
-
-					f1 = 0;
-				}
-
-			}
-
+*/
+		f1 = strategies.closingDistance(state);
+		f7 = strategies.closingDistanceOpp(state);
 
 		//      Value Range Cohesion : 64 - 0
-
 
 		double cohesionEvaluationValue = strategies.cohesion();
 
@@ -116,53 +82,53 @@ public class EvaluationFunction {
 				f2 = 10;
 			}
 
-			if (64 > cohesionEvaluationValue || cohesionEvaluationValue >= 60){
+			if (64 > cohesionEvaluationValue && cohesionEvaluationValue >= 60){
 
 				f2 = 9;
 			}
 
-			if (60 > cohesionEvaluationValue || cohesionEvaluationValue >= 54){
+			if (60 > cohesionEvaluationValue && cohesionEvaluationValue >= 54){
 
 				f2 = 8;
 
 			}
 
-			if (54 > cohesionEvaluationValue || cohesionEvaluationValue >= 48){
+			if (54 > cohesionEvaluationValue && cohesionEvaluationValue >= 48){
 
 				f2 = 7;
 			}
 
-			if (48 > cohesionEvaluationValue || cohesionEvaluationValue >= 42){
+			if (48 > cohesionEvaluationValue && cohesionEvaluationValue >= 42){
 
 				f2 = 6;
 
 			}
 
-			if (42 > cohesionEvaluationValue || cohesionEvaluationValue >= 34){
+			if (42 > cohesionEvaluationValue && cohesionEvaluationValue >= 34){
 
 				f2 = 5;
 
 			}
 
-			if (34 > cohesionEvaluationValue || cohesionEvaluationValue >= 26){
+			if (34 > cohesionEvaluationValue && cohesionEvaluationValue >= 26){
 
 				f2 = 4;
 
 			}
 
-			if (26 > cohesionEvaluationValue || cohesionEvaluationValue >= 18){
+			if (26 > cohesionEvaluationValue && cohesionEvaluationValue >= 18){
 
 				f2 = 3;
 
 			}
 
-			if (18 > cohesionEvaluationValue || cohesionEvaluationValue >= 10){
+			if (18 > cohesionEvaluationValue && cohesionEvaluationValue >= 10){
 
 				f2 = 2;
 
 			}
 
-			if (10 > cohesionEvaluationValue || cohesionEvaluationValue >= 2){
+			if (10 > cohesionEvaluationValue && cohesionEvaluationValue >= 2){
 
 				f2 = 1;
 
@@ -184,47 +150,47 @@ public class EvaluationFunction {
 				f3 = 10;
 			}
 
-			if (15 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 13){
+			if (15 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 13){
 
 				f3 = 9;
 			}
 
-			if (13 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 11){
+			if (13 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 11){
 
 				f3 = 8;
 			}
 
-			if (11 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 9){
+			if (11 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 9){
 
 				f3 = 8;
 			}
 
-			if (9 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 7){
+			if (9 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 7){
 
 				f3 = 7;
 			}
 
-			if (7 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 5){
+			if (7 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 5){
 
 				f3 = 6;
 			}
 
-			if (5 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 4){
+			if (5 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 4){
 
 				f3 = 5;
 			}
 
-			if (4 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 3){
+			if (4 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 3){
 
 				f3 = 4;
 			}
 
-			if (3 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 2){
+			if (3 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 2){
 
 				f3 = 3;
 			}
 
-			if (2 > breakGroupEvaluationValue || breakGroupEvaluationValue >= 1){
+			if (2 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 1){
 
 				f3 = 2;
 			}
@@ -243,47 +209,47 @@ public class EvaluationFunction {
 				f4 = 10;
 			}
 
-			if (10 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 9) {
+			if (10 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 9) {
 
 				f4 = 9;
 			}
 
-			if (9 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 8) {
+			if (9 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 8) {
 
 				f4 = 8;
 			}
 
-			if (8 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 7) {
+			if (8 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 7) {
 
 				f4 = 7;
 			}
 
-			if (7 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 6) {
+			if (7 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 6) {
 
 				f4 = 6;
 			}
 
-			if (6 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 5) {
+			if (6 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 5) {
 
 				f4 = 5;
 			}
 
-			if (5 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 4) {
+			if (5 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 4) {
 
 				f4 = 4;
 			}
 
-			if (4 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 3) {
+			if (4 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 3) {
 
 				f4 = 3;
 			}
 
-			if (3 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 2) {
+			if (3 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 2) {
 
 				f4 = 2;
 			}
 
-			if (2 > strengthenGroupEvaluationValue || strengthenGroupEvaluationValue >= 1) {
+			if (2 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 1) {
 
 				f4 = 1;
 			}
@@ -301,7 +267,7 @@ public class EvaluationFunction {
 
 			if (marblesWonEvaluationValue == 0){
 
-				f5 = -10;                                 // I argue, that setting the negative aspect in both counting methods to -10 rather than 0 makes more sense, so that we can steer with the weights (with 0 we cannot do anything anymore)
+				f5 = 0;                                 // I argue, that setting the negative aspect in both counting methods to -10 rather than 0 makes more sense, so that we can steer with the weights (with 0 we cannot do anything anymore)
 			}
 
 			else {
@@ -316,7 +282,7 @@ public class EvaluationFunction {
 
 			if (marblesLostEvaluationValue == 0){
 
-				f6 = 10;
+				f6 = 0;
 			}
 
 			else {
@@ -328,22 +294,24 @@ public class EvaluationFunction {
 
 		if (isPlayer1AI == true) {
 
-			ModeDetermination_1 modeDet = new ModeDetermination_1();
+			ModeDetermination_2 modeDet = new ModeDetermination_2();
 
-			double[] weightArray = modeDet.determineMode_1(f1, f2);
+			double[] weightArray = modeDet.determineMode_2(f1, strategies.amountOppMarbles());
 			w1 = weightArray[0];
 			w2 = weightArray[1];
 			w3 = weightArray[2];
 			w4 = weightArray[3];
 			w5 = weightArray[4];
 			w6 = weightArray[5];
+			w7 = weightArray[6];
+
 		}
 
 		if (isPlayer2AI == true) {
 
 			ModeDetermination_2 modeDet = new ModeDetermination_2();
 
-			double[] weightArray = modeDet.determineMode_2(f1, f2);
+			double[] weightArray = modeDet.determineMode_2(f1, strategies.amountOppMarbles());
 
 			w1 = weightArray[0];
 			w2 = weightArray[1];
@@ -351,7 +319,7 @@ public class EvaluationFunction {
 			w4 = weightArray[3];
 			w5 = weightArray[4];
 			w6 = weightArray[5];
-
+			w7 = weightArray[6];
 
 		}
 
@@ -367,6 +335,7 @@ public class EvaluationFunction {
 			w4 = weightArray[3];
 			w5 = weightArray[4];
 			w6 = weightArray[5];
+			w7 = weightArray[6];
 
 
 		}
@@ -385,7 +354,8 @@ public class EvaluationFunction {
         */
 		public double evaluate(){
 
-			double finalValue = w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4 + w5 * f5 + w6 * f6;
+			double finalValue = w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4 + w5 * f5 + w6 * f6 + w7 *f7;
+System.out.println(finalValue);
 
 			return finalValue;
 		}
