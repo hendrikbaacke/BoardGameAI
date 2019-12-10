@@ -50,60 +50,60 @@ public class EvaluationFunction {
 
 		//		Value Range ClosingDist. : 232 max - 111 min
 
+		f1 = strategies.closingDistance(state);
 
-
-			double closingDistanceEvaluationValue = strategies.closingDistance(state);
-
-
-			if (isPlayer2AI == true) {
-
-				if (closingDistanceEvaluationValue >= DistancePlayer2_early) {
-
-					f1 = -10;
-
-				}
-
-				if (DistancePlayer2_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer2_mid) {
-
-					f1 = -8;
-				}
-
-				if (DistancePlayer2_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer2_late + 40)) {
-
-					f1 = -2;
-				}
-
-				if ((DistancePlayer2_late + 40) >= closingDistanceEvaluationValue) {
-
-					f1 = 0;
-				}
-
-
-			}
-
-			if (isPlayer1AI == true) {
-
-				if (closingDistanceEvaluationValue >= DistancePlayer1_early) {
-
-					f1 = -10;
-				}
-
-				if (DistancePlayer1_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer1_mid) {
-
-					f1 = -8;
-				}
-
-				if (DistancePlayer1_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer1_late + 40)) {
-
-					f1 = -2;
-				}
-
-				if ((DistancePlayer1_late + 40) >= closingDistanceEvaluationValue) {
-
-					f1 = 0;
-				}
-
-			}
+//			double closingDistanceEvaluationValue = strategies.closingDistance(state);
+//
+//
+//			if (isPlayer2AI == true) {
+//
+//				if (closingDistanceEvaluationValue >= DistancePlayer2_early) {
+//
+//					f1 = -10;
+//
+//				}
+//
+//				if (DistancePlayer2_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer2_mid) {
+//
+//					f1 = -8;
+//				}
+//
+//				if (DistancePlayer2_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer2_late + 40)) {
+//
+//					f1 = -2;
+//				}
+//
+//				if ((DistancePlayer2_late + 40) >= closingDistanceEvaluationValue) {
+//
+//					f1 = 0;
+//				}
+//
+//
+//			}
+//
+//			if (isPlayer1AI == true) {
+//
+//				if (closingDistanceEvaluationValue >= DistancePlayer1_early) {
+//
+//					f1 = -10;
+//				}
+//
+//				if (DistancePlayer1_early > closingDistanceEvaluationValue || closingDistanceEvaluationValue > DistancePlayer1_mid) {
+//
+//					f1 = -8;
+//				}
+//
+//				if (DistancePlayer1_mid >= closingDistanceEvaluationValue || closingDistanceEvaluationValue > (DistancePlayer1_late + 40)) {
+//
+//					f1 = -2;
+//				}
+//
+//				if ((DistancePlayer1_late + 40) >= closingDistanceEvaluationValue) {
+//
+//					f1 = 0;
+//				}
+//
+//			}
 
 
 		//      Value Range Cohesion : 64 - 0

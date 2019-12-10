@@ -14,7 +14,7 @@ public class ModeDetermination_2 {
 
 
 
-    private double[] mode1={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 }; //get to the middle, except we can kill
+    private double[] mode1={  -0.3    ,  0  ,  0    ,  0  ,  0  ,  0 }; //get to the middle, except we can kill
 
     private double[] mode2={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 }; //1.breaking groups 2.cohesion
 
