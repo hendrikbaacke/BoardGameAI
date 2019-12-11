@@ -339,7 +339,7 @@ public class EvaluationFunction {
 		f7 = strategies.closingDistanceOpp(gameState);
 		System.out.println("f7= " + f7);
 
-		if (gameState.turn == 1) {
+		if (gameState.turn == 0) {
 
 			ModeDetermination_1 modeDet = new ModeDetermination_1();
 
@@ -356,7 +356,7 @@ public class EvaluationFunction {
 
 		}
 
-		if (gameState.turn == 2) {
+		if (gameState.turn == 2 || gameState.turn ==1) {
 
 			ModeDetermination_2 modeDet = new ModeDetermination_2();
 
