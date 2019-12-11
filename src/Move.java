@@ -224,7 +224,9 @@ public class Move {
 				if (board.equals(Board.hashBoard) && !adding) {
 					changePlayer();
 					Board.tb.add();
-					//checkAI();
+					if (Move.player1AI == false && (this.greedy || Board.numberPlayers ==3)) {
+						checkAI();
+					}
 				}
 				
 				
@@ -240,6 +242,9 @@ public class Move {
 					Board.tb.add();
 					//checkAI();
 					pushed = false;
+					if (Move.player1AI == false && (this.greedy || Board.numberPlayers ==3)) {
+						checkAI();
+					}
 				}
 				resetMove();
 			}
@@ -255,6 +260,9 @@ public class Move {
 					
 					//checkAI();
 					pushed = false;
+					if (Move.player1AI == false && (this.greedy || Board.numberPlayers ==3)) {
+						checkAI();
+					}
 				}
 				resetMove();
 			}
