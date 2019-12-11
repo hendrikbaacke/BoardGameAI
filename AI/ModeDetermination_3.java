@@ -1,5 +1,7 @@
 package AI;
 
+import src.Board;
+
 public class ModeDetermination_3 {
 
 //TODO: Assign weigths
@@ -7,6 +9,8 @@ public class ModeDetermination_3 {
     //1. closing Distance, 2. Cohesion, 3.breakGroup, 4. strengthenGroup, 5. Difference Opponent Marbles, 6. Difference Own Marbles
 
 	public static int Counter = 1;
+	private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
+
 
 	private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill                -7
 
@@ -37,7 +41,7 @@ public class ModeDetermination_3 {
 
 		}else {
 
-			if (f1 * (-0.05) < -8 && Counter < 2)
+			if (f1 < DistancePlayer && Counter < 2)
 				return mode1;
 			else
 				Counter = 2;

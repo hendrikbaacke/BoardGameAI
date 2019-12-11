@@ -61,6 +61,8 @@ public class EvaluationFunction {
 		//VALUE NORMALIZATION -----------------------------------------------------------------
 
 		//		Value Range ClosingDist. : 232 max - 111 min
+
+		System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  ");
 /*
 			double closingDistanceEvaluationValue = strategies.closingDistance(state);
 		System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  "+closingDistanceEvaluationValue);
