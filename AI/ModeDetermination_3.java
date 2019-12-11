@@ -30,7 +30,7 @@ public class ModeDetermination_3 {
 	private double[] defaultMode= {1,1,1,1,1,1};
 
 
-	public double[] determineMode_2(double f1, double Opp){
+	public double[] determineMode_3(double f1, double Opp){
 
 		if(Opp<=11){
 			return mode3;
