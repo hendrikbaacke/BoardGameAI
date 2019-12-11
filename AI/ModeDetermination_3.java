@@ -41,7 +41,7 @@ public class ModeDetermination_3 {
 
 		}else {
 
-			if (f1 < DistancePlayer && Counter < 2)
+			if (f1 > DistancePlayer && Counter < 2)
 				return mode1;
 			else
 				Counter = 2;
