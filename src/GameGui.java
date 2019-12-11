@@ -17,8 +17,11 @@ import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode;
 
-public class GameGui extends Application {
+
+public class GameGui extends Application{
 	
 	public Board board;
 	static BorderPane MainScene;
@@ -37,31 +40,32 @@ public class GameGui extends Application {
 			Button Eva = new Button("Evaluation");
 			Button buttonAI = new Button("Perform AI move");
 			//Eva.setStyle("-fx-background-color: darkgray");
-			Eva.setOnAction(e ->{
-				if(Move.playersTurn==2){
-				AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
+			Eva.setOnAction(e -> {
+				if (Move.playersTurn == 2) {
+					AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
 
-				//double f1 = strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));
-				//double f1=strategies.closingDistanceTest();
-				//double f2=strategies.cohesion();
-				//double f3=strategies.breakGroup();
-				//double f4=strategies.strengthenGroup();
-				//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
-				//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
+					//double f1 = strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));
+					//double f1=strategies.closingDistanceTest();
+					//double f2=strategies.cohesion();
+					//double f3=strategies.breakGroup();
+					//double f4=strategies.strengthenGroup();
+					//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
+					//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
 
-			//	System.out.println(" -------- "+f4 +" -------- ");
+					//	System.out.println(" -------- "+f4 +" -------- ");
 
 				}
 
 				//System.out.println(Board.hashBoard.get("E5").centerX-Board.hashBoard.get("G4").centerX);
-				System.out.println( Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX- Board.hashBoard.get("F5").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("F5").centerY, 2)));
+				System.out.println(Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("F5").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("F5").centerY, 2)));
 			});
-			
+
 			buttonAI.setOnAction(e -> {
 				Move.checkAI();
 				System.out.println("--did ai move and deleted tree--");
 			});
-			
+
+
 
 		    Label winner_label = new Label("Player win:\t");
 		     double MAX_FONT_SIZE = 30.0; // define max font size you need
@@ -143,10 +147,17 @@ public class GameGui extends Application {
 							e.printStackTrace();
 						}
 					} );
-	    		    stage.setScene(newScene(board.boardMarbles, board,SubScene));
+	    		    stage.setScene(newScene(Board.boardMarbles, board,SubScene));
 
 	            }
-	        }); 
+	        });
+
+			scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+				if(e.getCode() == KeyCode.DOWN) {
+					Move.checkAI();
+					System.out.println("--did ai move and deleted tree--");
+				}
+			});
 
 		} catch (Exception e) {
 			System.out.println("Exception in GUI Creation" + e.getMessage());
