@@ -14,9 +14,9 @@ public class ModeDetermination_2 {
     public static int Counter = 1;
 
 
-    private double[] mode1={  -0.08    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill                -7
+    private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill                -7
 
-    private double[] mode2={  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.08}; //1.breaking groups 2.cohesion
+    private double[] mode2={  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}; //1.breaking groups 2.cohesion
 
     private double[] mode3={  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 };
 
@@ -43,7 +43,7 @@ public class ModeDetermination_2 {
 
         }else {
 
-            if (f1 * (-0.08) < - 8 && Counter < 2)
+            if (f1 * (-0.05) < -8 && Counter < 2)
                 return mode1;
             else
                 Counter = 2;
