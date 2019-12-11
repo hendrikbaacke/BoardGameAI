@@ -65,16 +65,10 @@ public class PerformAIAction {
 	}
 	
 	public static Node<GameState> choose(){
-		//List<Node<GameState>> depth = tree.findAtDepth(1);
-		//return depth.get(0);
-		//AlphaBeta  A  =new AlphaBeta(tree,2);
-		//return A.getBestMove();
-		
 		AlphaBeta AB = new AlphaBeta();
 		AB.performAB(tree.getRoot(), 2, -Double.MAX_VALUE, Double.MAX_VALUE, true);
 		Node<GameState> node = AB.node;
 		return node;
-		
 	}
 	
 	public static void createGameTree(GameState state, int layers) {
@@ -83,7 +77,6 @@ public class PerformAIAction {
 		tree = new GameTree(current);
 		System.out.println("creating");
 		tree.buildFullTree(layers);
-		
 	}
 	
 }
