@@ -3,16 +3,19 @@ package src;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+/*
+ * Creates and contains lists of rows of boards.
+ * Gives insights to the board structure.
+ * NOTE: Needs to be created when the board is already in place.
+ */
+
 public class BoardRows {
-	//creates rows for the board -> one in every direction
-	//NEEDS to be created after the board otherwise it won't work
+	ArrayList<ArrayList<String>> horizontal = new ArrayList<>();
+	ArrayList<ArrayList<String>> topLeft = new ArrayList<>();
+	ArrayList<ArrayList<String>> topRight = new ArrayList<>();
 	
-	ArrayList<ArrayList<String>> horizontal = new ArrayList<ArrayList<String>>();
-	ArrayList<ArrayList<String>> topLeft = new ArrayList<ArrayList<String>>();
-	ArrayList<ArrayList<String>> topRight = new ArrayList<ArrayList<String>>();
-	
+	//automatically creates every row when this is called
 	public BoardRows() {
-		//create the rows
 		
 		//horizontal rows
 		for (char ch='A'; ch <= 'I'; ch++) {
@@ -39,7 +42,6 @@ public class BoardRows {
 		}
 		
 		//starting from top right (going to bottom left)
-		
 		char start = 'I';
 		for (int i = 13; i >= 5; i--) {
 			ArrayList<String> row = new ArrayList<String>();
@@ -54,9 +56,6 @@ public class BoardRows {
 			start = 'I';
 			topRight.add(row);
 		}
-		
-		
-		
 	}
 	
 	public boolean sameRowThree(String one, String two, String three) {

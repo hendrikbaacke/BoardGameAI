@@ -6,6 +6,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+/*
+ * A class for the GUI.
+ */
+
 public class RulesPane {
     public GridPane create(){
         GridPane MainCont = new GridPane();

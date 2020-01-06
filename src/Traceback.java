@@ -1,34 +1,45 @@
 package src;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+
+/*
+ * Stores a traceback, in hashtable form.
+ * The traceback is an arraylist -> with index 1 being the board at the start of the game.
+ * At this point, this is infinite - can be used to refrain from choices that will bring us to the same point as before. So, prevent loops.
+ */
 
 public class Traceback {
-	private static ArrayList<MarbleStorage> traceback = new ArrayList<MarbleStorage>();
+	private static ArrayList<Hashtable<String, Hexagon>> traceback = new ArrayList<>();
 	public static int current= 0;
 	
+	//add a hashboard to the traceback
 	public void add() {
-		traceback.add(Board.boardMarbles.clone());
+		traceback.add(BoardMethods.copyHashBoard(Board.hashBoard));
 		System.out.println("Number of moves up until now: " + (current + 1));
 		current++;
 	}
 	
-	public ArrayList<MarbleStorage> getTB() {
+	//return the whole arraylist
+	public ArrayList<Hashtable<String, Hexagon>> getTB() {
 		return traceback;
 	}
 	
-	public MarbleStorage goBack(int movesAgo) {
+	//return the hashtable that is ... moves back (input), so eg if you do goBack(1) it finds the previous hashboard
+	public Hashtable<String, Hexagon> goBack(int movesAgo) {
 		if (current - movesAgo >= 0) {
-			MarbleStorage find = traceback.get(current-movesAgo);
+			Hashtable<String, Hexagon> find = traceback.get(current-movesAgo);
 			return find;
 		}
 		else {
-			MarbleStorage find = new MarbleStorage();
+			Hashtable<String, Hexagon> find = new Hashtable<>();
 			return find;
 		}
 		
 	}
 	
+	// reset the traceback fully
 	public void reset() {
-		traceback = new ArrayList<MarbleStorage>();
+		traceback = new ArrayList<Hashtable<String, Hexagon>>();
 	}
 }

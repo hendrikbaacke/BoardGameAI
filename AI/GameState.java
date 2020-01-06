@@ -2,6 +2,8 @@ package AI;
 
 import java.util.Hashtable;
 import src.Board;
+import src.BoardMethods;
+import src.GameData;
 import src.Hexagon;
 import src.Move;
 
@@ -17,7 +19,7 @@ public class GameState {
 	public String second;
 	public String third;
 	public String moveTo;
-	private Move move = src.Board.move;
+	private Move move = src.GameData.move;
 	public int turn;
 	public double evaluatedValue;
 	public int evaluateFrom =0;
@@ -36,7 +38,7 @@ public class GameState {
 	
 	//rootNode
 	public GameState(Hashtable<String, Hexagon> state, int turn) {
-		this.boardState = Board.copyHashBoard(state);
+		this.boardState = BoardMethods.copyHashBoard(state);
 		this.point1 = move.getScore1();
 		this.point2 = move.getScore2();
 		this.point3 = move.getScore3();
@@ -48,10 +50,10 @@ public class GameState {
 	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree
 		this.turn = AddNodes.changePlayer(old.turn);
-		int save = Board.move.playersTurn;
+		int save = GameData.move.playersTurn;
 		this.evaluateFrom = old.evaluateFrom;
-		Board.move.playersTurn = this.turn;
-		Board.move.adding = true;
+		GameData.move.playersTurn = this.turn;
+		GameData.move.adding = true;
 		
 		this.first = first;
 		this.second = second;
@@ -60,7 +62,7 @@ public class GameState {
 		
 		
 			//make a deep copy of the current board
-			this.boardState = Board.copyHashBoard(old.boardState);
+			this.boardState = BoardMethods.copyHashBoard(old.boardState);
 		
 			if (first != null) {
 				move.select(first, boardState);
@@ -81,14 +83,14 @@ public class GameState {
 			move.select(moveTo, boardState);
 			move.resetMove();
 			
-			 valid = !Board.compareHashtables(boardState, old.boardState);
+			 valid = !BoardMethods.compareHashtables(boardState, old.boardState);
 		
 			//scores old
 			point1 = old.point1;
 			point2 = old.point2;
 			point3 = old.point3;
 		
-			if (Board.move.pushed) {
+			if (GameData.move.pushed) {
 				if (turn == 1) {
 					point1++;
 				}

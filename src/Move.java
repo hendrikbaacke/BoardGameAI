@@ -106,7 +106,7 @@ public class Move {
 					//System.out.println("total = 2");
 					selected = true;
 				}
-				else if(!board.get(code).adjacent(second) || !Board.rows.sameRowThree(first, second, code)) {
+				else if(!board.get(code).adjacent(second) || !GameData.rows.sameRowThree(first, second, code)) {
 					selectedMarbles.clear();
 					coloursBackToNormal(board);
 					first = code;
@@ -197,7 +197,7 @@ public class Move {
 					board.get(third).marble.setFill(Color.GRAY);
 				}
 			}
-			if (Board.numberPlayers ==3) {
+			if (GameData.numberPlayers ==3) {
 				if(board.get(first).marble.playerNumber == 3) {
 					board.get(first).marble.setFill(Color.DARKGREEN);
 					if(second != null && !board.get(second).empty) {
@@ -223,8 +223,8 @@ public class Move {
 				
 				if (board.equals(Board.hashBoard) && !adding) {
 					changePlayer();
-					Board.tb.add();
-					if (Move.player1AI == false && (this.greedy || Board.numberPlayers ==3)) {
+					GameData.tb.add();
+					if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
 						checkAI();
 					}
 				}
@@ -239,10 +239,10 @@ public class Move {
 				if (board.equals(Board.hashBoard) && !adding) {
 					gameFinished();
 					changePlayer();
-					Board.tb.add();
+					GameData.tb.add();
 					//checkAI();
 					pushed = false;
-					if (Move.player1AI == false && (this.greedy || Board.numberPlayers ==3)) {
+					if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
 						checkAI();
 					}
 				}
@@ -256,11 +256,11 @@ public class Move {
 				if (board.equals(Board.hashBoard) && !adding) {
 					gameFinished();
 					changePlayer();
-					Board.tb.add();
+					GameData.tb.add();
 					
 					//checkAI();
 					pushed = false;
-					if (Move.player1AI == false && (this.greedy || Board.numberPlayers ==3)) {
+					if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
 						checkAI();
 					}
 				}
@@ -275,10 +275,10 @@ public class Move {
 			playersTurn = 2;
 		}
 		else {
-			if (Board.numberPlayers == 2 || Board.numberPlayers == 3 && playersTurn ==3) {
+			if (GameData.numberPlayers == 2 || GameData.numberPlayers == 3 && playersTurn ==3) {
 				playersTurn = 1;
 			}
-			else if (Board.numberPlayers == 3 && playersTurn ==2){
+			else if (GameData.numberPlayers == 3 && playersTurn ==2){
 				if (playersTurn == 2) {
 					playersTurn = 3;
 				}
@@ -290,9 +290,9 @@ public class Move {
 	public static void checkAI()  {
 		if (playersTurn ==1 && player1AI) {
 			System.out.println("ai player 1");
-			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
+			GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
 			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy || Board.numberPlayers ==3 || greedyPlayer1) {
+			if (greedy || GameData.numberPlayers ==3 || greedyPlayer1) {
 				System.out.println("1 layer");
 				PerformAIAction.createGameTree(state, 1);
 				AI.PerformAIAction.perform(true);
@@ -309,9 +309,9 @@ public class Move {
 		}
 		else if (playersTurn ==2 && player2AI) {
 			System.out.println("ai player 2");
-			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
+			GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
 			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy || Board.numberPlayers ==3 || greedyPlayer2) {
+			if (greedy || GameData.numberPlayers ==3 || greedyPlayer2) {
 				System.out.println("1 layer");
 				PerformAIAction.createGameTree(state, 1);
 				AI.PerformAIAction.perform(true);
@@ -326,7 +326,7 @@ public class Move {
 		}
 		else if (playersTurn ==3 && player3AI) {
 			System.out.println("ai player 3");
-			GameState state = new GameState(Board.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
+			GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
 			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
 				System.out.println("1 layer");
 				PerformAIAction.createGameTree(state, 1);
@@ -342,7 +342,7 @@ public class Move {
 		else if (playerNr ==2) {
 			return 1;
 		}
-		else if (playerNr ==1 && Board.numberPlayers ==3) {
+		else if (playerNr ==1 && GameData.numberPlayers ==3) {
 			return 3;
 		}
 		else {
@@ -355,10 +355,10 @@ public class Move {
 			playerNr = 2;
 		}
 		else {
-			if ((Board.numberPlayers == 2 || Board.numberPlayers == 3) && playerNr ==3) {
+			if ((GameData.numberPlayers == 2 || GameData.numberPlayers == 3) && playerNr ==3) {
 				playerNr = 1;
 			}
-			else if (Board.numberPlayers == 3 && playerNr ==2){
+			else if (GameData.numberPlayers == 3 && playerNr ==2){
 				if (playerNr == 2) {
 					playerNr = 3;
 				}
@@ -382,7 +382,7 @@ public class Move {
 		//System.out.println("move two");
 		
 		//if it is moves sideways, then it can never push another marble
-		if(Board.rows.sideways(first, second, moveTo)) {
+		if(GameData.rows.sideways(first, second, moveTo)) {
 			moveSideways(board);
 		}
 		else if(board.get(moveTo).empty) {
@@ -394,7 +394,7 @@ public class Move {
 			moving.updateLocation(board);
 		}
 		else if (board.get(moveTo).marble.playerNumber != playersTurn){
-			String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
+			String newHex = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 			if(board.containsKey(newHex)) {
 				if (board.get(newHex).empty){
 					doPushOne(board); 
@@ -411,9 +411,9 @@ public class Move {
 	public void performMovementThree(Hashtable<String, Hexagon> board) {
 		//System.out.println("moveThree");
 		
-		String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
+		String newHex = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 		//if it is moves sideways, then it can never push another marble
-		if(Board.rows.sideways(first, second, moveTo)) {
+		if(GameData.rows.sideways(first, second, moveTo)) {
 			moveSideways(board);
 		}
 		else if(board.get(moveTo).empty) {
@@ -431,7 +431,7 @@ public class Move {
 					doPushOne(board);
 				}
 				else if(board.get(newHex).marble.playerNumber != playersTurn) {
-				String newnewHex = Board.rows.adjacentDirection(newHex, Board.rows.direction(first, moveTo));
+				String newnewHex = GameData.rows.adjacentDirection(newHex, GameData.rows.direction(first, moveTo));
 					if (board.containsKey(newnewHex)){
 							if(board.get(newnewHex).empty) {
 								doPushTwo(board);
@@ -449,7 +449,7 @@ public class Move {
 	}
 	
 	public void moveSideways(Hashtable<String, Hexagon> board) {
-		int direction = Board.rows.direction(first, moveTo);
+		int direction = GameData.rows.direction(first, moveTo);
 		//System.out.println("direction is " + direction);
 		char letterFirst = first.charAt(0);
 		char letterSecond = second.charAt(0);
@@ -593,7 +593,7 @@ public class Move {
 			board.get(moveTo).setEmpty();
 			board.get(moveTo).setFull(moving);
 		
-			String keyAdj = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
+			String keyAdj = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 		
 			if(board.containsKey(keyAdj)) {
 				board.get(keyAdj).setFull(removing);
@@ -603,7 +603,7 @@ public class Move {
 			}
 			else {
 				if (board.equals(Board.hashBoard) && !adding) {
-				Board.score[playersTurn-1]++;
+				GameData.score[playersTurn-1]++;
 				GameGui.MainScene.getChildren().remove(removing);
 				Board.boardMarbles.storage.remove(removing);
 				GameGui.Screen.getChildren().remove(removing);
@@ -634,7 +634,7 @@ public class Move {
 			board.get(moveTo).setEmpty();
 			board.get(moveTo).setFull(moving);
 		
-			String keyAdj = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
+			String keyAdj = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 		
 			if(board.containsKey(keyAdj)) {
 				board.get(keyAdj).setFull(removing);
@@ -644,7 +644,7 @@ public class Move {
 			}
 			else {
 				if (board.equals(Board.hashBoard) && !adding) {
-					Board.score[playersTurn-1]++;
+					GameData.score[playersTurn-1]++;
 					GameGui.MainScene.getChildren().remove(removing);
 					Board.boardMarbles.storage.remove(removing);
 					GameGui.Screen.getChildren().remove(removing);
@@ -679,8 +679,8 @@ public class Move {
 		board.get(moveTo).setEmpty();
 		board.get(moveTo).setFull(moving);
 		
-		String keyAdj = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
-		String keyAdjTwo = Board.rows.adjacentDirection(keyAdj, Board.rows.direction(first, moveTo));
+		String keyAdj = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
+		String keyAdjTwo = GameData.rows.adjacentDirection(keyAdj, GameData.rows.direction(first, moveTo));
 		//System.out.println("keyAdjTwo is " + keyAdjTwo);
 		
 		
@@ -693,7 +693,7 @@ public class Move {
 		}
 		else {
 			if (board.equals(Board.hashBoard) && !adding) {
-				Board.score[playersTurn-1]++;
+				GameData.score[playersTurn-1]++;
 				//System.out.println(playersTurn + " gets a point");
 				Board.boardMarbles.storage.remove(removing);
 				GameGui.MainScene.getChildren().remove(removing);
@@ -758,13 +758,13 @@ public class Move {
 	public static boolean validMoveTwo(Hashtable<String, Hexagon> board, String first, String second, String moveTo) {
 		if (board.containsKey(first) && board.containsKey(second) && board.containsKey(moveTo)) {
 			if (board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
-			String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
+			String newHex = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 			
 			if(board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
 			//if it needs to move sideways and if there are two free space where they are needed, the move is valid
-				if(Board.rows.sideways(first, second, moveTo)) {
+				if(GameData.rows.sideways(first, second, moveTo)) {
 					//System.out.println("sideways is true");
-					if (Board.rows.twoFree(first, second, moveTo, board)) {
+					if (GameData.rows.twoFree(first, second, moveTo, board)) {
 						return true;
 					}
 					else {
@@ -774,11 +774,11 @@ public class Move {
 						return false;
 					}
 				}
-				else if (board.get(moveTo).empty && Board.rows.direction(moveTo, first) == Board.rows.direction(first, second)) {
+				else if (board.get(moveTo).empty && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second)) {
 					//System.out.println("move to is empty");
 					return true;
 				}
-				else if (board.get(moveTo).marble.playerNumber != playersTurn && Board.rows.direction(moveTo, first) == Board.rows.direction(first, second)) {
+				else if (board.get(moveTo).marble.playerNumber != playersTurn && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second)) {
 					if (board.containsKey(newHex)) {
 						//System.out.println("push 1 with 2");
 						if (board.get(newHex).empty){
@@ -817,11 +817,11 @@ public class Move {
 	public static boolean validMoveThree(Hashtable<String, Hexagon> board, String first, String second, String third, String moveTo) {
 		if (board.containsKey(first) && board.containsKey(second) && board.containsKey(moveTo) && board.containsKey(third)) {
 			if (board.get(first).adjacent(second) && board.get(first).adjacent(moveTo) && board.get(second).adjacent(third)) {
-			String newHex = Board.rows.adjacentDirection(moveTo, Board.rows.direction(first, moveTo));
-			String newnewHex = Board.rows.adjacentDirection(newHex, Board.rows.direction(first, moveTo));
+			String newHex = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
+			String newnewHex = GameData.rows.adjacentDirection(newHex, GameData.rows.direction(first, moveTo));
 		
-			if(Board.rows.sideways(first, second, moveTo)) {
-				if (Board.rows.threeFree(first, second, third, moveTo, board)) {
+			if(GameData.rows.sideways(first, second, moveTo)) {
+				if (GameData.rows.threeFree(first, second, third, moveTo, board)) {
 					return true;
 				}
 				else {
@@ -830,12 +830,12 @@ public class Move {
 					return false;
 				}
 			}
-			else if (board.get(moveTo).empty && Board.rows.direction(moveTo, first) == Board.rows.direction(first, second) && Board.rows.direction(first, second) == Board.rows.direction(second, third)) {
+			else if (board.get(moveTo).empty && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second) && GameData.rows.direction(first, second) == GameData.rows.direction(second, third)) {
 				//System.out.println("move to is empty");
 				return true;
 			}
 			//can push one
-			else if (board.get(moveTo).marble.playerNumber != playersTurn  && Board.rows.direction(moveTo, first) == Board.rows.direction(first, second) && Board.rows.direction(first, second) == Board.rows.direction(second, third)){
+			else if (board.get(moveTo).marble.playerNumber != playersTurn  && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second) && GameData.rows.direction(first, second) == GameData.rows.direction(second, third)){
 				if (board.containsKey(newHex)){
 					if (board.get(newHex).empty){
 						return true; 
@@ -883,7 +883,7 @@ public class Move {
 	public void gameFinished() {
 		GameGui.score_text1.setText(String.valueOf(point));
 		GameGui.score_text2.setText(String.valueOf(point2));
-		if (Board.numberPlayers == 3) {
+		if (GameData.numberPlayers == 3) {
 			GameGui.score_text3.setText(String.valueOf(point3));
 		}
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -905,7 +905,7 @@ public class Move {
 			GameGui.winner_text.setText("Game over, Player 2 won!");
 			//System.out.println("DONE");
 		}
-		if (Board.numberPlayers ==3) {
+		if (GameData.numberPlayers ==3) {
 			if (getScore3() == 6) {
 				String s ="Game over, Player 3 won!" ;
 				alert.setContentText(s);

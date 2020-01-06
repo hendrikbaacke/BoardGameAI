@@ -1,51 +1,47 @@
 package src;
 
-
+import java.io.FileInputStream;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
-import javafx.stage.Stage;
-import javafx.geometry.Rectangle2D;
-import javafx.stage.Screen;
-import java.io.FileInputStream;
-import javafx.geometry.*;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.effect.DropShadow;
-import javafx.stage.Window;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
-import javafx.scene.text.FontWeight;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Screen;
+import javafx.stage.Stage;
+
+/*
+ * Sets up the whole game. Creates the start screen and links everything.
+ */
 
 public class Main extends Application {
 
     DropShadow shadow = new DropShadow();
     public GameGui Game;
 
-    @Override
+    
     public void start(Stage primaryStage) throws Exception {
-  
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
-
-        //Image pic = new Image("file:backgroundGame.jpg");
-        //ImageView mv = new ImageView(pic);
-
+        
         VBox sliderBox = new VBox();
         sliderBox.setAlignment(Pos.CENTER);
         sliderBox.setPrefHeight(500);
@@ -62,12 +58,12 @@ public class Main extends Application {
         
         twoP.setOnAction(e ->{
         	threeP.setStyle("-fx-background-color: white");
-            Board.numberPlayers = 2;
+            GameData.numberPlayers = 2;
             twoP.setStyle("-fx-background-color: darkgray");
         });
         threeP.setOnAction(e ->{
         	twoP.setStyle("-fx-background-color: white");
-            Board.numberPlayers =3;
+            GameData.numberPlayers =3;
             threeP.setStyle("-fx-background-color: darkgray");
         }); 
         chooseP.getChildren().addAll(twoP, threeP);
@@ -87,7 +83,6 @@ public class Main extends Application {
         title.setText("Abalone: Play it!");
         title.setFont(Font.font(null, FontWeight.BOLD, 70));
 
-
         Button settings = new Button("SETTINGS");
         settings.getStyleClass().add("menu_items");
         Button rules = new Button("RULES");
@@ -102,8 +97,6 @@ public class Main extends Application {
         menuBox.getChildren().addAll(settings, rules, credits);
 
         sliderBox.getChildren().addAll(title, menuBox, chooseP);
-
-
 
         //Add game mode images
         ImageView iv_1 = new ImageView();
@@ -126,9 +119,7 @@ public class Main extends Application {
         VBox modeTwoContainer = new VBox();
         VBox modeThreeContainer = new VBox();
 
-
         HBox modeBox = new HBox();
-
 
         modeOneContainer.getStyleClass().add("modeButton" );
         modeOneContainer.setPadding(new Insets(10,10,10,10));
@@ -139,43 +130,35 @@ public class Main extends Application {
 
         //some fancy shadow effects
         modeOneContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
-            @Override
             public void handle(MouseEvent t) {
                 iv_1.setEffect(shadow);
             }
         });
         modeOneContainer.setOnMouseExited(new EventHandler <MouseEvent>() {
-            @Override
             public void handle(MouseEvent t) {
                 iv_1.setEffect(null);
             }
         });
         modeTwoContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
-            @Override
             public void handle(MouseEvent t) { 
                 iv_2.setEffect(shadow);
             }
         });
         modeTwoContainer.setOnMouseExited(new EventHandler <MouseEvent>() {
-            @Override
             public void handle(MouseEvent t) {
                 iv_2.setEffect(null);
             }
         });
         modeThreeContainer.setOnMouseEntered(new EventHandler <MouseEvent>() {
-            @Override
             public void handle(MouseEvent t) {
                 iv_3.setEffect(shadow);
             }
         });
         modeThreeContainer.setOnMouseExited(new EventHandler <MouseEvent>() {
-            @Override
             public void handle(MouseEvent t) {
                 iv_3.setEffect(null);
             }
         });
-
-
 
         modeOneContainer.getChildren().addAll(iv_1,modeOneLabel );
         modeOneContainer.setAlignment(Pos.CENTER);
@@ -192,7 +175,6 @@ public class Main extends Application {
         pane.getChildren().addAll(mainContainer);
         String style = "-fx-background-color: lightblue;;";
         pane.setStyle(style);
-
 
         Scene scene = new Scene(pane,3000,2000);
 
@@ -340,7 +322,6 @@ public class Main extends Application {
         Scene setScene = new Scene(setMainCont);
 
 
-
         credits.setOnAction(e ->{
             primaryStage.setScene(creditScene);
             back.setOnAction(f-> {
@@ -377,7 +358,7 @@ public class Main extends Application {
             @Override
             public void handle(MouseEvent event) {
             	Move.player1AI = false;
-            	if (Board.numberPlayers ==2) {
+            	if (GameData.numberPlayers ==2) {
             		Move.player2AI = true;
             	}
             	else {
@@ -392,12 +373,11 @@ public class Main extends Application {
 
         modeThreeContainer.setPickOnBounds(true); // allows click on transparent areas
         modeThreeContainer.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
             public void handle(MouseEvent event) {
                 Move.player1AI = true;
                 Move.player2AI = true;
 
-                if (Board.numberPlayers ==3) {
+                if (GameData.numberPlayers ==3) {
                     Move.player3AI = true;
                 }
 
@@ -405,9 +385,8 @@ public class Main extends Application {
                 Game.start(primaryStage);
             }
         });
-    
-
     }
+    
     private Node createSpacer() {
         final Region spacer = new Region();
         // Make it always grow or shrink according to the available space

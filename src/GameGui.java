@@ -103,7 +103,7 @@ public class GameGui extends Application{
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
 			//hbox3.getChildren().add(reset);
-			if (Board.numberPlayers ==2) {
+			if (GameData.numberPlayers ==2) {
 				GridPane.setRowIndex(hbox3, 5);
 				GridPane.setRowIndex(winner, 4);
 				GridPane.setRowIndex(playerBox, 1);
@@ -114,7 +114,7 @@ public class GameGui extends Application{
 				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, Eva, buttonAI); //add reset for the reset button
 			}
 			
-			if (Board.numberPlayers ==3) {
+			if (GameData.numberPlayers ==3) {
 				GridPane.setRowIndex(hbox3, 6);
 				GridPane.setRowIndex(winner, 5);
 				GridPane.setRowIndex(playerBox, 1);
