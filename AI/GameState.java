@@ -39,9 +39,9 @@ public class GameState {
 	//rootNode
 	public GameState(Hashtable<String, Hexagon> state, int turn) {
 		this.boardState = BoardMethods.copyHashBoard(state);
-		this.point1 = move.getScore1();
-		this.point2 = move.getScore2();
-		this.point3 = move.getScore3();
+		this.point1 = move.point;
+		this.point2 = move.point2;
+		this.point3 = move.point3;
 		//last one who moved
 		this.turn = turn;
 		this.evaluateFrom = move.playersTurn;  //AddNodes.changePlayer(turn);
@@ -49,7 +49,7 @@ public class GameState {
 	
 	public GameState(String first, String second, String third, String moveTo, GameState old) {
 		//needed if we want a more extended tree
-		this.turn = AddNodes.changePlayer(old.turn);
+		this.turn = src.GameMethods.changePlayer(old.turn);
 		int save = GameData.move.playersTurn;
 		this.evaluateFrom = old.evaluateFrom;
 		GameData.move.playersTurn = this.turn;

@@ -33,7 +33,7 @@ public class AddNodes {
 				Hexagon current = board.get(currentString);
 				
 				if (!current.empty){
-					if (current.marble.playerNumber == changePlayer(node.returnData().turn)) {
+					if (current.marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn)) {
 						//run this for every direction
 						for (int j = 1; j < 7; j++) {
 							//System.out.println("code " + currentString + " dir " + j);
@@ -57,7 +57,7 @@ public class AddNodes {
 							String marble2= GameData.rows.adjacentDirection(currentString, k);
 							if (Board.hash.contains(currentString) && Board.hash.contains(marble2) & Board.hash.contains(moveTo)) {
 								if (!board.get(marble2).empty) {
-									if (board.get(marble2).marble.playerNumber == changePlayer(node.returnData().turn)) {
+									if (board.get(marble2).marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn)) {
 										if (Move.validMoveTwo(board, currentString, marble2, moveTo)) {
 											GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData());
 											if (twoM.valid) {
@@ -76,7 +76,7 @@ public class AddNodes {
 							String marble3 = GameData.rows.adjacentDirection(marble2, k);
 							if (Board.hash.contains(currentString) && Board.hash.contains(marble2) && Board.hash.contains(marble3) & Board.hash.contains(moveTo)) {
 								if (!board.get(marble2).empty && !board.get(marble3).empty) {
-									if (board.get(marble2).marble.playerNumber == changePlayer(node.returnData().turn) && board.get(marble3).marble.playerNumber == changePlayer(node.returnData().turn)) {
+									if (board.get(marble2).marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn) && board.get(marble3).marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn)) {
 										if(Move.validMoveThree(board, currentString, marble2, marble3, moveTo)) {
 											GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData());
 											if (threeM.valid) {
@@ -115,26 +115,6 @@ public class AddNodes {
 			for (int i = 0; i < nodes.size(); i++) {
 				addForOne(nodes.get(i));
 			}
-		}
-		
-		
-		//copy and paste from the move class
-		public static int changePlayer(int playersTurn) {
-			if (playersTurn ==1) {
-				playersTurn = 2;
-			}
-			else {
-				if (GameData.numberPlayers == 2 || GameData.numberPlayers == 3 && playersTurn ==3) {
-					playersTurn = 1;
-				}
-				else if (GameData.numberPlayers == 3 && playersTurn ==2){
-					if (playersTurn == 2) {
-						playersTurn = 3;
-					}
-					
-				}
-			}
-			return playersTurn;
 		}
 	
 }

@@ -9,6 +9,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 
+
+//trying to clean this one up a bit
 /*
  * Whenever a move on the board or in a gamestate needs to be performed, this class's methods are used.
  */
@@ -18,9 +20,9 @@ public class Move {
 	public static String first;
 	public static String second;
 	public static String third;
-	int point= 0;
-	int point2= 0;
-	int point3 = 0;
+	public static int point= 0;
+	public static int point2= 0;
+	public static int point3 = 0;
 	public static boolean pushed = false;
 	public static boolean adding = false;
 	
@@ -48,6 +50,7 @@ public class Move {
 	//choose if we use greedy or not
 	private static boolean greedy = true;
 	
+	//separately
 	private static boolean greedyPlayer1 = false;
 	private static boolean greedyPlayer2 = false;
 	
@@ -60,313 +63,161 @@ public class Move {
 	}
 	
 	//select marbles
-	public void select(String code, Hashtable<String, Hexagon> board) {
-		//System.out.println("select");
-		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
-		if (first == null && !board.get(code).empty) {
-			if (board.get(code).marble.playerNumber == playersTurn) {
-				//System.out.println("selected 1");
-				board.get(code).marble.setFill(Color.PURPLE);
-				first = code;
-				nrSelected++;
-				selectedMarbles.add(code);
-			}
-		}
-		//if the first and second are the same, end selection (you're done) it also checks whether they are adjacent
-		//if not adjacent: the second selected marble becomes the first - else just add it to the selection
-		else if(second == null  && !board.get(code).empty && !selected) {
-			if (board.get(code).marble.playerNumber == playersTurn) {
-				if (first.equals(code)) {
-					selected = true;
-					//System.out.println("total = 1");
-					board.get(code).marble.setFill(Color.ORANGE);
-				}
-				else if(!board.get(code).adjacent(first)) {
-					selectedMarbles.clear();
-					coloursBackToNormal(board);
-					first = code;
+		public void select(String code, Hashtable<String, Hexagon> board) {
+			//check whether a marble from the player is selected, then set that as a code and add it to the selection:
+			if (first == null && !board.get(code).empty) {
+				if (board.get(code).marble.playerNumber == playersTurn) {
+					//System.out.println("selected 1");
 					board.get(code).marble.setFill(Color.PURPLE);
-					selectedMarbles.add(code);
-				}
-				else{
-					second = code;
-					board.get(code).marble.setFill(Color.AQUAMARINE);
-					nrSelected++;
-					selectedMarbles.add(code);
-					//System.out.println("selected two");
-				}
-			}
-		}
-		//quite similar to the second selection - checks whether it is adjacent to the second one, if not, then it becomes the first in the selection
-		//if  this is done, selected becomes true automatically
-		else if(third == null && !selected && !board.get(code).empty) {
-			if (board.get(code).marble.playerNumber == playersTurn) {
-				if(first.equals(code) || second.equals(code)) {
-					board.get(first).marble.setFill(Color.ORANGE);
-					board.get(second).marble.setFill(Color.YELLOW);
-					//System.out.println("total = 2");
-					selected = true;
-				}
-				else if(!board.get(code).adjacent(second) || !GameData.rows.sameRowThree(first, second, code)) {
-					selectedMarbles.clear();
-					coloursBackToNormal(board);
 					first = code;
-					board.get(first).marble.setFill(Color.PURPLE);
-					second = null;
-					nrSelected = 1;
-					selectedMarbles.add(code);
-					
-				}
-				else {
-					third = code;
 					nrSelected++;
 					selectedMarbles.add(code);
-					selected = true;
-					board.get(first).marble.setFill(Color.ORANGE);
-					board.get(second).marble.setFill(Color.YELLOW);
-					board.get(third).marble.setFill(Color.YELLOW);
-					//System.out.println("selected three");
 				}
 			}
-		}
-		//so if all of these are not possible, try if it is possible to move it to the place you want to move it to
-		//if it's not, then it will automatically reset
-		else{
-			if (selected && board.get(code).adjacent(first)) {
-				if (!board.get(code).empty) {
-					if (board.get(code).marble.playerNumber == playersTurn) {
-							selectedMarbles.clear();
-							coloursBackToNormal(board);
-							selected = false;
-							first = code;
-							board.get(first).marble.setFill(Color.PURPLE);
-							second = null;
-							third = null;
-							nrSelected = 1;
-							selectedMarbles.add(code);
+			//if the first and second are the same, end selection (you're done) it also checks whether they are adjacent
+			//if not adjacent: the second selected marble becomes the first - else just add it to the selection
+			else if(second == null  && !board.get(code).empty && !selected) {
+				if (board.get(code).marble.playerNumber == playersTurn) {
+					if (first.equals(code)) {
+						selected = true;
+						board.get(code).marble.setFill(Color.ORANGE);
+					}
+					else if(!board.get(code).adjacent(first)) {
+						resetSelection(code, board);
+					}
+					else{
+						second = code;
+						board.get(code).marble.setFill(Color.AQUAMARINE);
+						nrSelected++;
+						selectedMarbles.add(code);
+					}
+				}
+			}
+			//quite similar to the second selection - checks whether it is adjacent to the second one, if not, then it becomes the first in the selection
+			//if  this is done, selected becomes true automatically
+			else if(third == null && !selected && !board.get(code).empty) {
+				if (board.get(code).marble.playerNumber == playersTurn) {
+					if(first.equals(code) || second.equals(code)) {
+						board.get(first).marble.setFill(Color.ORANGE);
+						board.get(second).marble.setFill(Color.YELLOW);
+						selected = true;
+					}
+					else if(!board.get(code).adjacent(second) || !GameData.rows.sameRowThree(first, second, code)) {
+						resetSelection(code, board);
+					}
+					else {
+						third = code;
+						nrSelected++;
+						selectedMarbles.add(code);
+						selected = true;
+						board.get(first).marble.setFill(Color.ORANGE);
+						board.get(second).marble.setFill(Color.YELLOW);
+						board.get(third).marble.setFill(Color.YELLOW);
+					}
+				}
+			}
+			//so if all of these are not possible, try if it is possible to move it to the place you want to move it to
+			//if it's not, then it will automatically reset
+			else{
+				if (selected && board.get(code).adjacent(first)) {
+					if (!board.get(code).empty) {
+						if (board.get(code).marble.playerNumber == playersTurn) {
+							resetSelection(code, board);
+							}
+						else {
+							moveTo = code;
+						}
 						}
 					else {
 						moveTo = code;
-						//System.out.println("moveto");
 					}
-					}
-				else {
-					moveTo = code;
-					//System.out.println("moveto");
+				}	
+				else if (!board.get(code).empty && board.get(code).marble.playerNumber ==playersTurn) {
+					resetSelection(code, board);
 				}
-			}	
-			else if (!board.get(code).empty && board.get(code).marble.playerNumber ==playersTurn) {
-				selectedMarbles.clear();
-				coloursBackToNormal(board);
-				selected = false;
-				first = code;
-				board.get(first).marble.setFill(Color.PURPLE);
-				second = null;
-				third = null;
-				nrSelected = 1;
-				selectedMarbles.add(code);
 			}
-		}
-		
-		if(moveTo != null && Board.hash.contains(moveTo)) {
-			coloursBackToNormal(board);
-			move(board);
-		}
-		if (board.equals(Board.hashBoard)) {
-			GameGui.player_text.setText(String.valueOf(playersTurn));
-		}
+			
+			if(moveTo != null && Board.hash.contains(moveTo)) {
+				GameMethods.coloursBackToNormal(board);
+				move(board);
+			}
+			if (board.equals(Board.hashBoard)) {
+				GameGui.player_text.setText(String.valueOf(playersTurn));
+			}
 
-	}
-	
-	public void coloursBackToNormal(Hashtable<String, Hexagon> board) {
-		if (!adding) {
-			if(board.get(first).marble.playerNumber == 1) {
-				board.get(first).marble.setFill(Color.BLACK);
-				if(second != null && !board.get(second).empty) {
-					board.get(second).marble.setFill(Color.BLACK);
-				}
-				if(third != null) {
-					board.get(third).marble.setFill(Color.BLACK);
-				}
-			}
-			if(board.get(first).marble.playerNumber == 2) {
-				board.get(first).marble.setFill(Color.GRAY);
-				if(second != null && !board.get(second).empty) {
-					board.get(second).marble.setFill(Color.GRAY);
-				}
-				if(third!=null && !board.get(third).empty) {
-					board.get(third).marble.setFill(Color.GRAY);
-				}
-			}
-			if (GameData.numberPlayers ==3) {
-				if(board.get(first).marble.playerNumber == 3) {
-					board.get(first).marble.setFill(Color.DARKGREEN);
-					if(second != null && !board.get(second).empty) {
-						board.get(second).marble.setFill(Color.DARKGREEN);
-					}
-					if(third!=null && !board.get(third).empty) {
-						board.get(third).marble.setFill(Color.DARKGREEN);
-					}
-				}
-			}
 		}
-	}
 	
-	public void move(Hashtable<String, Hexagon> board) {
-		//check if valid -> if not, reset, else: perform movement, change player, resetmove
-		//System.out.println("move");
+		public void resetSelection(String code, Hashtable<String, Hexagon> board) {
+			selectedMarbles.clear();
+			GameMethods.coloursBackToNormal(board);
+			first = code;
+			second = null;
+			third = null;
+			board.get(code).marble.setFill(Color.PURPLE);
+			selectedMarbles.add(code);
+			nrSelected = 1;
+		}
 		
-		if (nrSelected == 1) {
-			if(validMoveOne(board, first, moveTo)) {
-				//System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
-				performMovementOne(board);
-				resetMove();
-				
-				if (board.equals(Board.hashBoard) && !adding) {
-					changePlayer();
-					GameData.tb.add();
-					if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
-						checkAI();
-					}
+		public void move(Hashtable<String, Hexagon> board) {
+			//check if valid -> if not, reset, else: perform movement, change player, resetmove
+			
+			if (nrSelected == 1) {
+				if(validMoveOne(board, first, moveTo)) {
+					//System.out.println(Board.rows.direction(Board.hashBoard.get(first), Board.hashBoard.get(moveTo)));
+					performMovementOne(board);
+					moveForAll(board);
 				}
-				
-				
 			}
-		}
-		else if(nrSelected ==2) {
-			if(validMoveTwo(board, first, second, moveTo)) {
-				performMovementTwo(board);
-				
-				if (board.equals(Board.hashBoard) && !adding) {
-					gameFinished();
-					changePlayer();
-					GameData.tb.add();
-					//checkAI();
-					pushed = false;
-					if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
-						checkAI();
-					}
+			else if(nrSelected ==2) {
+				if(validMoveTwo(board, first, second, moveTo)) {
+					performMovementTwo(board);
+					moveForAll(board);
 				}
-				resetMove();
 			}
-		}
-		else if(nrSelected ==3) {
-			if(validMoveThree(board, first, second, third, moveTo)) {
-				performMovementThree(board);
-				
-				if (board.equals(Board.hashBoard) && !adding) {
-					gameFinished();
-					changePlayer();
-					GameData.tb.add();
-					
-					//checkAI();
-					pushed = false;
-					if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
-						checkAI();
-					}
-				}
-				resetMove();
-			}
-		}
-	}
-	
-	//changes who is playing
-	public void changePlayer() {
-		if (playersTurn ==1) {
-			playersTurn = 2;
-		}
-		else {
-			if (GameData.numberPlayers == 2 || GameData.numberPlayers == 3 && playersTurn ==3) {
-				playersTurn = 1;
-			}
-			else if (GameData.numberPlayers == 3 && playersTurn ==2){
-				if (playersTurn == 2) {
-					playersTurn = 3;
+			else if(nrSelected ==3) {
+				if(validMoveThree(board, first, second, third, moveTo)) {
+					performMovementThree(board);
+					moveForAll(board);
 				}
 			}
 		}
-	}
-	
+		
+		public void moveForAll(Hashtable<String, Hexagon> board) {
+			if (board.equals(Board.hashBoard) && !adding) {
+				GameMethods.gameFinished();
+				playersTurn = GameMethods.changePlayer(playersTurn);
+				GameData.tb.add();
+				pushed = false;
+				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
+					checkAI();
+				}
+			}
+			resetMove();
+		}
+		
 	//automatically perform the move for the ai -> create tree, search and perform the move!!
 	public static void checkAI()  {
-		if (playersTurn ==1 && player1AI) {
-			System.out.println("ai player 1");
-			GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
-			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy || GameData.numberPlayers ==3 || greedyPlayer1) {
-				System.out.println("1 layer");
-				PerformAIAction.createGameTree(state, 1);
-				AI.PerformAIAction.perform(true);
-				
-			}
-			else {
-				System.out.println("2 layers");
-				PerformAIAction.createGameTree(state, 2);
-				AI.PerformAIAction.perform(greedy);
-				
-			}
-			
-			
-		}
-		else if (playersTurn ==2 && player2AI) {
-			System.out.println("ai player 2");
-			GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
-			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-			if (greedy || GameData.numberPlayers ==3 || greedyPlayer2) {
-				System.out.println("1 layer");
-				PerformAIAction.createGameTree(state, 1);
-				AI.PerformAIAction.perform(true);
-			}
-			else {
-				System.out.println("2 layers");
-				PerformAIAction.createGameTree(state, 2);
-				AI.PerformAIAction.perform(greedy);
-			}
-			
-			
-		}
-		else if (playersTurn ==3 && player3AI) {
-			System.out.println("ai player 3");
-			GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),changeBack(playersTurn));
-			//PerformAIAction.tree = new GameTree(new Node<GameState>(state));
-				System.out.println("1 layer");
-				PerformAIAction.createGameTree(state, 1);
-				AI.PerformAIAction.perform(true);
-			
+		if (playersTurn ==1 && player1AI || playersTurn ==2 && player2AI || playersTurn ==3 && player3AI) {
+			performAI();
 		}
 	}
 	
-	public static int changeBack(int playerNr) {
-		if (playerNr ==3) {
-			return 2;
-		}
-		else if (playerNr ==2) {
-			return 1;
-		}
-		else if (playerNr ==1 && GameData.numberPlayers ==3) {
-			return 3;
+	public static void performAI() {
+		GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
+		if (greedy || GameData.numberPlayers ==3 || greedyPlayer2) {
+			System.out.println("1 layer");
+			PerformAIAction.createGameTree(state, 1);
+			AI.PerformAIAction.perform(true);
 		}
 		else {
-			return 2;
+			System.out.println("2 layers");
+			PerformAIAction.createGameTree(state, 2);
+			AI.PerformAIAction.perform(greedy);
 		}
+		
 	}
 	
-	public static int changePlayer(int playerNr) {
-		if (playerNr ==1) {
-			playerNr = 2;
-		}
-		else {
-			if ((GameData.numberPlayers == 2 || GameData.numberPlayers == 3) && playerNr ==3) {
-				playerNr = 1;
-			}
-			else if (GameData.numberPlayers == 3 && playerNr ==2){
-				if (playerNr == 2) {
-					playerNr = 3;
-				}
-			}
-		}
-		return playerNr;
-	}
+	//up until here, it's cleaned up
 	
 	//moves one single marble
 	public void performMovementOne(Hashtable<String, Hexagon> board) {
@@ -867,62 +718,5 @@ public class Move {
 		resetMove();
 		return false;
 	}
-	
-	public int getScore1() {
-		return point;
-	}
-	public int getScore2() {
-		return point2;
-	}
-	
-	public int getScore3() {
-		return point3;
-	}
-	
-	public int player() {
-		return playersTurn;
-	}
-	
-	public void gameFinished() {
-		GameGui.score_text1.setText(String.valueOf(point));
-		GameGui.score_text2.setText(String.valueOf(point2));
-		if (GameData.numberPlayers == 3) {
-			GameGui.score_text3.setText(String.valueOf(point3));
-		}
-		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("Game Over");
-		alert.setHeaderText("Winner is:");
-		if ( getScore1() == 6){
-			String s ="Game over, Player 1 won!" ;
-			alert.setContentText(s);
-			alert.show();
-			GameGui.winner_text.setText("Game over, Player 1 won!");
-			//System.out.println("DONE");
-		
-		}
-		if ( getScore2() == 6) {
-			
-			String s ="Game over, Player 2 won!" ;
-			alert.setContentText(s);
-			alert.show();
-			GameGui.winner_text.setText("Game over, Player 2 won!");
-			//System.out.println("DONE");
-		}
-		if (GameData.numberPlayers ==3) {
-			if (getScore3() == 6) {
-				String s ="Game over, Player 3 won!" ;
-				alert.setContentText(s);
-				alert.show();
-				GameGui.winner_text.setText("Game over, Player 3 won!");
-			}
-		}
-		
-		alert.setOnCloseRequest( event ->
-	    {
-	        //System.out.println("CLOSING");
-	        System.exit(0);
-	    });
-	}
-	
 	
 }
