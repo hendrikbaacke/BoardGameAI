@@ -58,6 +58,8 @@ public class BoardRows {
 		}
 	}
 	
+	
+	//checks whether three marbles are in the same row
 	public boolean sameRowThree(String one, String two, String three) {
 		boolean sameRow = false;
 		
@@ -67,7 +69,6 @@ public class BoardRows {
 			}
 			if (horizontal.get(i).contains(one) && horizontal.get(i).contains(two) && horizontal.get(i).contains(three)) {
 				sameRow = true;
-				
 			}
 		}
 		
@@ -88,83 +89,15 @@ public class BoardRows {
 			if (topRight.get(i).contains(one) && topRight.get(i).contains(two) && topRight.get(i).contains(three)) {
 				sameRow = true;
 			}
-			//System.out.println(sameRow);
-			
 		}
 		return sameRow;
 	}
 	
-	public int direction(String first, String moveTo) {
-		boolean sameRow = false;
-		int direction = 0;
-		
-		for (int i = 0; i < horizontal.size(); i++) {
-			if (sameRow) {
-				break;
-			}
-			if (horizontal.get(i).contains(first) && horizontal.get(i).contains(moveTo)) {
-				String numberFirst = first.substring(1);
-				String numberMoveTo = moveTo.substring(1);
-				
-				int numberOne = Integer.parseInt(numberFirst);
-				int numberTwo = Integer.parseInt(numberMoveTo);
-				
-				if (numberOne>numberTwo) {
-					direction = 1;
-				}
-				else {
-					direction = 4;
-				}
-				
-				sameRow = true;
-			}
-		}
-		
-		for (int i = 0; i < topLeft.size(); i++) {
-			if (sameRow) {
-				break;
-			}
-			if (topLeft.get(i).contains(first) && topLeft.get(i).contains(moveTo)) {
-				
-					char letterFirst = first.charAt(0);
-					char letterMoveTo = moveTo.charAt(0);
-					
-					if (letterFirst>letterMoveTo) {
-						direction = 5;
-					}
-					else {
-						direction = 2;
-					}
-				
-			}
-		}
-		
-		for(int i = 0; i < topRight.size(); i++) {
-			if (sameRow) {
-				break;
-			}
-			if (topRight.get(i).contains(first) && topRight.get(i).contains(moveTo)) {
-				String numberFirst = first.substring(1);
-				String numberMoveTo = moveTo.substring(1);
-				
-				int numberOne = Integer.parseInt(numberFirst);
-				int numberTwo = Integer.parseInt(numberMoveTo);
-				
-				if (numberOne>numberTwo) {
-					direction = 6;
-				}
-				else {
-					direction = 3;
-				}
-				
-				sameRow = true;
-			}
-			
-		}
-		
-		return direction;
-	}
 	
+	
+	
+	
+	//checks whether a movement is sideways or not
 	public boolean sideways(String first, String second, String moveTo) {
 		if (this.direction(first, second) == 1 & this.direction(first, moveTo) ==4 || this.direction(first, second) == 4 & this.direction(first, moveTo) ==1) {
 			return false;
@@ -182,10 +115,10 @@ public class BoardRows {
 		return false;
 	}
 	
-	//if it's sideways with two!!
+	//if it's sideways with two- check whether two hexagons in a certain direction are still available
 	public boolean twoFree(String first, String second, String moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
-		//System.out.println("direction is " + direction);
+		
 		char letterFirst = first.charAt(0);
 		char letterSecond = second.charAt(0);
 		
@@ -218,12 +151,10 @@ public class BoardRows {
 		if (direction ==1) {
 			if (board.containsKey(letterFirstSt+numberOneMinus) && board.containsKey(letterSecondSt+numberTwoMinus)) {
 				if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty) {
-					//System.out.println("ONE TRUE");
 					return true;
 				}
 			}
 			else {
-				//System.out.println("FALSE");
 				return false;
 			}
 		}
@@ -231,12 +162,10 @@ public class BoardRows {
 		else if (direction ==2) {
 			if (board.containsKey(letterOnePlusSt + numberOne) && board.containsKey(letterTwoPlusSt+ numberTwo)){
 				if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty) {
-					//System.out.println("TWO TRUE");
 					return true;
 				}	
 			}
 			else {
-				//System.out.println("FALSE");
 				return false;
 			}
 		}
@@ -244,12 +173,10 @@ public class BoardRows {
 		else if(direction ==3) {
 			if (board.containsKey(letterOnePlusSt + numberOnePlus) && board.containsKey(letterTwoPlusSt+numberTwoPlus)) {
 				if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty) {
-					//System.out.println("THREE TRUE");
 					return true;
 				}
 			}
 			else {
-				//System.out.println("FALSE");
 				return false;
 			}
 			
@@ -257,47 +184,38 @@ public class BoardRows {
 		else if (direction ==4) {
 			if (board.containsKey(letterFirstSt+numberOnePlus) && board.containsKey(letterSecondSt+numberTwoPlus)) {
 				if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty) {
-					//System.out.println("FOUR TRUE");
 					return true;
 				}
 			}
 			else {
-				//System.out.println("FALSE");
 				return false;
 			}
 		}
 		else if (direction ==5) {
 			if (board.containsKey(letterOneMinusSt + numberOne) && board.containsKey(letterTwoMinusSt + numberTwo)) {
 				if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty) {
-					//System.out.println("FIVE TRUE");
 					return true;
 				}
 			}
 			else {
-				//System.out.println("FALSE");
 				return false;
 			}
 		}
 		else if (direction ==6) {
 			if (board.containsKey(letterOneMinusSt + numberOneMinus) && board.containsKey(letterTwoMinusSt + numberTwoMinus)) {
 				if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty) {
-					//System.out.println("SIX TRUE");
 					return true;
 				}
 			}
 			else {
-				//System.out.println("FALSE");
 				return false;
 				
-			}
-			
+			}	
 		}
-		
-		//System.out.println("FALSE");
 		return false;
 	}
 	
-	//if it's sideways with three
+	//if it's sideways with three - check whether the three adjacent hexagons in a certain direction are still empty
 	public boolean threeFree(String first, String second, String third, String moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
 		//System.out.println("direction is " + direction);
@@ -343,7 +261,6 @@ public class BoardRows {
 		if (direction ==1) {
 			if(board.containsKey(letterFirstSt+numberOneMinus) && board.containsKey(letterSecondSt+numberTwoMinus) && board.containsKey(letterThirdSt + numberThreeMinus)) {
 				if(board.get(letterFirstSt+numberOneMinus).empty && board.get(letterSecondSt+numberTwoMinus).empty && board.get(letterThirdSt + numberThreeMinus).empty) {
-					//System.out.println("ONE TRUE");
 					return true;
 				}	
 			}
@@ -352,7 +269,6 @@ public class BoardRows {
 		else if (direction ==2) {
 			if(board.containsKey(letterOnePlusSt + numberOne) && board.containsKey(letterTwoPlusSt+ numberTwo) && board.containsKey(letterThreePlusSt + numberThree)) {
 				if(board.get(letterOnePlusSt + numberOne).empty && board.get(letterTwoPlusSt+ numberTwo).empty && board.get(letterThreePlusSt + numberThree).empty) {
-					//System.out.println("TWO TRUE");
 					return true;
 				}	
 			}
@@ -361,7 +277,6 @@ public class BoardRows {
 		else if(direction ==3) {
 			if(board.containsKey(letterOnePlusSt + numberOnePlus) && board.containsKey(letterTwoPlusSt+numberTwoPlus) && board.containsKey(letterThreePlusSt + numberThreePlus)) {
 				if(board.get(letterOnePlusSt + numberOnePlus).empty && board.get(letterTwoPlusSt+numberTwoPlus).empty && board.get(letterThreePlusSt + numberThreePlus).empty) {
-					//System.out.println("THREE TRUE");
 					return true;
 				}	
 			}
@@ -369,7 +284,6 @@ public class BoardRows {
 		else if (direction ==4) {
 			if(board.containsKey(letterFirstSt+numberOnePlus) && board.containsKey(letterSecondSt+numberTwoPlus) && board.containsKey(letterThirdSt + numberThreePlus)) {
 				if(board.get(letterFirstSt+numberOnePlus).empty && board.get(letterSecondSt+numberTwoPlus).empty && board.get(letterThirdSt + numberThreePlus).empty) {
-					//System.out.println("FOUR TRUE");
 					return true;
 				}
 			}
@@ -377,7 +291,6 @@ public class BoardRows {
 		else if (direction ==5) {
 			if(board.containsKey(letterOneMinusSt + numberOne) && board.containsKey(letterTwoMinusSt + numberTwo) && board.containsKey(letterThreeMinusSt + numberThree)) {
 				if(board.get(letterOneMinusSt + numberOne).empty && board.get(letterTwoMinusSt + numberTwo).empty && board.get(letterThreeMinusSt + numberThree).empty) {
-					//System.out.println("FIVE TRUE");
 					return true;
 				}
 			}
@@ -385,17 +298,65 @@ public class BoardRows {
 		else if (direction ==6) {
 			if(board.containsKey(letterOneMinusSt + numberOneMinus) && board.containsKey(letterTwoMinusSt + numberTwoMinus) && board.containsKey(letterThreeMinusSt + numberThreeMinus)) {
 				if(board.get(letterOneMinusSt + numberOneMinus).empty && board.get(letterTwoMinusSt + numberTwoMinus).empty && board.get(letterThreeMinusSt + numberThreeMinus).empty) {
-					//System.out.println("SIX TRUE");
 					return true;
 				}
 			}
 		}
-		
-		//System.out.println("FALSE");
 		return false;
 	}
 	
-	//fix this
+	//returns the number which is the direction in which two adjacent hexagons are
+	public int direction(String first, String moveTo) {
+		for (int i = 0; i < horizontal.size(); i++) {
+			if (horizontal.get(i).contains(first) && horizontal.get(i).contains(moveTo)) {
+				String numberFirst = first.substring(1);
+				String numberMoveTo = moveTo.substring(1);
+				
+				int numberOne = Integer.parseInt(numberFirst);
+				int numberTwo = Integer.parseInt(numberMoveTo);
+					
+				if (numberOne>numberTwo) {
+					return 1;
+				}
+				else {
+					return 4;
+				}
+			}
+		}
+			
+		for (int i = 0; i < topLeft.size(); i++) {
+			if (topLeft.get(i).contains(first) && topLeft.get(i).contains(moveTo)) {
+					char letterFirst = first.charAt(0);
+					char letterMoveTo = moveTo.charAt(0);
+					
+					if (letterFirst>letterMoveTo) {
+						return 5;
+					}
+					else {
+						return 2;
+					}
+			}
+		}
+			
+		for(int i = 0; i < topRight.size(); i++) {
+			if (topRight.get(i).contains(first) && topRight.get(i).contains(moveTo)) {
+				String numberFirst = first.substring(1);
+				String numberMoveTo = moveTo.substring(1);
+				int numberOne = Integer.parseInt(numberFirst);
+				int numberTwo = Integer.parseInt(numberMoveTo);
+					
+				if (numberOne>numberTwo) {
+					return 6;
+				}
+				else {
+					return 3;
+				}
+			}	
+		}
+		return 0;
+	}
+	
+	//returns the code of an adjacent hexagon/marble in a certain direction from another code
 	public String adjacentDirection(String moveTo, int direction ) {
 		char letterMoveTo = moveTo.charAt(0);
 		String letterMoveToSt = moveTo.substring(0,1);
@@ -406,7 +367,6 @@ public class BoardRows {
 		int numberMoveToPlus = numberMoveTo + 1;
 		char letterMoveToPlus = (char) (letterMoveTo +1);
 		String letterMoveToPlusSt = Character.toString(letterMoveToPlus);
-		
 		
 		//when the value is one smaller
 		int numberMoveToMinus = numberMoveTo - 1;
@@ -434,6 +394,8 @@ public class BoardRows {
 		return null;
 	}
 	
+	
+	//return the opposite direction of a certain direction
 	public int oppositeDirection(int direction) {
 		if (direction ==1) {
 			direction = 4;

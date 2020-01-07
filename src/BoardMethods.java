@@ -54,4 +54,15 @@ public class BoardMethods {
 		}
 		return marbles;
 	}
+	
+	//repetition checker
+	public static boolean repetitionChecker(Hashtable<String, Hexagon> current) {
+		ArrayList<Hashtable<String, Hexagon>> tb = GameData.tb.getTB();
+		for (int i = 0; i < tb.size(); i++) {
+			if (compareHashtables(tb.get(i), current)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

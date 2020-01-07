@@ -1,13 +1,15 @@
 package src;
 
-import java.util.ArrayList;
 import java.util.Hashtable;
-
 import javafx.event.EventHandler;
-import javafx.scene.Cursor;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Ellipse;
+
+/*
+ * Handles the marbles with which a game is played. 
+ * Things such as color are automatically set.
+ */
 
 public class Marble extends Ellipse{
 	private String locationKey;
@@ -15,6 +17,7 @@ public class Marble extends Ellipse{
 	double orgSceneX, orgSceneY;
 	double orgTranslateX, orgTranslateY;
 	
+	//creates a marble at a certain space, with a certain key
 	Marble(double centerX, double centerY, int player, String key, boolean newM){
 		super(centerX, centerY, Hexagon.radius*0.70, Hexagon.radius*0.70);
 		this.playerNumber = player;
@@ -39,6 +42,7 @@ public class Marble extends Ellipse{
 		
 	}
 	
+	//handle location keys (that are private) with a set and get method
 	public void setLocationKey(String key){
 		this.locationKey = key;
 	}
@@ -47,6 +51,7 @@ public class Marble extends Ellipse{
 		return locationKey;
 	}
 	
+	//can automatically put the marble in the middle of a hexagon with the same key
 	public void updateLocation(Hashtable<String, Hexagon> board) {
 		Hexagon hex = (Hexagon) board.get(locationKey);
 		double tempX = hex.centerX ;
@@ -54,18 +59,18 @@ public class Marble extends Ellipse{
 		this.setCenterX(tempX);
 		this.setCenterY(tempY);
 	}
-			EventHandler<MouseEvent> EllipseOnMouseClicked =
-					new EventHandler<MouseEvent>() {
+			
+	//make it clickable, so you can play the game
+	EventHandler<MouseEvent> EllipseOnMouseClicked =
+				new EventHandler<MouseEvent>() {
 
-						@Override
-						public void handle(MouseEvent t) {
-							//System.out.println(locationKey);
-							if ((Move.playersTurn == 1 && !Move.player1AI) || (Move.playersTurn ==2 && !Move.player2AI) || (Move.playersTurn ==3 && !Move.player3AI)) {
-								GameData.move.select(locationKey, Board.hashBoard);
-							}
+					public void handle(MouseEvent t) {
+						if ((Move.playersTurn == 1 && !Move.player1AI) || (Move.playersTurn ==2 && !Move.player2AI) || (Move.playersTurn ==3 && !Move.player3AI)) {
+							GameData.move.select(locationKey, Board.hashBoard);							}
 						}
 					};
 					
+	// make a copy of a marble, with a different reference
 	public Marble deepClone() {
 		Marble marble = new Marble(this.getCenterX(), this.getCenterY(), playerNumber, locationKey, false);
 		return marble;

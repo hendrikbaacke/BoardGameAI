@@ -1,16 +1,17 @@
 package src;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import AI.GameState;
+import AI.PerformAIAction;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.concurrent.TimeUnit;
 
-import AI.GameState;
-import AI.GameTree;
-import AI.Node;
-import AI.PerformAIAction;
+/*
+ * Whenever a move on the board or in a gamestate needs to be performed, this class's methods are used.
+ */
 
 public class Move {
 	//first, second, and third marble code that need to be moved (the hexagon in the hashboard contains the marbles of the same code- which can be removed and added quickly)
@@ -866,6 +867,7 @@ public class Move {
 		resetMove();
 		return false;
 	}
+	
 	public int getScore1() {
 		return point;
 	}
@@ -880,6 +882,7 @@ public class Move {
 	public int player() {
 		return playersTurn;
 	}
+	
 	public void gameFinished() {
 		GameGui.score_text1.setText(String.valueOf(point));
 		GameGui.score_text2.setText(String.valueOf(point2));
