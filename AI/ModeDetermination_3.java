@@ -12,23 +12,23 @@ public class ModeDetermination_3 {
 	private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
 
 
-	private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill                -7
+	private double [][] weightMatrix_AI_3 = {{  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}, //get to the middle, except we can kill                -7
 
-	private double[] mode2={  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}; //1.breaking groups 2.cohesion
+											{  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}, //1.breaking groups 2.cohesion
 
-	private double[] mode3={  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 };
+											{  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 },
 
-	private double[] mode4={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 };
+											{  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
 
-	private double[] mode5={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 };
+											{  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
 
-	private double[] mode6={  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 };
+											{  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 },
 
-	private double[] mode7={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 };
+											{  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
 
-	private double[] mode8={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 };
+											{  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
 
-	private double[] mode9={  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 };
+											{  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};
 
 
 	private double[] defaultMode= {1,1,1,1,1,1};
@@ -37,15 +37,15 @@ public class ModeDetermination_3 {
 	public double[] determineMode_3(double f1, double Opp){
 
 		if(Opp<=11){
-			return mode3;
+			return weightMatrix_AI_3[2];
 
 		}else {
 
 			if (f1 > DistancePlayer && Counter < 2)
-				return mode1;
+				return weightMatrix_AI_3[0];
 			else
 				Counter = 2;
-			return mode2;
+			return weightMatrix_AI_3[1];
 		}
 //        if(centerDistance<DistanceM1)
 //            return mode2;

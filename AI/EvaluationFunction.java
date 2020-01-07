@@ -346,6 +346,7 @@ public class EvaluationFunction {
 			ModeDetermination_1 modeDet = new ModeDetermination_1();
 
 			double[] weightArray = modeDet.determineMode_1(f1, strategies.amountOppMarbles());
+
 			w1 = weightArray[0];
 			w2 = weightArray[1];
 			w3 = weightArray[2];
