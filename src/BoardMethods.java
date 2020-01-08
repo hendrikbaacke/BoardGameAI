@@ -55,7 +55,7 @@ public class BoardMethods {
 		return marbles;
 	}
 	
-	//repetition checker
+	//repetition checker - return false if it is a repetition
 	public static boolean repetitionChecker(Hashtable<String, Hexagon> current) {
 		ArrayList<Hashtable<String, Hexagon>> tb = GameData.tb.getTB();
 		for (int i = 0; i < tb.size(); i++) {
@@ -64,5 +64,44 @@ public class BoardMethods {
 			}
 		}
 		return true;
+	}
+	
+	//repetition checker - return false if it is a repetition
+	public static boolean moveRepetitionChecker(String first, String second, String third, int playerNumber) {
+		ArrayList<String> check;
+		if(playerNumber ==1) {
+			check = GameData.tb.oldMovePlayer1;
+		}
+		else if(playerNumber ==2) {
+			check = GameData.tb.oldMovePlayer2;
+		}
+		else {
+			check = GameData.tb.oldMovePlayer3;
+		}
+		
+		if (second == null && third == null) {
+			if (check.size() == 1) {
+				if (check.get(0) == first) {
+					return true;
+				}
+			}
+		}
+		
+		if (second != null && third == null) {
+			if (check.size()== 2) {
+				if (check.get(0) == second && check.get(1) == first) {
+					return true;
+				}
+			}
+			
+		}
+		if (second != null && third != null) {
+			if(check.size() == 3) {
+				if (check.get(0) == third && check.get(1) == second && check.get(2) == first) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

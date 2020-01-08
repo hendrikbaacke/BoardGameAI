@@ -203,6 +203,7 @@ public class Move {
 		}
 	}
 	
+	//checks whether it needs to be greedy and then performs the move
 	public static void performAI() {
 		GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
 		if (greedy || GameData.numberPlayers ==3 || (playersTurn ==1 && greedyPlayer1) || (playersTurn ==2 && greedyPlayer2) ) {
@@ -218,6 +219,7 @@ public class Move {
 		
 	}
 	
+	//move a marble from one place (see code) to the other
 	public void moveMarble(String from, String to, Hashtable<String, Hexagon> board) {
 		Marble moving = board.get(from).marble;
 		board.get(from).setEmpty();
@@ -231,6 +233,7 @@ public class Move {
 		moveMarble(first, moveTo, board);
 	}
 	
+	//moves two marbles, either sideways or in the same direction
 	public void performMovementTwo(Hashtable<String, Hexagon> board) {
 		//if it is moves sideways, then it can never push another marble
 		if(GameData.rows.sideways(first, second, moveTo)) {
@@ -252,7 +255,7 @@ public class Move {
 		}
 	}
 	
-	
+	//moves three marbles, either sideways or in the same direction
 	public void performMovementThree(Hashtable<String, Hexagon> board) {
 		String newHex = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 		//if it is moves sideways, then it can never push another marble
@@ -282,9 +285,10 @@ public class Move {
 			else {
 				doPushOne(board);
 			}
-	}
+		}
 	}
 	
+	//moves marbles sideways (either two or three)
 	public void moveSideways(Hashtable<String, Hexagon> board) {
 		int direction = GameData.rows.direction(first, moveTo);
 		//System.out.println("direction is " + direction);
@@ -296,7 +300,6 @@ public class Move {
 		
 		String numberFirst = first.substring(1);
 		String numberSecond = second.substring(1);
-		
 		
 		int numberOne = Integer.parseInt(numberFirst);
 		int numberTwo = Integer.parseInt(numberSecond);
@@ -389,6 +392,7 @@ public class Move {
 		moveMarble(second, keyTwo, board);
 	}
 	
+	//removes a marble from the board - used in push methods
 	public void removeMarble(Marble removing, Hashtable<String, Hexagon> board) {
 		if (board.equals(Board.hashBoard) && !adding) {
 			GameData.score[playersTurn-1]++;
@@ -404,8 +408,7 @@ public class Move {
 				}
 				else {
 					point3++;
-				}
-				
+				}	
 			}
 			else {
 				pushed = true;
@@ -418,7 +421,6 @@ public class Move {
 			Marble removing = board.get(moveTo).marble;
 			board.get(moveTo).setEmpty();
 			moveMarble(second, moveTo, board);
-		
 			String keyAdj = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 		
 			if(board.containsKey(keyAdj)) {
@@ -477,7 +479,6 @@ public class Move {
 		else {
 			removeMarble(removing, board);
 		}
-		
 		moving.setLocationKey(moveTo);
 		moving.updateLocation(board);
 	}
@@ -511,7 +512,7 @@ public class Move {
 		}
 	}
 	
-	//should be done
+	//checks whether a move with two marbles is valid
 	public static boolean validMoveTwo(Hashtable<String, Hexagon> board, String first, String second, String moveTo) {
 		if (board.containsKey(first) && board.containsKey(second) && board.containsKey(moveTo)) {
 			if (board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
@@ -562,7 +563,7 @@ public class Move {
 		return false;
 	}
 	
-	//done
+	//checks whether a move with three marbles is possible
 	public static boolean validMoveThree(Hashtable<String, Hexagon> board, String first, String second, String third, String moveTo) {
 		if (board.containsKey(first) && board.containsKey(second) && board.containsKey(moveTo) && board.containsKey(third)) {
 			if (board.get(first).adjacent(second) && board.get(first).adjacent(moveTo) && board.get(second).adjacent(third)) {
