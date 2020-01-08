@@ -6,6 +6,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
+/*
+ * A class for the GUI.
+ */
+
 public class SettingsPane {
     public GridPane create(){
         GridPane MainCont = new GridPane();
@@ -14,7 +18,6 @@ public class SettingsPane {
         //Setting the vertical and horizontal gaps between the columns
         MainCont.setVgap(10);
         MainCont.setHgap(50);
-
 
         Text OneContent = new Text("1. To be able to play the game first select the mode on which you prefer to play.");
         TextFlow OneCont = new TextFlow();

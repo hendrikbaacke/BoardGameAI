@@ -2,24 +2,27 @@ package src;
 
 
 import AI.GameState;
-import AI.ModeDetermination_2;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
+/*
+ * Handles the game itself. So when the game is being played, this screen is showed.
+ */
 
 public class GameGui extends Application{
 	
@@ -42,7 +45,7 @@ public class GameGui extends Application{
 			//Eva.setStyle("-fx-background-color: darkgray");
 			Eva.setOnAction(e -> {
 				if (Move.playersTurn == 2) {
-					AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
+					//AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
 
 					//double f1 = strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));
 					//double f1=strategies.closingDistanceTest();
@@ -64,8 +67,6 @@ public class GameGui extends Application{
 				Move.checkAI();
 				System.out.println("--did ai move and deleted tree--");
 			});
-
-
 
 		    Label winner_label = new Label("Player win:\t");
 		     double MAX_FONT_SIZE = 30.0; // define max font size you need
@@ -103,7 +104,7 @@ public class GameGui extends Application{
 			HBox hbox3 = new HBox();
 			Button reset = new Button("RESET");
 			//hbox3.getChildren().add(reset);
-			if (Board.numberPlayers ==2) {
+			if (GameData.numberPlayers ==2) {
 				GridPane.setRowIndex(hbox3, 5);
 				GridPane.setRowIndex(winner, 4);
 				GridPane.setRowIndex(playerBox, 1);
@@ -114,7 +115,7 @@ public class GameGui extends Application{
 				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, Eva, buttonAI); //add reset for the reset button
 			}
 			
-			if (Board.numberPlayers ==3) {
+			if (GameData.numberPlayers ==3) {
 				GridPane.setRowIndex(hbox3, 6);
 				GridPane.setRowIndex(winner, 5);
 				GridPane.setRowIndex(playerBox, 1);
@@ -164,6 +165,7 @@ public class GameGui extends Application{
 		}
 
 	}
+	
 	protected static Scene newScene(MarbleStorage m, Board board,GridPane SubScene) {
 		Screen = new Pane();
 		MainScene = board.add();
@@ -173,8 +175,4 @@ public class GameGui extends Application{
 		Scene scene = new Scene(Screen);
 		return scene;
 	}
-
-
-
-
 }

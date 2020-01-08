@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import src.Board;
+import src.GameData;
 import src.Move;
 
 public class PerformAIAction {
@@ -25,26 +26,26 @@ public class PerformAIAction {
 
 		if (needed.returnData().first != null) {
 
-			Board.move.select(needed.returnData().first, Board.hashBoard);
+			GameData.move.select(needed.returnData().first, Board.hashBoard);
 			System.out.println("select " + needed.returnData().first);
 			if (needed.returnData().second != null) {
-				Board.move.select(needed.returnData().second, Board.hashBoard);
+				GameData.move.select(needed.returnData().second, Board.hashBoard);
 				System.out.println("select " + needed.returnData().second);
 				if (needed.returnData().third != null) {
-					Board.move.select(needed.returnData().third, Board.hashBoard);
+					GameData.move.select(needed.returnData().third, Board.hashBoard);
 					System.out.println("select " + needed.returnData().third);
 				} 
 				else {
-					Board.move.select(needed.returnData().first, Board.hashBoard);
+					GameData.move.select(needed.returnData().first, Board.hashBoard);
 					System.out.println("select " + needed.returnData().first);
 				}
 			}
 			else {
-				Board.move.select(needed.returnData().first, Board.hashBoard);
+				GameData.move.select(needed.returnData().first, Board.hashBoard);
 				System.out.println("select " + needed.returnData().first);
 			}
 			System.out.println("Move to:  " + needed.returnData().moveTo);
-			Board.move.select(needed.returnData().moveTo, Board.hashBoard);
+			GameData.move.select(needed.returnData().moveTo, Board.hashBoard);
 			
 		}
 		Move.ai = false;

@@ -50,9 +50,9 @@ public class EvaluationFunction {
 		System.out.println(gameState.turn);
 
 
-		boolean isPlayer1AI = src.Board.move.player1AI;
-		boolean isPlayer2AI = src.Board.move.player2AI;
-		boolean isPlayer3AI = src.Board.move.player3AI;
+		boolean isPlayer1AI = src.GameData.move.player1AI;
+		boolean isPlayer2AI = src.GameData.move.player2AI;
+		boolean isPlayer3AI = src.GameData.move.player3AI;
 
 
 		Strategies strategies = new Strategies(gameState);
@@ -346,6 +346,7 @@ public class EvaluationFunction {
 			ModeDetermination_1 modeDet = new ModeDetermination_1();
 
 			double[] weightArray = modeDet.determineMode_1(f1, strategies.amountOppMarbles());
+
 			w1 = weightArray[0];
 			w2 = weightArray[1];
 			w3 = weightArray[2];
