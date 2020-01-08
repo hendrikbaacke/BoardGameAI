@@ -204,7 +204,7 @@ public class Move {
 	
 	public static void performAI() {
 		GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
-		if (greedy || GameData.numberPlayers ==3 || greedyPlayer2) {
+		if (greedy || GameData.numberPlayers ==3 || (playersTurn ==1 && greedyPlayer1) || (playersTurn ==2 && greedyPlayer2) ) {
 			System.out.println("1 layer");
 			PerformAIAction.createGameTree(state, 1);
 			AI.PerformAIAction.perform(true);
@@ -212,7 +212,7 @@ public class Move {
 		else {
 			System.out.println("2 layers");
 			PerformAIAction.createGameTree(state, 2);
-			AI.PerformAIAction.perform(greedy);
+			AI.PerformAIAction.perform(false);
 		}
 		
 	}
