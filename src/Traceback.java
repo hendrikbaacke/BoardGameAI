@@ -17,7 +17,7 @@ public class Traceback {
 	
 	//add a hashboard to the traceback
 	public void add() {
-		if (current < tracebacksize) {
+		if (current < tracebacksize - 1) {
 			current++;
 		}
 		else {
