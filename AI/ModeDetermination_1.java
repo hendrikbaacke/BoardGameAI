@@ -23,13 +23,13 @@ public class ModeDetermination_1 {
     public static int Counter = 1;
     private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
 
+    // { Distance , Cohesion , Break , strengh , Won , Lost , DistanceOpp }
 
+    private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill
 
-    private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill                -7
+    private double[] mode2={  -0.01  ,  1 ,  1.2  ,  0.5  ,  1  ,  3 , 0.02}; //1.breaking groups 2.cohesion
 
-    private double[] mode2={  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}; //1.breaking groups 2.cohesion
-
-    private double[] mode3={  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 };
+    private double[] mode3={  0  ,  3  ,  5  ,  3  ,  1  ,  1 ,  0 };
 
     private double[] mode4={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 };
 

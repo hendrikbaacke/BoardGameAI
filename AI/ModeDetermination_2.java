@@ -16,13 +16,13 @@ public class ModeDetermination_2 {
     private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
 
 
-    private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill                -7
+    private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill
 
     private double[] mode2={  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}; //1.breaking groups 2.cohesion
 
-    private double[] mode3={  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 };
+    private double[] mode3={  0  ,  3  ,  5    ,  3  ,  30  ,  0 , 0 };
 
-    private double[] mode4={  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 };
+    private double[] mode4={  -0.02  ,  1.5  ,  1    ,  1  ,  5  ,  20 , 0 };
 
     private double[] mode5={  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 };
 
@@ -38,9 +38,11 @@ public class ModeDetermination_2 {
     private double[] defaultMode= {1,1,1,1,1,1};
 
 
-    public double[] determineMode_2(double f1, double Opp){
+    public double[] determineMode_2(double f1, double Opp, double Own){
 
-        if(Opp<=11){
+        if(Own<9){
+            return mode4;
+        }else if(Opp<=11){
             return mode3;
 
         }else {
