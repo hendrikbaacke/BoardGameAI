@@ -363,7 +363,7 @@ public class EvaluationFunction {
 
 			ModeDetermination_2 modeDet = new ModeDetermination_2();
 
-			double[] weightArray = modeDet.determineMode_2(f1, strategies.amountOppMarbles());
+			double[] weightArray = modeDet.determineMode_2(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
 
 			w1 = weightArray[0];
 			w2 = weightArray[1];

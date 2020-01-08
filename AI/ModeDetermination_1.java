@@ -23,6 +23,9 @@ public class ModeDetermination_1 {
     public static int Counter = 1;
     private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
 
+    // { Distance , Cohesion , Break , strengh , Won , Lost , DistanceOpp }
+
+    private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill
 
 
     private double [][] weightMatrix_AI_1 = {  {  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}, //get to the middle, except we can kill                -7

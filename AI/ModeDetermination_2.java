@@ -17,6 +17,7 @@ public class ModeDetermination_2 {
 
     // here the weights are defined in a [9][7] matrix, reason: easier to optimise by an evolutionary algorithm
 
+
     private double [][] weightMatrix_AI_2 = {{  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   }, //get to the middle, except we can kill                -7
 
                                               {  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02   },   //1.breaking groups 2.cohesion
@@ -39,7 +40,7 @@ public class ModeDetermination_2 {
     private double[] defaultMode= {1,1,1,1,1,1,1};
 
 
-    public double[] determineMode_2(double f1, double Opp){
+    public double[] determineMode_2(double f1, double Opp, double Own){
 
         if(Opp<=11){
             return weightMatrix_AI_2[2];
