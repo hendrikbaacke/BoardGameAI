@@ -13,7 +13,7 @@ public class Traceback {
 	private static ArrayList<Hashtable<String, Hexagon>> traceback = new ArrayList<>();
 	public static int current= 1;
 	public static int totalMoves = 1;
-	private int tracebacksize = 0;
+	private int tracebacksize = 10;
 	
 	//add a hashboard to the traceback
 	public void add() {
@@ -24,7 +24,7 @@ public class Traceback {
 			current = 1;
 		}
 		
-		if (traceback.size() < 10) {
+		if (traceback.size() < tracebacksize) {
 			traceback.add(BoardMethods.copyHashBoard(Board.hashBoard));
 		}
 		else {
