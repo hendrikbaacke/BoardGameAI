@@ -16,13 +16,8 @@ public class BoardMethods {
 	//copies a whole hashboard - depends on the one you get as input
 	public static Hashtable<String, Hexagon> copyHashBoard(Hashtable<String, Hexagon> hex){
 		Hashtable<String, Hexagon> newBoard = new Hashtable<>();
-		for (char i= 'A'; i < 'J'; i++) {
-			for (int j = 1; j < 10; j++) {
-				String code = Character.toString(i) + j;
-				if (hex.containsKey(code)){
-					newBoard.put(code, hex.get(code).deepClone());
-				}
-			}
+		for(int i = 0; hash.size() > i; i++) {
+			newBoard.put(hash.get(i), hex.get(hash.get(i)).deepClone());
 		}
 		return newBoard;
 	}
@@ -59,49 +54,59 @@ public class BoardMethods {
 	public static boolean repetitionChecker(Hashtable<String, Hexagon> current) {
 		ArrayList<Hashtable<String, Hexagon>> tb = GameData.tb.getTB();
 		for (int i = 0; i < tb.size(); i++) {
+			System.out.println(i);
 			if (compareHashtables(tb.get(i), current)) {
+				System.out.println("board repetition");
 				return false;
 			}
 		}
+		System.out.println("no board repetition");
 		return true;
 	}
 	
 	//repetition checker - return false if it is a repetition
-	public static boolean moveRepetitionChecker(String first, String second, String third, int playerNumber) {
-		ArrayList<String> check;
+	public static boolean moveRepetitionChecker(String first, String second, String third, int playerNumber, int direction) {
+		ArrayList<String> check = null;
+		int olddirection = 0;
 		if(playerNumber ==1) {
 			check = GameData.tb.oldMovePlayer1;
+			olddirection = GameData.tb.direct1;
 		}
 		else if(playerNumber ==2) {
 			check = GameData.tb.oldMovePlayer2;
+			olddirection = GameData.tb.direct2;
 		}
 		else {
 			check = GameData.tb.oldMovePlayer3;
+			olddirection = GameData.tb.direct3;
 		}
 		
-		if (second == null && third == null) {
+		//System.out.println(first + " " + second + " " +  third);
+		
+		if (first != null && second == null && third == null) {
 			if (check.size() == 1) {
-				if (check.get(0) == first) {
-					return true;
+				if (check.get(0) == first && GameData.rows.oppositeDirection(olddirection) == direction) {
+					return false;
 				}
 			}
 		}
 		
-		if (second != null && third == null) {
+		if (first != null && second != null && third == null) {
 			if (check.size()== 2) {
-				if (check.get(0) == second && check.get(1) == first) {
-					return true;
+				if ((check.get(0) == second && check.get(1) == first || check.get(0) == first && check.get(1) == second) && direction == GameData.rows.oppositeDirection(olddirection)) {
+					return false;
 				}
 			}
 			
 		}
-		if (second != null && third != null) {
+		if (first != null && second != null && third != null) {
 			if(check.size() == 3) {
-				if (check.get(0) == third && check.get(1) == second && check.get(2) == first) {
-					return true;
+				if (check.contains(first) && check.contains(second) && check.contains(third) && direction == GameData.rows.oppositeDirection(olddirection)) {
+					return false;
 				}
 			}
 		}
-		return false;
+		System.out.println("no move repetition");
+		return true;
 	}
 }

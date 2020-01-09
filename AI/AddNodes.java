@@ -1,6 +1,5 @@
 package AI;
 
-//should be correct
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -11,14 +10,15 @@ import src.GameData;
 import src.Hexagon;
 import src.Move;
 
-public class AddNodes {
-//automatically add a layer to the tree
-//put in a node and it automatically gives you every game state that will be possible after this and will add this as a child!!
-	
-	//add every gamestate to a node as children
-	//check for every nr marbles, direction and node
+/*
+ * Can add layers to our game tree.
+ * There is a method in which you can put in the node and it will add every possible node to it.
+ */
+
+public class AddNodes {	
 	public static int nodeNR = 0;
 	
+	//add all the children of the node you pass as a parameter
 	public static void addForOne(Node<GameState> node) {
 		Hashtable<String, Hexagon> board = node.returnData().boardState;
 		ArrayList<String> hexagons = Board.hash;
@@ -36,8 +36,6 @@ public class AddNodes {
 					if (current.marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn)) {
 						//run this for every direction
 						for (int j = 1; j < 7; j++) {
-							//System.out.println("code " + currentString + " dir " + j);
-	
 							String moveTo = GameData.rows.adjacentDirection(currentString, j);
 							
 							//add every move with one marble -- is okay!!
@@ -45,11 +43,8 @@ public class AddNodes {
 								GameState oneM = new GameState(currentString, null, null, moveTo, node.returnData());
 								if (oneM.valid) {
 									nodeNR++;
-									//System.out.println(nodeNR);
 									oneMarbleMoves.add(oneM);
-									//System.out.println("first is " + currentString + " moveto is " + moveTo);
 								}
-								//node.addChild(oneM);
 							}
 	
 							for (int k = 1; k < 7; k++) {
@@ -62,10 +57,7 @@ public class AddNodes {
 											GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData());
 											if (twoM.valid) {
 												nodeNR++;
-												//System.out.println(nodeNR);
 												twoMarblesMoves.add(twoM);
-												//System.out.println("first is " + currentString + " second is  " + marble2 +  " moveto is " + moveTo);
-												//node.addChild(twoM);
 											}
 										}
 									}
@@ -81,18 +73,13 @@ public class AddNodes {
 											GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData());
 											if (threeM.valid) {
 												nodeNR++;
-												//System.out.println(nodeNR);
-												//node.addChild(threeM);
 												threeMarblesMoves.add(threeM);	
 											}
 										}
 									}
 								}
 							}
-							
 							}
-	
-							
 						}
 					}	
 				}
