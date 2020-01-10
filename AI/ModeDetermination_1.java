@@ -28,7 +28,7 @@ public class ModeDetermination_1 {
     private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill
 
 
-    private double [][] weightMatrix_AI_1 = {  {  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}, //get to the middle, except we can kill                -7
+    private double [][] weightMatrix_AI_1 = {  {  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}, //get to the middle, except we can kill                -7
 
                                                 {  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}, //1.breaking groups 2.cohesion
 
@@ -57,7 +57,7 @@ public class ModeDetermination_1 {
 
         } else {
 
-            if (f1 > DistancePlayer && Counter < 2)
+            if (f1 < 0.75 && Counter < 2)
                 return weightMatrix_AI_1[0];
             else
                 Counter = 2;
