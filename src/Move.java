@@ -283,7 +283,7 @@ public class Move {
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
 				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
-					checkAI();
+					//checkAI();
 				}
 			}
 		}

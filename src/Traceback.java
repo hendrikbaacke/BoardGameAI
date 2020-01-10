@@ -44,10 +44,15 @@ public class Traceback {
 	
 	//add a move to a player's log
 	public void addForPlayer(int playerNumber, String first, String second, String third, int direction) {
-		System.out.println("traceback for " + playerNumber);
-		System.out.println("add to traceback " + first);
-		System.out.println("add to traceback " + second);
-		System.out.println("add to traceback " + third);
+		if (first == null && second == null && third == null) {
+			return;
+		}
+		else {
+			System.out.println("traceback for " + playerNumber);
+			System.out.println("add to traceback " + first);
+			System.out.println("add to traceback " + second);
+			System.out.println("add to traceback " + third);
+		}
 		if (playerNumber ==1) {
 			oldMovePlayer1.clear();
 			oldMovePlayer1.add(first);
