@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//basic tree data structure
+/*
+ * A basic tree data structure.
+ */
 
 public class Tree<T> {
 	public Node<T> root;

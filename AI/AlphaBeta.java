@@ -1,8 +1,9 @@
 package AI;
 
-//Returns optimal value for 
-//current player (Initially called 
-//for root and maximizer) 
+/*
+ * Contains an alpha beta method.
+ * Stores the best node (the move the current player does).
+ */ 
 
 public class AlphaBeta{
 	
@@ -14,7 +15,7 @@ public class AlphaBeta{
 	
 	public double performAB(Node<GameState> node, int depth, double alpha, double beta, boolean max) {
 		double value = 0;
-		if (depth == 0 /* node = terminal */) {
+		if (depth == 0) {
 			return node.returnData().evaluatedValue;
 		}
 		

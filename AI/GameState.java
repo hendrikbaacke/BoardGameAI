@@ -83,8 +83,8 @@ public class GameState {
 			move.select(moveTo, boardState);
 			move.resetMove();
 			
-			 valid = !BoardMethods.compareHashtables(boardState, old.boardState);
-		
+			valid = !BoardMethods.compareHashtables(boardState, old.boardState);
+				
 			//scores old
 			point1 = old.point1;
 			point2 = old.point2;
@@ -102,6 +102,11 @@ public class GameState {
 					point3++;
 				}
 			}
+			
+			if (valid) {
+				valid = BoardMethods.repetitionChecker(boardState);
+			}
+			
 		oldGameState = old;
 		
 		//set the turn back to the one that was actually needed

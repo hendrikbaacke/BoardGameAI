@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-//basic node data structure
+/*
+ * Basic node structure.
+ */
 
 public class Node<T> {
 

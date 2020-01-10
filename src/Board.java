@@ -25,7 +25,6 @@ public class Board extends BorderPane {
 	   CenterY = Y;
    }
    
-   
    //adding the marbles manually
    public BorderPane add() {
 	   int HexRowStart = 5;
