@@ -10,9 +10,9 @@ import java.util.Hashtable;
  */
 
 public class BoardRows {
-	ArrayList<ArrayList<String>> horizontal = new ArrayList<>();
-	ArrayList<ArrayList<String>> topLeft = new ArrayList<>();
-	ArrayList<ArrayList<String>> topRight = new ArrayList<>();
+	public ArrayList<ArrayList<String>> horizontal = new ArrayList<>();
+	public ArrayList<ArrayList<String>> topLeft = new ArrayList<>();
+	public ArrayList<ArrayList<String>> topRight = new ArrayList<>();
 	
 	//automatically creates every row when this is called
 	public BoardRows() {

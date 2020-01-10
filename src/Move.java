@@ -5,8 +5,6 @@ import java.util.Hashtable;
 
 import AI.GameState;
 import AI.PerformAIAction;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
 
 
