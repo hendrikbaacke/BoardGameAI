@@ -70,9 +70,11 @@ public class Move {
 
 	//select marbles
 	public void select(String code, Hashtable<String, Hexagon> board) {
+		//System.out.println("select");
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
 		if (first == null && !board.get(code).empty) {
 			if (board.get(code).marble.playerNumber == playersTurn) {
+				//System.out.println("selected 1");
 				board.get(code).marble.setFill(Color.PURPLE);
 				first = code;
 				nrSelected++;
@@ -85,16 +87,22 @@ public class Move {
 			if (board.get(code).marble.playerNumber == playersTurn) {
 				if (first.equals(code)) {
 					selected = true;
+					//System.out.println("total = 1");
 					board.get(code).marble.setFill(Color.ORANGE);
 				}
 				else if(!board.get(code).adjacent(first)) {
-					resetSelection(code, board);
+					selectedMarbles.clear();
+					GameMethods.coloursBackToNormal(board);
+					first = code;
+					board.get(code).marble.setFill(Color.PURPLE);
+					selectedMarbles.add(code);
 				}
 				else{
 					second = code;
 					board.get(code).marble.setFill(Color.AQUAMARINE);
 					nrSelected++;
 					selectedMarbles.add(code);
+					//System.out.println("selected two");
 				}
 			}
 		}
@@ -105,11 +113,17 @@ public class Move {
 				if(first.equals(code) || second.equals(code)) {
 					board.get(first).marble.setFill(Color.ORANGE);
 					board.get(second).marble.setFill(Color.YELLOW);
-					
+					//System.out.println("total = 2");
 					selected = true;
 				}
 				else if(!board.get(code).adjacent(second) || !GameData.rows.sameRowThree(first, second, code)) {
-					resetSelection(code, board);
+					selectedMarbles.clear();
+					GameMethods.coloursBackToNormal(board);
+					first = code;
+					board.get(first).marble.setFill(Color.PURPLE);
+					second = null;
+					nrSelected = 1;
+					selectedMarbles.add(code);
 					
 				}
 				else {
@@ -120,6 +134,7 @@ public class Move {
 					board.get(first).marble.setFill(Color.ORANGE);
 					board.get(second).marble.setFill(Color.YELLOW);
 					board.get(third).marble.setFill(Color.YELLOW);
+					//System.out.println("selected three");
 				}
 			}
 		}
@@ -129,18 +144,36 @@ public class Move {
 			if (selected && board.get(code).adjacent(first)) {
 				if (!board.get(code).empty) {
 					if (board.get(code).marble.playerNumber == playersTurn) {
-							resetSelection(code, board);
+							selectedMarbles.clear();
+							GameMethods.coloursBackToNormal(board);
+							selected = false;
+							first = code;
+							board.get(first).marble.setFill(Color.PURPLE);
+							second = null;
+							third = null;
+							nrSelected = 1;
+							selectedMarbles.add(code);
 						}
 					else {
 						moveTo = code;
+						//System.out.println("moveto");
 					}
 					}
 				else {
 					moveTo = code;
+					//System.out.println("moveto");
 				}
 			}	
 			else if (!board.get(code).empty && board.get(code).marble.playerNumber ==playersTurn) {
-				resetSelection(code, board);
+				selectedMarbles.clear();
+				GameMethods.coloursBackToNormal(board);
+				selected = false;
+				first = code;
+				board.get(first).marble.setFill(Color.PURPLE);
+				second = null;
+				third = null;
+				nrSelected = 1;
+				selectedMarbles.add(code);
 			}
 		}
 		
@@ -153,7 +186,8 @@ public class Move {
 		}
 
 	}
-		
+
+
 		public void resetSelection(String code, Hashtable<String, Hexagon> board) {
 			selectedMarbles.clear();
 			selectedMarbles.add(code);
@@ -249,7 +283,7 @@ public class Move {
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
 				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
-					checkAI();
+					//checkAI();
 				}
 			}
 		}
@@ -684,5 +718,92 @@ public class Move {
 		}
 	}
 	
-	
+	/*
+	//select marbles
+	public void select(String code, Hashtable<String, Hexagon> board) {
+		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
+		if (first == null && !board.get(code).empty) {
+			if (board.get(code).marble.playerNumber == playersTurn) {
+				board.get(code).marble.setFill(Color.PURPLE);
+				first = code;
+				nrSelected++;
+				selectedMarbles.add(code);
+			}
+		}
+		//if the first and second are the same, end selection (you're done) it also checks whether they are adjacent
+		//if not adjacent: the second selected marble becomes the first - else just add it to the selection
+		else if(second == null  && !board.get(code).empty && !selected) {
+			if (board.get(code).marble.playerNumber == playersTurn) {
+				if (first.equals(code)) {
+					selected = true;
+					board.get(code).marble.setFill(Color.ORANGE);
+				}
+				else if(!board.get(code).adjacent(first)) {
+					resetSelection(code, board);
+				}
+				else{
+					second = code;
+					board.get(code).marble.setFill(Color.AQUAMARINE);
+					nrSelected++;
+					selectedMarbles.add(code);
+				}
+			}
+		}
+		//quite similar to the second selection - checks whether it is adjacent to the second one, if not, then it becomes the first in the selection
+		//if  this is done, selected becomes true automatically
+		else if(third == null && !selected && !board.get(code).empty) {
+			if (board.get(code).marble.playerNumber == playersTurn) {
+				if(first.equals(code) || second.equals(code)) {
+					board.get(first).marble.setFill(Color.ORANGE);
+					board.get(second).marble.setFill(Color.YELLOW);
+					
+					selected = true;
+				}
+				else if(!board.get(code).adjacent(second) || !GameData.rows.sameRowThree(first, second, code)) {
+					resetSelection(code, board);
+					
+				}
+				else {
+					third = code;
+					nrSelected++;
+					selectedMarbles.add(code);
+					selected = true;
+					board.get(first).marble.setFill(Color.ORANGE);
+					board.get(second).marble.setFill(Color.YELLOW);
+					board.get(third).marble.setFill(Color.YELLOW);
+				}
+			}
+		}
+		//so if all of these are not possible, try if it is possible to move it to the place you want to move it to
+		//if it's not, then it will automatically reset
+		else{
+			if (selected && board.get(code).adjacent(first)) {
+				if (!board.get(code).empty) {
+					if (board.get(code).marble.playerNumber == playersTurn) {
+							resetSelection(code, board);
+						}
+					else {
+						moveTo = code;
+					}
+					}
+				else {
+					moveTo = code;
+				}
+			}	
+			else if (!board.get(code).empty && board.get(code).marble.playerNumber ==playersTurn) {
+				resetSelection(code, board);
+			}
+		}
+		
+		if(moveTo != null && Board.hash.contains(moveTo)) {
+			GameMethods.coloursBackToNormal(board);
+			move(board);
+		}
+		if (board.equals(Board.hashBoard)) {
+			GameGui.player_text.setText(String.valueOf(playersTurn));
+		}
+
+	}
+		
+		*/
 }
