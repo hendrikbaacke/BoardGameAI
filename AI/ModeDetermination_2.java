@@ -18,7 +18,7 @@ public class ModeDetermination_2 {
     // here the weights are defined in a [9][7] matrix, reason: easier to optimise by an evolutionary algorithm
 
 
-    private double [][] weightMatrix_AI_2 = {{  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   }, //get to the middle, except we can kill                -7
+    private double [][] weightMatrix_AI_2 = {{  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   }, //get to the middle, except we can kill                -7
 
                                               {  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02   },   //1.breaking groups 2.cohesion
 
@@ -47,7 +47,7 @@ public class ModeDetermination_2 {
 
         }else {
 
-            if (f1 > DistancePlayer  && Counter < 2)
+            if (f1 < 0.75  && Counter < 2)
                 return weightMatrix_AI_2[0];
             else
                 Counter = 2;

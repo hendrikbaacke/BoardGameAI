@@ -60,286 +60,37 @@ public class EvaluationFunction {
 
 		//VALUE NORMALIZATION -----------------------------------------------------------------
 
-		//		Value Range ClosingDist. : 232 max - 111 min
 
-		System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  ");
-/*
-			double closingDistanceEvaluationValue = strategies.closingDistance(state);
-		System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  "+closingDistanceEvaluationValue);
+		//System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  ");
 
-				if (closingDistanceEvaluationValue > DistancePlayer1) {
-					f1 = 1;
-				} else if (closingDistanceEvaluationValue > DistancePlayer2) {
-					f1 = 2;
-				} else if (closingDistanceEvaluationValue > DistancePlayer3) {
-					f1 = 3;
-				} else if (closingDistanceEvaluationValue > DistancePlayer4) {
-					f1 = 4;
-				} else if (closingDistanceEvaluationValue > DistancePlayer5) {
-					f1 = 5;
-				} else if (closingDistanceEvaluationValue > DistancePlayer6) {
-					f1 = 6;
-				} else if (closingDistanceEvaluationValue > DistancePlayer7) {
-					f1 = 7;
-				}else if (closingDistanceEvaluationValue > 0) {
-					f1 = 8;
-				}else {
-					f1=9;
-				}
-*/
-		f1 = strategies.closingDistance(gameState);
-		System.out.println("f1= " + f1);
+		double Max = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("A1").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A1").centerY, 2));
+		double Min = (Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("D4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("D4").centerY, 2))*6+Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2))*2)/9;
+		//scaling between 0-1
+		f1 = (strategies.closingDistance(gameState)-Max)/(Min-Max);
+		//Min and Max are swapped
+		f7 = (strategies.closingDistanceOpp(gameState)-Min)/(Max-Min);
 
+		//      Value Range cohesion : 64 - 0
+		f2 = strategies.cohesion()/64;
 
-		//      Value Range Cohesion : 64 - 0
+		//       Value Range breakGroup : 10 - 0
+		f3 = strategies.breakGroup()/10;
 
-		double cohesionEvaluationValue = strategies.cohesion();
+		//       Value Range strengthenGroup : 32 - 0
+		f4 = strategies.strengthenGroup()/32;
 
-		if (cohesionEvaluationValue >= 64) {
+		//       Value Range compareMarblesWon : 1 - 0
+		f5 = strategies.compareMarblesWon();
 
-			f2 = 10;
-			System.out.println("f2= " + f2);
-		}
-
-		if (64 > cohesionEvaluationValue && cohesionEvaluationValue >= 60) {
-
-			f2 = 9;
-			System.out.println("f2= " + f2);
-		}
-
-		if (60 > cohesionEvaluationValue && cohesionEvaluationValue >= 54) {
-
-			f2 = 8;
-			System.out.println("f2= " + f2);
-		}
-
-		if (54 > cohesionEvaluationValue && cohesionEvaluationValue >= 48) {
-
-			f2 = 7;
-			System.out.println("f2= " + f2);
-		}
-
-		if (48 > cohesionEvaluationValue && cohesionEvaluationValue >= 42) {
-
-			f2 = 6;
-			System.out.println("f2= " + f2);
-		}
-
-		if (42 > cohesionEvaluationValue && cohesionEvaluationValue >= 34) {
-
-			f2 = 5;
-			System.out.println("f2= " + f2);
-		}
-
-		if (34 > cohesionEvaluationValue && cohesionEvaluationValue >= 26) {
-
-			f2 = 4;
-			System.out.println("f2= " + f2);
-		}
-
-		if (26 > cohesionEvaluationValue && cohesionEvaluationValue >= 18) {
-
-			f2 = 3;
-			System.out.println("f2= " + f2);
-		}
-
-		if (18 > cohesionEvaluationValue && cohesionEvaluationValue >= 10) {
-
-			f2 = 2;
-			System.out.println("f2= " + f2);
-
-		}
-
-		if (10 > cohesionEvaluationValue && cohesionEvaluationValue >= 2) {
-
-			f2 = 1;
-			System.out.println("f2= " + f2);
-
-		}
-
-		if (cohesionEvaluationValue < 2) {
-
-			f2 = 0;
-			System.out.println("f2= " + f2);
-
-		}
-
-
-		//       Value Range BreakStrong : 15 - 0
-
-		double breakGroupEvaluationValue = strategies.breakGroup();
-
-		if (breakGroupEvaluationValue >= 15) {
-
-			f3 = 10;
-			System.out.println("f3= " + f3);
-		}
-
-		if (15 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 13) {
-
-			f3 = 9;
-			System.out.println("f3= " + f3);
-		}
-
-		if (13 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 11) {
-
-			f3 = 8;
-			System.out.println("f3= " + f3);
-		}
-
-		if (11 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 9) {
-
-			f3 = 8;
-			System.out.println("f3= " + f3);
-		}
-
-		if (9 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 7) {
-
-			f3 = 7;
-			System.out.println("f3= " + f3);
-		}
-
-		if (7 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 5) {
-
-			f3 = 6;
-			System.out.println("f3= " + f3);
-		}
-
-		if (5 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 4) {
-
-			f3 = 5;
-			System.out.println("f3= " + f3);
-		}
-
-		if (4 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 3) {
-
-			f3 = 4;
-			System.out.println("f3= " + f3);
-		}
-
-		if (3 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 2) {
-
-			f3 = 3;
-			System.out.println("f3= " + f3);
-		}
-
-		if (2 > breakGroupEvaluationValue && breakGroupEvaluationValue >= 1) {
-
-			f3 = 2;
-			System.out.println("f3= " + f3);
-		}
-		if (breakGroupEvaluationValue <= 1) {
-
-			f3 = 1;
-			System.out.println("f3= " + f3);
-		}
-
-		//       Value Range Strengthen Group : 10 - 0
-
-
-		double strengthenGroupEvaluationValue = strategies.strengthenGroup();
-
-		if (strengthenGroupEvaluationValue >= 10) {
-
-			f4 = 10;
-			System.out.println("f4= " + f4);
-		}
-
-		if (10 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 9) {
-
-			f4 = 9;
-			System.out.println("f4= " + f4);
-		}
-
-		if (9 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 8) {
-
-			f4 = 8;
-			System.out.println("f4= " + f4);
-		}
-
-		if (8 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 7) {
-
-			f4 = 7;
-			System.out.println("f4= " + f4);
-		}
-
-		if (7 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 6) {
-
-			f4 = 6;
-			System.out.println("f4= " + f4);
-		}
-
-		if (6 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 5) {
-
-			f4 = 5;
-			System.out.println("f4= " + f4);
-		}
-
-		if (5 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 4) {
-
-			f4 = 4;
-			System.out.println("f4= " + f4);
-		}
-
-		if (4 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 3) {
-
-			f4 = 3;
-			System.out.println("f4= " + f4);
-		}
-
-		if (3 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 2) {
-
-			f4 = 2;
-			System.out.println("f4= " + f4);
-		}
-
-		if (2 > strengthenGroupEvaluationValue && strengthenGroupEvaluationValue >= 1) {
-
-			f4 = 1;
-			System.out.println("f4= " + f4);
-		}
-
-		if (strengthenGroupEvaluationValue <= 1) {
-
-			f4 = 0;
-			System.out.println("f4= " + f4);
-		}
-
-
-		//       Value Range compareMarblesWon : 0 - 1
-
-		double marblesWonEvaluationValue = strategies.compareMarblesWon();
-
-		if (marblesWonEvaluationValue == 0) {
-
-			f5 = 0;
-			System.out.println("f5= " + f5);
-
-		} else {
-
-			f5 = 10;
-			System.out.println("f5= " + f5);
-		}
-
-
-		//       Value Range compareMarblesLost : 0 - 1
-
+        //Value Range compareMarblesLost : 0 - 1
 		double marblesLostEvaluationValue = strategies.compareMarblesLost();
-
 		if (marblesLostEvaluationValue == 0) {
-
-			f6 = 0;
-
-			System.out.println("f6= " + f6);
+			f6 = 1;
 		} else {
-
-			f6 = -10;
-			System.out.println("f6= " + f6);
+			f6 = 0;
 		}
 
 
-		f7 = strategies.closingDistanceOpp(gameState);
-		System.out.println("f7= " + f7);
 
 		if (gameState.evaluateFrom == 1) {
 
