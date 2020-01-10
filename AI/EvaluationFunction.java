@@ -394,8 +394,6 @@ public class EvaluationFunction {
 
 		}
 
-
-
 	}
 
 
