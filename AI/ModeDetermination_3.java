@@ -37,15 +37,18 @@ public class ModeDetermination_3 {
 	public double[] determineMode_3(double f1, double Opp){
 
 		if(Opp<=11){
-			return weightMatrix_AI_3[2];
+			//return weightMatrix_AI_3[2];
+			return weightMatrix_AI_3[0];
 
 		}else {
 
 			if (f1 > DistancePlayer && Counter < 2)
+				//return weightMatrix_AI_3[0];
 				return weightMatrix_AI_3[0];
 			else
 				Counter = 2;
-			return weightMatrix_AI_3[1];
+			//return weightMatrix_AI_3[1];
+			return weightMatrix_AI_3[0];
 		}
 //        if(centerDistance<DistanceM1)
 //            return mode2;
