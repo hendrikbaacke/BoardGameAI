@@ -18,23 +18,15 @@ public class ModeDetermination_2 {
     // here the weights are defined in a [9][7] matrix, reason: easier to optimise by an evolutionary algorithm
 
 
-    private double [][] weightMatrix_AI_2 = {{  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   }, //get to the middle, except we can kill                -7
+    private double [][] weightMatrix_AI_2 = { {  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   },       //get to the middle
 
-                                              {  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02   },   //1.breaking groups 2.cohesion
+                                              {  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02   },    //1.breaking groups 2.cohesion
 
                                               {  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0       },
 
-                                              {  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
+                                              {  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },   //Very aggressive
 
-                                              {  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
-
-                                              {  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 },
-
-                                              {  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
-
-                                              {  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
-
-                                              {  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};
+                                              {  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};  //Very defensive
 
 
     private double[] defaultMode= {1,1,1,1,1,1,1};
@@ -42,9 +34,12 @@ public class ModeDetermination_2 {
 
     public double[] determineMode_2(double f1, double Opp, double Own){
 
-        if(Opp<=11){
+        if(Own==9){
+            return weightMatrix_AI_2[4];
+        }else if(Opp==9){
+            return weightMatrix_AI_2[3];
+        }else if(Own > Opp){
             return weightMatrix_AI_2[2];
-
         }else {
 
             if (f1 < 0.75  && Counter < 2)

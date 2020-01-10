@@ -174,10 +174,8 @@ public class Strategies {
         return Opponent.size();
     }
 
-    public int amountOwnMarbles() {
-        return Player.size();
+    public int amountOwnMarbles() { return Player.size(); }
 
-    }
     public int compareMarblesWon() {
         if (old != null) {
             System.out.println("+++++++++++"+ (old.amountOppMarbles() - this.amountOppMarbles()));

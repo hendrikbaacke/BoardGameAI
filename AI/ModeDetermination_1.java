@@ -28,33 +28,27 @@ public class ModeDetermination_1 {
     private double[] mode1={  -0.05    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}; //get to the middle, except we can kill
 
 
-    private double [][] weightMatrix_AI_1 = {  {  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}, //get to the middle, except we can kill                -7
+    private double [][] weightMatrix_AI_1 = {   {  1  ,  0  ,  0  ,  0  ,  0  ,  0  ,  0  },       //get to the middle
 
-                                                {  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}, //1.breaking groups 2.cohesion
+                                                {  0.000001  ,  0.138889 ,  0.111111  ,  0.111111  ,  0.222222  ,  0.333333 , 0.083333   },    //bit def
 
-                                                {  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 },
+                                                {  0  ,  0.038889 ,  0.1611111  ,  0.1211111  ,  0.3333333  ,  0.2222222 , 0.123333   },   //bit agg
 
-                                                {  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
+                                                {  0  ,  0.046512 ,  0.116279  ,  0.116279  ,  0.581395  ,  0  ,  0.139535 },   //Very aggressive
 
-                                                {  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
-
-                                                {  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 },
-
-                                                {  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
-
-                                                {  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
-
-                                                {  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};
-
+                                                {  0.051020  ,  0.102040  ,  0.102040  ,  0.020408  ,  0.204081  ,  0.510207 , 0.010204 }};  //Very defensive
 
     private double[] defaultMode= {1,1,1,1,1,1};
 
 
-    public double[] determineMode_1(double f1, double Opp) {
+    public double[] determineMode_1(double f1, double Opp, double Own) {
 
-        if (Opp <= 11) {
+        if(Own==9){
+            return weightMatrix_AI_1[4];
+        }else if(Opp==9){
+            return weightMatrix_AI_1[3];
+        }else if(Own > Opp){
             return weightMatrix_AI_1[2];
-
         } else {
 
             if (f1 < 0.75 && Counter < 2)
