@@ -12,33 +12,28 @@ public class ModeDetermination_3 {
 	private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
 
 
-	private double [][] weightMatrix_AI_3 = {{  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0}, //get to the middle, except we can kill                -7
+	private double [][] weightMatrix_AI_3 = {	{  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   },       //get to the middle
 
-											{  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02}, //1.breaking groups 2.cohesion
+												{  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02   },    //1.breaking groups 2.cohesion
 
-											{  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0 },
+												{  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0       },
 
-											{  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
+												{  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },   //Very aggressive
 
-											{  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
-
-											{  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 },
-
-											{  1    ,  0  ,  0    ,  0  ,  500  ,  -1000 , 0 },
-
-											{  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },
-
-											{  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};
+												{  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};  //Very defensive
 
 
 	private double[] defaultMode= {1,1,1,1,1,1};
 
 
-	public double[] determineMode_3(double f1, double Opp){
+	public double[] determineMode_3(double f1, double Opp, double Own){
 
-		if(Opp<=11){
-			//return weightMatrix_AI_3[2];
-			return weightMatrix_AI_3[0];
+		if(Own==9){
+			return weightMatrix_AI_3[4];
+		}else if(Opp==9){
+			return weightMatrix_AI_3[3];
+		}else if(Own > Opp){
+			return weightMatrix_AI_3[2];
 
 		}else {
 
