@@ -24,6 +24,7 @@ public class EvaluationFunction {
 	private double f5;
 	private double f6;
 	private double f7;
+	private double f8;
 
 
 	private double w1;
@@ -33,6 +34,7 @@ public class EvaluationFunction {
 	private double w5;
 	private double w6;
 	private double w7;
+	private double w8;
 
 
 	private GameState gameState;
@@ -81,6 +83,12 @@ public class EvaluationFunction {
 
 		//       Value Range compareMarblesWon : 1 - 0
 		f5 = strategies.compareMarblesWon();
+		
+		f8 = strategies.danger();
+		
+		if (f8 ==1) {
+			System.out.println("DANGER");
+		}
 
         //Value Range compareMarblesLost : 0 - 1
 		double marblesLostEvaluationValue = strategies.compareMarblesLost();
@@ -105,6 +113,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
+			w8 = 1;
 
 			System.out.println("Player1 evaluation");
 
@@ -123,6 +132,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
+			w8 = 1;
 			System.out.println("Player2 evaluation");
 
 		}
@@ -140,6 +150,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
+			w8 = 1;
 			
 			System.out.println("Player3 evaluation");
 
@@ -155,7 +166,7 @@ public class EvaluationFunction {
         */
 	public double evaluate() {
 
-		double finalValue = w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4 + w5 * f5 + w6 * f6 + w7 * f7;
+		double finalValue = w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4 + w5 * f5 + w6 * f6 + w7 * f7 + w8 *f8;
 		System.out.println(finalValue);
 
 		System.out.println("----------------------------" + "eval value: " + finalValue);

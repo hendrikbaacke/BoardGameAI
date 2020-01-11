@@ -204,10 +204,23 @@ public class Strategies {
         return PlayerDisAv;
     }
     
-    public boolean danger() {
+    //return 1 if a marble is in danger, return 0 if there is no marble in danger
+    public int danger() {
     	Hashtable<String, Hexagon> board = this.gameState.boardState;
     	BoardRows rows = src.GameData.rows;
-    	
+    	if (dangerRow(rows.horizontal) ==1) {
+    		return 1;
+    	}
+    	if (dangerRow(rows.topLeft) ==1) {
+    		return 1;
+    	}
+    	if (dangerRow(rows.topRight) ==1) {
+    		return 1;
+    	}
+    	return 0;
+    }
+
+    public int dangerRow(ArrayList<ArrayList<String>> row) {
     	//at the "start" of a row -> so spot 0, 1, 2, 3
     	//these are the playernumbers!!!
     	int bfirst = 0;
@@ -223,174 +236,71 @@ public class Strategies {
     	int endfourth = 0;
     	int endfifth = 0;
     	
-    	//run through all the rows
-    	for (int i = 0; i < rows.horizontal.size(); i++) {
-    		if (!board.get(rows.horizontal.get(i).get(0)).empty) {
-    			bfirst = board.get(rows.horizontal.get(i).get(0)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(1)).empty) {
-    			bsecond = board.get(rows.horizontal.get(i).get(1)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(2)).empty) {
-    			bthird = board.get(rows.horizontal.get(i).get(2)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(3)).empty) {
-    			bfourth = board.get(rows.horizontal.get(i).get(3)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(4)).empty) {
-    			bfifth = board.get(rows.horizontal.get(i).get(4)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-1)).empty) {
-    			endfirst = board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-1)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-2)).empty) {
-    			endsecond = board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-2)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-3)).empty) {
-    			endthird = board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-3)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-4)).empty) {
-    			endfourth = board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-4)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-5)).empty) {
-    			endfifth = board.get(rows.horizontal.get(i).get(rows.horizontal.get(i).size()-5)).marble.playerNumber;
-    		}
-    		//now check whether there is an endangered marble
-    		if (bfirst == gameState.evaluateFrom) {
-    			if (bsecond == gameState.evaluateFrom) {
-    				if (bthird > 0 && bthird != gameState.evaluateFrom && bthird ==bfourth && bthird ==bfifth) {
-    					return true;
-    				}
-    			}
-    			else if(bsecond > 0 && bsecond != gameState.evaluateFrom && bsecond == bthird) {
-    				return true;
-    			}
-    		}
-    		
-    		if (endfirst == gameState.evaluateFrom) {
-    			if (endsecond == gameState.evaluateFrom) {
-    				if (endthird > 0 && endthird != gameState.evaluateFrom && endthird ==endfourth && endthird ==endfifth) {
-    					return true;
-    				}
-    			}
-    			else if(endsecond > 0 && endsecond != gameState.evaluateFrom && endsecond == endthird) {
-    				return true;
-    			}
-    		}
-    		
-    	}
+    	Hashtable<String, Hexagon> board = this.gameState.boardState;
     	
-    	for (int i = 0; i < rows.topLeft.size(); i ++) {
-    		if (!board.get(rows.topLeft.get(i).get(0)).empty) {
-    			bfirst = board.get(rows.topLeft.get(i).get(0)).marble.playerNumber;
+    	for (int i = 0; i < row.size(); i++) {
+    		if (row.get(i).size()>4) {
+	    		if (!board.get(row.get(i).get(0)).empty) {
+	    			bfirst = board.get(row.get(i).get(0)).marble.playerNumber;
+	    		}
+	    		if (!board.get(row.get(i).get(1)).empty) {
+	    			bsecond = board.get(row.get(i).get(1)).marble.playerNumber;;
+	    		}
+	    		if (!board.get(row.get(i).get(2)).empty) {
+	    			bthird = board.get(row.get(i).get(2)).marble.playerNumber;;
+	    		}
+	    		if (!board.get(row.get(i).get(3)).empty) {
+	    			bfourth = board.get(row.get(i).get(3)).marble.playerNumber;;
+	    		}
+	    		if (!board.get(row.get(i).get(4)).empty) {
+	    			bfifth = board.get(row.get(i).get(4)).marble.playerNumber;;
+	    		}
+	    		if (!board.get(row.get(i).get(row.get(i).size()-1)).empty) {
+	    			endfirst = board.get(row.get(i).get(row.get(i).size()-1)).marble.playerNumber;
+	    		}
+	    		if (!board.get(row.get(i).get((row.get(i).size()-2))).empty) {
+	    			endsecond = board.get(row.get(i).get(row.get(i).size()-2)).marble.playerNumber;
+	    		}
+	    		if (!board.get(row.get(i).get(row.get(i).size()-3)).empty) {
+	    			endthird = board.get(row.get(i).get(row.get(i).size()-3)).marble.playerNumber;
+	    		}
+	    		if (!board.get(row.get(i).get(row.get(i).size()-4)).empty) {
+	    			endfourth = board.get(row.get(i).get(row.get(i).size()-4)).marble.playerNumber;
+	    		}
+	    		if (!board.get(row.get(i).get(row.get(i).size()-5)).empty) {
+	    			endfifth = board.get(row.get(i).get(row.get(i).size()-5)).marble.playerNumber;
+	    		}
     		}
-    		if (!board.get(rows.topLeft.get(i).get(1)).empty) {
-    			bsecond = board.get(rows.topLeft.get(i).get(1)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(2)).empty) {
-    			bthird = board.get(rows.topLeft.get(i).get(2)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(3)).empty) {
-    			bfourth = board.get(rows.topLeft.get(i).get(3)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(4)).empty) {
-    			bfifth = board.get(rows.topLeft.get(i).get(4)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-1)).empty) {
-    			endfirst = board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-1)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-2)).empty) {
-    			endsecond = board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-2)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-3)).empty) {
-    			endthird = board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-3)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-4)).empty) {
-    			endfourth = board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-4)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-5)).empty) {
-    			endfifth = board.get(rows.topLeft.get(i).get(rows.topLeft.get(i).size()-5)).marble.playerNumber;
-    		}
-    		//now check whether there is an endangered marble
-    		if (bfirst == gameState.evaluateFrom) {
-    			if (bsecond == gameState.evaluateFrom) {
-    				if (bthird > 0 && bthird != gameState.evaluateFrom && bthird ==bfourth && bthird ==bfifth) {
-    					return true;
-    				}
-    			}
-    			else if(bsecond > 0 && bsecond != gameState.evaluateFrom && bsecond == bthird) {
-    				return true;
-    			}
-    		}
-    		
-    		if (endfirst == gameState.evaluateFrom) {
-    			if (endsecond == gameState.evaluateFrom) {
-    				if (endthird > 0 && endthird != gameState.evaluateFrom && endthird ==endfourth && endthird ==endfifth) {
-    					return true;
-    				}
-    			}
-    			else if(endsecond > 0 && endsecond != gameState.evaluateFrom && endsecond == endthird) {
-    				return true;
-    			}
-    		}
-    	}
     	
-    	for (int i = 0; i < rows.topRight.size(); i++) {
-    		if (!board.get(rows.topRight.get(i).get(0)).empty) {
-    			bfirst = board.get(rows.topRight.get(i).get(0)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(1)).empty) {
-    			bsecond = board.get(rows.topRight.get(i).get(1)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(2)).empty) {
-    			bthird = board.get(rows.topRight.get(i).get(2)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(3)).empty) {
-    			bfourth = board.get(rows.topRight.get(i).get(3)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(4)).empty) {
-    			bfourth = board.get(rows.topRight.get(i).get(4)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-1)).empty) {
-    			endfirst = board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-1)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-2)).empty) {
-    			endsecond = board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-2)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-3)).empty) {
-    			endthird = board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-3)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-4)).empty) {
-    			endfourth = board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-4)).marble.playerNumber;
-    		}
-    		if (!board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-5)).empty) {
-    			endfifth = board.get(rows.topRight.get(i).get(rows.topRight.get(i).size()-5)).marble.playerNumber;
-    		}
     		//now check whether there is an endangered marble
     		if (bfirst == gameState.evaluateFrom) {
     			if (bsecond == gameState.evaluateFrom) {
     				if (bthird > 0 && bthird != gameState.evaluateFrom && bthird ==bfourth && bthird ==bfifth) {
-    					return true;
+    					System.out.println("case 1");
+    					return 1;
     				}
     			}
     			else if(bsecond > 0 && bsecond != gameState.evaluateFrom && bsecond == bthird) {
-    				return true;
+    				System.out.println("case 2");
+    				return 1;
     			}
     		}
     		
     		if (endfirst == gameState.evaluateFrom) {
     			if (endsecond == gameState.evaluateFrom) {
     				if (endthird > 0 && endthird != gameState.evaluateFrom && endthird ==endfourth && endthird ==endfifth) {
-    					return true;
+    					System.out.println("case 3");
+    					return 1;
     				}
     			}
     			else if(endsecond > 0 && endsecond != gameState.evaluateFrom && endsecond == endthird) {
-    				return true;
+    				System.out.println("case 4");
+    				return 1;
     			}
     		}
     	}
-    	return false;
+    	System.out.println("no danger");
+    	return 0;
     }
-
 
 }
