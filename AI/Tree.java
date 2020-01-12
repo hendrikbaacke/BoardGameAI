@@ -23,4 +23,5 @@ public class Tree<T> {
 		this.root = newRoot;
 	}
 	
+	
 }

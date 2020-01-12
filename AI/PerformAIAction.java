@@ -20,7 +20,7 @@ public class PerformAIAction {
 		needed = choose2();
 		}
 		else {
-			needed = choose();
+			needed = chooseMCTS_Search();
 		}
 //		Node<GameState> needed = choose();
 
@@ -78,6 +78,12 @@ public class PerformAIAction {
 		tree = new GameTree(current);
 		System.out.println("creating");
 		tree.buildFullTree(layers);
+	}
+	public static Node<GameState> chooseMCTS_Search(){
+		Node<GameState> node = tree.getRoot();
+		MCTS mc = new MCTS();
+		Node<GameState> result = mc.findBestMove();
+		return result;
 	}
 	
 }

@@ -9,3 +9,8 @@
 /Strategies.class
 /Tree.class
 /AlphaBeta.class
+/MCTS.class
+/GameData.class
+/ModeDetermination_1.class
+/ModeDetermination_2.class
+/ModeDetermination_3.class
