@@ -13,6 +13,8 @@ public class Node<T> {
 	T data;
     Node<T> parent;
     List<Node<T>> children;
+	public int nVisits;
+	public double totValue;
 
     public Node(T data) {
         this.data = data;
@@ -36,5 +38,20 @@ public class Node<T> {
     public T returnData(){
     	return data;
     }
+
+	public Node<GameState> select() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isLeaf() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void expand() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
