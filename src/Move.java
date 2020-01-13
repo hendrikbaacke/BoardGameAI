@@ -58,7 +58,6 @@ public class Move {
 	private static Marble three = null;
 	
 	public static GameState initial = null;
-	public static boolean in = true;
 	
 
 	public Move() {
@@ -66,15 +65,12 @@ public class Move {
 		second = null;
 		third = null;
 		moveTo = null;
+		initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),playersTurn);
 	}
 
 
 	//select marbles
 	public void select(String code, Hashtable<String, Hexagon> board) {
-		if (in) {
-			initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),playersTurn);
-			in = false;
-		}
 		//System.out.println("select");
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
 		if (first == null && !board.get(code).empty) {
