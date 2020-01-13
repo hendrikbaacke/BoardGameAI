@@ -113,7 +113,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
-			w8 = 1;
+			w8 = 0;
 
 			System.out.println("Player1 evaluation");
 

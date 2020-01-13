@@ -20,9 +20,10 @@ public class PerformAIAction {
 		needed = choose2();
 		}
 		else {
-			needed = chooseMCTS_Search();
+			//needed = chooseMCTS_Search();
+			needed = choose();
+			
 		}
-//		Node<GameState> needed = choose();
 
 		if (needed.returnData().first != null) {
 
@@ -79,6 +80,7 @@ public class PerformAIAction {
 		System.out.println("creating");
 		tree.buildFullTree(layers);
 	}
+	
 	public static Node<GameState> chooseMCTS_Search(){
 		Node<GameState> node = tree.getRoot();
 		MCTS mc = new MCTS();
