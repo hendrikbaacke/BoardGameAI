@@ -65,7 +65,7 @@ public class Move {
 		second = null;
 		third = null;
 		moveTo = null;
-		initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),playersTurn);
+		initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
 	}
 
 
