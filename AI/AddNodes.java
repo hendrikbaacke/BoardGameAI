@@ -18,8 +18,7 @@ import src.Move;
 public class AddNodes {	
 	public static int nodeNR = 0;
 	
-	//add all the children of the node you pass as a parameter
-	public static void addForOne(Node<GameState> node) {
+	public static ArrayList<GameState> everyGameState(Node<GameState> node){
 		Hashtable<String, Hexagon> board = node.returnData().boardState;
 		ArrayList<String> hexagons = Board.hash;
 		
@@ -84,18 +83,32 @@ public class AddNodes {
 					}	
 				}
 			}
-		
+			ArrayList<GameState> everyPossibleNode = new ArrayList<GameState>();
+			
 			for(int i = 0; i < threeMarblesMoves.size(); i++) {
-				node.addChild(threeMarblesMoves.get(i));
+				everyPossibleNode.add(threeMarblesMoves.get(i));
+				//node.addChild(threeMarblesMoves.get(i));
 			}
 			for(int i = 0; i < twoMarblesMoves.size(); i++) {
-				node.addChild(twoMarblesMoves.get(i));
+				everyPossibleNode.add(twoMarblesMoves.get(i));
+				//node.addChild(twoMarblesMoves.get(i));
 			}
 			for(int i = 0; i < oneMarbleMoves.size(); i++) {
-				node.addChild(oneMarbleMoves.get(i));
+				everyPossibleNode.add(oneMarbleMoves.get(i));
+				//node.addChild(oneMarbleMoves.get(i));
 			}
 			
+			return everyPossibleNode;
+		
+	}
+	
+	//add all the children of the node you pass as a parameter
+	public static void addForOne(Node<GameState> node) {
+		ArrayList<GameState> children = everyGameState(node);
+		for (int i = 0; i < children.size(); i++) {
+			node.addChild(children.get(i));
 		}
+	}
 		
 		//add children to all these children
 		public static void addForMultiple(List<Node<GameState>> nodes) {
