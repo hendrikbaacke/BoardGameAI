@@ -208,6 +208,12 @@ public class Strategies {
     public int danger() {
     	Hashtable<String, Hexagon> board = this.gameState.boardState;
     	BoardRows rows = src.GameData.rows;
+    	int sum = 0;
+    	sum = sum + dangerRow(rows.horizontal);
+    	sum = sum + dangerRow(rows.topLeft);
+    	sum = sum + dangerRow(rows.topRight);
+    	
+    	/*
     	if (dangerRow(rows.horizontal) ==1) {
     		return 1;
     	}
@@ -216,13 +222,15 @@ public class Strategies {
     	}
     	if (dangerRow(rows.topRight) ==1) {
     		return 1;
-    	}
-    	return 0;
+    	}*/
+    	return sum;
     }
 
     public int dangerRow(ArrayList<ArrayList<String>> row) {
     	//at the "start" of a row -> so spot 0, 1, 2, 3
     	//these are the playernumbers!!!
+    	int sum = 0; 
+    	
     	int bfirst = 0;
     	int bsecond = 0;
     	int bthird = 0;
@@ -277,12 +285,12 @@ public class Strategies {
     			if (bsecond == gameState.evaluateFrom) {
     				if (bthird > 0 && bthird != gameState.evaluateFrom && bthird ==bfourth && bthird ==bfifth) {
     					System.out.println("case 1");
-    					return 1;
+    					sum++;
     				}
     			}
     			else if(bsecond > 0 && bsecond != gameState.evaluateFrom && bsecond == bthird) {
     				System.out.println("case 2");
-    				return 1;
+    				sum++;
     			}
     		}
     		
@@ -290,12 +298,12 @@ public class Strategies {
     			if (endsecond == gameState.evaluateFrom) {
     				if (endthird > 0 && endthird != gameState.evaluateFrom && endthird ==endfourth && endthird ==endfifth) {
     					System.out.println("case 3");
-    					return 1;
+    					sum++;
     				}
     			}
     			else if(endsecond > 0 && endsecond != gameState.evaluateFrom && endsecond == endthird) {
     				System.out.println("case 4");
-    				return 1;
+    				sum++;
     			}
     		}
     	}
