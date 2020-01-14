@@ -4,27 +4,23 @@ import src.Board;
 
 public class ModeDetermination_3 {
 
-//TODO: Assign weigths
+	//Defensive agent
 
-    //1. closing Distance, 2. Cohesion, 3.breakGroup, 4. strengthenGroup, 5. Difference Opponent Marbles, 6. Difference Own Marbles
+	// all weigths should be positive, the function values f1..f7 have been instead altered according to heuristic observations
 
 	public static int Counter = 1;
-	private static double DistancePlayer = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
 
+	// { Distance , Cohesion , Break , strength , Won , Lost , DistanceOpp }
 
-	private double [][] weightMatrix_AI_3 = {	{  1    ,  0  ,  0    ,  0  ,  0  ,  0 , 0   },       //get to the middle
+	private double [][] weightMatrix_AI_3 = {   {  1  ,  0  ,  0  ,  0  ,  0  ,  0  ,  0  },   //get to the middle
 
-												{  0  ,  1 ,  1.2  ,  0.5  ,  30  ,  5 , 0.02   },    //1.breaking groups 2.cohesion
+												{  1  ,  1  ,  0.5  ,  0.7  ,  2  ,  3  ,  0.3  },   //bit def
 
-												{  0  ,  3  ,  5    ,  1  ,  30  ,  0 , 0       },
+												{  0.5  ,  0.7  ,  0.8 ,  1  ,  3  ,  2  ,  0.7  },   //bit agg
 
-												{  0.2  ,  50 ,  200  ,  0  ,  0    ,  -1000 , 0 },   //Very aggressive
+												{  0  ,  0.5  ,  0.5  ,  0.5  ,  3  ,  1  ,  1  },   //Very aggressive
 
-												{  0.2  ,  0  ,  0    ,  0  ,  0    ,  -1000 , 0 }};  //Very defensive
-
-
-	private double[] defaultMode= {1,1,1,1,1,1};
-
+												{  1  ,  1  ,  0.4  ,  0.2  ,  1  ,  3  ,  0  }};  //Very defensive
 
 	public double[] determineMode_3(double f1, double Opp, double Own){
 
@@ -45,27 +41,6 @@ public class ModeDetermination_3 {
 			//return weightMatrix_AI_3[1];
 			return weightMatrix_AI_3[0];
 		}
-//        if(centerDistance<DistanceM1)
-//            return mode2;
-//        if(centerDistance<=DistanceM1 && cohesion>=0 && cohesion<4)
-//            return mode3;
-//        if(centerDistance<=DistanceM1 && cohesion>=4 && cohesion<10)
-//            return mode4;
-//        if(centerDistance<=DistanceM1 && cohesion>=10 && cohesion<16)
-//            return mode5;
-//        if(centerDistance<=DistanceM1 && cohesion>=16 && cohesion<22)
-//            return mode6;
-//        if(centerDistance<=DistanceM1 && cohesion>=22 && cohesion<28)
-//            return mode7;
-//        if(centerDistance<=DistanceM1 && cohesion>=28 && cohesion<34)
-//            return mode8;
-//        if(centerDistance<=DistanceM1 && cohesion>=34)
-//            return mode9;
-//
-//        return defaultMode;
-
-
-
     }
 
 }

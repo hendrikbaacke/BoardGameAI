@@ -84,7 +84,7 @@ public class EvaluationFunction {
 		//       Value Range compareMarblesWon : 1 - 0
 		f5 = strategies.compareMarblesWon();
 		
-		f8 = strategies.danger();
+		f8 = strategies.danger()/strategies.amountOwnMarbles();
 		
 		if (f8 ==1) {
 			System.out.println("DANGER");
@@ -103,6 +103,8 @@ public class EvaluationFunction {
 		if (gameState.evaluateFrom == 1) {
 
 			ModeDetermination_1 modeDet = new ModeDetermination_1();
+
+			normalization(modeDet.determineMode_1(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
 
 			double[] weightArray = modeDet.determineMode_1(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
 
@@ -123,6 +125,8 @@ public class EvaluationFunction {
 
 			ModeDetermination_2 modeDet = new ModeDetermination_2();
 
+			normalization(modeDet.determineMode_2(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
+
 			double[] weightArray = modeDet.determineMode_2(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
 
 			w1 = weightArray[0];
@@ -140,6 +144,8 @@ public class EvaluationFunction {
 		if (gameState.evaluateFrom == 3) {
 
 			ModeDetermination_3 modeDet = new ModeDetermination_3();
+
+			normalization(modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
 
 			double[] weightArray = modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
 
@@ -170,5 +176,15 @@ public class EvaluationFunction {
 		System.out.println("----------------------------" + "eval value: " + finalValue);
 
 		return finalValue;
+	}
+
+	private void normalization(double[] weights){
+		double sum = 0;
+		for (int i=0; i<weights.length; i++){
+			sum+=weights[i];
+		}
+		for (int j=0; j<weights.length; j++){
+			weights[j] = weights[j]/sum;
+		}
 	}
 }
