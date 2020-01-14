@@ -84,11 +84,8 @@ public class EvaluationFunction {
 		//       Value Range compareMarblesWon : 1 - 0
 		f5 = strategies.compareMarblesWon();
 		
-		f8 = strategies.danger()/strategies.amountOwnMarbles();
+		f8 = 1 - strategies.danger()/strategies.amountOwnMarbles();
 		
-		if (f8 ==1) {
-			System.out.println("DANGER");
-		}
 
         //Value Range compareMarblesLost : 0 - 1
 		double marblesLostEvaluationValue = strategies.compareMarblesLost();
