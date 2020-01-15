@@ -95,7 +95,7 @@ public class EvaluationFunction {
 		}
 
 
-		String Name;
+		String Name = null;
 		if (gameState.evaluateFrom == 1) {
 			Name = "Neutral";
 			System.out.println("Player1 evaluation");
@@ -105,7 +105,7 @@ public class EvaluationFunction {
 			System.out.println("Player2 evaluation");
 		}
 		if (gameState.evaluateFrom == 3) {
-			Name = "Defensive";
+			Name = "Defenssive";
 			System.out.println("Player3 evaluation");
 		}
 

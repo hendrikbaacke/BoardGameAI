@@ -14,7 +14,7 @@ public class ReadMatrix {
     //! m is the number of modes
     private static int m = 5;
 
-
+    public static int gen = 0;
     private static int FileNumber;
 
 
@@ -118,13 +118,13 @@ public class ReadMatrix {
 
     public static void ReadOut(double[][] weights){
         FileNumber++;
-        File doc = new File("AIMatrix"+FileNumber);
+        File doc = new File(System.getProperty("user.dir")+"\\AI\\Matrices\\"+"AIMatrix"+FileNumber+".txt");
         System.out.println("Path : " + doc.getAbsolutePath());
         try{
             FileWriter fw = new FileWriter(doc,true);
-            fw.write("AInumber: "+n);
+            fw.write("AInumber: "+FileNumber);
             fw.write(System.lineSeparator());
-            fw.write("Gen: "+m);
+            fw.write("Gen: "+gen);
             fw.write(System.lineSeparator());
             for (int k=0; k<m; k++){
                 for (int l=0; l<n; l++){
