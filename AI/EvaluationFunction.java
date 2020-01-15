@@ -1,7 +1,9 @@
 package AI;
 
+import AI.WeightOptimisation.EvolutionaryAlgo;
 import src.Board;
 import src.Hexagon;
+
 
 import java.util.Hashtable;
 
@@ -149,4 +151,6 @@ public class EvaluationFunction {
 			weights[j] = weights[j]/sum;
 		}
 	}
+
+
 }
