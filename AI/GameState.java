@@ -31,6 +31,7 @@ public class GameState {
 	public int point2;
 	//optional:
 	public int point3;
+	public boolean terminal;
 	
 	public Hashtable<String, Hexagon> boardState;
 	
@@ -106,6 +107,13 @@ public class GameState {
 			if (valid) {
 				valid = BoardMethods.repetitionChecker(boardState);
 			}
+			
+		if (point1==6 ||point2 == 6 || point3==6) {
+			terminal = true;
+		}
+		else {
+			terminal = false;
+		}
 			
 		oldGameState = old;
 		
