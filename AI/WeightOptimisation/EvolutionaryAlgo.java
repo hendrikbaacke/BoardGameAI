@@ -1,53 +1,83 @@
 package AI.WeightOptimisation;
 
-import src.Marble;
+import AI.ReadMatrix;
+import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 
 public class EvolutionaryAlgo {
 
-    private int initialGenerationSize = 10;
-    private int modes = 5;
-    private int amountWeights = 8;
+    private static int initialGenerationSize = 3;          // should be >10
+    private static int modes = 5;
+    private static int amountWeights = 8;
 
-    public double[][] initialGeneration() {
-        double sum = 0;
+    private static int amountGames = 4;
+
+    public static void initialGeneration() {
+
+        ReadMatrix.FileNumber = 0;
+
         double[][] randWeightMatrix = new double[modes][amountWeights];
 
-        for (int i=0; i<=initialGenerationSize; i++) {
+        for (int i=0; i<initialGenerationSize; i++) {
 
 
-            for (int j=0; j<=modes; j++) {
-                for (int k=0; k<=amountWeights; k++) {
+            for (int j = 0; j<modes; j++) {
+                for (int k = 0; k < amountWeights; k++) {
                     randWeightMatrix[j][k] = Math.random();
 
                 }
             }
-
-            for (int l = 0; l<=modes; l++) {
-                for (int m=0; m<=amountWeights; m++) {
+            //Normalisation:
+            for (int l = 0; l<modes; l++) {
+                double sum = 0;
+                for (int m = 0; m<amountWeights; m++) {
 
                     sum += randWeightMatrix[l][m];
-
-                    for (int n=0; n<=modes; n++) {
+                }
+                    for (int n = 0; n<amountWeights; n++) {
                         randWeightMatrix[l][n] = (randWeightMatrix[l][n]) / sum;
                     }
-                }
+
 
             }
+            ReadMatrix.ReadOut(randWeightMatrix,"Matrices");
 
         }
-        return randWeightMatrix;
     }
-        
-    private void normalization(double[] weights){
-        double sum = 0;
-            for (int i=0; i<weights.length; i++){
-                sum+=weights[i];
+
+
+    public static void Selection(){
+
+        TrainingInstances.RandInstanceCreation();
+
+        for(int i=0; i<initialGenerationSize; i++) {
+
+            for(int j=0; j<3; j++){
+
+                double[][] player1 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\Trainers\\"+ "AInumber" + ReadMatrix.gen +"_" +j + ".txt");
+                double[][] player2 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\Matrices\\"+ "AInumber" + ReadMatrix.gen +"_" +i + ".txt");
+
+                for(int k=0; k<amountGames; k++){
+
+
+                    if(k % 2 == 0){
+                        double[][] placeholder = player1;
+                        player1 = player2;
+                        player2=placeholder;
+                    }
+                    GameEnvironment(player1,player2);
+                }
             }
-            for (int j=0; j<weights.length; j++){
-                weights[j] = weights[j]/sum;
-            }
+
+
         }
 
 
 
+    }
+    private static void Crossover(double[][] strongBloodline){
+
+    }
+    private static void Mutation(double[][] strongBloodLine){
+
+    }
 }

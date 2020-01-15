@@ -1,7 +1,9 @@
 package AI;
 
+import AI.WeightOptimisation.EvolutionaryAlgo;
 import src.Board;
 import src.Hexagon;
+
 
 import java.util.Hashtable;
 
@@ -105,7 +107,7 @@ public class EvaluationFunction {
 			System.out.println("Player2 evaluation");
 		}
 		if (gameState.evaluateFrom == 3) {
-			Name = "Defensive";
+			Name = "Defenssive";
 			System.out.println("Player3 evaluation");
 		}
 
@@ -149,4 +151,6 @@ public class EvaluationFunction {
 			weights[j] = weights[j]/sum;
 		}
 	}
+
+
 }

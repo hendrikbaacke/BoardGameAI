@@ -2,6 +2,7 @@ package src;
 
 import java.io.FileInputStream;
 
+import AI.WeightOptimisation.EvolutionaryAlgo;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -39,6 +40,8 @@ public class Main extends Application {
 
     
     public void start(Stage primaryStage) throws Exception {
+        EvolutionaryAlgo.initialGeneration();
+
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
         
