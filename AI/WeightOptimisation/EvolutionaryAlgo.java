@@ -11,6 +11,8 @@ public class EvolutionaryAlgo {
 
     public static void initialGeneration() {
 
+        ReadMatrix.FileNumber = 0;
+
         double[][] randWeightMatrix = new double[modes][amountWeights];
 
         for (int i=0; i<initialGenerationSize; i++) {

@@ -15,7 +15,7 @@ public class ReadMatrix {
     private static int m = 5;
 
     public static int gen;
-    private static int FileNumber;
+    public static int FileNumber;
 
 
 

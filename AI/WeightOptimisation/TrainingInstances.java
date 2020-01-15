@@ -10,21 +10,12 @@ public class TrainingInstances {
 
     public static void RandInstanceCreation() {
 
-        double[][] RandAggressiveInstance = AggressiveInstance;
+        ReadMatrix.FileNumber = 0;
+
         double[][] RandNeutralInstance = NeutralInstance;
+        double[][] RandAggressiveInstance = AggressiveInstance;
         double[][] RandDefensiveInstance = DefensiveInstance;
         double randomInterval = 0.15;
-
-        for (int i = 0; i < RandAggressiveInstance.length; i++) {
-            for (int j = 0; j < RandAggressiveInstance[0].length; j++) {
-
-                RandAggressiveInstance[i][j] = AggressiveInstance[i][j] - randomInterval + Math.random() * 2 * randomInterval;       // midpoint of [a,b] is value of AggressiveInstance[i][j]
-
-                if (RandAggressiveInstance[i][j] < 0) {
-                    RandAggressiveInstance[i][j] = 0;
-                }
-            }
-        }
 
         for (int i = 0; i < RandNeutralInstance.length; i++) {
             for (int j = 0; j < RandNeutralInstance[0].length; j++) {
@@ -37,6 +28,16 @@ public class TrainingInstances {
             }
         }
 
+        for (int i = 0; i < RandAggressiveInstance.length; i++) {
+            for (int j = 0; j < RandAggressiveInstance[0].length; j++) {
+
+                RandAggressiveInstance[i][j] = AggressiveInstance[i][j] - randomInterval + Math.random() * 2 * randomInterval;       // midpoint of [a,b] is value of AggressiveInstance[i][j]
+
+                if (RandAggressiveInstance[i][j] < 0) {
+                    RandAggressiveInstance[i][j] = 0;
+                }
+            }
+        }
 
         for (int i = 0; i < RandDefensiveInstance.length; i++) {
             for (int j = 0; j < RandDefensiveInstance[0].length; j++) {
@@ -49,13 +50,12 @@ public class TrainingInstances {
             }
         }
 
-        Normalize(RandAggressiveInstance);
         Normalize(RandNeutralInstance);
+        Normalize(RandAggressiveInstance);
         Normalize(RandDefensiveInstance);
 
-
-        ReadMatrix.ReadOut(RandAggressiveInstance,"Trainers");
         ReadMatrix.ReadOut(RandNeutralInstance,"Trainers");
+        ReadMatrix.ReadOut(RandAggressiveInstance,"Trainers");
         ReadMatrix.ReadOut(RandDefensiveInstance,"Trainers");
 
 
