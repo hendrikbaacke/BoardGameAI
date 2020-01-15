@@ -13,15 +13,15 @@ public class ModeDetermination_2 {
 
     // { Distance , Cohesion , Break , strength , Won , Lost , DistanceOpp }
 
-    private double [][] weightMatrix_AI_2 = {   {  1  ,  0  ,  0  ,  0  ,  0  ,  0  ,  0  },   //get to the middle
+    private double [][] weightMatrix_AI_2 = {   {  1  ,  0  ,  0  ,  0  ,  0  ,  0  ,  0 , 0 },   //get to the middle
 
-                                                {  0.1  ,  0.5  ,  1  ,  1.2  ,  5  ,  0.5  ,  0.5  },   //bit def
+                                                {  0.1  ,  0.5  ,  1  ,  1.2  ,  5  ,  0.5  ,  0.5 ,  0.5  },   //bit def
 
-                                                {  0  ,  0.7  ,  0.5  ,  1  ,  3  ,  0.1  ,  0.7  },   //bit agg
+                                                {  0  ,  0.7  ,  0.5  ,  1  ,  3  ,  0.1  ,  0.7 , 0.1 },   //bit agg
 
-                                                {  0  ,  0  ,  0.8  ,  1  ,  5  ,  0  ,  1  },   //Very aggressive
+                                                {  0  ,  0  ,  0.8  ,  1  ,  5  ,  0  ,  1  , 0},   //Very aggressive
 
-                                                {  0.05  ,  1  ,  0  ,  0  ,  3  ,  5  ,  0.2  }};  //Very defensive
+                                                {  0.05  ,  1  ,  0  ,  0  ,  3  ,  5  ,  0.2 , 5  }};  //Very defensive
 
     public double[] determineMode_2(double f1, double Opp, double Own){
 
