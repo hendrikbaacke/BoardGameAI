@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 
 import AI.GameState;
+import AI.MonteCarlo;
+import AI.Node;
 import AI.PerformAIAction;
 import javafx.scene.paint.Color;
 
@@ -58,16 +60,17 @@ public class Move {
 	private static Marble three = null;
 	
 	public static GameState initial = null;
+	public static MonteCarlo mcts;
 	
-	private static boolean repOff = false;
+	private static boolean repOff = true;
 	
-
 	public Move() {
 		first = null;
 		second = null;
 		third = null;
 		moveTo = null;
 		initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
+		mcts = new MonteCarlo(new Node<GameState>(initial));
 	}
 
 
