@@ -54,8 +54,6 @@ public class EvaluationFunction {
 
 		boolean isPlayer1AI = src.GameData.move.player1AI;
 		boolean isPlayer2AI = src.GameData.move.player2AI;
-		boolean isPlayer3AI = src.GameData.move.player3AI;
-
 
 		Strategies strategies = new Strategies(gameState);
 
