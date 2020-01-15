@@ -95,35 +95,25 @@ public class EvaluationFunction {
 		}
 
 
-
+		String Name;
 		if (gameState.evaluateFrom == 1) {
-
-			ModeDetermination_1 modeDet = new ModeDetermination_1();
-
-			normalization(modeDet.determineMode_1(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
-
-			double[] weightArray = modeDet.determineMode_1(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
-
-			w1 = weightArray[0];
-			w2 = weightArray[1];
-			w3 = weightArray[2];
-			w4 = weightArray[3];
-			w5 = weightArray[4];
-			w6 = weightArray[5];
-			w7 = weightArray[6];
-			w8 = weightArray[7];
-
+			Name = "Neutral";
 			System.out.println("Player1 evaluation");
-
+		}
+		if (gameState.evaluateFrom == 2) {
+			Name = "Aggressive";
+			System.out.println("Player2 evaluation");
+		}
+		if (gameState.evaluateFrom == 3) {
+			Name = "Defensive";
+			System.out.println("Player3 evaluation");
 		}
 
-		if (gameState.evaluateFrom == 2) {
+			ModeDetermination modeDet = new ModeDetermination(Name);
 
-			ModeDetermination_3 modeDet = new ModeDetermination_3();
+			normalization(modeDet.determineMode(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
 
-			normalization(modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
-
-			double[] weightArray = modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
+			double[] weightArray = modeDet.determineMode(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
 
 			w1 = weightArray[0];
 			w2 = weightArray[1];
@@ -133,30 +123,6 @@ public class EvaluationFunction {
 			w6 = weightArray[5];
 			w7 = weightArray[6];
 			w8 = weightArray[7];
-			System.out.println("Player2 evaluation");
-
-		}
-
-		if (gameState.evaluateFrom == 3) {
-
-			ModeDetermination_3 modeDet = new ModeDetermination_3();
-
-			normalization(modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
-
-			double[] weightArray = modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
-
-			w1 = weightArray[0];
-			w2 = weightArray[1];
-			w3 = weightArray[2];
-			w4 = weightArray[3];
-			w5 = weightArray[4];
-			w6 = weightArray[5];
-			w7 = weightArray[6];
-			w8 =  weightArray[7];
-			
-			System.out.println("Player3 evaluation");
-
-		}
 
 	}
 

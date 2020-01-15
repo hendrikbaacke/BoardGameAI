@@ -10,7 +10,7 @@ public class ReadMatrix {
     public final static String COMMENT = "//";
 
     //! n is the number of weights per mode
-    private static int n = 7;
+    private static int n = 8;
     //! m is the number of modes
     private static int m = 5;
 
