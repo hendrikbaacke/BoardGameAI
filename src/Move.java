@@ -58,9 +58,10 @@ public class Move {
 	private static Marble three = null;
 	
 	public static GameState initial = null;
-	
-	private static boolean repOff = false;
-	
+
+	//_________________________________________________________________________
+	private static boolean repOff = true;
+	//_________________________________________________________________________
 
 	public Move() {
 		first = null;
