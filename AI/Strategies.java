@@ -307,7 +307,6 @@ public class Strategies {
     			}
     		}
     	}
-    	System.out.println("no danger");
     	return sum;
     }
 

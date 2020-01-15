@@ -54,8 +54,6 @@ public class EvaluationFunction {
 
 		boolean isPlayer1AI = src.GameData.move.player1AI;
 		boolean isPlayer2AI = src.GameData.move.player2AI;
-		boolean isPlayer3AI = src.GameData.move.player3AI;
-
 
 		Strategies strategies = new Strategies(gameState);
 
@@ -83,12 +81,10 @@ public class EvaluationFunction {
 
 		//       Value Range compareMarblesWon : 1 - 0
 		f5 = strategies.compareMarblesWon();
+
+		//Marbles in danger
+		f8 = 1 - strategies.danger()/strategies.amountOwnMarbles();
 		
-		f8 = strategies.danger()/strategies.amountOwnMarbles();
-		
-		if (f8 ==1) {
-			System.out.println("DANGER");
-		}
 
         //Value Range compareMarblesLost : 0 - 1
 		double marblesLostEvaluationValue = strategies.compareMarblesLost();
@@ -115,19 +111,19 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
-			w8 = 0;
+			w8 = weightArray[7];
 
 			System.out.println("Player1 evaluation");
 
 		}
 
-		if (gameState.evaluateFrom ==2) {
+		if (gameState.evaluateFrom == 2) {
 
-			ModeDetermination_2 modeDet = new ModeDetermination_2();
+			ModeDetermination_3 modeDet = new ModeDetermination_3();
 
-			normalization(modeDet.determineMode_2(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
+			normalization(modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
 
-			double[] weightArray = modeDet.determineMode_2(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
+			double[] weightArray = modeDet.determineMode_3(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
 
 			w1 = weightArray[0];
 			w2 = weightArray[1];
@@ -136,7 +132,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
-			w8 = 0;
+			w8 = weightArray[7];
 			System.out.println("Player2 evaluation");
 
 		}
@@ -156,7 +152,7 @@ public class EvaluationFunction {
 			w5 = weightArray[4];
 			w6 = weightArray[5];
 			w7 = weightArray[6];
-			w8 = 0;
+			w8 =  weightArray[7];
 			
 			System.out.println("Player3 evaluation");
 
