@@ -64,6 +64,7 @@ public class Move {
 	
 	private static boolean repOff = true;
 	
+
 	public Move() {
 		first = null;
 		second = null;
