@@ -54,9 +54,9 @@ public class TrainingInstances {
         Normalize(RandDefensiveInstance);
 
 
-        ReadMatrix.ReadOut(RandAggressiveInstance);
-        ReadMatrix.ReadOut(RandNeutralInstance);
-        ReadMatrix.ReadOut(RandDefensiveInstance);
+        ReadMatrix.ReadOut(RandAggressiveInstance,"Trainers");
+        ReadMatrix.ReadOut(RandNeutralInstance,"Trainers");
+        ReadMatrix.ReadOut(RandDefensiveInstance,"Trainers");
 
 
     }

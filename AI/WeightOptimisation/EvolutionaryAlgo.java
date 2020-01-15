@@ -37,7 +37,7 @@ public class EvolutionaryAlgo {
 
 
             }
-            ReadMatrix.ReadOut(randWeightMatrix);
+            ReadMatrix.ReadOut(randWeightMatrix,"Matrices");
 
         }
     }
