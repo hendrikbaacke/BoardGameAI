@@ -4,11 +4,11 @@ import AI.ReadMatrix;
 
 public class TrainingInstances {
 
-    double[][] AggressiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Agressive" + ".txt");
-    double[][] NeutralInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Neutral" + ".txt");
-    double[][] DefensiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Devensive" + ".txt");
+    static double[][] AggressiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Aggressive" + ".txt");
+    static double[][] NeutralInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Neutral" + ".txt");
+    static double[][] DefensiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Defensive" + ".txt");
 
-    public void RandInstanceCreation() {
+    public static void RandInstanceCreation() {
 
         double[][] RandAggressiveInstance = AggressiveInstance;
         double[][] RandNeutralInstance = NeutralInstance;
@@ -61,7 +61,7 @@ public class TrainingInstances {
 
     }
     //Normalisation:
-    private void Normalize(double[][] inputMatrix) {
+    private static void Normalize(double[][] inputMatrix) {
 
 
         for (int l = 0; l < inputMatrix.length; l++) {
@@ -80,5 +80,5 @@ public class TrainingInstances {
         }
 
     }
-    
+
 }
