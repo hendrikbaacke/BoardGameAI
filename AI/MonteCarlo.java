@@ -1,5 +1,7 @@
 package AI;
 
+import java.util.ArrayList;
+
 import src.BoardMethods;
 
 /*
@@ -19,9 +21,10 @@ public class MonteCarlo {
 	
 	//do the whole monte-carlo search-> for a set number of seconds-> stop expanding after this is reached
 	public Node<GameState> MCTS (int numberSeconds) {
-		//set a timer!!!
-		boolean cont = true;
-		while (cont) {
+		//for a certain amount of time, this is performed
+		
+		double curr = System.currentTimeMillis();
+		while ((System.currentTimeMillis() - curr) < (numberSeconds*1000)) {
 			selection(monteCarloTree.root);
 		}
 		
@@ -30,60 +33,50 @@ public class MonteCarlo {
 		return chosen;
 	}
 	
-	//change the current root node to the one that is needed
-	public void changeRoot(Node<GameState> changed) {
-		monteCarloTree.setRoot(changed);
-		changed.parent = null;
-	}
-	
-	//change the node from outside (so, the human player)
-	public void changeRootOutside(GameState state) {
-		boolean isThere = false;
-		int i = 0;
-		while (!isThere && i < monteCarloTree.root.children.size()) {
-			if (!monteCarloTree.root.isLeaf()) {
-				if (BoardMethods.compareHashtables(monteCarloTree.getRoot().children.get(i).data.boardState, state.boardState)) {
-					changeRoot(monteCarloTree.getRoot().children.get(i));
-					isThere = true;
-				}
-			}
-			i++;
-		}
-		if (!isThere) {
-			GameState newRoot = new GameState(state.boardState,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
-			changeRoot(new Node<GameState>(newRoot));
-		}
-	}
-	
-	//chooses the node that will be played
-	public Node<GameState> selection(Node<GameState> current){
-		
+	//start from the root
+	//select successive child-nodes, until a lead node is reached
+	//then, if it terminates the tree, it backpropagates or expands
+	public void selection(Node<GameState> current){
 		while (!current.isLeaf()) {
 			current = sucChild(current);
 		}
-		//there needs to be more in this method, but i'll do this later
-		expansion(current);
-		
-		return null;
-		
+		if (current.data.terminal) {
+			backpropagate(current);
+		}
+		else {
+			expansion(current);
+		}
 	}
 	
 	//chooses successful child node - similar to the greedy algorithm
 	public Node<GameState> sucChild(Node<GameState> parent){
 		Node<GameState> bestChild = null;
 		double maxEval = Double.NEGATIVE_INFINITY;
+		ArrayList<Node<GameState>> multiple = new ArrayList<>();
 		
 		for (int i = 0; i < parent.children.size(); i++){
 			if (Math.max(maxEval, parent.children.get(i).totValue) > maxEval) {
+				multiple.clear();
 				maxEval = parent.children.get(i).totValue;
 				bestChild = parent.children.get(i);
 			}
+			else if(Math.max(maxEval, parent.children.get(i).totValue) == maxEval){
+				multiple.add(parent.children.get(i));
+			}
 		}
+		
+		//fair coin flip!!
+		if(multiple.size()> 1) {
+			
+		}
+		
 		return bestChild;
 	}
 	
 	//expands the current node
 	public void expansion(Node<GameState> expand) {
+		AddNodes.addForOne(expand);
+		//randomly choose one of those children and expand that one
 		
 	}
 	
@@ -93,7 +86,7 @@ public class MonteCarlo {
 		
 	}
 	
-	//backpropagation method
+	//backpropagation method - automatically calculate all the new values for it!!
 	public void backpropagate(Node<GameState> toPropagate) {
 		if (!(toPropagate.parent == null)) {
 			//these values need to be set to the right ones - there is a formula for this, so that needs to be implemented later... or not??? idk
@@ -110,4 +103,29 @@ public class MonteCarlo {
 		return ((wins / simulations) + explorationParam * Math.sqrt(Math.log(parentSimulations)/simulations));
 	}
 	
+	
+	//change the current root node to the one that is needed
+		public void changeRoot(Node<GameState> changed) {
+			monteCarloTree.setRoot(changed);
+			changed.parent = null;
+		}
+		
+		//change the node from outside (so, the human player)
+		public void changeRootOutside(GameState state) {
+			boolean isThere = false;
+			int i = 0;
+			while (!isThere && i < monteCarloTree.root.children.size()) {
+				if (!monteCarloTree.root.isLeaf()) {
+					if (BoardMethods.compareHashtables(monteCarloTree.getRoot().children.get(i).data.boardState, state.boardState)) {
+						changeRoot(monteCarloTree.getRoot().children.get(i));
+						isThere = true;
+					}
+				}
+				i++;
+			}
+			if (!isThere) {
+				GameState newRoot = new GameState(state.boardState,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
+				changeRoot(new Node<GameState>(newRoot));
+			}
+		}
 }
