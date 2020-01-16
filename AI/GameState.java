@@ -32,6 +32,7 @@ public class GameState {
 	//optional:
 	public int point3;
 	public boolean terminal;
+	public int winner = 0;
 	
 	public Hashtable<String, Hexagon> boardState;
 	
@@ -110,6 +111,15 @@ public class GameState {
 			
 		if (point1==6 ||point2 == 6 || point3==6) {
 			terminal = true;
+			if(point1 ==6) {
+				winner = 1;
+			}
+			else if(point2 ==6) {
+				winner =2;
+			}
+			else if (point3 ==6) {
+				winner = 3;
+			}
 		}
 		else {
 			terminal = false;

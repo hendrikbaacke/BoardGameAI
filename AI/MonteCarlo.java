@@ -1,18 +1,23 @@
 package AI;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import src.BoardMethods;
+import src.GameMethods;
 
 /*
- * Janneke's home-made version :D
+ * Janneke's home-made version :D - needs to be further implemented and then probably fixed.
+ * Testing is currently not possible due to some errors in the evolution thingy
  */
 
 public class MonteCarlo {
 	
 	//this tree stays the same during the whole game - although if it is really possible, it starts from scratch
 	Tree<GameState> monteCarloTree; 
-	private final double explorationParam = Math.sqrt(2);
+	Random random = new Random();
+	
+	private final static double explorationParam = Math.sqrt(2);
 	
 	//construct the tree, using the initial board state - automatically happens in move
 	public MonteCarlo(Node<GameState> root) {
@@ -41,7 +46,7 @@ public class MonteCarlo {
 			current = sucChild(current);
 		}
 		if (current.data.terminal) {
-			backpropagate(current);
+			backpropagate(current, current.data.winner);
 		}
 		else {
 			expansion(current);
@@ -67,11 +72,15 @@ public class MonteCarlo {
 		
 		//fair coin flip!!
 		if(multiple.size()> 1) {
-			
+			bestChild = multiple.get(random.nextInt(multiple.size()));
 		}
 		
 		return bestChild;
 	}
+	
+	/*
+	 * Next two methods still need to be finished - expansion and simulation. (idk what the difference is tbh)
+	 */
 	
 	//expands the current node
 	public void expansion(Node<GameState> expand) {
@@ -87,19 +96,23 @@ public class MonteCarlo {
 	}
 	
 	//backpropagation method - automatically calculate all the new values for it!!
-	public void backpropagate(Node<GameState> toPropagate) {
+	public void backpropagate(Node<GameState> toPropagate, int winningplayer) {
 		if (!(toPropagate.parent == null)) {
-			//these values need to be set to the right ones - there is a formula for this, so that needs to be implemented later... or not??? idk
+			
 			toPropagate.nVisits++;
-			toPropagate.totValue++; 
-			backpropagate(toPropagate.parent);
+			//if it wins, add the win as well
+			if (GameMethods.changePlayer(toPropagate.returnData().turn) == winningplayer) {
+				toPropagate.wins++;
+			}
+			toPropagate.calcMCTSvalue();
+			backpropagate(toPropagate.parent, winningplayer);
 		}
 	}
 	
 	//wins = number of wins for the node considered after the i-th move
 	//simulations = number of simulations for the node considered after the i-th move
 	//parentSimulations = total number of simulations after the i-th move run by the parent node of the one considered
-	public double calculateUCB(int wins, int simulations, int parentSimulations) {
+	public static double calculateUCB(int wins, int simulations, int parentSimulations) {
 		return ((wins / simulations) + explorationParam * Math.sqrt(Math.log(parentSimulations)/simulations));
 	}
 	

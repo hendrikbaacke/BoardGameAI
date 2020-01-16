@@ -81,11 +81,13 @@ public class PerformAIAction {
 		tree.buildFullTree(layers);
 	}
 	
+	//accidentally changed some stuff in node, which is why it said it had errors.
 	public static Node<GameState> chooseMCTS_Search(){
 		Node<GameState> node = tree.getRoot();
-		MCTS mc = new MCTS();
-		Node<GameState> result = mc.findBestMove();
-		return result;
+		//MCTS mc = new MCTS();
+		//Node<GameState> result = mc.findBestMove();
+		//return result;
+		return null;
 	}
 	
 }
