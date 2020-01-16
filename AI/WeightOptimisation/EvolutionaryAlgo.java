@@ -64,7 +64,7 @@ public class EvolutionaryAlgo {
                         player1 = player2;
                         player2=placeholder;
                     }
-                    GameEnvironment(player1,player2);
+                    //GameEnvironment.GameEnvironment(player1,player2);
                 }
             }
 

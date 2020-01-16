@@ -3,6 +3,8 @@ package src;
 import java.io.FileInputStream;
 
 import AI.WeightOptimisation.EvolutionaryAlgo;
+import AI.WeightOptimisation.GameSimulation.GameEnvironment;
+import AI.WeightOptimisation.GameSimulation.Simulation;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -386,6 +388,7 @@ public class Main extends Application {
 
                 Game = new GameGui();
                 Game.start(primaryStage);
+                //AI.WeightOptimisation.GameSimulation.GameEnvironment.GameEnvironment();
             }
         });
     }
