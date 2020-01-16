@@ -131,7 +131,8 @@ public class GameGui extends Application{
 			//MarbleStorage m = new MarbleStorage();
 			Board.boardMarbles = new MarbleStorage();
 			Scene scene = newScene(Board.boardMarbles, board,SubScene);
-			stage.setTitle("Gametime it on!");
+			stage.setTitle("Abalone Project");
+
 			stage.setScene(scene);
 			stage.show();
 			

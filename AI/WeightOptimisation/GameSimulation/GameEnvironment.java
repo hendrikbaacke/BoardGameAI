@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 public class GameEnvironment {
 
+
     private static int Wsize = 8;
     public static double[][] player1;
     public static double[][] player2;
@@ -41,4 +42,8 @@ public class GameEnvironment {
 
 
     }
+
+
+
+
 }
