@@ -5,11 +5,13 @@ import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 
 public class EvolutionaryAlgo {
 
-    private static int initialGenerationSize = 3;          // should be >10
-    private static int modes = 5;
-    private static int amountWeights = 8;
+    private static int initialGenerationSize = 1;          // should be >10
+    public static int modes = 5;
+    public static int amountWeights = 8;
 
     private static int amountGames = 4;
+
+    private static int Trainer=1;
 
     public static void initialGeneration() {
 
@@ -47,10 +49,7 @@ public class EvolutionaryAlgo {
 
     public static void Selection(){
 
-        TrainingInstances.RandInstanceCreation();
-
         for(int i=0; i<initialGenerationSize; i++) {
-
             for(int j=0; j<3; j++){
 
                 double[][] player1 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\Trainers\\"+ "AInumber" + ReadMatrix.gen +"_" +j + ".txt");
@@ -63,8 +62,9 @@ public class EvolutionaryAlgo {
                         double[][] placeholder = player1;
                         player1 = player2;
                         player2=placeholder;
+                        Trainer = Trainer*(-1);
                     }
-                    //GameEnvironment.GameEnvironment(player1,player2);
+                    GameEnvironment.GameEnvironment(player1,player2,Trainer,i);
                 }
             }
 

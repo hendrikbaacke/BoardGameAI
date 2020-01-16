@@ -16,7 +16,7 @@ public class GameEnvironment {
     public static double[][] player2;
 
 
-    public static void GameEnvironment(double[][] p1, double[][] p2){
+    public static void GameEnvironment(double[][] p1, double[][] p2, int Trainer,int name){
         player1 = p1;
         player2 = p2;
 
@@ -37,13 +37,15 @@ public class GameEnvironment {
 
         src.GameMethods.AlertON = false;
         EvaluationFunction.AITestingON = true;
-        while(Move.point<6 && Move.point2<6) Move.checkAI();
+        while(Move.point<6 && Move.point2<6) Move.checkAI(); //or move limit
+
+        /*TODO give results...
+        Results result = new Results();
+        result.name = name;
+        result.MoveCounter = ;
+        result.Marbles = ;
 
 
-
+         */
     }
-
-
-
-
 }
