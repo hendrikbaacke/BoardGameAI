@@ -98,6 +98,7 @@ public class EvaluationFunction {
 
 
 		String Name = null;
+
 		if (gameState.evaluateFrom == 1) {
 			Name = "Neutral";
 			System.out.println("Player1 evaluation");
