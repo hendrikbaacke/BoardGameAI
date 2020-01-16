@@ -15,6 +15,8 @@ import javafx.scene.paint.Color;
 
 public class GameMethods {
 
+	public static boolean AlertON = true;
+
 	//changes a turn automatically
 	public static int changePlayer(int playersTurn) {
 		if (playersTurn ==1) {
@@ -91,38 +93,40 @@ public class GameMethods {
 			if (GameData.numberPlayers == 3) {
 				GameGui.score_text3.setText(String.valueOf(Move.point3));
 			}
-			Alert alert = new Alert(AlertType.INFORMATION);
-			alert.setTitle("Game Over");
-			alert.setHeaderText("Winner is:");
-			if ( Move.point == 6){
-				String s ="Game over, Player 1 won!" ;
-				alert.setContentText(s);
-				alert.show();
-				GameGui.winner_text.setText("Game over, Player 1 won!");
-				//System.out.println("DONE");
-			
-			}
-			if ( Move.point2 == 6) {
-				
-				String s ="Game over, Player 2 won!" ;
-				alert.setContentText(s);
-				alert.show();
-				GameGui.winner_text.setText("Game over, Player 2 won!");
-				//System.out.println("DONE");
-			}
-			if (GameData.numberPlayers ==3) {
-				if (Move.point3 == 6) {
-					String s ="Game over, Player 3 won!" ;
+			if(AlertON) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("Game Over");
+				alert.setHeaderText("Winner is:");
+				if (Move.point == 6) {
+					String s = "Game over, Player 1 won!";
 					alert.setContentText(s);
 					alert.show();
-					GameGui.winner_text.setText("Game over, Player 3 won!");
+					GameGui.winner_text.setText("Game over, Player 1 won!");
+					//System.out.println("DONE");
+
 				}
+				if (Move.point2 == 6) {
+
+					String s = "Game over, Player 2 won!";
+					alert.setContentText(s);
+					alert.show();
+					GameGui.winner_text.setText("Game over, Player 2 won!");
+					//System.out.println("DONE");
+				}
+				if (GameData.numberPlayers == 3) {
+					if (Move.point3 == 6) {
+						String s = "Game over, Player 3 won!";
+						alert.setContentText(s);
+						alert.show();
+						GameGui.winner_text.setText("Game over, Player 3 won!");
+					}
+				}
+
+				alert.setOnCloseRequest(event ->
+				{
+					//System.out.println("CLOSING");
+					System.exit(0);
+				});
 			}
-			
-			alert.setOnCloseRequest( event ->
-		    {
-		        //System.out.println("CLOSING");
-		        System.exit(0);
-		    });
 		}
 }

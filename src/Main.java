@@ -42,8 +42,6 @@ public class Main extends Application {
 
     
     public void start(Stage primaryStage) throws Exception {
-        EvolutionaryAlgo.initialGeneration();
-
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
         
@@ -388,6 +386,7 @@ public class Main extends Application {
 
                 Game = new GameGui();
                 Game.start(primaryStage);
+
                 //AI.WeightOptimisation.GameSimulation.GameEnvironment.GameEnvironment();
             }
         });

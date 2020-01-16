@@ -1,6 +1,7 @@
 package AI;
 
 import AI.WeightOptimisation.EvolutionaryAlgo;
+import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 import src.Board;
 import src.Hexagon;
 
@@ -41,6 +42,9 @@ public class EvaluationFunction {
 
 	private GameState gameState;
 	private Strategies old;
+
+	public static boolean AITestingON = false;
+	public  ModeDetermination modeDet;
 
 	public EvaluationFunction(GameState gameState) {
 
@@ -97,22 +101,29 @@ public class EvaluationFunction {
 		}
 
 
-		String Name = null;
-		if (gameState.evaluateFrom == 1) {
-			Name = "Neutral";
-			System.out.println("Player1 evaluation");
-		}
-		if (gameState.evaluateFrom == 2) {
-			Name = "Aggressive";
-			System.out.println("Player2 evaluation");
-		}
-		if (gameState.evaluateFrom == 3) {
-			Name = "Defenssive";
-			System.out.println("Player3 evaluation");
-		}
+		if(!AITestingON) {
+			String Name = null;
+			if (gameState.evaluateFrom == 1) {
+				Name = "Neutral";
+				System.out.println("Player1 evaluation");
+			}
+			if (gameState.evaluateFrom == 2) {
+				Name = "Aggressive";
+				System.out.println("Player2 evaluation");
+			}
+			if (gameState.evaluateFrom == 3) {
+				Name = "Defenssive";
+				System.out.println("Player3 evaluation");
+			}
 
-			ModeDetermination modeDet = new ModeDetermination(Name);
-
+			modeDet = new ModeDetermination(Name);
+		}else{
+			if (gameState.evaluateFrom == 1) {
+				modeDet = new ModeDetermination(GameEnvironment.player1);
+			}else{
+				modeDet = new ModeDetermination(GameEnvironment.player2);
+			}
+		}
 			normalization(modeDet.determineMode(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles()));
 
 			double[] weightArray = modeDet.determineMode(f1, strategies.amountOppMarbles(), strategies.amountOwnMarbles());
