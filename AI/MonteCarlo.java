@@ -16,7 +16,6 @@ public class MonteCarlo {
 	//this tree stays the same during the whole game - although if it is really possible, it starts from scratch
 	Tree<GameState> monteCarloTree; 
 	Random random = new Random();
-	
 	private final static double explorationParam = Math.sqrt(2);
 	
 	//construct the tree, using the initial board state - automatically happens in move
@@ -45,10 +44,7 @@ public class MonteCarlo {
 		while (!current.isLeaf()) {
 			current = sucChild(current);
 		}
-		if (current.data.terminal) {
-			backpropagate(current, current.data.winner);
-		}
-		else {
+		if (!current.data.terminal) {
 			expansion(current);
 		}
 	}
