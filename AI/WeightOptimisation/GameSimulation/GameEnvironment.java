@@ -28,5 +28,6 @@ public class GameEnvironment {
         Game.start(stage);
 
         while(Move.point<6 && Move.point2<6) Move.checkAI();
+
     }
 }
