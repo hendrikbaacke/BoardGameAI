@@ -45,7 +45,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         System.out.println("Running on: "+System.getProperty("os.name"));
         if(System.getProperty("os.name").contains("Mac")){
-            ReadMatrix.Slash = "/";
+            ReadMatrix.Slash = "//";
         }else{
             ReadMatrix.Slash = "\\";
         }
