@@ -2,13 +2,11 @@ package AI;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import src.BoardMethods;
 import src.GameMethods;
 
 /*
- * Janneke's home-made version :D - needs to be further implemented and then probably fixed.
- * Testing is currently not possible due to some errors in the evolution thingy
+ * Needs to be integrated and tested.
  */
 
 public class MonteCarlo {
@@ -17,6 +15,7 @@ public class MonteCarlo {
 	Tree<GameState> monteCarloTree; 
 	Random random = new Random();
 	private final static double explorationParam = Math.sqrt(2);
+	private boolean chooseForAIMove;
 	
 	//construct the tree, using the initial board state - automatically happens in move
 	public MonteCarlo(Node<GameState> root) {
@@ -26,14 +25,18 @@ public class MonteCarlo {
 	//do the whole monte-carlo search-> for a set number of seconds-> stop expanding after this is reached
 	public Node<GameState> MCTS (int numberSeconds) {
 		//for a certain amount of time, this is performed
+		chooseForAIMove = false;
 		
+		//will still finish current simulation
 		double curr = System.currentTimeMillis();
 		while ((System.currentTimeMillis() - curr) < (numberSeconds*1000)) {
 			selection(monteCarloTree.root);
 		}
 		
+		chooseForAIMove = true;
 		Node<GameState> chosen = sucChild(monteCarloTree.root);
 		changeRoot(chosen);
+		
 		return chosen;
 	}
 	
@@ -45,7 +48,7 @@ public class MonteCarlo {
 			current = sucChild(current);
 		}
 		if (!current.data.terminal) {
-			expansion(current);
+			simulation(current);
 		}
 	}
 	
@@ -56,12 +59,12 @@ public class MonteCarlo {
 		ArrayList<Node<GameState>> multiple = new ArrayList<>();
 		
 		for (int i = 0; i < parent.children.size(); i++){
-			if (Math.max(maxEval, parent.children.get(i).totValue) > maxEval) {
+			if (Math.max(maxEval, parent.children.get(i).totValue) > maxEval && (!chooseForAIMove || maxEval < Double.POSITIVE_INFINITY )) {
 				multiple.clear();
 				maxEval = parent.children.get(i).totValue;
 				bestChild = parent.children.get(i);
 			}
-			else if(Math.max(maxEval, parent.children.get(i).totValue) == maxEval){
+			else if(Math.max(maxEval, parent.children.get(i).totValue) == maxEval && (!chooseForAIMove || maxEval < Double.POSITIVE_INFINITY )){
 				multiple.add(parent.children.get(i));
 			}
 		}
@@ -74,21 +77,23 @@ public class MonteCarlo {
 		return bestChild;
 	}
 	
-	/*
-	 * Next two methods still need to be finished - expansion and simulation. (idk what the difference is tbh)
-	 */
-	
 	//expands the current node
 	public void expansion(Node<GameState> expand) {
 		AddNodes.addForOne(expand);
-		//randomly choose one of those children and expand that one
-		
+		//we can also make one that adds less nodes?? if this one is too expensive
 	}
 	
-	
 	//simulation (also known as roll out)
-	public void simulation() {
+	public void simulation(Node<GameState> current) {
+		expansion(current);
+		Node<GameState> newChoice = sucChild(current);
 		
+		if (newChoice.data.terminal) {
+			backpropagate(newChoice, newChoice.data.winner);
+		}
+		else {
+			simulation(newChoice);
+		}
 	}
 	
 	//backpropagation method - automatically calculate all the new values for it!!
@@ -138,3 +143,4 @@ public class MonteCarlo {
 			}
 		}
 }
+
