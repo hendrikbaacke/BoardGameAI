@@ -48,7 +48,7 @@ public class Move {
 	public static boolean player3AI = false;
 	
 	//choose if we use greedy or not
-	private static boolean greedy = true;
+	private static boolean greedy = false;
 	
 	//separately
 	private static boolean greedyPlayer1 = false;
@@ -60,9 +60,10 @@ public class Move {
 	private static Marble three = null;
 	
 	public static GameState initial = null;
-	public MonteCarlo monteCarlo = null;
+	public static MonteCarlo monteCarlo = null;
 	
 	private static boolean repOff = true;
+	private static boolean alphabeta = false;
 	
 
 	public Move() {
@@ -291,6 +292,7 @@ public class Move {
 				GameMethods.gameFinished();
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
+				monteCarlo.changeRootOutside(board);
 				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
 					//checkAI();
 				}
@@ -308,16 +310,21 @@ public class Move {
 	public static void performAI() {
 		GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
 		if (greedy || GameData.numberPlayers ==3 || (playersTurn ==1 && greedyPlayer1) || (playersTurn ==2 && greedyPlayer2) ) {
+			System.out.println("greedy");
 			System.out.println("1 layer");
 			PerformAIAction.createGameTree(state, 1);
-			AI.PerformAIAction.perform(true);
+			AI.PerformAIAction.perform(true, false);
 		}
-		else {
+		else if(alphabeta == true) {
+			System.out.println("alphabeta");
 			System.out.println("2 layers");
 			PerformAIAction.createGameTree(state, 2);
-			AI.PerformAIAction.perform(false);
+			AI.PerformAIAction.perform(false, true);
 		}
-		
+		else {
+			System.out.println("montecarlo");
+			AI.PerformAIAction.perform(false, false);
+		}
 	}
 	
 	//move a marble from one place (see code) to the other

@@ -1,8 +1,5 @@
 package AI;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import src.Board;
 import src.GameData;
 import src.Move;
@@ -13,16 +10,17 @@ public class PerformAIAction {
 	public static GameTree tree;
 
 	//get the best node and use this action
-	public static void perform(boolean greedy) {
+	public static void perform(boolean greedy, boolean alphabeta) {
 		//build the tree and perform search - make a new node a root node?
 		Node<GameState> needed = null;
 		if (greedy) {
 		needed = choose2();
 		}
-		else {
-			//needed = chooseMCTS_Search();
+		else if (alphabeta) {
 			needed = choose();
-			
+		}
+		else {
+			needed = chooseMCTS_Search();
 		}
 
 		if (needed.returnData().first != null) {
@@ -74,7 +72,7 @@ public class PerformAIAction {
 	}
 	
 	public static void createGameTree(GameState state, int layers) {
-		Node current = new Node(state);
+		Node<GameState> current = new Node<GameState>(state);
 		//always create a new tree
 		tree = new GameTree(current);
 		System.out.println("creating");
@@ -83,11 +81,6 @@ public class PerformAIAction {
 	
 	//accidentally changed some stuff in node, which is why it said it had errors.
 	public static Node<GameState> chooseMCTS_Search(){
-		Node<GameState> node = tree.getRoot();
-		//MCTS mc = new MCTS();
-		//Node<GameState> result = mc.findBestMove();
-		//return result;
-		return null;
+		return Move.monteCarlo.MCTS(10);
 	}
-	
 }

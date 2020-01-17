@@ -1,12 +1,14 @@
 package AI;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Random;
 import src.BoardMethods;
 import src.GameMethods;
+import src.Hexagon;
 
 /*
- * Needs to be integrated and tested.
+ * Needs to be tested.
  */
 
 public class MonteCarlo {
@@ -35,7 +37,7 @@ public class MonteCarlo {
 		
 		chooseForAIMove = true;
 		Node<GameState> chosen = sucChild(monteCarloTree.root);
-		changeRoot(chosen);
+		//changeRoot(chosen);
 		
 		return chosen;
 	}
@@ -89,6 +91,7 @@ public class MonteCarlo {
 		Node<GameState> newChoice = sucChild(current);
 		
 		if (newChoice.data.terminal) {
+			System.out.println("backpropagate");
 			backpropagate(newChoice, newChoice.data.winner);
 		}
 		else {
@@ -119,28 +122,28 @@ public class MonteCarlo {
 	
 	
 	//change the current root node to the one that is needed
-		public void changeRoot(Node<GameState> changed) {
-			monteCarloTree.setRoot(changed);
-			changed.parent = null;
-		}
+	public void changeRoot(Node<GameState> changed) {
+		monteCarloTree.setRoot(changed);
+		changed.parent = null;
+	}
 		
-		//change the node from outside (so, the human player)
-		public void changeRootOutside(GameState state) {
-			boolean isThere = false;
-			int i = 0;
-			while (!isThere && i < monteCarloTree.root.children.size()) {
-				if (!monteCarloTree.root.isLeaf()) {
-					if (BoardMethods.compareHashtables(monteCarloTree.getRoot().children.get(i).data.boardState, state.boardState)) {
-						changeRoot(monteCarloTree.getRoot().children.get(i));
-						isThere = true;
-					}
+	//change the node from outside (so, the human player)
+	public void changeRootOutside(Hashtable<String, Hexagon> board) {
+		boolean isThere = false;
+		int i = 0;
+		while (!isThere && i < monteCarloTree.root.children.size()) {
+			if (!monteCarloTree.root.isLeaf()) {
+				if (BoardMethods.compareHashtables(monteCarloTree.getRoot().children.get(i).data.boardState, board)) {
+					changeRoot(monteCarloTree.getRoot().children.get(i));
+					isThere = true;
 				}
-				i++;
 			}
-			if (!isThere) {
-				GameState newRoot = new GameState(state.boardState,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
-				changeRoot(new Node<GameState>(newRoot));
-			}
+			i++;
 		}
+		if (!isThere) {
+			GameState newRoot = new GameState(board,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
+			changeRoot(new Node<GameState>(newRoot));
+		}
+	}
 }
 
