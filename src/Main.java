@@ -2,6 +2,7 @@ package src;
 
 import java.io.FileInputStream;
 
+import AI.ReadMatrix;
 import AI.WeightOptimisation.EvolutionaryAlgo;
 import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 import AI.WeightOptimisation.GameSimulation.Simulation;
@@ -42,6 +43,14 @@ public class Main extends Application {
 
     
     public void start(Stage primaryStage) throws Exception {
+        System.out.println("Running on: "+System.getProperty("os.name"));
+        if(System.getProperty("os.name").contains("Mac")){
+            ReadMatrix.Slash = "/";
+        }else{
+            ReadMatrix.Slash = "\\";
+        }
+
+        AI.WeightOptimisation.TrainingInstances.RandInstanceCreation();
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
         
@@ -387,7 +396,7 @@ public class Main extends Application {
                 Game = new GameGui();
                 Game.start(primaryStage);
 
-                //AI.WeightOptimisation.GameSimulation.GameEnvironment.GameEnvironment();
+               // AI.WeightOptimisation.GameSimulation.GameEnvironment.GameEnvironment( ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Neutral" + ".txt"),ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Aggressive" + ".txt"),1,0);
             }
         });
     }

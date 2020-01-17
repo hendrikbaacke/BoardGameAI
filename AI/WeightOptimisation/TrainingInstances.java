@@ -4,9 +4,9 @@ import AI.ReadMatrix;
 
 public class TrainingInstances {
 
-    static double[][] AggressiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Aggressive" + ".txt");
-    static double[][] NeutralInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Neutral" + ".txt");
-    static double[][] DefensiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Defensive" + ".txt");
+    static double[][] AggressiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash + "Aggressive" + ".txt");
+    static double[][] NeutralInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") +  ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash + "Neutral" + ".txt");
+    static double[][] DefensiveInstance = ReadMatrix.ReadIn(System.getProperty("user.dir") +  ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash + "Defensive" + ".txt");
 
     public static void RandInstanceCreation() {
 

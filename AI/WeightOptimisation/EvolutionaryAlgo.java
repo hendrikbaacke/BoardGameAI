@@ -52,8 +52,8 @@ public class EvolutionaryAlgo {
         for(int i=0; i<initialGenerationSize; i++) {
             for(int j=0; j<3; j++){
 
-                double[][] player1 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\Trainers\\"+ "AInumber" + ReadMatrix.gen +"_" +j + ".txt");
-                double[][] player2 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\Matrices\\"+ "AInumber" + ReadMatrix.gen +"_" +i + ".txt");
+                double[][] player1 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Trainers"+ReadMatrix.Slash+ "AInumber" + ReadMatrix.gen +"_" +j + ".txt");
+                double[][] player2 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Matrices"+ReadMatrix.Slash+ "AInumber" + ReadMatrix.gen +"_" +i + ".txt");
 
                 for(int k=0; k<amountGames; k++){
 

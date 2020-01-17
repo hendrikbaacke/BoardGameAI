@@ -17,6 +17,7 @@ public class ReadMatrix {
     public static int gen;
     public static int FileNumber;
 
+    public static String Slash;
 
 
     public static double[][] ReadIn( String File ) {
@@ -118,7 +119,8 @@ public class ReadMatrix {
 
     public static void ReadOut(double[][] weights, String folder){
         FileNumber++;
-        File doc = new File(System.getProperty("user.dir")+"\\AI\\"+folder+"\\"+"AInumber"+gen+"_"+FileNumber+".txt");
+        File doc = new File(System.getProperty("user.dir")+Slash+"AI"+Slash+folder+Slash+"AInumber"+gen+"_"+FileNumber+".txt");
+
         System.out.println("Path : " + doc.getAbsolutePath());
         try{
             FileWriter fw = new FileWriter(doc,true);
