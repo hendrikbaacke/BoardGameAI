@@ -42,6 +42,7 @@ public class EvolutionaryAlgo {
 
             }
             ReadMatrix.ReadOut(randWeightMatrix,"Matrices");
+            ReadResult.ReadOut();
 
         }
     }
@@ -64,19 +65,13 @@ public class EvolutionaryAlgo {
                         player2=placeholder;
                         Trainer = Trainer*(-1);
                     }
-                    GameEnvironment.GameEnvironment(player1,player2,Trainer,i);
+                    int [] result = GameEnvironment.GameEnvironment(player1,player2,Trainer,i);
+                    ReadResult.AddRsult(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Results"+ReadMatrix.Slash+ "AIResult" + ReadMatrix.gen +"_" +i + ".txt",result);
                 }
             }
-
-
         }
-
-
-
     }
-    private static void Crossover(double[][] strongBloodline){
 
-    }
     private static void Mutation(double[][] strongBloodLine){
 
     }

@@ -16,7 +16,8 @@ public class GameEnvironment {
     public static double[][] player2;
 
 
-    public static void GameEnvironment(double[][] p1, double[][] p2, int Trainer,int name){
+    public static int[] GameEnvironment(double[][] p1, double[][] p2, int Trainer,int name){
+        int[] result = new int[2];
         player1 = p1;
         player2 = p2;
 
@@ -47,5 +48,6 @@ public class GameEnvironment {
 
 
          */
+        return result;
     }
 }
