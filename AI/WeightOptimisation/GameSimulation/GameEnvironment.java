@@ -8,10 +8,12 @@ import src.Board;
 import src.GameGui;
 import src.Move;
 import javafx.stage.Stage;
+import src.Traceback;
 
 public class GameEnvironment {
 
 
+    private static int limit = 500;
     private static int Wsize = 8;
     public static double[][] player1;
     public static double[][] player2;
@@ -40,10 +42,9 @@ public class GameEnvironment {
         src.GameMethods.AlertON = false;
         EvaluationFunction.AITestingON = true;
         //can change the board now!!
-        while(Move.point<6 && Move.point2<6) Move.checkAI(Board.hashBoard); //or move limit
+        while(Move.point<6 && Move.point2<6 &&Traceback.totalMoves<limit) Move.checkAI(Board.hashBoard);
 
-        //TODO give results...
-        //result[0] =
+        result[0] = Traceback.totalMoves;
         result[1] = Trainer*(Move.point-Move.point2);
 
         return result;
