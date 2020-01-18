@@ -1,6 +1,7 @@
 package src;
 
 
+import AI.AutomaticGamePlay;
 import AI.GameState;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -63,8 +64,9 @@ public class GameGui extends Application{
 			});
 
 			buttonAI.setOnAction(e -> {
-				Move.checkAI();
+				Move.checkAI(Board.hashBoard);
 				System.out.println("--did ai move and deleted tree--");
+				//AutomaticGamePlay.playGame(Board.hashBoard);
 			});
 
 		    Label winner_label = new Label("Player win:\t");
@@ -155,7 +157,7 @@ public class GameGui extends Application{
 
 			scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
 				if(e.getCode() == KeyCode.DOWN) {
-					Move.checkAI();
+					Move.checkAI(Board.hashBoard);
 					System.out.println("--did ai move and deleted tree--");
 				}
 			});

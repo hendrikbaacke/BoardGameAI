@@ -4,6 +4,7 @@ import AI.EvaluationFunction;
 import AI.ModeDetermination;
 import javafx.geometry.Rectangle2D;
 import javafx.stage.Screen;
+import src.Board;
 import src.GameGui;
 import src.Move;
 import javafx.stage.Stage;
@@ -38,7 +39,8 @@ public class GameEnvironment {
 
         src.GameMethods.AlertON = false;
         EvaluationFunction.AITestingON = true;
-        while(Move.point<6 && Move.point2<6) Move.checkAI(); //or move limit
+        //can change the board now!!
+        while(Move.point<6 && Move.point2<6) Move.checkAI(Board.hashBoard); //or move limit
 
         //TODO give results...
         //result[0] =

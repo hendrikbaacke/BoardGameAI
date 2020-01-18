@@ -19,6 +19,10 @@ public class MonteCarlo {
 	private final static double explorationParam = Math.sqrt(2);
 	private boolean chooseForAIMove;
 	
+	//need to cutoff when the game takes too long
+	private final int cutoff = 200;
+	private int currentNode = 1;
+	
 	//construct the tree, using the initial board state - automatically happens in move
 	public MonteCarlo(Node<GameState> root) {
 		monteCarloTree = new Tree<GameState>(root);
@@ -32,6 +36,8 @@ public class MonteCarlo {
 		//will still finish current simulation
 		double curr = System.currentTimeMillis();
 		while ((System.currentTimeMillis() - curr) < (numberSeconds*1000)) {
+			System.out.println("cutoff " + currentNode);
+			currentNode = 1;
 			selection(monteCarloTree.root);
 		}
 		
@@ -46,10 +52,12 @@ public class MonteCarlo {
 	//select successive child-nodes, until a lead node is reached
 	//then, if it terminates the tree, it backpropagates or expands
 	public void selection(Node<GameState> current){
-		while (!current.isLeaf()) {
+		while (!current.isLeaf() && currentNode < cutoff) {
+			currentNode++;
 			current = sucChild(current);
 		}
-		if (!current.data.terminal) {
+		if (!current.data.terminal && currentNode < cutoff) {
+			currentNode++;
 			simulation(current);
 		}
 	}
@@ -90,11 +98,12 @@ public class MonteCarlo {
 		expansion(current);
 		Node<GameState> newChoice = sucChild(current);
 		
-		if (newChoice.data.terminal) {
+		if (newChoice.data.terminal || currentNode >= cutoff) {
 			System.out.println("backpropagate");
 			backpropagate(newChoice, newChoice.data.winner);
 		}
 		else {
+			currentNode ++;
 			simulation(newChoice);
 		}
 	}
@@ -105,9 +114,13 @@ public class MonteCarlo {
 			
 			toPropagate.nVisits++;
 			//if it wins, add the win as well
+			if (winningplayer ==0) {
+				toPropagate.wins =  (toPropagate.wins + 0.5);
+			}
 			if (GameMethods.changePlayer(toPropagate.returnData().turn) == winningplayer) {
 				toPropagate.wins++;
 			}
+			
 			toPropagate.calcMCTSvalue();
 			backpropagate(toPropagate.parent, winningplayer);
 		}
@@ -116,7 +129,7 @@ public class MonteCarlo {
 	//wins = number of wins for the node considered after the i-th move
 	//simulations = number of simulations for the node considered after the i-th move
 	//parentSimulations = total number of simulations after the i-th move run by the parent node of the one considered
-	public static double calculateUCB(int wins, int simulations, int parentSimulations) {
+	public static double calculateUCB(double wins, int simulations, int parentSimulations) {
 		return ((wins / simulations) + explorationParam * Math.sqrt(Math.log(parentSimulations)/simulations));
 	}
 	
@@ -144,6 +157,7 @@ public class MonteCarlo {
 			GameState newRoot = new GameState(board,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
 			changeRoot(new Node<GameState>(newRoot));
 		}
+		System.out.println("changed root");
 	}
 }
 

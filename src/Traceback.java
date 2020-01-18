@@ -48,10 +48,10 @@ public class Traceback {
 			return;
 		}
 		else {
-			System.out.println("traceback for " + playerNumber);
-			System.out.println("add to traceback " + first);
-			System.out.println("add to traceback " + second);
-			System.out.println("add to traceback " + third);
+			//System.out.println("traceback for " + playerNumber);
+			//System.out.println("add to traceback " + first);
+			//System.out.println("add to traceback " + second);
+			//System.out.println("add to traceback " + third);
 		}
 		if (playerNumber ==1) {
 			oldMovePlayer1.clear();
@@ -61,7 +61,7 @@ public class Traceback {
 			}
 			if(third != null) {
 				oldMovePlayer1.add(third);
-				System.out.println(oldMovePlayer1.size());
+				//System.out.println(oldMovePlayer1.size());
 			}
 			direct1 = direction;
 		}
@@ -73,7 +73,7 @@ public class Traceback {
 			}
 			if(third != null) {
 				oldMovePlayer2.add(third);
-				System.out.println(oldMovePlayer2.size());
+				//System.out.println(oldMovePlayer2.size());
 			}
 			direct2 = direction;
 		}
@@ -85,7 +85,7 @@ public class Traceback {
 			}
 			if(third != null) {
 				oldMovePlayer3.add(third);
-				System.out.println(oldMovePlayer3.size());
+				//System.out.println(oldMovePlayer3.size());
 			}
 			direct3 = direction;
 		}
@@ -99,5 +99,15 @@ public class Traceback {
 	// reset the traceback fully
 	public void reset() {
 		traceback = new ArrayList<Hashtable<String, Hexagon>>();
+		oldMovePlayer1 = new ArrayList<>();
+		oldMovePlayer2 = new ArrayList<>();
+		oldMovePlayer3 = new ArrayList<>();
+		direct1 = 0;
+		direct2 = 0;
+		direct3 = 0;
+		current= 1;
+		totalMoves = 1;
+		tracebacksize = 10;
+		
 	}
 }

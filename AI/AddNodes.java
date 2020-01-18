@@ -39,7 +39,7 @@ public class AddNodes {
 							
 							//add every move with one marble -- is okay!!
 							if (Move.validMoveOne(board, currentString, moveTo) & Board.hash.contains(moveTo)) {
-								GameState oneM = new GameState(currentString, null, null, moveTo, node.returnData());
+								GameState oneM = new GameState(currentString, null, null, moveTo, node.returnData(), true);
 								if (oneM.valid) {
 									nodeNR++;
 									oneMarbleMoves.add(oneM);
@@ -53,7 +53,7 @@ public class AddNodes {
 								if (!board.get(marble2).empty) {
 									if (board.get(marble2).marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn)) {
 										if (Move.validMoveTwo(board, currentString, marble2, moveTo)) {
-											GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData());
+											GameState twoM = new GameState(currentString, marble2, null, moveTo, node.returnData(), true);
 											if (twoM.valid) {
 												nodeNR++;
 												twoMarblesMoves.add(twoM);
@@ -69,7 +69,7 @@ public class AddNodes {
 								if (!board.get(marble2).empty && !board.get(marble3).empty) {
 									if (board.get(marble2).marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn) && board.get(marble3).marble.playerNumber == src.GameMethods.changePlayer(node.returnData().turn)) {
 										if(Move.validMoveThree(board, currentString, marble2, marble3, moveTo)) {
-											GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData());
+											GameState threeM = new GameState(currentString, marble2, marble3, moveTo, node.returnData(), true);
 											if (threeM.valid) {
 												nodeNR++;
 												threeMarblesMoves.add(threeM);	
@@ -104,6 +104,7 @@ public class AddNodes {
 	
 	//add all the children of the node you pass as a parameter
 	public static void addForOne(Node<GameState> node) {
+		System.out.println("addforone");
 		ArrayList<GameState> children = everyGameState(node);
 		for (int i = 0; i < children.size(); i++) {
 			node.addChild(children.get(i));
@@ -112,6 +113,7 @@ public class AddNodes {
 		
 		//add children to all these children
 		public static void addForMultiple(List<Node<GameState>> nodes) {
+			System.out.println("addformultiple");
 			for (int i = 0; i < nodes.size(); i++) {
 				addForOne(nodes.get(i));
 			}
