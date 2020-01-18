@@ -11,8 +11,6 @@ public class EvolutionaryAlgo {
 
     private static int amountGames = 4;
 
-    private static int Trainer=1;
-
     public static void initialGeneration() {
 
         ReadMatrix.FileNumber = 0;
@@ -42,41 +40,34 @@ public class EvolutionaryAlgo {
 
             }
             ReadMatrix.ReadOut(randWeightMatrix,"Matrices");
-
+            ReadResult.ReadOut();
         }
     }
 
 
     public static void Selection(){
 
-        for(int i=0; i<initialGenerationSize; i++) {
-            for(int j=0; j<3; j++){
+        for(int i=1; i<=initialGenerationSize; i++) {
+            for(int j=1; j<4; j++){
 
                 double[][] player1 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Trainers"+ReadMatrix.Slash+ "AInumber" + ReadMatrix.gen +"_" +j + ".txt");
                 double[][] player2 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Matrices"+ReadMatrix.Slash+ "AInumber" + ReadMatrix.gen +"_" +i + ".txt");
+                int Trainer=-1;
 
                 for(int k=0; k<amountGames; k++){
-
-
                     if(k % 2 == 0){
                         double[][] placeholder = player1;
                         player1 = player2;
                         player2=placeholder;
                         Trainer = Trainer*(-1);
                     }
-                    GameEnvironment.GameEnvironment(player1,player2,Trainer,i);
+                    int[] result = GameEnvironment.GameEnvironment(player1,player2,Trainer);
+                    ReadResult.AddResult(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Results"+ReadMatrix.Slash+ "AIResult" + ReadMatrix.gen +"_" +i +"_" +j+ ".txt",result);
                 }
             }
-
-
         }
-
-
-
     }
-    private static void Crossover(double[][] strongBloodline){
 
-    }
     private static void Mutation(double[][] strongBloodLine){
 
     }
