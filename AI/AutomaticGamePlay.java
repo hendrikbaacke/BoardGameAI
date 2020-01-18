@@ -32,7 +32,7 @@ public class AutomaticGamePlay {
 		Move.point3 = 0;
 		Move.winnerAutomaticGame =0;
 		Move.automaticGame = false;
-		Move.automaticGameEnd = true;
+		Move.automaticGameEnd = false;
 		GameData.tb.reset();
 		Move.resetMove();
 	}
