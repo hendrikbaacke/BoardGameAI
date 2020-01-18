@@ -5,7 +5,7 @@ import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 
 public class EvolutionaryAlgo {
 
-    private static int initialGenerationSize = 1;          // should be >10
+    public static int initialGenerationSize = 10;          // should be >10
     public static int modes = 5;
     public static int amountWeights = 8;
 
