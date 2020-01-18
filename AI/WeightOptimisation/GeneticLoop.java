@@ -22,8 +22,7 @@ public class GeneticLoop {
         EvolutionaryAlgo.Selection();
 
         for (int i = 1; i < Gensize; i++) {
-            ArrayList ResultList = new ArrayList<double[][]>();
-            //TODO fill ResultList
+            ArrayList ResultList = SortResults.sorting();
             Crossover.crossover(ResultList);
             TrainingInstances.RandInstanceCreation();
             EvolutionaryAlgo.Selection();
