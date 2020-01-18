@@ -18,7 +18,6 @@ public class GameEnvironment {
     public static double[][] player1;
     public static double[][] player2;
 
-
     public static int[] GameEnvironment(double[][] p1, double[][] p2, int Trainer){
         int[] result = new int[2];
         player1 = p1;
