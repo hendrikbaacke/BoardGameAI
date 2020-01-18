@@ -16,7 +16,7 @@ public class GameEnvironment {
     public static double[][] player2;
 
 
-    public static int[] GameEnvironment(double[][] p1, double[][] p2, int Trainer,int name){
+    public static int[] GameEnvironment(double[][] p1, double[][] p2, int Trainer){
         int[] result = new int[2];
         player1 = p1;
         player2 = p2;
@@ -40,14 +40,10 @@ public class GameEnvironment {
         EvaluationFunction.AITestingON = true;
         while(Move.point<6 && Move.point2<6) Move.checkAI(); //or move limit
 
-        /*TODO give results...
-        Results result = new Results();
-        result.name = name;
-        result.MoveCounter = ;
-        result.Marbles = ;
+        //TODO give results...
+        //result[0] =
+        result[1] = Trainer*(Move.point-Move.point2);
 
-
-         */
         return result;
     }
 }

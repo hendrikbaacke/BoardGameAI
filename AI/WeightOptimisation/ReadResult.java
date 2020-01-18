@@ -85,33 +85,37 @@ public class ReadResult {
             System.exit(0);
         }
 
+        Results[0] = moves;
+        Results[1] = marbles;
+
         return Results;
 
     }
 
     public static void ReadOut(){
         FileNumber++;
-        File doc = new File(System.getProperty("user.dir")+ ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"Results"+ReadMatrix.Slash+"AIResults"+ReadMatrix.gen+"_"+FileNumber+".txt");
+        for(int i=1; i<4; i++) {
+            File doc = new File(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Results" + ReadMatrix.Slash + "AIResults" + ReadMatrix.gen + "_" + FileNumber + "_" + i + ".txt");
 
-        System.out.println("Path : " + doc.getAbsolutePath());
-        try{
-            FileWriter fw = new FileWriter(doc,true);
-            fw.write("AInumber: "+FileNumber);
-            fw.write(System.lineSeparator());
-            fw.write("Gen: "+ReadMatrix.gen);
-            fw.write(System.lineSeparator());
-            fw.write("Moves: 0");
-            fw.write(System.lineSeparator());
-            fw.write("Marbles: 0");
-            fw.write(System.lineSeparator());
-            fw.close();
-        } catch (IOException ex){
-            System.err.println("Couldn't log this");
+            System.out.println("Path : " + doc.getAbsolutePath());
+            try {
+                FileWriter fw = new FileWriter(doc, true);
+                fw.write("AInumber: " + FileNumber);
+                fw.write(System.lineSeparator());
+                fw.write("Gen: " + ReadMatrix.gen);
+                fw.write(System.lineSeparator());
+                fw.write("Moves: 0");
+                fw.write(System.lineSeparator());
+                fw.write("Marbles: 0");
+                fw.write(System.lineSeparator());
+                fw.close();
+            } catch (IOException ex) {
+                System.err.println("Couldn't log this");
+            }
         }
-
     }
 
-    public static void AddRsult(String filePath, int[] result){
+    public static void AddResult(String filePath, int[] result){
         File fileToBeModified = new File(filePath);
         String oldContent = "";
         BufferedReader reader = null;
