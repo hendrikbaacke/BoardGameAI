@@ -93,7 +93,7 @@ public class GameMethods {
 			if (GameData.numberPlayers == 3) {
 				GameGui.score_text3.setText(String.valueOf(Move.point3));
 			}
-			if(AlertON) {
+			if(AlertON && !Move.automaticGame) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("Game Over");
 				alert.setHeaderText("Winner is:");
@@ -127,6 +127,20 @@ public class GameMethods {
 					//System.out.println("CLOSING");
 					System.exit(0);
 				});
+			}
+			else if (Move.automaticGame){
+				if (Move.point ==6) {
+					Move.automaticGameEnd =true;
+					Move.winnerAutomaticGame =1;
+				}
+				else if(Move.point2 ==6) {
+					Move.automaticGameEnd =true;
+					Move.winnerAutomaticGame = 2;
+				}
+				else if(Move.point3==6) {
+					Move.automaticGameEnd =true;
+					Move.winnerAutomaticGame = 3;
+				}
 			}
 		}
 }

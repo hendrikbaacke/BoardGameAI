@@ -14,7 +14,7 @@ public class Node<T> {
     Node<T> parent;
     List<Node<T>> children;
 	public int nVisits = 0;
-	public int wins = 0;
+	public double wins = 0;
 	public double totValue;
 
     public Node(T data) {

@@ -1,7 +1,10 @@
 package AI;
 
+import java.util.Hashtable;
+
 import src.Board;
 import src.GameData;
+import src.Hexagon;
 import src.Move;
 
 public class PerformAIAction {
@@ -10,45 +13,50 @@ public class PerformAIAction {
 	public static GameTree tree;
 
 	//get the best node and use this action
-	public static void perform(boolean greedy, boolean alphabeta) {
+	public static void perform(boolean greedy, boolean alphabeta, Hashtable<String, Hexagon> board) {
 		//build the tree and perform search - make a new node a root node?
 		Node<GameState> needed = null;
 		if (greedy) {
-		needed = choose2();
+			System.out.println("greedy choose");
+			needed = choose2();
 		}
 		else if (alphabeta) {
+			System.out.println("alphabeta choose");
 			needed = choose();
 		}
 		else {
+			System.out.println("mcts choose");
 			needed = chooseMCTS_Search();
 		}
 
 		if (needed.returnData().first != null) {
 
-			GameData.move.select(needed.returnData().first, Board.hashBoard);
+			GameData.move.select(needed.returnData().first, board);
 			System.out.println("select " + needed.returnData().first);
 			if (needed.returnData().second != null) {
-				GameData.move.select(needed.returnData().second, Board.hashBoard);
+				GameData.move.select(needed.returnData().second, board);
 				System.out.println("select " + needed.returnData().second);
 				if (needed.returnData().third != null) {
-					GameData.move.select(needed.returnData().third, Board.hashBoard);
+					GameData.move.select(needed.returnData().third, board);
 					System.out.println("select " + needed.returnData().third);
 				} 
 				else {
-					GameData.move.select(needed.returnData().first, Board.hashBoard);
+					GameData.move.select(needed.returnData().first, board);
 					System.out.println("select " + needed.returnData().first);
 				}
 			}
 			else {
-				GameData.move.select(needed.returnData().first, Board.hashBoard);
+				GameData.move.select(needed.returnData().first, board);
 				System.out.println("select " + needed.returnData().first);
 			}
 			System.out.println("Move to:  " + needed.returnData().moveTo);
-			GameData.move.select(needed.returnData().moveTo, Board.hashBoard);
+			GameData.move.select(needed.returnData().moveTo, board);
 			
 		}
 		Move.ai = false;
-		DeleteLayers.deleteBranch(tree.getRoot());
+		if (alphabeta || greedy) {
+			DeleteLayers.deleteBranch(tree.getRoot());
+		}
 	}
 	
 	public static Node<GameState> choose2(){

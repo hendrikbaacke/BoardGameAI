@@ -3,6 +3,7 @@ package src;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import AI.AutomaticGamePlay;
 import AI.GameState;
 import AI.MonteCarlo;
 import AI.Node;
@@ -65,6 +66,10 @@ public class Move {
 	private static boolean repOff = true;
 	private static boolean alphabeta = false;
 	
+	public static boolean automaticGame = false;
+	public static boolean automaticGameEnd = false;
+	public static int winnerAutomaticGame = 0;
+	
 
 	public Move() {
 		first = null;
@@ -73,6 +78,7 @@ public class Move {
 		moveTo = null;
 		
 		//create the start of the monte carlo tree
+		System.out.println("created move");
 		initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
 		monteCarlo = new MonteCarlo(new Node<GameState>(initial));
 	}
@@ -221,6 +227,7 @@ public class Move {
 					
 					addMoveToTb(board);
 					resetMove();
+					
 				}
 			}
 			else if(nrSelected ==2) {
@@ -248,7 +255,7 @@ public class Move {
 		
 		//add both the move and the hashtable to the traceback
 		public void addToTb(Hashtable<String, Hexagon> board) {
-			if (!adding && board.equals(Board.hashBoard)) {
+			if ((!adding && board.equals(Board.hashBoard)) || (automaticGame && !ai)) {
 				GameData.tb.add(board);
 				if (first != null) {
 					one = Board.hashBoard.get(first).marble;
@@ -263,7 +270,7 @@ public class Move {
 		}
 		
 		public void addMoveToTb(Hashtable<String, Hexagon> board) {
-			if (!adding && board.equals(Board.hashBoard)) {
+			if ((!adding && board.equals(Board.hashBoard))) {
 				String tbOne = null;
 				String tbTwo = null;
 				String tbThree = null;
@@ -288,42 +295,44 @@ public class Move {
 		}
 		
 		public void moveForAll(Hashtable<String, Hexagon> board) {
-			if (board.equals(Board.hashBoard) && !adding) {
+			if ((board.equals(Board.hashBoard) && !adding)|| (automaticGame && !ai)) {
 				GameMethods.gameFinished();
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
-				monteCarlo.changeRootOutside(board);
 				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
 					//checkAI();
+				}
+				if(!automaticGame && !ai) {
+					monteCarlo.changeRootOutside(board);
 				}
 			}
 		}
 		
 	//automatically perform the move for the ai -> create tree, search and perform the move!!
-	public static void checkAI()  {
+	public static void checkAI(Hashtable<String, Hexagon> board)  {
 		if (playersTurn ==1 && player1AI || playersTurn ==2 && player2AI || playersTurn ==3 && player3AI) {
-			performAI();
+			performAI(board);
 		}
 	}
 	
 	//checks whether it needs to be greedy and then performs the move
-	public static void performAI() {
-		GameState state = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
+	public static void performAI(Hashtable<String, Hexagon> board) {
+		GameState state = new GameState(BoardMethods.copyHashBoard(board), GameMethods.changeBack(playersTurn));
 		if (greedy || GameData.numberPlayers ==3 || (playersTurn ==1 && greedyPlayer1) || (playersTurn ==2 && greedyPlayer2) ) {
 			System.out.println("greedy");
 			System.out.println("1 layer");
 			PerformAIAction.createGameTree(state, 1);
-			AI.PerformAIAction.perform(true, false);
+			AI.PerformAIAction.perform(true, false, board );
 		}
 		else if(alphabeta == true) {
 			System.out.println("alphabeta");
 			System.out.println("2 layers");
 			PerformAIAction.createGameTree(state, 2);
-			AI.PerformAIAction.perform(false, true);
+			AI.PerformAIAction.perform(false, true, board);
 		}
 		else {
 			System.out.println("montecarlo");
-			AI.PerformAIAction.perform(false, false);
+			AI.PerformAIAction.perform(false, false, board);
 		}
 	}
 	
@@ -502,6 +511,17 @@ public class Move {
 	
 	//removes a marble from the board - used in push methods
 	public void removeMarble(Marble removing, Hashtable<String, Hexagon> board) {
+		if (automaticGame && !ai) {
+			if(playersTurn==1) {
+				point++;
+				//System.out.println(playersTurn + " gets a point");
+			}else if (playersTurn ==2) {
+				point2++;
+			}
+			else {
+				point3++;
+			}		
+		}
 		if (board.equals(Board.hashBoard) && !adding) {
 			GameData.score[playersTurn-1]++;
 			GameGui.MainScene.getChildren().remove(removing);

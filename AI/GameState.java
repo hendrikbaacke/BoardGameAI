@@ -49,13 +49,14 @@ public class GameState {
 		this.evaluateFrom = move.playersTurn;  //AddNodes.changePlayer(turn);
 	}
 	
-	public GameState(String first, String second, String third, String moveTo, GameState old) {
+	public GameState(String first, String second, String third, String moveTo, GameState old, boolean evaluate) {
 		//needed if we want a more extended tree
 		this.turn = src.GameMethods.changePlayer(old.turn);
 		int save = GameData.move.playersTurn;
 		this.evaluateFrom = old.evaluateFrom;
 		GameData.move.playersTurn = this.turn;
 		GameData.move.adding = true;
+		Move.ai = true;
 		
 		this.first = first;
 		this.second = second;
@@ -131,6 +132,9 @@ public class GameState {
 		move.pushed = false;
 		move.playersTurn = save;
 		move.adding = false;
+		Move.ai = false;
+		
+		
 		EvaluationFunction eval= new EvaluationFunction(this);
 		evaluatedValue=eval.evaluate();
 		System.out.println(evaluatedValue);
