@@ -6,6 +6,7 @@ import src.BoardMethods;
 import src.GameData;
 import src.Hexagon;
 import src.Move;
+import src.Traceback;
 
 /*
  * Automatically play games and get results right away.
@@ -20,8 +21,9 @@ import src.Move;
 
 public class AutomaticGamePlay {
 	
-	public static int playGame(Hashtable<String, Hexagon> startBoard) {
+	public static int[] playGame(Hashtable<String, Hexagon> startBoard) {
 		Hashtable<String, Hexagon> board = BoardMethods.copyHashBoard(startBoard);
+		int[] result = new int[2];
 		GameData.tb.reset();
 		Move.resetMove();
 		Move.point = 0;
@@ -47,12 +49,17 @@ public class AutomaticGamePlay {
 		}
 		System.out.println("winner is " + Move.winnerAutomaticGame);
 		
+		int winner = Move.winnerAutomaticGame;
+		
+		result[0] = Traceback.totalMoves;
+		result[1] = Move.point - Move.point2;
+		
 		//Reset everything now, so when the normal game is being player, everything is normal again.
 		Move.playersTurn =1;
 		Move.point = 0;
 		Move.point2 = 0;
 		Move.point3 = 0;
-		int winner = Move.winnerAutomaticGame;
+		
 		Move.winnerAutomaticGame =0;
 		Move.automaticGame = false;
 		Move.automaticGameEnd = false;
@@ -70,7 +77,7 @@ public class AutomaticGamePlay {
 		AddNodes.nodeNR = 1;
 		ModeDetermination.Counter = 1;
 		
-		return winner;
+		return result;
 	}
 	
 }
