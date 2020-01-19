@@ -67,7 +67,7 @@ public class GameGui extends Application{
 
 			buttonAI.setOnAction(e -> {
 				//need to create this 
-				if ((Move.initialBoard == null && Move.need) || Move.mcts) {
+				if ((Move.initialBoard == null && Move.need) || Move.mcts && Move.initialBoard == null) {
 					System.out.println("enter");
 					Move.initialBoard = BoardMethods.copyHashBoard(Board.hashBoard);
 					Move.initial = new GameState(Move.initialBoard, GameMethods.changeBack(Move.playersTurn));
