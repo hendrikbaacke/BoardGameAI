@@ -14,7 +14,7 @@ import src.Traceback;
 public class GameEnvironment {
 
 
-    private static int limit = 500;
+    public static int limit = 500;
     private static int Wsize = 8;
     public static double[][] player1;
     public static double[][] player2;

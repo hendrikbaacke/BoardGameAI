@@ -2,6 +2,7 @@ package AI;
 
 import java.util.Hashtable;
 
+import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 import src.BoardMethods;
 import src.GameData;
 import src.Hexagon;
@@ -44,7 +45,7 @@ public class AutomaticGamePlay {
 		Move.player2AI = true;
 		Move.player3AI = true;
 		
-		while(!Move.automaticGameEnd){
+		while(!Move.automaticGameEnd && Traceback.totalMoves < GameEnvironment.limit){
 			Move.checkAI(board);
 		}
 		System.out.println("winner is " + Move.winnerAutomaticGame);
