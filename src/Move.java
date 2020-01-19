@@ -49,7 +49,7 @@ public class Move {
 	public static boolean player3AI = false;
 	
 	//choose if we use greedy or not
-	private static boolean greedy = true;
+	static boolean greedy = true;
 	
 	//separately
 	private static boolean greedyPlayer1 = false;
@@ -64,13 +64,15 @@ public class Move {
 	public static MonteCarlo monteCarlo = null;
 	
 	private static boolean repOff = true;
-	private static boolean alphabeta = false;
+	static boolean alphabeta = false;
+	static boolean mcts = false;
 	
 	public static boolean automaticGame = false;
 	public static boolean automaticGameEnd = false;
 	public static int winnerAutomaticGame = 0;
 	public static Hashtable<String, Hexagon> initialBoard;
-	public static boolean need = true;
+	public static boolean need = false;
+	
 	
 
 	public Move() {

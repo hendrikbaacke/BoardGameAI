@@ -45,7 +45,6 @@ public class AutomaticGamePlay {
 		while(!Move.automaticGameEnd){
 			Move.checkAI(board);
 		}
-		
 		System.out.println("winner is " + Move.winnerAutomaticGame);
 		
 		//Reset everything now, so when the normal game is being player, everything is normal again.

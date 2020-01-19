@@ -66,19 +66,18 @@ public class GameGui extends Application{
 			});
 
 			buttonAI.setOnAction(e -> {
-				if (Move.initialBoard == null && Move.need) {
+				//need to create this 
+				if ((Move.initialBoard == null && Move.need) || Move.mcts) {
 					System.out.println("enter");
 					Move.initialBoard = BoardMethods.copyHashBoard(Board.hashBoard);
-					Move.initial = new GameState(Move.initialBoard,GameMethods.changeBack(Move.playersTurn));
+					Move.initial = new GameState(Move.initialBoard, GameMethods.changeBack(Move.playersTurn));
 					Move.monteCarlo = new MonteCarlo(new Node<GameState>(Move.initial));
 				}
-				else if(Move.need) {
+				else if(Move.need && (Move.greedy || Move.alphabeta)) {
 					AutomaticGamePlay.playGame(Move.initialBoard);
 				}
 				else {
 					Move.checkAI(Board.hashBoard);
-					System.out.println("--did ai move and deleted tree--");
-					
 				}
 			});
 

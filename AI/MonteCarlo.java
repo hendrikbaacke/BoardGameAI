@@ -8,7 +8,8 @@ import src.GameMethods;
 import src.Hexagon;
 
 /*
- * Needs to be tested.
+ * Performs a Monte-Carlo tree search.
+ * Automatically cuts off after 100 consecutive moves, as to make it not too large (which would be computationally expensive).
  */
 
 public class MonteCarlo {
@@ -19,8 +20,8 @@ public class MonteCarlo {
 	private final static double explorationParam = Math.sqrt(2);
 	private boolean chooseForAIMove;
 	
-	//need to cutoff when the game takes too long
-	private final int cutoff = 200;
+	//need to cutoff when the game takes too long - about hundred, to not make it too big
+	private final int cutoff = 100;
 	private int currentNode = 1;
 	
 	//construct the tree, using the initial board state - automatically happens in move
@@ -43,7 +44,6 @@ public class MonteCarlo {
 		
 		chooseForAIMove = true;
 		Node<GameState> chosen = sucChild(monteCarloTree.root);
-		//changeRoot(chosen);
 		
 		return chosen;
 	}
@@ -132,8 +132,7 @@ public class MonteCarlo {
 	public static double calculateUCB(double wins, int simulations, int parentSimulations) {
 		return ((wins / simulations) + explorationParam * Math.sqrt(Math.log(parentSimulations)/simulations));
 	}
-	
-	
+
 	//change the current root node to the one that is needed
 	public void changeRoot(Node<GameState> changed) {
 		monteCarloTree.setRoot(changed);
