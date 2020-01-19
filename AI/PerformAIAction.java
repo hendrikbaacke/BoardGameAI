@@ -53,7 +53,7 @@ public class PerformAIAction {
 			GameData.move.select(needed.returnData().moveTo, board);
 			
 		}
-		Move.ai = false;
+		
 		if (alphabeta || greedy) {
 			DeleteLayers.deleteBranch(tree.getRoot());
 		}

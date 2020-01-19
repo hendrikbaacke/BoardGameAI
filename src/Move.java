@@ -56,9 +56,9 @@ public class Move {
 	private static boolean greedyPlayer2 = false;
 	
 	//temporarily store
-	private static Marble one = null;
-	private static Marble two = null;
-	private static Marble three = null;
+	public static Marble one = null;
+	public static Marble two = null;
+	public static Marble three = null;
 	
 	public static GameState initial = null;
 	public static MonteCarlo monteCarlo = null;
@@ -299,7 +299,7 @@ public class Move {
 				GameMethods.gameFinished();
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
-				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3)) {
+				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3) && !automaticGame) {
 					//checkAI();
 				}
 				if(!automaticGame && !ai) {
@@ -514,7 +514,6 @@ public class Move {
 		if (automaticGame && !ai) {
 			if(playersTurn==1) {
 				point++;
-				//System.out.println(playersTurn + " gets a point");
 			}else if (playersTurn ==2) {
 				point2++;
 			}
