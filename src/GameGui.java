@@ -64,9 +64,9 @@ public class GameGui extends Application{
 			});
 
 			buttonAI.setOnAction(e -> {
-				//Move.checkAI(Board.hashBoard);
+				Move.checkAI(Board.hashBoard);
 				//System.out.println("--did ai move and deleted tree--");
-				AutomaticGamePlay.playGame(Board.hashBoard);
+				//AutomaticGamePlay.playGame(Board.hashBoard);
 			});
 
 		    Label winner_label = new Label("Player win:\t");
