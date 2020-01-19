@@ -84,7 +84,10 @@ public class Board extends BorderPane {
 	    for (int i = 0; i < hash.size(); i++) {
 	    	hashBoard.get(hash.get(i)).createNeighbourList();
 	    }
+	    
 	    GameData.rows = new BoardRows();
+	    
+	    //System.out.println("hash " + hash.size());
 	    
 	    return board;
    }

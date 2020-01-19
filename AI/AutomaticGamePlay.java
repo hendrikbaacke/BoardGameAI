@@ -28,6 +28,12 @@ public class AutomaticGamePlay {
 		Move.point2 = 0;
 		Move.point3 = 0;
 		Move.automaticGame = true;
+		Move.automaticGameEnd = false;
+		Move.one = null;
+		Move.two = null;
+		Move.three = null;
+		Move.pushed = false;
+		Move.adding = false;
 		
 		boolean store1 = Move.player1AI;
 		boolean store2 = Move.player2AI;
@@ -62,6 +68,8 @@ public class AutomaticGamePlay {
 		Move.pushed = false;
 		Move.adding = false;
 		Move.ai = false;
+		AddNodes.nodeNR = 1;
+		ModeDetermination.Counter = 1;
 		
 		return winner;
 	}

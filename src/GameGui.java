@@ -3,6 +3,8 @@ package src;
 
 import AI.AutomaticGamePlay;
 import AI.GameState;
+import AI.MonteCarlo;
+import AI.Node;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -64,9 +66,20 @@ public class GameGui extends Application{
 			});
 
 			buttonAI.setOnAction(e -> {
-				Move.checkAI(Board.hashBoard);
-				//System.out.println("--did ai move and deleted tree--");
-				//AutomaticGamePlay.playGame(Board.hashBoard);
+				if (Move.initialBoard == null && Move.need) {
+					System.out.println("enter");
+					Move.initialBoard = BoardMethods.copyHashBoard(Board.hashBoard);
+					Move.initial = new GameState(Move.initialBoard,GameMethods.changeBack(Move.playersTurn));
+					Move.monteCarlo = new MonteCarlo(new Node<GameState>(Move.initial));
+				}
+				else if(Move.need) {
+					AutomaticGamePlay.playGame(Move.initialBoard);
+				}
+				else {
+					Move.checkAI(Board.hashBoard);
+					System.out.println("--did ai move and deleted tree--");
+					
+				}
 			});
 
 		    Label winner_label = new Label("Player win:\t");

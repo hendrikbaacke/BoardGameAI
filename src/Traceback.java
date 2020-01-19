@@ -19,7 +19,7 @@ public class Traceback {
 	public static int direct3 = 0;
  	public static int current= 1;
 	public static int totalMoves = 1;
-	private int tracebacksize = 30;
+	private final int tracebacksize = 30;
 	
 	
 	//add a hashboard to the traceback - this one is for boardstates
@@ -107,7 +107,5 @@ public class Traceback {
 		direct3 = 0;
 		current= 1;
 		totalMoves = 1;
-		tracebacksize = 10;
-		
 	}
 }

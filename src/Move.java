@@ -69,6 +69,8 @@ public class Move {
 	public static boolean automaticGame = false;
 	public static boolean automaticGameEnd = false;
 	public static int winnerAutomaticGame = 0;
+	public static Hashtable<String, Hexagon> initialBoard;
+	public static boolean need = true;
 	
 
 	public Move() {
@@ -77,15 +79,13 @@ public class Move {
 		third = null;
 		moveTo = null;
 		
-		//create the start of the monte carlo tree
 		System.out.println("created move");
-		initial = new GameState(BoardMethods.copyHashBoard(Board.hashBoard),GameMethods.changeBack(playersTurn));
-		monteCarlo = new MonteCarlo(new Node<GameState>(initial));
 	}
 
 
 	//select marbles
 	public void select(String code, Hashtable<String, Hexagon> board) {
+		
 		//System.out.println("select");
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
 		if (first == null && !board.get(code).empty) {

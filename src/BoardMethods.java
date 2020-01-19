@@ -15,7 +15,9 @@ public class BoardMethods {
 	
 	//copies a whole hashboard - depends on the one you get as input
 	public static Hashtable<String, Hexagon> copyHashBoard(Hashtable<String, Hexagon> hex){
-		Hashtable<String, Hexagon> newBoard = new Hashtable<>();
+		//System.out.println("enter copy method");
+		//System.out.println("hash size " + hash.size());
+		Hashtable<String, Hexagon> newBoard = new Hashtable<String, Hexagon>();
 		for(int i = 0; hash.size() > i; i++) {
 			newBoard.put(hash.get(i), hex.get(hash.get(i)).deepClone());
 		}

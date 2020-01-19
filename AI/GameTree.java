@@ -57,7 +57,6 @@ public class GameTree {
 		}
 		
 		return currentKids;
-		
 	}
 
 	public Node<GameState> getRoot() {
