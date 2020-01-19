@@ -2,11 +2,8 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-
-import AI.AutomaticGamePlay;
 import AI.GameState;
 import AI.MonteCarlo;
-import AI.Node;
 import AI.PerformAIAction;
 import javafx.scene.paint.Color;
 
@@ -73,8 +70,6 @@ public class Move {
 	public static Hashtable<String, Hexagon> initialBoard;
 	public static boolean need = false;
 	
-	
-
 	public Move() {
 		first = null;
 		second = null;
@@ -304,7 +299,7 @@ public class Move {
 				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3) && !automaticGame) {
 					//checkAI();
 				}
-				if(!automaticGame && !ai) {
+				if(!automaticGame && !ai && mcts) {
 					monteCarlo.changeRootOutside(board);
 				}
 			}
