@@ -38,7 +38,6 @@ public class Traceback {
 			traceback.set(current, BoardMethods.copyHashBoard(board));
 		}
 		
-		System.out.println("Number of moves up until now: " + (totalMoves));
 		totalMoves++;
 	}
 	

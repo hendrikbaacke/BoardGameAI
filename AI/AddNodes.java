@@ -104,7 +104,6 @@ public class AddNodes {
 	
 	//add all the children of the node you pass as a parameter
 	public static void addForOne(Node<GameState> node) {
-		System.out.println("addforone");
 		ArrayList<GameState> children = everyGameState(node);
 		for (int i = 0; i < children.size(); i++) {
 			node.addChild(children.get(i));
@@ -113,7 +112,6 @@ public class AddNodes {
 		
 		//add children to all these children
 		public static void addForMultiple(List<Node<GameState>> nodes) {
-			System.out.println("addformultiple");
 			for (int i = 0; i < nodes.size(); i++) {
 				addForOne(nodes.get(i));
 			}

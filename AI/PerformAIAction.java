@@ -32,24 +32,18 @@ public class PerformAIAction {
 		if (needed.returnData().first != null) {
 
 			GameData.move.select(needed.returnData().first, board);
-			System.out.println("select " + needed.returnData().first);
 			if (needed.returnData().second != null) {
 				GameData.move.select(needed.returnData().second, board);
-				System.out.println("select " + needed.returnData().second);
 				if (needed.returnData().third != null) {
 					GameData.move.select(needed.returnData().third, board);
-					System.out.println("select " + needed.returnData().third);
-				} 
+				}
 				else {
 					GameData.move.select(needed.returnData().first, board);
-					System.out.println("select " + needed.returnData().first);
 				}
 			}
 			else {
 				GameData.move.select(needed.returnData().first, board);
-				System.out.println("select " + needed.returnData().first);
 			}
-			System.out.println("Move to:  " + needed.returnData().moveTo);
 			GameData.move.select(needed.returnData().moveTo, board);
 			
 		}

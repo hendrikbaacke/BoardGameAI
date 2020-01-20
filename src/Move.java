@@ -243,7 +243,6 @@ public class Move {
 					performMovementThree(board);
 					moveForAll(board);
 					
-					System.out.println("add three");
 					addMoveToTb(board);
 					resetMove();
 				}
@@ -316,19 +315,14 @@ public class Move {
 	public static void performAI(Hashtable<String, Hexagon> board) {
 		GameState state = new GameState(BoardMethods.copyHashBoard(board), GameMethods.changeBack(playersTurn));
 		if (greedy || GameData.numberPlayers ==3 || (playersTurn ==1 && greedyPlayer1) || (playersTurn ==2 && greedyPlayer2) ) {
-			System.out.println("greedy");
-			System.out.println("1 layer");
 			PerformAIAction.createGameTree(state, 1);
 			AI.PerformAIAction.perform(true, false, board );
 		}
 		else if(alphabeta == true) {
-			System.out.println("alphabeta");
-			System.out.println("2 layers");
 			PerformAIAction.createGameTree(state, 2);
 			AI.PerformAIAction.perform(false, true, board);
 		}
 		else {
-			System.out.println("montecarlo");
 			AI.PerformAIAction.perform(false, false, board);
 		}
 	}
