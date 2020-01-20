@@ -179,7 +179,6 @@ public class Strategies {
 
     public int compareMarblesWon() {
         if (old != null) {
-            System.out.println("+++++++++++"+ (old.amountOppMarbles() - this.amountOppMarbles()));
             return old.amountOppMarbles() - this.amountOppMarbles();
         }
         return 0;
@@ -284,12 +283,10 @@ public class Strategies {
     		if (bfirst == gameState.evaluateFrom) {
     			if (bsecond == gameState.evaluateFrom) {
     				if (bthird > 0 && bthird != gameState.evaluateFrom && bthird ==bfourth && bthird ==bfifth) {
-    					System.out.println("case 1");
     					sum++;
     				}
     			}
     			else if(bsecond > 0 && bsecond != gameState.evaluateFrom && bsecond == bthird) {
-    				System.out.println("case 2");
     				sum++;
     			}
     		}
@@ -297,12 +294,10 @@ public class Strategies {
     		if (endfirst == gameState.evaluateFrom) {
     			if (endsecond == gameState.evaluateFrom) {
     				if (endthird > 0 && endthird != gameState.evaluateFrom && endthird ==endfourth && endthird ==endfifth) {
-    					System.out.println("case 3");
     					sum++;
     				}
     			}
     			else if(endsecond > 0 && endsecond != gameState.evaluateFrom && endsecond == endthird) {
-    				System.out.println("case 4");
     				sum++;
     			}
     		}

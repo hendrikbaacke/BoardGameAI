@@ -37,6 +37,7 @@ public class GameEnvironment {
 
         result[1] = result[1] * Trainer;//*(Move.point-Move.point2);
 
+        System.out.println("-----------------------------RESULTS: "+result[0]+"     "+result[1]);
         return result;
     }
     

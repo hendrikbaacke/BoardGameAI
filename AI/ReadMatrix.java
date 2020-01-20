@@ -58,7 +58,7 @@ public class ReadMatrix {
             if( record.startsWith("AInumber: ") )
             {
                 name = Integer.parseInt( record.substring(10) );
-                if(DEBUG) System.out.println(COMMENT + " AInumber: "+name);
+//                if(DEBUG) System.out.println(COMMENT + " AInumber: "+name);
             }
 
             record = br.readLine();
@@ -66,7 +66,7 @@ public class ReadMatrix {
             if( record.startsWith("Gen: ") )
             {
                 gen = Integer.parseInt( record.substring(5) );
-                if(DEBUG) System.out.println(COMMENT + " Gen: "+gen);
+//                if(DEBUG) System.out.println(COMMENT + " Gen: "+gen);
             }
 
             int row =0;

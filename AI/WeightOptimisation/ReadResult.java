@@ -95,7 +95,7 @@ public class ReadResult {
     public static void ReadOut(){
         FileNumber++;
         for(int i=1; i<4; i++) {
-            File doc = new File(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Results" + ReadMatrix.Slash + "AIResults" + ReadMatrix.gen + "_" + FileNumber + "_" + i + ".txt");
+            File doc = new File(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Results" + ReadMatrix.Slash + "AIResult" + ReadMatrix.gen + "_" + FileNumber + "_" + i + ".txt");
 
             System.out.println("Path : " + doc.getAbsolutePath());
             try {

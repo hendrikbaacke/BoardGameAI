@@ -25,6 +25,9 @@ public class AutomaticGamePlay {
 	public static int[] playGame(Hashtable<String, Hexagon> startBoard) {
 		Hashtable<String, Hexagon> board = BoardMethods.copyHashBoard(startBoard);
 		int[] result = new int[2];
+		result[0] = 0;
+		result[1] = 0;
+
 		GameData.tb.reset();
 		Move.resetMove();
 		Move.point = 0;

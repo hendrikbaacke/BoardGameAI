@@ -50,7 +50,6 @@ public class Main extends Application {
             ReadMatrix.Slash = "\\";
         }
 
-        AI.WeightOptimisation.TrainingInstances.RandInstanceCreation();
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
         

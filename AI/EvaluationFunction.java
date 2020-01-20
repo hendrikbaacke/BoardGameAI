@@ -11,15 +11,6 @@ import java.util.Hashtable;
 
 public class EvaluationFunction {
 
-	private static double DistancePlayer1 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("A1").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A1").centerY, 2));
-	private static double DistancePlayer2 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("A3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A3").centerY, 2));
-	private static double DistancePlayer3 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("B2").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("B2").centerY, 2));
-	private static double DistancePlayer4 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("B3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("B3").centerY, 2));
-	private static double DistancePlayer5 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C3").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C3").centerY, 2));
-	private static double DistancePlayer6 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2));
-	private static double DistancePlayer7 = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("D4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("D4").centerY, 2));
-
-
 	private double f1;
 	private double f2;
 	private double f3;
@@ -55,7 +46,7 @@ public class EvaluationFunction {
 		}
 		Hashtable<String, Hexagon> boardState = gameState.boardState;
 
-		System.out.println(gameState.turn);
+		//System.out.println(gameState.turn);
 
 
 		boolean isPlayer1AI = src.GameData.move.player1AI;
@@ -66,9 +57,7 @@ public class EvaluationFunction {
 
 		//VALUE NORMALIZATION -----------------------------------------------------------------
 
-
-		//System.out.println(DistancePlayer1+"  "+DistancePlayer2+"  "+DistancePlayer3+"  "+DistancePlayer4+"  "+DistancePlayer5+"  "+"  "+DistancePlayer6+"  "+"  "+DistancePlayer7+"  ");
-
+		
 		double Max = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("A1").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A1").centerY, 2));
 		double Min = (Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("D4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("D4").centerY, 2))*6+Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("C4").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("C4").centerY, 2))*2)/9;
 		//scaling between 0-1
@@ -105,15 +94,15 @@ public class EvaluationFunction {
 			String Name = null;
 			if (gameState.evaluateFrom == 1) {
 				Name = "Neutral";
-				System.out.println("Player1 evaluation");
+				//System.out.println("Player1 evaluation");
 			}
 			if (gameState.evaluateFrom == 2) {
 				Name = "Aggressive";
-				System.out.println("Player2 evaluation");
+				//System.out.println("Player2 evaluation");
 			}
 			if (gameState.evaluateFrom == 3) {
 				Name = "Defenssive";
-				System.out.println("Player3 evaluation");
+				//System.out.println("Player3 evaluation");
 			}
 
 			modeDet = new ModeDetermination(Name);
@@ -146,9 +135,9 @@ public class EvaluationFunction {
 	public double evaluate() {
 
 		double finalValue = w1 * f1 + w2 * f2 + w3 * f3 + w4 * f4 + w5 * f5 + w6 * f6 + w7 * f7 + w8 *f8;
-		System.out.println(finalValue);
+		//System.out.println(finalValue);
 
-		System.out.println("----------------------------" + "eval value: " + finalValue);
+		//System.out.println("----------------------------" + "eval value: " + finalValue);
 
 		return finalValue;
 	}
