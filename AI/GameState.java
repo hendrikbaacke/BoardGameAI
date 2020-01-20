@@ -137,7 +137,7 @@ public class GameState {
 		
 		EvaluationFunction eval= new EvaluationFunction(this);
 		evaluatedValue=eval.evaluate();
-		System.out.println(evaluatedValue);
+		//System.out.println(evaluatedValue);
 	}
 	
 	

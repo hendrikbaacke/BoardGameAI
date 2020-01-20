@@ -156,7 +156,7 @@ public class MonteCarlo {
 			GameState newRoot = new GameState(board,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
 			changeRoot(new Node<GameState>(newRoot));
 		}
-		System.out.println("changed root");
+		//System.out.println("changed root");
 	}
 }
 
