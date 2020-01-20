@@ -74,7 +74,8 @@ public class GameGui extends Application{
 					Move.monteCarlo = new MonteCarlo(new Node<GameState>(Move.initial));
 				}
 				else if(Move.need && (Move.greedy || Move.alphabeta)) {
-					AutomaticGamePlay.playGame(Move.initialBoard);
+					//AutomaticGamePlay.playGame(Move.initialBoard);
+					AI.WeightOptimisation.GeneticLoop.start();
 				}
 				else {
 					Move.checkAI(Board.hashBoard);

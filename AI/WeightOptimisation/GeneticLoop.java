@@ -6,9 +6,9 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class GeneticLoop {
-    private int Gensize = 10;
+    private static int Gensize = 10;
 
-    public void start() {
+    public static void start() {
         //emptying the folders (so we get no confusion and wrong results)
         deleteDirectory(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Trainers");
         deleteDirectory(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Matrices");
