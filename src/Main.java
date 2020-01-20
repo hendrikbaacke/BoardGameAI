@@ -1,11 +1,13 @@
 package src;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
 
 import AI.ReadMatrix;
 import AI.WeightOptimisation.EvolutionaryAlgo;
 import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 import AI.WeightOptimisation.GameSimulation.Simulation;
+import AI.WeightOptimisation.SortResults;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

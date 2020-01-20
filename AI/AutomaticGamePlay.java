@@ -25,8 +25,6 @@ public class AutomaticGamePlay {
 	public static int[] playGame(Hashtable<String, Hexagon> startBoard) {
 		Hashtable<String, Hexagon> board = BoardMethods.copyHashBoard(startBoard);
 		int[] result = new int[2];
-		result[0] = 0;
-		result[1] = 0;
 
 		GameData.tb.reset();
 		Move.resetMove();
@@ -47,6 +45,8 @@ public class AutomaticGamePlay {
 		Move.player1AI = true;
 		Move.player2AI = true;
 		Move.player3AI = true;
+
+		EvaluationFunction.AITestingON = true;
 		
 		while(!Move.automaticGameEnd && Traceback.totalMoves < GameEnvironment.limit){
 			Move.checkAI(board);

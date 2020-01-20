@@ -10,6 +10,7 @@ public class Crossover {
 
     public static void crossover(ArrayList<double[][]> Best){
         ReadMatrix.FileNumber = 0;
+        ReadResult.FileNumber = 0;
         ReadMatrix.gen++;
 
         for(int i=0; i<Best.size(); i++){
@@ -24,6 +25,7 @@ public class Crossover {
                 mutation(crossWeightMatrix);
                 normalise(crossWeightMatrix);
                 ReadMatrix.ReadOut(crossWeightMatrix,"Matrices");
+                ReadResult.ReadOut();
             }
         }
     }
@@ -42,7 +44,7 @@ public class Crossover {
     }
     public static double[][] mutation(double[][] Matrix){
         for(int i=0; i<Matrix.length; i++) {
-            for (int j = i; j < Matrix[0].length; j++) {
+            a : for (int j = i; j < Matrix[0].length; j++) {
                 double x = Math.random();
                 if (x < mutationRate) {
                     Matrix[i][j] = Matrix[i][j] - randomInterval + Math.random() * 2 * randomInterval;
@@ -50,6 +52,7 @@ public class Crossover {
                     if (Matrix[i][j] < 0) {
                         Matrix[i][j] = 0;
                     }
+                    break a;
                 }
             }
         }

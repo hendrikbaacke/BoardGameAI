@@ -101,11 +101,12 @@ public class EvaluationFunction {
 				//System.out.println("Player2 evaluation");
 			}
 			if (gameState.evaluateFrom == 3) {
-				Name = "Defenssive";
+				Name = "Defensive";
 				//System.out.println("Player3 evaluation");
 			}
 
-			modeDet = new ModeDetermination(Name);
+			//modeDet = new ModeDetermination(Name);
+			modeDet = new ModeDetermination(ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt"));
 		}else{
 			if (gameState.evaluateFrom == 1) {
 				modeDet = new ModeDetermination(GameEnvironment.player1);

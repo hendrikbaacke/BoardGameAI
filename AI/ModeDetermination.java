@@ -22,9 +22,7 @@ public class ModeDetermination{
         weightMatrix_AI = ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+name+".txt");
     }
 
-    public ModeDetermination(double[][] AI){
-        weightMatrix_AI = AI;
-    }
+    public ModeDetermination(double[][] AI){ weightMatrix_AI = AI; }
 
     public double[] determineMode(double f1, double Opp, double Own) {
 

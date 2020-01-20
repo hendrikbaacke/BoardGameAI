@@ -15,7 +15,7 @@ public class TrainingInstances {
         double[][] RandNeutralInstance = NeutralInstance;
         double[][] RandAggressiveInstance = AggressiveInstance;
         double[][] RandDefensiveInstance = DefensiveInstance;
-        double randomInterval = 0.15;
+        double randomInterval = 0.1;
 
         for (int i = 0; i < RandNeutralInstance.length; i++) {
             for (int j = 0; j < RandNeutralInstance[0].length; j++) {
@@ -42,7 +42,7 @@ public class TrainingInstances {
         for (int i = 0; i < RandDefensiveInstance.length; i++) {
             for (int j = 0; j < RandDefensiveInstance[0].length; j++) {
 
-                RandAggressiveInstance[i][j] = DefensiveInstance[i][j] - randomInterval + Math.random() * 2 * randomInterval;       // midpoint of [a,b] is value of DefensiveInstance[i][j]
+                RandDefensiveInstance[i][j] = DefensiveInstance[i][j] - randomInterval + Math.random() * 2 * randomInterval;       // midpoint of [a,b] is value of DefensiveInstance[i][j]
 
                 if (RandDefensiveInstance[i][j] < 0) {
                     RandDefensiveInstance[i][j] = 0;

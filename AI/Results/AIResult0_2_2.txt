@@ -1,4 +1,0 @@
-AInumber: 2
-Gen: 0
-Moves: 0
-Marbles: 0

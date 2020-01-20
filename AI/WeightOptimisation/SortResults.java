@@ -14,6 +14,7 @@ public class SortResults {
         int[] compare;
         int[][] positions = new int[EvolutionaryAlgo.initialGenerationSize][2];
         for(int m=1; m<=EvolutionaryAlgo.initialGenerationSize; m++) positions[m-1][1]=m;
+
         for(int j=1; j<=3; j++){
             for(int i=1; i<=EvolutionaryAlgo.initialGenerationSize; i++){
                 compare = ReadResult.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Results"+ReadMatrix.Slash+ "AIResult" + ReadMatrix.gen +"_" +i+"_" +j + ".txt");
@@ -25,15 +26,15 @@ public class SortResults {
             quickSort(moves,0,moves.length-1);
             quickSort(marbles,0,marbles.length-1);
             for(int i=0; i<moves.length; i++){
-                int x = moves[i][1];
-                positions[x][0] += i;
-                int y = marbles[i][1];
-                positions[y][0] += i;
+                int x = moves[i][1]-1;
+                positions[x][0] += i+1;
+                int y = marbles[moves.length-i-1][1]-1;
+                positions[y][0] += i+1;
             }
         }
         quickSort(positions,0,positions.length-1);
         for(int l=0; l<BestMatrices; l++) {
-            list.add(ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Results" + ReadMatrix.Slash + "AIResult" + ReadMatrix.gen + "_" + positions[l][1] + ".txt"));
+            list.add(ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash + "AI" + ReadMatrix.Slash + "Matrices" + ReadMatrix.Slash + "AInumber" + ReadMatrix.gen + "_" + positions[l][1] + ".txt"));
         }
         return list;
     }

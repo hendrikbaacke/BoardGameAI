@@ -20,7 +20,7 @@ public class GeneticLoop {
         EvolutionaryAlgo.initialGeneration();
         //training generation
         EvolutionaryAlgo.Selection();
-/*
+
         for (int i = 1; i < Gensize; i++) {
             System.out.println("________________GEN: "+ReadMatrix.gen);
             ArrayList ResultList = SortResults.sorting();
@@ -28,8 +28,7 @@ public class GeneticLoop {
             TrainingInstances.RandInstanceCreation();
             EvolutionaryAlgo.Selection();
         }
-
- */
+        System.out.println("DONE!!!!");
     }
 
     static public void deleteDirectory(String directoryName) {

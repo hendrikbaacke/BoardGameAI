@@ -9,7 +9,7 @@ public class EvolutionaryAlgo {
     public static int modes = 5;
     public static int amountWeights = 8;
 
-    private static int amountGames = 4;
+    private static int amountGames = 2;
 
     public static void initialGeneration() {
 
@@ -47,19 +47,18 @@ public class EvolutionaryAlgo {
 
     public static void Selection(){
 
-        //for(int i=1; i<=initialGenerationSize; i++) {
-        for(int i=1; i<=1; i++) {
+        for(int i=1; i<=initialGenerationSize; i++) {
             for(int j=1; j<4; j++){
 
                 double[][] player1 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Trainers"+ReadMatrix.Slash+ "AInumber" + ReadMatrix.gen +"_" +j + ".txt");
                 double[][] player2 =   ReadMatrix.ReadIn(System.getProperty("user.dir") + ReadMatrix.Slash +"AI"+ReadMatrix.Slash+"Matrices"+ReadMatrix.Slash+ "AInumber" + ReadMatrix.gen +"_" +i + ".txt");
                 int Trainer=-1;
 
-                for(int k=0; k<1; k++){
-                    if(k % 2 == 0){
+                for(int k=0; k<amountGames; k++){
+                    if(k % 2 != 0){
                         double[][] placeholder = player1;
                         player1 = player2;
-                        player2=placeholder;
+                        player2 = placeholder;
                         Trainer = Trainer*(-1);
                     }
                     int[] result = GameEnvironment.GameEnvironment(player1,player2,Trainer);
