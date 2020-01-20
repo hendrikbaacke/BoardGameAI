@@ -17,15 +17,15 @@ public class PerformAIAction {
 		//build the tree and perform search - make a new node a root node?
 		Node<GameState> needed = null;
 		if (greedy) {
-			System.out.println("greedy choose");
+			//System.out.println("greedy choose");
 			needed = choose2();
 		}
 		else if (alphabeta) {
-			System.out.println("alphabeta choose");
+			//System.out.println("alphabeta choose");
 			needed = choose();
 		}
 		else {
-			System.out.println("mcts choose");
+			//System.out.println("mcts choose");
 			needed = chooseMCTS_Search();
 		}
 
@@ -83,7 +83,7 @@ public class PerformAIAction {
 		Node<GameState> current = new Node<GameState>(state);
 		//always create a new tree
 		tree = new GameTree(current);
-		System.out.println("creating");
+		//System.out.println("creating");
 		tree.buildFullTree(layers);
 	}
 	
