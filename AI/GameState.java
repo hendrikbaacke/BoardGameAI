@@ -1,16 +1,13 @@
 package AI;
 
 import java.util.Hashtable;
-import src.Board;
 import src.BoardMethods;
 import src.GameData;
 import src.Hexagon;
 import src.Move;
 
-//should work
-
 public class GameState {
-	//all the information needed to store the move you made (from the first one)(we need to store first, second and third and moveTo in case the move needs to be done again):
+	//all the information needed to store the move made (from the first one)(we need to store first, second and third and moveTo in case the move needs to be done again):
 	//use this to store every valid gamestate
 	
 	//store which move needs to be done to get to this state - such as which player's turn it is and which move they perform
@@ -26,7 +23,7 @@ public class GameState {
 	
 	
 	public boolean valid;
-	//later needed for the evaluation function
+	//needed for the evaluation function
 	public int point1;
 	public int point2;
 	//optional:
@@ -73,12 +70,10 @@ public class GameState {
 						move.select(second, boardState);
 						if (third != null) {
 							move.select(third, boardState);
-						}
-						else {
+						} else {
 						move.select(first, boardState);
 					}
-				}
-				else {
+				} else {
 					move.select(first, boardState);
 				}
 			}
@@ -96,12 +91,10 @@ public class GameState {
 			if (GameData.move.pushed) {
 				if (turn == 1) {
 					point1++;
-				}
-				else if(turn ==2) {
+				} else if(turn ==2) {
 					point2++;
 				
-				}
-				else if (turn ==3) {
+				} else if (turn ==3) {
 					point3++;
 				}
 			}
@@ -114,18 +107,14 @@ public class GameState {
 			terminal = true;
 			if(point1 ==6) {
 				winner = 1;
-			}
-			else if(point2 ==6) {
+			} else if(point2 ==6) {
 				winner =2;
-			}
-			else if (point3 ==6) {
+			} else if (point3 ==6) {
 				winner = 3;
 			}
-		}
-		else {
+		} else {
 			terminal = false;
 		}
-			
 		oldGameState = old;
 		
 		//set the turn back to the one that was actually needed
@@ -133,12 +122,8 @@ public class GameState {
 		move.playersTurn = save;
 		move.adding = false;
 		Move.ai = false;
-		
-		
+
 		EvaluationFunction eval= new EvaluationFunction(this);
 		evaluatedValue=eval.evaluate();
-		//System.out.println(evaluatedValue);
 	}
-	
-	
 }

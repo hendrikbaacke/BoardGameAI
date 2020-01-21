@@ -1,7 +1,6 @@
 package src;
 
 import java.util.Hashtable;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.paint.Color;
@@ -30,7 +29,6 @@ public class GameMethods {
 				if (playersTurn == 2) {
 					playersTurn = 3;
 				}
-				
 			}
 		}
 		return playersTurn;
@@ -102,17 +100,16 @@ public class GameMethods {
 					alert.setContentText(s);
 					alert.show();
 					GameGui.winner_text.setText("Game over, Player 1 won!");
-					//System.out.println("DONE");
-
 				}
+
 				if (Move.point2 == 6) {
 
 					String s = "Game over, Player 2 won!";
 					alert.setContentText(s);
 					alert.show();
 					GameGui.winner_text.setText("Game over, Player 2 won!");
-					//System.out.println("DONE");
 				}
+
 				if (GameData.numberPlayers == 3) {
 					if (Move.point3 == 6) {
 						String s = "Game over, Player 3 won!";
@@ -124,7 +121,7 @@ public class GameMethods {
 
 				alert.setOnCloseRequest(event ->
 				{
-					//System.out.println("CLOSING");
+					System.out.println("CLOSING");
 					System.exit(0);
 				});
 			}

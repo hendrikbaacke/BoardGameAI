@@ -218,7 +218,6 @@ public class BoardRows {
 	//if it's sideways with three - check whether the three adjacent hexagons in a certain direction are still empty
 	public boolean threeFree(String first, String second, String third, String moveTo, Hashtable<String, Hexagon> board) {
 		int direction = direction(first, moveTo);
-		//System.out.println("direction is " + direction);
 		char letterFirst = first.charAt(0);
 		char letterSecond = second.charAt(0);
 		char letterThird = third.charAt(0);

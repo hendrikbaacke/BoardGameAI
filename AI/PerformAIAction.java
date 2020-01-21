@@ -1,15 +1,12 @@
 package AI;
 
 import java.util.Hashtable;
-
-import src.Board;
 import src.GameData;
 import src.Hexagon;
 import src.Move;
 
 public class PerformAIAction {
 
-	//for now, this is done!!
 	public static GameTree tree;
 
 	//get the best node and use this action
@@ -17,35 +14,26 @@ public class PerformAIAction {
 		//build the tree and perform search - make a new node a root node?
 		Node<GameState> needed = null;
 		if (greedy) {
-			//System.out.println("greedy choose");
 			needed = choose2();
-		}
-		else if (alphabeta) {
-			//System.out.println("alphabeta choose");
+		} else if (alphabeta) {
 			needed = choose();
-		}
-		else {
-			//System.out.println("mcts choose");
+		} else {
 			needed = chooseMCTS_Search();
 		}
 
 		if (needed.returnData().first != null) {
-
 			GameData.move.select(needed.returnData().first, board);
 			if (needed.returnData().second != null) {
 				GameData.move.select(needed.returnData().second, board);
 				if (needed.returnData().third != null) {
 					GameData.move.select(needed.returnData().third, board);
-				}
-				else {
+				} else {
 					GameData.move.select(needed.returnData().first, board);
 				}
-			}
-			else {
+			} else {
 				GameData.move.select(needed.returnData().first, board);
 			}
 			GameData.move.select(needed.returnData().moveTo, board);
-			
 		}
 		
 		if (alphabeta || greedy) {
@@ -77,7 +65,6 @@ public class PerformAIAction {
 		Node<GameState> current = new Node<GameState>(state);
 		//always create a new tree
 		tree = new GameTree(current);
-		//System.out.println("creating");
 		tree.buildFullTree(layers);
 	}
 	

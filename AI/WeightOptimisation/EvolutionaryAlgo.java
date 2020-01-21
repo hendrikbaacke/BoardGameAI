@@ -1,14 +1,12 @@
 package AI.WeightOptimisation;
 
 import AI.ReadMatrix;
-import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 
 public class EvolutionaryAlgo {
 
     public static int initialGenerationSize = 10;          // should be >10
     public static int modes = 5;
     public static int amountWeights = 8;
-
     private static int amountGames = 2;
 
     public static void initialGeneration() {
@@ -33,11 +31,9 @@ public class EvolutionaryAlgo {
 
                     sum += randWeightMatrix[l][m];
                 }
-                    for (int n = 0; n<amountWeights; n++) {
-                        randWeightMatrix[l][n] = (randWeightMatrix[l][n]) / sum;
-                    }
-
-
+                for (int n = 0; n<amountWeights; n++) {
+                    randWeightMatrix[l][n] = (randWeightMatrix[l][n]) / sum;
+                }
             }
             ReadMatrix.ReadOut(randWeightMatrix,"Matrices");
             ReadResult.ReadOut();
@@ -46,7 +42,6 @@ public class EvolutionaryAlgo {
 
 
     public static void Selection(){
-
         for(int i=1; i<=initialGenerationSize; i++) {
             for(int j=1; j<4; j++){
 
@@ -66,9 +61,5 @@ public class EvolutionaryAlgo {
                 }
             }
         }
-    }
-
-    private static void Mutation(double[][] strongBloodLine){
-
     }
 }

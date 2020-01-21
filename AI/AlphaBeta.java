@@ -8,10 +8,8 @@ package AI;
 public class AlphaBeta{
 	
 	Node<GameState> node = null;
-	
-	public AlphaBeta() {
-		
-	}
+
+	public AlphaBeta() { }
 	
 	public double performAB(Node<GameState> node, int depth, double alpha, double beta, boolean max) {
 		double value = 0;
@@ -36,8 +34,7 @@ public class AlphaBeta{
 				}
 			}
 			return value;
-		}
-		else {
+		} else {
 			value = Double.MAX_VALUE;
 			
 			for (Node<GameState> node2 : node.children) {

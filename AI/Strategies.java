@@ -1,22 +1,16 @@
 package AI;
 
-
-
 import src.Board;
 import src.BoardRows;
 import src.Hexagon;
-
 import java.util.ArrayList;
 import java.util.Hashtable;
 import static java.lang.Math.abs;
 
 
-
 public class Strategies {
 
-
     /* class contains methods that define each strategy, like moving to the center etc.
-
      */
 
     //not covered here is the possibility of drawing from a database of openings, this would stronlgy mitigate the importance of the closingDistance strategy
@@ -37,14 +31,12 @@ public class Strategies {
     		old = new Strategies(gameState.oldGameState);
     	}
     	Hashtable<String, Hexagon> boardState = gameState.boardState;
-        //System.out.println("evalfrom " + gameState.evaluateFrom);
-    	
+
         for (int i = 0; i< boardState.size(); i++) {
         	if (!boardState.get(Board.hash.get(i)).empty) {
         		if (gameState.evaluateFrom == boardState.get(Board.hash.get(i)).marble.playerNumber) {
         			Player.add(Board.hash.get(i));
-        		}
-        		else {
+        		} else {
         			Opponent.add(Board.hash.get(i));
         		}
         	}
@@ -58,14 +50,10 @@ public class Strategies {
 
         for (int i = 0; i < Player.size(); i++) {
 
-
             PlayerDisAv += Math.sqrt(Math.pow(boardState.boardState.get(Player.get(i)).centerX - CenterX, 2) + Math.pow(boardState.boardState.get(Player.get(i)).centerY - CenterY, 2));
 
-
             /* Distance to Center, use Euclidean Distance:
-
             (centerPointX - MarbleX )^2 + (centerPointY - MarbleY )^2 = distance^2 ;sqrt.dist^2 = distance
-
             */
         }
         PlayerDisAv = ( PlayerDisAv / Player.size());
@@ -166,17 +154,13 @@ public class Strategies {
                 }
             }
         }
-        //System.out.println(Test1+Test2);
         return groupStrengh;
     }
-
 
     public int amountOppMarbles() {
         return Opponent.size();
     }
-
     public int amountOwnMarbles() { return Player.size(); }
-
     public int compareMarblesWon() {
         if (old != null) {
             return old.amountOppMarbles() - this.amountOppMarbles();
@@ -203,7 +187,6 @@ public class Strategies {
         return PlayerDisAv;
     }
     
-    //return 1 if a marble is in danger, return 0 if there is no marble in danger
     public int danger() {
     	Hashtable<String, Hexagon> board = this.gameState.boardState;
     	BoardRows rows = src.GameData.rows;
@@ -211,23 +194,13 @@ public class Strategies {
     	sum = sum + dangerRow(rows.horizontal);
     	sum = sum + dangerRow(rows.topLeft);
     	sum = sum + dangerRow(rows.topRight);
-    	
-    	/*
-    	if (dangerRow(rows.horizontal) ==1) {
-    		return 1;
-    	}
-    	if (dangerRow(rows.topLeft) ==1) {
-    		return 1;
-    	}
-    	if (dangerRow(rows.topRight) ==1) {
-    		return 1;
-    	}*/
+
     	return sum;
     }
 
     public int dangerRow(ArrayList<ArrayList<String>> row) {
     	//at the "start" of a row -> so spot 0, 1, 2, 3
-    	//these are the playernumbers!!!
+    	//these are the playernumbers
     	int sum = 0; 
     	
     	int bfirst = 0;
@@ -304,5 +277,4 @@ public class Strategies {
     	}
     	return sum;
     }
-
 }

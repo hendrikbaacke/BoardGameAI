@@ -1,7 +1,5 @@
 package src;
 
-
-import AI.AutomaticGamePlay;
 import AI.GameState;
 import AI.MonteCarlo;
 import AI.Node;
@@ -38,8 +36,6 @@ public class GameGui extends Application{
     static Text score_text1 = new Text("0");
     static Text score_text2 = new Text("0");
     static Text score_text3 = new Text("0");
-
-    Move move;
 
 	public void start( Stage stage) {
 		try {

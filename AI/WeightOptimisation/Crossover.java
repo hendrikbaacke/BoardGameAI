@@ -1,7 +1,6 @@
 package AI.WeightOptimisation;
 
 import AI.ReadMatrix;
-
 import java.util.ArrayList;
 
 public class Crossover {
@@ -33,7 +32,6 @@ public class Crossover {
         for (int l = 0; l<crossWeightMatrix.length; l++) {
             double sum = 0;
             for (int m = 0; m<crossWeightMatrix[0].length; m++) {
-
                 sum += crossWeightMatrix[l][m];
             }
             for (int n = 0; n<crossWeightMatrix[0].length; n++) {
@@ -58,5 +56,4 @@ public class Crossover {
         }
         return  Matrix;
     }
-
 }

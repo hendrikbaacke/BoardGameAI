@@ -75,15 +75,12 @@ public class Move {
 		second = null;
 		third = null;
 		moveTo = null;
-		
-		System.out.println("created move");
 	}
 
 
 	//select marbles
 	public void select(String code, Hashtable<String, Hexagon> board) {
 		
-		//System.out.println("select");
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
 		if (first == null && !board.get(code).empty) {
 			if (board.get(code).marble.playerNumber == playersTurn) {
@@ -100,7 +97,6 @@ public class Move {
 			if (board.get(code).marble.playerNumber == playersTurn) {
 				if (first.equals(code)) {
 					selected = true;
-					//System.out.println("total = 1");
 					board.get(code).marble.setFill(Color.ORANGE);
 				}
 				else if(!board.get(code).adjacent(first)) {
@@ -115,7 +111,6 @@ public class Move {
 					board.get(code).marble.setFill(Color.AQUAMARINE);
 					nrSelected++;
 					selectedMarbles.add(code);
-					//System.out.println("selected two");
 				}
 			}
 		}
@@ -126,7 +121,6 @@ public class Move {
 				if(first.equals(code) || second.equals(code)) {
 					board.get(first).marble.setFill(Color.ORANGE);
 					board.get(second).marble.setFill(Color.YELLOW);
-					//System.out.println("total = 2");
 					selected = true;
 				}
 				else if(!board.get(code).adjacent(second) || !GameData.rows.sameRowThree(first, second, code)) {
@@ -147,7 +141,6 @@ public class Move {
 					board.get(first).marble.setFill(Color.ORANGE);
 					board.get(second).marble.setFill(Color.YELLOW);
 					board.get(third).marble.setFill(Color.YELLOW);
-					//System.out.println("selected three");
 				}
 			}
 		}
@@ -157,27 +150,22 @@ public class Move {
 			if (selected && board.get(code).adjacent(first)) {
 				if (!board.get(code).empty) {
 					if (board.get(code).marble.playerNumber == playersTurn) {
-							selectedMarbles.clear();
-							GameMethods.coloursBackToNormal(board);
-							selected = false;
-							first = code;
-							board.get(first).marble.setFill(Color.PURPLE);
-							second = null;
-							third = null;
-							nrSelected = 1;
-							selectedMarbles.add(code);
-						}
-					else {
+						selectedMarbles.clear();
+						GameMethods.coloursBackToNormal(board);
+						selected = false;
+						first = code;
+						board.get(first).marble.setFill(Color.PURPLE);
+						second = null;
+						third = null;
+						nrSelected = 1;
+						selectedMarbles.add(code);
+					} else {
 						moveTo = code;
-						//System.out.println("moveto");
 					}
-					}
-				else {
+				} else {
 					moveTo = code;
-					//System.out.println("moveto");
 				}
-			}	
-			else if (!board.get(code).empty && board.get(code).marble.playerNumber ==playersTurn) {
+			} else if (!board.get(code).empty && board.get(code).marble.playerNumber ==playersTurn) {
 				selectedMarbles.clear();
 				GameMethods.coloursBackToNormal(board);
 				selected = false;
@@ -197,9 +185,7 @@ public class Move {
 		if (board.equals(Board.hashBoard)) {
 			GameGui.player_text.setText(String.valueOf(playersTurn));
 		}
-
 	}
-
 
 		public void resetSelection(String code, Hashtable<String, Hexagon> board) {
 			selectedMarbles.clear();
@@ -210,12 +196,10 @@ public class Move {
 			third = null;
 			board.get(code).marble.setFill(Color.PURPLE);
 			selected = false;
-			//nrSelected = 1;
 		}
 		
 		public void move(Hashtable<String, Hexagon> board) {
 			//check if valid -> if not, reset, else: perform movement, change player, resetmove
-			
 			if (nrSelected == 1) {
 				if(validMoveOne(board, first, moveTo)) {
 					addToTb(board);
@@ -224,10 +208,8 @@ public class Move {
 					
 					addMoveToTb(board);
 					resetMove();
-					
 				}
-			}
-			else if(nrSelected ==2) {
+			} else if(nrSelected ==2) {
 				if(validMoveTwo(board, first, second, moveTo)) {
 					addToTb(board);
 					performMovementTwo(board);
@@ -236,8 +218,7 @@ public class Move {
 					addMoveToTb(board);
 					resetMove();
 				}
-			}
-			else if(nrSelected ==3) {
+			} else if(nrSelected ==3) {
 				if(validMoveThree(board, first, second, third, moveTo)) {
 					addToTb(board);
 					performMovementThree(board);
@@ -296,7 +277,6 @@ public class Move {
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
 				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3) && !automaticGame) {
-					//checkAI();
 				}
 				if(!automaticGame && !ai && mcts) {
 					monteCarlo.changeRootOutside(board);
@@ -377,20 +357,17 @@ public class Move {
 			if (board.containsKey(newHex)){
 				if (board.get(newHex).empty){
 					doPushOne(board);
-				}
-				else if(board.get(newHex).marble.playerNumber != playersTurn) {
+				} else if(board.get(newHex).marble.playerNumber != playersTurn) {
 				String newnewHex = GameData.rows.adjacentDirection(newHex, GameData.rows.direction(first, moveTo));
 					if (board.containsKey(newnewHex)){
 							if(board.get(newnewHex).empty) {
 								doPushTwo(board);
 							}
-					}
-					else {
+					} else {
 						doPushTwo(board);
 					}
 				}
-			}
-			else {
+			} else {
 				doPushOne(board);
 			}
 		}
@@ -399,7 +376,6 @@ public class Move {
 	//moves marbles sideways (either two or three)
 	public void moveSideways(Hashtable<String, Hexagon> board) {
 		int direction = GameData.rows.direction(first, moveTo);
-		//System.out.println("direction is " + direction);
 		char letterFirst = first.charAt(0);
 		char letterSecond = second.charAt(0);
 		
@@ -439,25 +415,20 @@ public class Move {
 		if (direction ==1) {
 			keyOne = letterFirstSt + numberOneMinus;
 			keyTwo = letterSecondSt + numberTwoMinus;
-		}
-		else if (direction ==2) {
+		} else if (direction ==2) {
 			keyOne = letterOnePlusSt + numberOne;
 			keyTwo = letterTwoPlusSt + numberTwo;
 			
-		}
-		else if(direction ==3) {
+		} else if(direction ==3) {
 			keyOne = letterOnePlusSt + numberOnePlus;
 			keyTwo = letterTwoPlusSt + numberTwoPlus;
-		}
-		else if (direction ==4) {
+		} else if (direction ==4) {
 			keyOne = letterFirstSt + numberOnePlus;
 			keyTwo = letterSecondSt + numberTwoPlus;
-		}
-		else if (direction ==5) {
+		} else if (direction ==5) {
 			keyOne = letterOneMinusSt + numberOne;
 			keyTwo = letterTwoMinusSt + numberTwo;
-		}
-		else if (direction ==6) {
+		} else if (direction ==6) {
 			keyOne = letterOneMinusSt + numberOneMinus;
 			keyTwo = letterTwoMinusSt + numberTwoMinus;
 		}
@@ -505,10 +476,9 @@ public class Move {
 		if (automaticGame && !ai) {
 			if(playersTurn==1) {
 				point++;
-			}else if (playersTurn ==2) {
+			} else if (playersTurn ==2) {
 				point2++;
-			}
-			else {
+			} else {
 				point3++;
 			}		
 		}
@@ -518,19 +488,17 @@ public class Move {
 			Board.boardMarbles.storage.remove(removing);
 			GameGui.Screen.getChildren().remove(removing);
 			GameGui.pp.getChildren().remove(removing);
-				if(playersTurn==1) {
-					point++;
-					//System.out.println(playersTurn + " gets a point");
-				}else if (playersTurn ==2) {
-					point2++;
-				}
-				else {
-					point3++;
-				}	
+			if(playersTurn==1) {
+				point++;
+				//System.out.println(playersTurn + " gets a point");
+			} else if (playersTurn ==2) {
+				point2++;
+			} else {
+				point3++;
 			}
-			else {
-				pushed = true;
-			}
+		} else {
+			pushed = true;
+		}
 	}
 	
 	//push one marble
@@ -545,12 +513,10 @@ public class Move {
 				board.get(keyAdj).setFull(removing);
 				removing.setLocationKey(keyAdj);
 				removing.updateLocation(board);
-			}
-			else {
+			} else {
 				removeMarble(removing, board);
 			}
-		}
-		else {
+		} else {
 			Marble moving=board.get(third).marble;
 			Marble removing = board.get(moveTo).marble;
 		
@@ -565,8 +531,7 @@ public class Move {
 				removing.setLocationKey(keyAdj);
 				removing.updateLocation(board);
 				//System.out.println("pushed");
-			}
-			else {
+			} else {
 				removeMarble(removing, board);
 			}
 
@@ -593,8 +558,7 @@ public class Move {
 			board.get(keyAdjTwo).setFull(removing);
 			removing.setLocationKey(keyAdjTwo);
 			removing.updateLocation(board);	
-		}
-		else {
+		} else {
 			removeMarble(removing, board);
 		}
 		moving.setLocationKey(moveTo);
@@ -618,13 +582,11 @@ public class Move {
 		if(board.containsKey(first) && board.containsKey(moveTo) && (BoardMethods.moveRepetitionChecker(first, null, null, playersTurn, GameData.rows.direction(first, moveTo))|| repOff)) {
 			if (board.get(first).adjacent(moveTo) && board.get(moveTo).empty){
 				return true;
-			}
-			else {
+			} else {
 				resetMove();
 				return false;
 			}
-		}
-		else {
+		} else {
 			resetMove();
 			return false;
 		}
@@ -637,46 +599,39 @@ public class Move {
 				if (board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
 				String newHex = GameData.rows.adjacentDirection(moveTo, GameData.rows.direction(first, moveTo));
 				
-				if(board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
-				//if it needs to move sideways and if there are two free space where they are needed, the move is valid
-					if(GameData.rows.sideways(first, second, moveTo)) {
-						if (GameData.rows.twoFree(first, second, moveTo, board)) {
-							return true;
-						}
-						else {
-							resetMove();
-							return false;
-						}
-					}
-					else if (board.get(moveTo).empty && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second)) {
-						return true;
-					}
-					else if (board.get(moveTo).marble.playerNumber != playersTurn && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second)) {
-						if (board.containsKey(newHex)) {
-							if (board.get(newHex).empty){
+					if (board.get(first).adjacent(second) && board.get(first).adjacent(moveTo)) {
+					//if it needs to move sideways and if there are two free space where they are needed, the move is valid
+						if (GameData.rows.sideways(first, second, moveTo)) {
+							if (GameData.rows.twoFree(first, second, moveTo, board)) {
 								return true;
-							}
-							else {
+							} else {
 								resetMove();
 								return false;
 							}
-						}	
-						else {
+						} else if (board.get(moveTo).empty && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second)) {
 							return true;
+						} else if (board.get(moveTo).marble.playerNumber != playersTurn && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second)) {
+							if (board.containsKey(newHex)) {
+								if (board.get(newHex).empty){
+									return true;
+								} else {
+									resetMove();
+									return false;
+								}
+							} else {
+								return true;
+							}
 						}
-				}
-				resetMove();
-				return false;
-				}
-				else {
+						resetMove();
+						return false;
+					} else {
+						resetMove();
+						return false;
+					}
+				} else {
 					resetMove();
 					return false;
 				}
-			}
-			else {
-				resetMove();
-				return false;
-			}
 			}
 			resetMove();
 			return false;
@@ -698,13 +653,11 @@ public class Move {
 				if(GameData.rows.sideways(first, second, moveTo)) {
 					if (GameData.rows.threeFree(first, second, third, moveTo, board)) {
 						return true;
-					}
-					else {
+					} else {
 						resetMove();
 						return false;
 					}
-				}
-				else if (board.get(moveTo).empty && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second) && GameData.rows.direction(first, second) == GameData.rows.direction(second, third)) {
+				} else if (board.get(moveTo).empty && GameData.rows.direction(moveTo, first) == GameData.rows.direction(first, second) && GameData.rows.direction(first, second) == GameData.rows.direction(second, third)) {
 					return true;
 				}
 				//can push one
@@ -715,21 +668,18 @@ public class Move {
 						}
 						else if(board.get(newHex).marble.playerNumber != playersTurn) {
 							
-								if (board.containsKey(newnewHex)){
-									if(board.get(newnewHex).empty) {
-										return true; 
-									}
+							if (board.containsKey(newnewHex)){
+								if(board.get(newnewHex).empty) {
+									return true;
 								}
-							else {
+							} else {
 							return true;
 							}
 						}
-					}
-					else {
+					} else {
 						return true;
 					}
-				}
-				else {
+				} else {
 					resetMove();
 					return false;
 				}
@@ -737,8 +687,7 @@ public class Move {
 		}
 			resetMove();
 			return false;
-		}
-		else {
+		} else {
 			resetMove();
 			return false;
 		}

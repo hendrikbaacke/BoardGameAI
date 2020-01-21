@@ -3,12 +3,9 @@ package AI;
 import java.util.ArrayList;
 import java.util.List;
 
-//this class should be working as we need it
-
 public class GameTree {
 	Tree<GameState> gameTree;
-	
-	
+
 	public GameTree(Node<GameState> root) {
 		gameTree = new Tree<>(root);
 	}
@@ -23,18 +20,12 @@ public class GameTree {
 		
 		List<Node<GameState>> expanding = new ArrayList();
 		expanding.add(gameTree.getRoot());
-		//System.out.println("start adding");
-		
+
 		//create layers
 		for (int i = 1; i < layers + 1; i++) {
 			AddNodes.addForMultiple(expanding);
 			expanding = findAtDepth(i);
-			//System.out.println("layer " + i + " done");
 		}
-		
-		//System.out.println(findAtDepth(0).size());
-		//System.out.println(findAtDepth(1).size());
-		//System.out.println(findAtDepth(2).size());
 	}
 	
 	//finds all the nodes at a certain depth
@@ -55,7 +46,6 @@ public class GameTree {
 			currentKids.addAll(newKids);
 			newKids.clear();
 		}
-		
 		return currentKids;
 	}
 

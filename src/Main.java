@@ -1,14 +1,7 @@
 package src;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
-
 import AI.ReadMatrix;
-import AI.WeightOptimisation.EvolutionaryAlgo;
-import AI.WeightOptimisation.GameSimulation.GameEnvironment;
-import AI.WeightOptimisation.GameSimulation.Simulation;
-import AI.WeightOptimisation.Plotting;
-import AI.WeightOptimisation.SortResults;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -47,14 +40,12 @@ public class Main extends Application {
     
     public void start(Stage primaryStage) throws Exception {
         System.out.println("Running on: "+System.getProperty("os.name"));
-        if(System.getProperty("os.name").contains("Mac")){
-            ReadMatrix.Slash = "//";
-        }else{
+        if(System.getProperty("os.name").contains("Windows")){
             ReadMatrix.Slash = "\\";
+        }else{
+            ReadMatrix.Slash = "//";
         }
 
-        Plotting.main();
-        //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
         
         VBox sliderBox = new VBox();

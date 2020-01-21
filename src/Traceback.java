@@ -46,12 +46,7 @@ public class Traceback {
 		if (first == null && second == null && third == null) {
 			return;
 		}
-		else {
-			//System.out.println("traceback for " + playerNumber);
-			//System.out.println("add to traceback " + first);
-			//System.out.println("add to traceback " + second);
-			//System.out.println("add to traceback " + third);
-		}
+
 		if (playerNumber ==1) {
 			oldMovePlayer1.clear();
 			oldMovePlayer1.add(first);
@@ -60,11 +55,9 @@ public class Traceback {
 			}
 			if(third != null) {
 				oldMovePlayer1.add(third);
-				//System.out.println(oldMovePlayer1.size());
 			}
 			direct1 = direction;
-		}
-		else if(playerNumber ==2) {
+		} else if(playerNumber ==2) {
 			oldMovePlayer2.clear();
 			oldMovePlayer2.add(first);
 			if (second != null) {
@@ -72,11 +65,9 @@ public class Traceback {
 			}
 			if(third != null) {
 				oldMovePlayer2.add(third);
-				//System.out.println(oldMovePlayer2.size());
 			}
 			direct2 = direction;
-		}
-		else if (playerNumber ==3){
+		} else if (playerNumber ==3){
 			oldMovePlayer3.clear();
 			oldMovePlayer3.add(first);
 			if (second != null) {
@@ -84,7 +75,6 @@ public class Traceback {
 			}
 			if(third != null) {
 				oldMovePlayer3.add(third);
-				//System.out.println(oldMovePlayer3.size());
 			}
 			direct3 = direction;
 		}

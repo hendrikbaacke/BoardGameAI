@@ -57,28 +57,19 @@ public class TrainingInstances {
         ReadMatrix.ReadOut(RandNeutralInstance,"Trainers");
         ReadMatrix.ReadOut(RandAggressiveInstance,"Trainers");
         ReadMatrix.ReadOut(RandDefensiveInstance,"Trainers");
-
-
     }
+
     //Normalisation:
     private static void Normalize(double[][] inputMatrix) {
 
-
         for (int l = 0; l < inputMatrix.length; l++) {
-
             double sum = 0;
-
             for (int m = 0; m < inputMatrix[0].length; m++) {
-
                 sum += inputMatrix[l][m];
             }
             for (int n = 0; n < inputMatrix.length; n++) {
                 inputMatrix[l][n] = (inputMatrix[l][n]) / sum;
-
             }
-
         }
-
     }
-
 }

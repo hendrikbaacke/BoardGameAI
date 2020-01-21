@@ -73,13 +73,11 @@ public class MonteCarlo {
 				multiple.clear();
 				maxEval = parent.children.get(i).totValue;
 				bestChild = parent.children.get(i);
-			}
-			else if(Math.max(maxEval, parent.children.get(i).totValue) == maxEval && (!chooseForAIMove || maxEval < Double.POSITIVE_INFINITY )){
+			} else if(Math.max(maxEval, parent.children.get(i).totValue) == maxEval && (!chooseForAIMove || maxEval < Double.POSITIVE_INFINITY )){
 				multiple.add(parent.children.get(i));
 			}
 		}
 		
-		//fair coin flip!!
 		if(multiple.size()> 1) {
 			bestChild = multiple.get(random.nextInt(multiple.size()));
 		}
@@ -90,7 +88,6 @@ public class MonteCarlo {
 	//expands the current node
 	public void expansion(Node<GameState> expand) {
 		AddNodes.addForOne(expand);
-		//we can also make one that adds less nodes?? if this one is too expensive
 	}
 	
 	//simulation (also known as roll out)
@@ -99,7 +96,6 @@ public class MonteCarlo {
 		Node<GameState> newChoice = sucChild(current);
 		
 		if (newChoice.data.terminal || currentNode >= cutoff) {
-			System.out.println("backpropagate");
 			backpropagate(newChoice, newChoice.data.winner);
 		}
 		else {
@@ -156,7 +152,6 @@ public class MonteCarlo {
 			GameState newRoot = new GameState(board,src.GameMethods.changePlayer(monteCarloTree.root.data.evaluateFrom));
 			changeRoot(new Node<GameState>(newRoot));
 		}
-		//System.out.println("changed root");
 	}
 }
 

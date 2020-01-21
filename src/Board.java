@@ -86,9 +86,7 @@ public class Board extends BorderPane {
 	    }
 	    
 	    GameData.rows = new BoardRows();
-	    
-	    //System.out.println("hash " + hash.size());
-	    
+
 	    return board;
    }
 }

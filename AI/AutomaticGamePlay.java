@@ -1,8 +1,7 @@
 package AI;
 
 import java.util.Hashtable;
-
-import AI.WeightOptimisation.GameSimulation.GameEnvironment;
+import AI.WeightOptimisation.GameEnvironment;
 import src.BoardMethods;
 import src.GameData;
 import src.Hexagon;
@@ -83,5 +82,4 @@ public class AutomaticGamePlay {
 		
 		return result;
 	}
-	
 }

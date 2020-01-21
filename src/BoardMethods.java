@@ -56,13 +56,10 @@ public class BoardMethods {
 	public static boolean repetitionChecker(Hashtable<String, Hexagon> current) {
 		ArrayList<Hashtable<String, Hexagon>> tb = GameData.tb.getTB();
 		for (int i = 0; i < tb.size(); i++) {
-			//System.out.println(i);
 			if (compareHashtables(tb.get(i), current)) {
-				//System.out.println("board repetition");
 				return false;
 			}
 		}
-		//System.out.println("no board repetition");
 		return true;
 	}
 	
@@ -82,9 +79,7 @@ public class BoardMethods {
 			check = GameData.tb.oldMovePlayer3;
 			olddirection = GameData.tb.direct3;
 		}
-		
-		//System.out.println(first + " " + second + " " +  third);
-		
+
 		if (first != null && second == null && third == null) {
 			if (check.size() == 1) {
 				if (check.get(0) == first && GameData.rows.oppositeDirection(olddirection) == direction) {
@@ -108,7 +103,6 @@ public class BoardMethods {
 				}
 			}
 		}
-		//System.out.println("no move repetition");
 		return true;
 	}
 }

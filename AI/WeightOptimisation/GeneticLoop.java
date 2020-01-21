@@ -2,7 +2,6 @@ package AI.WeightOptimisation;
 
 import AI.ReadMatrix;
 import java.io.File;
-
 import java.util.ArrayList;
 
 public class GeneticLoop {
@@ -29,21 +28,17 @@ public class GeneticLoop {
             EvolutionaryAlgo.Selection();
         }
         System.out.println("DONE!!!!");
-        Plotting.main();
     }
 
     static public void deleteDirectory(String directoryName) {
         File directory = new File(directoryName);
 
         // Get all files in directory
-
         File[] files = directory.listFiles();
         for (File file : files) {
             // Delete each file
-
             if (!file.delete()) {
                 // Failed to delete file
-
                 System.out.println("Failed to delete " + file);
             }
         }

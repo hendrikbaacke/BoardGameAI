@@ -1,7 +1,6 @@
 package AI.WeightOptimisation;
 
 import AI.ReadMatrix;
-
 import java.io.*;
 
 public class ReadResult {
@@ -11,18 +10,12 @@ public class ReadResult {
 
     public static int FileNumber;
 
-
     public static int[] ReadIn( String File ) {
-
         int[] Results =new int[2];
-
-        if( File.length() < 1 )
-        {
+        if( File.length() < 1 ) {
             System.out.println("Error! No filename specified.");
             System.exit(0);
         }
-
-        boolean seen[] = null;
 
         int name = 0;
         int gen = 0;
@@ -39,31 +32,26 @@ public class ReadResult {
             //! THe first few lines of the file are allowed to be comments, staring with a // symbol.
             //! These comments are only allowed at the top of the file.
 
-            //! -----------------------------------------
-            while ((record = br.readLine()) != null)
-            {
+            while ((record = br.readLine()) != null) {
                 if( record.startsWith("//") ) continue;
                 break; // Saw a line that did not start with a comment -- time to start reading the data in!
             }
 
-            if( record.startsWith("AInumber: ") )
-            {
+            if( record.startsWith("AInumber: ") ) {
                 name = Integer.parseInt( record.substring(10) );
                 if(DEBUG) System.out.println(COMMENT + " AInumber: "+name);
             }
 
             record = br.readLine();
 
-            if( record.startsWith("Gen: ") )
-            {
+            if( record.startsWith("Gen: ") ) {
                 gen = Integer.parseInt( record.substring(5) );
                 if(DEBUG) System.out.println(COMMENT + " Gen: "+gen);
             }
 
             record = br.readLine();
 
-            if( record.startsWith("Moves: ") )
-            {
+            if( record.startsWith("Moves: ") ) {
                 moves = Integer.parseInt( record.substring(7) );
                 Results[0] = moves;
                 if(DEBUG) System.out.println(COMMENT + " Moves: "+moves);
@@ -78,8 +66,7 @@ public class ReadResult {
                 if(DEBUG) System.out.println(COMMENT + " Marbles: "+marbles);
             }
         }
-        catch (IOException ex)
-        {
+        catch (IOException ex) {
             // catch possible io errors from readLine()
             System.out.println("Error! Problem reading file "+File);
             System.exit(0);
@@ -89,7 +76,6 @@ public class ReadResult {
         Results[1] = marbles;
 
         return Results;
-
     }
 
     public static void ReadOut(){
@@ -160,5 +146,4 @@ public class ReadResult {
             }
         }
     }
-
 }

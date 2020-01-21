@@ -1,7 +1,6 @@
 package AI.WeightOptimisation;
 
 import AI.ReadMatrix;
-
 import java.util.ArrayList;
 
 public class SortResults {
@@ -53,7 +52,6 @@ public class SortResults {
         for (int j = begin; j < end; j++) {
             if (arr[j][0] <= pivot) {
                 i++;
-
                 int swapTemp = arr[i][0];
                 int swapTemp2 = arr[i][1];
                 arr[i][0] = arr[j][0];

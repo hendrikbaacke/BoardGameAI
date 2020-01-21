@@ -1,6 +1,5 @@
 package src;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import javafx.scene.layout.AnchorPane;
 
@@ -70,7 +69,6 @@ public class MarbleStorage {
 		
 		//now, if numberPlayers = 3, then add the marbles this way
 		else {
-			
 			//player 1
 			for (int i = 0; i < 10; i++) {
 				
@@ -85,7 +83,6 @@ public class MarbleStorage {
 					storage.add(p);
 				}
 			}
-			
 			//player 2
 			char start = 'I';
 			for (int i = 6; i >= 5; i--) {
@@ -101,7 +98,6 @@ public class MarbleStorage {
 				}
 				start = 'I';
 			}
-			
 			//player 3
 			for (int j = 8; j < 10; j++) {
 				for (char ch='A'; ch <= 'I'; ch++) {
@@ -113,7 +109,6 @@ public class MarbleStorage {
 					}
 				}
 			}
-			
 		}
 		return pieceGroup;
 	}

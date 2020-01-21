@@ -14,8 +14,6 @@ import javafx.scene.shape.Ellipse;
 public class Marble extends Ellipse{
 	private String locationKey;
 	public int playerNumber;
-	double orgSceneX, orgSceneY;
-	double orgTranslateX, orgTranslateY;
 	
 	//creates a marble at a certain space, with a certain key
 	Marble(double centerX, double centerY, int player, String key, boolean newM){
@@ -39,7 +37,6 @@ public class Marble extends Ellipse{
 		if (newM) {
 			MarbleStorage.pieceGroup.getChildren().add(this);
 		}
-		
 	}
 	
 	//handle location keys (that are private) with a set and get method
@@ -63,7 +60,6 @@ public class Marble extends Ellipse{
 	//make it clickable, so you can play the game
 	EventHandler<MouseEvent> EllipseOnMouseClicked =
 				new EventHandler<MouseEvent>() {
-
 					public void handle(MouseEvent t) {
 						if ((Move.playersTurn == 1 && !Move.player1AI) || (Move.playersTurn ==2 && !Move.player2AI) || (Move.playersTurn ==3 && !Move.player3AI)) {
 							GameData.move.select(locationKey, Board.hashBoard);							}

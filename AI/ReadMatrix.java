@@ -1,12 +1,10 @@
 package AI;
 
 import java.io.*;
-import java.util.*;
 
 public class ReadMatrix {
 
     public final static boolean DEBUG = true;
-
     public final static String COMMENT = "//";
 
     //! n is the number of weights per mode
@@ -24,16 +22,12 @@ public class ReadMatrix {
 
         double[][] WeightMatrix = new double[m][n];
 
-        if( File.length() < 1 )
-        {
+        if( File.length() < 1 ) {
             System.out.println("Error! No filename specified.");
             System.exit(0);
         }
 
-
         String inputfile = File;
-
-        boolean seen[] = null;
 
         int name = 0;
         int gen = 0;
@@ -55,28 +49,21 @@ public class ReadMatrix {
                 break; // Saw a line that did not start with a comment -- time to start reading the data in!
             }
 
-            if( record.startsWith("AInumber: ") )
-            {
+            if( record.startsWith("AInumber: ")) {
                 name = Integer.parseInt( record.substring(10) );
-//                if(DEBUG) System.out.println(COMMENT + " AInumber: "+name);
             }
 
             record = br.readLine();
 
-            if( record.startsWith("Gen: ") )
-            {
+            if( record.startsWith("Gen: ")) {
                 gen = Integer.parseInt( record.substring(5) );
-//                if(DEBUG) System.out.println(COMMENT + " Gen: "+gen);
             }
 
             int row =0;
-            for( int d=0; d<m; d++)
-            {
-                //if(DEBUG) System.out.println(COMMENT + " Reading weights "+(d+1));
+            for( int d=0; d<m; d++) {
                 record = br.readLine();
                 String data[] = record.split(" ");
-                if( data.length != n )
-                {
+                if( data.length != n ) {
                     System.out.println("Error! Malformed weight line: "+record);
                     System.exit(0);
                 }
@@ -85,36 +72,20 @@ public class ReadMatrix {
                     WeightMatrix[row][i] = Double.parseDouble( data[i]);
                 }
                 row++;
-
-//                if(DEBUG) System.out.println(COMMENT + " Edge: "+ e[d].u +" "+e[d].v);
-
             }
 
             String surplus = br.readLine();
-            if( surplus != null )
-            {
+            if( surplus != null ) {
                 if( surplus.length() >= n ) if(DEBUG) System.out.println(COMMENT + " Warning: there appeared to be data in your file after the last weight: '"+surplus+"'");
             }
 
         }
-        catch (IOException ex)
-        {
+        catch (IOException ex) {
             // catch possible io errors from readLine()
             System.out.println("Error! Problem reading file "+inputfile);
             System.exit(0);
         }
-/*
-        for( int x=1; x<=n; x++ )
-        {
-            if( seen[x] == false )
-            {
-                if(DEBUG) System.out.println(COMMENT + " Warning: vertex "+x+" didn't appear in any edge : it will be considered a disconnected vertex on its own.");
-            }
-        }
-*/
-
         return WeightMatrix;
-
     }
 
     public static void ReadOut(double[][] weights, String folder){
@@ -138,6 +109,5 @@ public class ReadMatrix {
         } catch (IOException ex){
             System.err.println("Couldn't log this");
         }
-
     }
 }
