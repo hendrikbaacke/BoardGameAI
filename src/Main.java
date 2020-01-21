@@ -7,6 +7,7 @@ import AI.ReadMatrix;
 import AI.WeightOptimisation.EvolutionaryAlgo;
 import AI.WeightOptimisation.GameSimulation.GameEnvironment;
 import AI.WeightOptimisation.GameSimulation.Simulation;
+import AI.WeightOptimisation.Plotting;
 import AI.WeightOptimisation.SortResults;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -52,6 +53,7 @@ public class Main extends Application {
             ReadMatrix.Slash = "\\";
         }
 
+        Plotting.main();
         //Define Window title
         primaryStage.setTitle("Team 1 -  Project 2.1");
         

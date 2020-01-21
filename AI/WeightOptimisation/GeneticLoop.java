@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class GeneticLoop {
-    private static int Gensize = 10;
+    public static int Gensize = 10;
 
     public static void start() {
         //emptying the folders (so we get no confusion and wrong results)
@@ -29,6 +29,7 @@ public class GeneticLoop {
             EvolutionaryAlgo.Selection();
         }
         System.out.println("DONE!!!!");
+        Plotting.main();
     }
 
     static public void deleteDirectory(String directoryName) {
