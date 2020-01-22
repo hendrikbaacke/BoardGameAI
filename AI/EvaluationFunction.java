@@ -34,6 +34,7 @@ public class EvaluationFunction {
 
 	public static String Name1 = "Final";
 	public static String Name2 = "Final";
+	public static String Name3 = "Final";
 
 	public EvaluationFunction(GameState gameState) {
 
@@ -48,8 +49,6 @@ public class EvaluationFunction {
 		boolean isPlayer2AI = src.GameData.move.player2AI;
 
 		Strategies strategies = new Strategies(gameState);
-
-
 
 		//VALUE NORMALIZATION -----------------------------------------------------------------
 		double Max = Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("A1").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("A1").centerY, 2));
@@ -90,6 +89,9 @@ public class EvaluationFunction {
 			}
 			if (gameState.evaluateFrom == 2) {
 				Name = Name2;
+			}
+			if (gameState.evaluateFrom == 3) {
+				Name = Name3;
 			}
 
 			modeDet = new ModeDetermination(ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+Name+".txt"));
