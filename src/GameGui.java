@@ -42,6 +42,7 @@ public class GameGui extends Application{
 			Button buttonAI = new Button("Press me twice to run the genetic algorithm");
 
 			buttonAI.setOnAction(e -> {
+				
 				//need to create this
 				if ((Move.initialBoard == null && Move.need) || Move.mcts && Move.initialBoard == null) {
 					System.out.println("enter");

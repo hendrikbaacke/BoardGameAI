@@ -68,7 +68,7 @@ public class Move {
 	public static boolean automaticGameEnd = false;
 	public static int winnerAutomaticGame = 0;
 	public static Hashtable<String, Hexagon> initialBoard;
-	public static boolean need = false;
+	public static boolean need = true;
 	public static boolean PvC;
 
 	public Move() {

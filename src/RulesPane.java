@@ -20,31 +20,31 @@ public class RulesPane {
         MainCont.setHgap(50);
 
 
-        Text OneContent = new Text("To be the first player to push six of the opponent's marbles out of play, into the board's outer rim.");
+        Text OneContent = new Text("Goal: to be the first player to push 6 of the opponent's marbles out of the board.");
         TextFlow OneCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list1 = OneCont.getChildren();
         list1.addAll(OneContent);
 
-        Text TwoContent = new Text("Black makes the first move");
+        Text TwoContent = new Text("Black makes the first move.");
         TextFlow TwoCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list2 = TwoCont.getChildren();
         list2.addAll(TwoContent);
 
-        Text ThreeContent = new Text("You can push one, two or three marbles at a time");
+        Text ThreeContent = new Text("You can move one, two or three marbles at a time.");
         TextFlow ThreeCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list3 = ThreeCont.getChildren();
         list3.addAll(ThreeContent);
 
-        Text FourContent = new Text("Your marbles can move one space, in a straight line or laterally.");
+        Text FourContent = new Text("Your marbles can move one space: in a straight line or sideways. You can only move if the spots you want to move to are free, or if you can push the opponent away.");
         TextFlow FourCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list4 = FourCont.getChildren();
         list4.addAll(FourContent);
 
-        Text FiveContent = new Text(" Two marbles can push one and three marbles can push one or two of your opponent's marbles. However, an equal number of marbles cannot push each other (ie: 1 cannot push 1, 2 cannot push 2, etc).");
+        Text FiveContent = new Text(" Two marbles can push one of the opponent's marbles and three marbles can push one or two of the opponent's marbles if they are in the same row and the spot the opponent's marbles need to be pushed to is either free or not in the board. However, an equal number of marbles cannot push each other (ie: 1 cannot push 1, 2 cannot push 2, etc).");
         TextFlow FiveCont = new TextFlow();
         //Retrieving the observable list of the TextFlow Pane
         ObservableList list5 = FiveCont.getChildren();
