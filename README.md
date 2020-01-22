@@ -20,6 +20,8 @@ In the PvP mode, a game can be played between two human players. The players alt
 
 In the PvC mode, a game is played between a human player and an AI. The AI that is playing against the human player is the greedy algorithm, using an evaluation function that is found by the genetic algorithm. The AI automatically performs a move after the player performed a move.
 
-In the CvC mode, the player can do two things: run the genetic algorithm, and perform a game between two AI's of the user's own choosing. The AI's can be chosen by selecting it in the menu on the left side of the screen. When this game is finished, the result and resulting board state gets displayed.
+In the CvC mode, the player can do two things: run the genetic algorithm, and perform a game between two AI's of the user's own choosing. 
+
+For a single game between multiple Ai's, the AI's can be chosen by selecting it in the menu on the left side of the screen. When this game is finished, the result and resulting board state gets displayed.
 
 The genetic algorithm is ran by clicking a button twice, firstly creating the initial state, and after that running the whole algorithm. The fact this needs to be pressed twice is indicated on the button. The results for every game in the genetic algorithm is printed in the command line.
