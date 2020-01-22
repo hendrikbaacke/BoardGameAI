@@ -89,7 +89,7 @@ public class Main extends Application {
         title.setText("Abalone: Play it!");
         title.setFont(Font.font(null, FontWeight.BOLD, 70));
 
-        Button settings = new Button("SETTINGS");
+        Button settings = new Button("HOW TO PLAY");
         settings.getStyleClass().add("menu_items");
         Button rules = new Button("RULES");
         rules.getStyleClass().add("menu_items");
@@ -310,7 +310,7 @@ public class Main extends Application {
         VBox setMainCont = new VBox();
         HBox settingsTitleCont = new HBox();
         settingsTitleCont.setAlignment(Pos.CENTER);
-        Text settingsTitle = new Text("SETTINGS");
+        Text settingsTitle = new Text("HOW TO PLAY");
         settingsTitle.setStyle("-fx-font-size: 30px;");
         settingsTitleCont.getChildren().add(settingsTitle);
         settingsTitleCont.setPrefHeight(100);

@@ -148,7 +148,10 @@ public class GameGui extends Application{
 						EvaluationFunction.AITestingON = false;
 						EvaluationFunction.Name1 = (String) choiceBox.getValue();
 						EvaluationFunction.Name2 = (String) choiceBox2.getValue();
-						AutomaticGamePlay.playGame(Board.hashBoard);
+						while(Move.point != 6 && Move.point2 != 6 && Move.point3!= 6) {
+							Move.checkAI(Board.hashBoard);
+						}
+						//AutomaticGamePlay.playGame(Board.hashBoard);
 					}
 				});
 				GridPane.setRowIndex(startAI, 14);
