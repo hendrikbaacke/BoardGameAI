@@ -12,7 +12,7 @@ The src package includes the classes which contain the way the game itself is bu
 The AI package contains classes for the game tree, game state, evaluation function and search algorithms such as greedy, alpha beta and Monte Carlo tree search. Besides that, there are also folders which contain both the results (if the genetic algorithm has been run) and the framework and implementation of the genetic algorithm.
 
 ## How to use the GUI:
-Firstly, the class Main.java needs to be run. Then, there are multiple buttons which there could be chosen from. It is possible to look at the rules, credits and the 'how to', which shows how to play this game. 
+Firstly, the class Main.java needs to be run. Then, there are multiple buttons which could be chosen from. It is possible to look at the rules, credits and the 'how to', which shows how to play this game. 
 
 When the player is ready to choose one of the options, there are three modes to choose from. These are: Player vs. Player, Player vs. Computer and Computer vs. Computer.
 
