@@ -1,8 +1,6 @@
 package src;
 
-import AI.GameState;
-import AI.MonteCarlo;
-import AI.Node;
+import AI.*;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -20,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 /*
  * Handles the game itself. So when the game is being played, this screen is showed.
@@ -36,49 +35,26 @@ public class GameGui extends Application{
     static Text score_text1 = new Text("0");
     static Text score_text2 = new Text("0");
     static Text score_text3 = new Text("0");
+    static boolean AIAI = false;
 
 	public void start( Stage stage) {
 		try {
-			Button Eva = new Button("Evaluation");
-			Button buttonAI = new Button("Perform AI move");
-			//Eva.setStyle("-fx-background-color: darkgray");
-			Eva.setOnAction(e -> {
-				if (Move.playersTurn == 2) {
-					//AI.Strategies strategies = new AI.Strategies(new GameState(Board.hashBoard, Move.playersTurn));
-
-					//double f1 = AI.Strategies.closingDistance(new GameState(Board.hashBoard, Move.playersTurn));
-					//double f1=strategies.closingDistanceTest();
-					//double f2=strategies.cohesion();
-					//double f3=strategies.breakGroup();
-					//double f4=strategies.strengthenGroup();
-					//double f5=strategies.amountOppMarbles(state,isPlayer1AI);
-					//double f6=strategies.amountOwnMarbles(state,isPlayer1AI);
-
-						//System.out.println(" -------- "+f1 +" -------- ");
-
-				}
-
-				//System.out.println(Math.sqrt(Math.pow(Board.hashBoard.get("E5").centerX - Board.hashBoard.get("F5").centerX, 2) + Math.pow(Board.hashBoard.get("E5").centerY - Board.hashBoard.get("F5").centerY, 2)));
-			});
+			Button buttonAI = new Button("Press me twice to run the genetic algorithm");
 
 			buttonAI.setOnAction(e -> {
-				//need to create this 
+				//need to create this
 				if ((Move.initialBoard == null && Move.need) || Move.mcts && Move.initialBoard == null) {
 					System.out.println("enter");
 					Move.initialBoard = BoardMethods.copyHashBoard(Board.hashBoard);
 					Move.initial = new GameState(Move.initialBoard, GameMethods.changeBack(Move.playersTurn));
 					Move.monteCarlo = new MonteCarlo(new Node<GameState>(Move.initial));
 				}
-				else if(Move.need && (Move.greedy || Move.alphabeta)) {
-					//AutomaticGamePlay.playGame(Move.initialBoard);
+				else if((Move.greedy || Move.alphabeta) && Move.need) {
 					AI.WeightOptimisation.GeneticLoop.start();
-				}
-				else {
-					Move.checkAI(Board.hashBoard);
 				}
 			});
 
-		    Label winner_label = new Label("Player win:\t");
+		    Label winner_label = new Label("Winning Player :\t");
 		     double MAX_FONT_SIZE = 30.0; // define max font size you need
 		     winner_label.setFont(new Font(MAX_FONT_SIZE));		
 		     winner_text.setFont(new Font(MAX_FONT_SIZE));		
@@ -120,9 +96,7 @@ public class GameGui extends Application{
 				GridPane.setRowIndex(playerBox, 1);
 				GridPane.setRowIndex(score,2 );
 				GridPane.setRowIndex(score2,3 );
-				GridPane.setRowIndex(Eva,6 );
-				GridPane.setRowIndex(buttonAI, 7);
-				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, Eva, buttonAI); //add reset for the reset button
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2); //add reset for the reset button
 			}
 			
 			if (GameData.numberPlayers ==3) {
@@ -132,7 +106,32 @@ public class GameGui extends Application{
 				GridPane.setRowIndex(score,2 );
 				GridPane.setRowIndex(score2,3 );
 				GridPane.setRowIndex(score3, 4);
-				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, score3, Eva, buttonAI); //add reset for the reset button
+				SubScene.getChildren().addAll(hbox3,winner,playerBox,score,score2, score3); //add reset for the reset button
+			}
+
+			if(AIAI) {
+				Label placeholder = new Label();
+				GridPane.setRowIndex(placeholder, 6);
+				Label placeholder2 = new Label();
+				GridPane.setRowIndex(buttonAI, 7);
+				GridPane.setRowIndex(placeholder2, 8);
+				SubScene.getChildren().addAll(placeholder,buttonAI, placeholder2);
+				TextField file1 = new TextField();
+				TextField file2 = new TextField();
+				file1.setPromptText("FilePath of your first AI");
+				file2.setPromptText("FilePath of your second AI");
+				GridPane.setRowIndex(file1, 9);
+				GridPane.setRowIndex(file2, 10);
+				SubScene.getChildren().addAll(file1,file2);
+				Button startAI = new Button("Start your custom AI game");
+				startAI.setOnAction(e -> {
+					EvaluationFunction.Name1 = file1.getText();
+					EvaluationFunction.Name2 = file2.getText();
+
+					AutomaticGamePlay.playGame(Board.hashBoard);
+				});
+				GridPane.setRowIndex(startAI, 11);
+				SubScene.getChildren().add(startAI);
 			}
 			player_text.setText("1");
 			
@@ -185,5 +184,9 @@ public class GameGui extends Application{
 		Screen.getChildren().addAll(MainScene,SubScene);
 		Scene scene = new Scene(Screen);
 		return scene;
+	}
+
+	public void setAIAI(boolean x){
+		AIAI = x;
 	}
 }

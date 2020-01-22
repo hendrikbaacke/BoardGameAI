@@ -30,7 +30,10 @@ public class EvaluationFunction {
 	private Strategies old;
 
 	public static boolean AITestingON = false;
-	public  ModeDetermination modeDet;
+	public ModeDetermination modeDet;
+
+	public static String Name1 = System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt";
+	public static String Name2 = System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt";
 
 	public EvaluationFunction(GameState gameState) {
 
@@ -40,7 +43,6 @@ public class EvaluationFunction {
 			old = new Strategies(gameState.oldGameState);
 		}
 		Hashtable<String, Hexagon> boardState = gameState.boardState;
-
 
 		boolean isPlayer1AI = src.GameData.move.player1AI;
 		boolean isPlayer2AI = src.GameData.move.player2AI;
@@ -85,22 +87,14 @@ public class EvaluationFunction {
 		if(!AITestingON) {
 			String Name = null;
 			if (gameState.evaluateFrom == 1) {
-				Name = "Neutral";
+				Name = Name1;
 			}
 			if (gameState.evaluateFrom == 2) {
-				Name = "Aggressive";
-			}
-			if (gameState.evaluateFrom == 3) {
-				Name = "Defensive";
+				Name = Name2;
 			}
 
-			/*
-			*	The code is written to play against the optimised AI; can be changed in the following two lines
-			*/
-
-			//modeDet = new ModeDetermination(Name);
-			modeDet = new ModeDetermination(ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt"));
-
+			modeDet = new ModeDetermination(Name);
+			//modeDet = new ModeDetermination(ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt"));
 		}else{
 			if (gameState.evaluateFrom == 1) {
 				modeDet = new ModeDetermination(GameEnvironment.player1);
@@ -120,9 +114,7 @@ public class EvaluationFunction {
 			w6 = weightArray[5];
 			w7 = weightArray[6];
 			w8 = weightArray[7];
-
 	}
-
 
 	/*assigns a numeric value to each GameState in the Tree, based on the linear equation
     */

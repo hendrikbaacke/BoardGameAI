@@ -83,6 +83,7 @@ public class ReadMatrix {
         catch (IOException ex) {
             // catch possible io errors from readLine()
             System.out.println("Error! Problem reading file "+inputfile);
+
             System.exit(0);
         }
         return WeightMatrix;

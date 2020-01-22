@@ -68,8 +68,9 @@ public class Move {
 	public static boolean automaticGameEnd = false;
 	public static int winnerAutomaticGame = 0;
 	public static Hashtable<String, Hexagon> initialBoard;
-	public static boolean need = true;
-	
+	public static boolean need = false;
+	public static boolean PvC;
+
 	public Move() {
 		first = null;
 		second = null;
@@ -77,14 +78,12 @@ public class Move {
 		moveTo = null;
 	}
 
-
 	//select marbles
 	public void select(String code, Hashtable<String, Hexagon> board) {
 		
 		//check whether a marble from the player is selected, then set that as a code and add it to the selection:
 		if (first == null && !board.get(code).empty) {
 			if (board.get(code).marble.playerNumber == playersTurn) {
-				//System.out.println("selected 1");
 				board.get(code).marble.setFill(Color.PURPLE);
 				first = code;
 				nrSelected++;
@@ -208,6 +207,7 @@ public class Move {
 					
 					addMoveToTb(board);
 					resetMove();
+
 				}
 			} else if(nrSelected ==2) {
 				if(validMoveTwo(board, first, second, moveTo)) {
@@ -217,6 +217,7 @@ public class Move {
 					
 					addMoveToTb(board);
 					resetMove();
+
 				}
 			} else if(nrSelected ==3) {
 				if(validMoveThree(board, first, second, third, moveTo)) {
@@ -226,6 +227,7 @@ public class Move {
 					
 					addMoveToTb(board);
 					resetMove();
+
 				}
 			}
 		}
@@ -260,9 +262,6 @@ public class Move {
 				if (three != null) {
 					tbThree = three.getLocationKey();
 				}
-				System.out.println(tbOne);
-				System.out.println(tbTwo);
-				System.out.println(tbThree);
 				
 				GameData.tb.addForPlayer(GameMethods.changeBack(playersTurn),tbOne ,tbTwo ,tbThree , GameData.rows.direction(first, moveTo));
 				one= null;
@@ -276,7 +275,8 @@ public class Move {
 				GameMethods.gameFinished();
 				playersTurn = GameMethods.changePlayer(playersTurn);
 				pushed = false;
-				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3) && !automaticGame) {
+				if (Move.player1AI == false && (this.greedy || GameData.numberPlayers ==3) && !automaticGame && PvC) {
+					checkAI(board);
 				}
 				if(!automaticGame && !ai && mcts) {
 					monteCarlo.changeRootOutside(board);
@@ -490,7 +490,6 @@ public class Move {
 			GameGui.pp.getChildren().remove(removing);
 			if(playersTurn==1) {
 				point++;
-				//System.out.println(playersTurn + " gets a point");
 			} else if (playersTurn ==2) {
 				point2++;
 			} else {
@@ -530,7 +529,6 @@ public class Move {
 				board.get(keyAdj).setFull(removing);
 				removing.setLocationKey(keyAdj);
 				removing.updateLocation(board);
-				//System.out.println("pushed");
 			} else {
 				removeMarble(removing, board);
 			}

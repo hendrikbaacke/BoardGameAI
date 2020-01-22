@@ -86,7 +86,6 @@ public class Board extends BorderPane {
 	    }
 	    
 	    GameData.rows = new BoardRows();
-
 	    return board;
    }
 }

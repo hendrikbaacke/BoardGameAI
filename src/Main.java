@@ -197,7 +197,6 @@ public class Main extends Application {
 
         //Show stage
         primaryStage.show();
-
         Button back = new Button("BACK");
         HBox backCont = new HBox();
         backCont.getChildren().add(back);
@@ -373,6 +372,7 @@ public class Main extends Application {
             	}
             	
             	Game = new GameGui();
+            	Move.PvC = true;
                 Game.start(primaryStage);
             }
         });
@@ -388,9 +388,8 @@ public class Main extends Application {
                 }
 
                 Game = new GameGui();
+                Game.setAIAI(true);
                 Game.start(primaryStage);
-
-               // AI.WeightOptimisation.GameSimulation.GameEnvironment.GameEnvironment( ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Neutral" + ".txt"),ReadMatrix.ReadIn(System.getProperty("user.dir") + "\\AI\\StartingAI\\" + "Aggressive" + ".txt"),1,0);
             }
         });
     }
@@ -405,6 +404,5 @@ public class Main extends Application {
     public static void main(String[] args) {
         Application.launch(args);
     }
-
 
 }
