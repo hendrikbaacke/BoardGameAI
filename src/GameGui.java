@@ -112,50 +112,117 @@ public class GameGui extends Application{
 			}
 
 			if(AIAI) {
-				Label placeholder = new Label();
-				GridPane.setRowIndex(placeholder, 6);
-				Label placeholder2 = new Label();
-				GridPane.setRowIndex(buttonAI, 7);
-				GridPane.setRowIndex(placeholder2, 8);
-				SubScene.getChildren().addAll(placeholder,buttonAI, placeholder2);
-				Label Label3 = new Label("Or do a custom game.");
-				GridPane.setRowIndex(Label3, 9);
-				Label Label4 = new Label("Player 1");
-				GridPane.setRowIndex(Label4, 10);
-				Label Label5 = new Label("Player 2");
-				GridPane.setRowIndex(Label5, 12);
-
-				ChoiceBox choiceBox = new ChoiceBox();
-
-				choiceBox.getItems().add("Neutral");
-				choiceBox.getItems().add("Aggressive");
-				choiceBox.getItems().add("Defensive");
-				choiceBox.getItems().add("Final");
-
-				ChoiceBox choiceBox2 = new ChoiceBox();
-
-				choiceBox2.getItems().add("Neutral");
-				choiceBox2.getItems().add("Aggressive");
-				choiceBox2.getItems().add("Defensive");
-				choiceBox2.getItems().add("Final");
-
-				GridPane.setRowIndex(choiceBox, 11);
-				GridPane.setRowIndex(choiceBox2, 13);
-				SubScene.getChildren().addAll(Label3,Label4,choiceBox,Label5,choiceBox2);
-				Button startAI = new Button("Start your custom AI game");
-				startAI.setOnAction(e -> {
-					if(choiceBox.getValue() != null && choiceBox2.getValue()!= null) {
-						EvaluationFunction.AITestingON = false;
-						EvaluationFunction.Name1 = (String) choiceBox.getValue();
-						EvaluationFunction.Name2 = (String) choiceBox2.getValue();
-						while(Move.point != 6 && Move.point2 != 6 && Move.point3!= 6) {
-							Move.checkAI(Board.hashBoard);
+				if (GameData.numberPlayers ==2) {
+					Label placeholder = new Label();
+					GridPane.setRowIndex(placeholder, 6);
+					Label placeholder2 = new Label();
+					GridPane.setRowIndex(buttonAI, 7);
+					GridPane.setRowIndex(placeholder2, 8);
+					SubScene.getChildren().addAll(placeholder,buttonAI, placeholder2);
+					Label Label3 = new Label("Or do a custom game.");
+					GridPane.setRowIndex(Label3, 9);
+					Label Label4 = new Label("Player 1");
+					GridPane.setRowIndex(Label4, 10);
+					Label Label5 = new Label("Player 2");
+					GridPane.setRowIndex(Label5, 12);
+	
+					ChoiceBox choiceBox = new ChoiceBox();
+	
+					choiceBox.getItems().add("Neutral");
+					choiceBox.getItems().add("Aggressive");
+					choiceBox.getItems().add("Defensive");
+					choiceBox.getItems().add("Final");
+	
+					ChoiceBox choiceBox2 = new ChoiceBox();
+	
+					choiceBox2.getItems().add("Neutral");
+					choiceBox2.getItems().add("Aggressive");
+					choiceBox2.getItems().add("Defensive");
+					choiceBox2.getItems().add("Final");
+					
+	
+					GridPane.setRowIndex(choiceBox, 11);
+					GridPane.setRowIndex(choiceBox2, 13);
+					SubScene.getChildren().addAll(Label3,Label4,choiceBox,Label5,choiceBox2);
+					
+					
+					Button startAI = new Button("Start your custom AI game");
+					startAI.setOnAction(e -> {
+						if(choiceBox.getValue() != null && choiceBox2.getValue()!= null) {
+							EvaluationFunction.AITestingON = false;
+							EvaluationFunction.Name1 = (String) choiceBox.getValue();
+							EvaluationFunction.Name2 = (String) choiceBox2.getValue();
+							while(Move.point != 6 && Move.point2 != 6 && Move.point3!= 6) {
+								Move.checkAI(Board.hashBoard);
+							}
+							//AutomaticGamePlay.playGame(Board.hashBoard);
 						}
-						//AutomaticGamePlay.playGame(Board.hashBoard);
-					}
-				});
-				GridPane.setRowIndex(startAI, 14);
-				SubScene.getChildren().add(startAI);
+					});
+					GridPane.setRowIndex(startAI, 14);
+					SubScene.getChildren().add(startAI);
+				}
+				else {
+					Label placeholder = new Label();
+					GridPane.setRowIndex(placeholder, 6);
+					Label placeholder2 = new Label();
+					GridPane.setRowIndex(buttonAI, 7);
+					GridPane.setRowIndex(placeholder2, 8);
+					SubScene.getChildren().addAll(placeholder,buttonAI, placeholder2);
+					
+					Label Label3 = new Label("Or do a custom game.");
+					GridPane.setRowIndex(Label3, 9);
+					Label Label4 = new Label("Player 1");
+					GridPane.setRowIndex(Label4, 10);
+					Label Label5 = new Label("Player 2");
+					GridPane.setRowIndex(Label5, 12);
+					Label Label6 = new Label("Player 3");
+					GridPane.setRowIndex(Label6, 14);
+							
+	
+					ChoiceBox choiceBox = new ChoiceBox();
+	
+					choiceBox.getItems().add("Neutral");
+					choiceBox.getItems().add("Aggressive");
+					choiceBox.getItems().add("Defensive");
+					choiceBox.getItems().add("Final");
+	
+					ChoiceBox choiceBox2 = new ChoiceBox();
+	
+					choiceBox2.getItems().add("Neutral");
+					choiceBox2.getItems().add("Aggressive");
+					choiceBox2.getItems().add("Defensive");
+					choiceBox2.getItems().add("Final");
+					
+					ChoiceBox choiceBox3 = new ChoiceBox();
+					
+					choiceBox3.getItems().add("Neutral");
+					choiceBox3.getItems().add("Aggressive");
+					choiceBox3.getItems().add("Defensive");
+					choiceBox3.getItems().add("Final");
+					
+	
+					GridPane.setRowIndex(choiceBox, 11);
+					GridPane.setRowIndex(choiceBox2, 13);
+					GridPane.setRowIndex(choiceBox3, 15);
+					SubScene.getChildren().addAll(Label3,Label4,choiceBox,Label5,choiceBox2, Label6, choiceBox3);
+					
+					
+					Button startAI = new Button("Start your custom AI game");
+					startAI.setOnAction(e -> {
+						if(choiceBox.getValue() != null && choiceBox2.getValue()!= null && choiceBox3.getValue() != null) {
+							EvaluationFunction.AITestingON = false;
+							EvaluationFunction.Name1 = (String) choiceBox.getValue();
+							EvaluationFunction.Name2 = (String) choiceBox2.getValue();
+							EvaluationFunction.Name3 = (String) choiceBox3.getValue();
+							while(Move.point != 6 && Move.point2 != 6 && Move.point3!= 6) {
+								Move.checkAI(Board.hashBoard);
+							}
+							//AutomaticGamePlay.playGame(Board.hashBoard);
+						}
+					});
+					GridPane.setRowIndex(startAI, 16);
+					SubScene.getChildren().add(startAI);
+				}
 			}
 			player_text.setText("1");
 			
