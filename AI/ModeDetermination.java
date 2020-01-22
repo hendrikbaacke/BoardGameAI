@@ -14,11 +14,9 @@ public class ModeDetermination{
     //  Structure of the weights
     // { Distance , Cohesion , Break , strength , Won , Lost , DistanceOpp , Danger }
 
-    private double [][] weightMatrix_AI;
+    private double[][] weightMatrix_AI;
 
-    public ModeDetermination(String path){
-        weightMatrix_AI = ReadMatrix.ReadIn(path);
-    }
+
 
     public ModeDetermination(double[][] AI){ weightMatrix_AI = AI; }
 

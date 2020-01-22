@@ -26,6 +26,7 @@ public class GameEnvironment {
         result = AutomaticGamePlay.playGame(Move.initialBoard);
 
         result[1] = result[1] * Trainer;
+        System.out.println("Results:  Moves: "+result[0]+"  Score: "+result[1]);
         return result;
     }
 }

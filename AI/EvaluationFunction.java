@@ -32,8 +32,8 @@ public class EvaluationFunction {
 	public static boolean AITestingON = false;
 	public ModeDetermination modeDet;
 
-	public static String Name1 = System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt";
-	public static String Name2 = System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt";
+	public static String Name1 = "Final";
+	public static String Name2 = "Final";
 
 	public EvaluationFunction(GameState gameState) {
 
@@ -83,7 +83,6 @@ public class EvaluationFunction {
 			f6 = 0;
 		}
 
-
 		if(!AITestingON) {
 			String Name = null;
 			if (gameState.evaluateFrom == 1) {
@@ -93,8 +92,7 @@ public class EvaluationFunction {
 				Name = Name2;
 			}
 
-			modeDet = new ModeDetermination(Name);
-			//modeDet = new ModeDetermination(ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+"Final"+".txt"));
+			modeDet = new ModeDetermination(ReadMatrix.ReadIn(System.getProperty("user.dir")+ReadMatrix.Slash+"AI"+ReadMatrix.Slash+"StartingAI"+ReadMatrix.Slash+Name+".txt"));
 		}else{
 			if (gameState.evaluateFrom == 1) {
 				modeDet = new ModeDetermination(GameEnvironment.player1);

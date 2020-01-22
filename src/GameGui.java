@@ -18,7 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
+import javafx.scene.control.ChoiceBox;
 
 /*
  * Handles the game itself. So when the game is being played, this screen is showed.
@@ -43,13 +43,14 @@ public class GameGui extends Application{
 
 			buttonAI.setOnAction(e -> {
 				//need to create this
-				if ((Move.initialBoard == null && Move.need) || Move.mcts && Move.initialBoard == null) {
+				if ((Move.initialBoard == null ) || Move.mcts && Move.initialBoard == null) {
 					System.out.println("enter");
 					Move.initialBoard = BoardMethods.copyHashBoard(Board.hashBoard);
 					Move.initial = new GameState(Move.initialBoard, GameMethods.changeBack(Move.playersTurn));
 					Move.monteCarlo = new MonteCarlo(new Node<GameState>(Move.initial));
 				}
-				else if((Move.greedy || Move.alphabeta) && Move.need) {
+				else if((Move.greedy || Move.alphabeta) ) {
+					EvaluationFunction.AITestingON = true;
 					AI.WeightOptimisation.GeneticLoop.start();
 				}
 			});
@@ -116,21 +117,40 @@ public class GameGui extends Application{
 				GridPane.setRowIndex(buttonAI, 7);
 				GridPane.setRowIndex(placeholder2, 8);
 				SubScene.getChildren().addAll(placeholder,buttonAI, placeholder2);
-				TextField file1 = new TextField();
-				TextField file2 = new TextField();
-				file1.setPromptText("FilePath of your first AI");
-				file2.setPromptText("FilePath of your second AI");
-				GridPane.setRowIndex(file1, 9);
-				GridPane.setRowIndex(file2, 10);
-				SubScene.getChildren().addAll(file1,file2);
+				Label Label3 = new Label("Or do a custom game.");
+				GridPane.setRowIndex(Label3, 9);
+				Label Label4 = new Label("Player 1");
+				GridPane.setRowIndex(Label4, 10);
+				Label Label5 = new Label("Player 2");
+				GridPane.setRowIndex(Label5, 12);
+
+				ChoiceBox choiceBox = new ChoiceBox();
+
+				choiceBox.getItems().add("Neutral");
+				choiceBox.getItems().add("Aggressive");
+				choiceBox.getItems().add("Defensive");
+				choiceBox.getItems().add("Final");
+
+				ChoiceBox choiceBox2 = new ChoiceBox();
+
+				choiceBox2.getItems().add("Neutral");
+				choiceBox2.getItems().add("Aggressive");
+				choiceBox2.getItems().add("Defensive");
+				choiceBox2.getItems().add("Final");
+
+				GridPane.setRowIndex(choiceBox, 11);
+				GridPane.setRowIndex(choiceBox2, 13);
+				SubScene.getChildren().addAll(Label3,Label4,choiceBox,Label5,choiceBox2);
 				Button startAI = new Button("Start your custom AI game");
 				startAI.setOnAction(e -> {
-					EvaluationFunction.Name1 = file1.getText();
-					EvaluationFunction.Name2 = file2.getText();
-
-					AutomaticGamePlay.playGame(Board.hashBoard);
+					if(choiceBox.getValue() != null && choiceBox2.getValue()!= null) {
+						EvaluationFunction.AITestingON = false;
+						EvaluationFunction.Name1 = (String) choiceBox.getValue();
+						EvaluationFunction.Name2 = (String) choiceBox2.getValue();
+						AutomaticGamePlay.playGame(Board.hashBoard);
+					}
 				});
-				GridPane.setRowIndex(startAI, 11);
+				GridPane.setRowIndex(startAI, 14);
 				SubScene.getChildren().add(startAI);
 			}
 			player_text.setText("1");
