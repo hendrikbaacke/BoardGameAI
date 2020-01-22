@@ -45,7 +45,6 @@ public class AutomaticGamePlay {
 		Move.player2AI = true;
 		Move.player3AI = true;
 
-		EvaluationFunction.AITestingON = true;
 		
 		while(!Move.automaticGameEnd && Traceback.totalMoves < GameEnvironment.limit){
 			Move.checkAI(board);
